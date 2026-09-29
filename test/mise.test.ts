@@ -1,6 +1,6 @@
 import { Project } from 'projen';
 import { Testing } from 'projen/lib/testing';
-import { Mise, MiseFile } from '../src/mise';
+import { Mise, MiseFile } from '../src';
 
 function testProject(): Project {
   return new Project({ name: 'test-project' });
@@ -115,4 +115,47 @@ test('Mise.addTools/merge configure the mixin before it is applied', () => {
   const toml = snapshot['mise.toml'] as string;
   expect(toml).toMatch(/node = \[.*"24".*\]/);
   expect(toml).toMatch(/pnpm = \[.*"11".*"10".*\]/);
+});
+
+test('fileName option is honored by MiseFile and the Mise mixin', () => {
+  const project = testProject();
+
+  project.with(new Mise({ fileName: 'custom-mise.toml', config: { tools: { node: ['24'] } } }));
+
+  const snapshot = Testing.synth(project);
+  expect(snapshot['custom-mise.toml']).toContain('node');
+  expect(snapshot['mise.toml']).toBeUndefined();
+});
+
+test('merge preserves existing values for keys left undefined in the fragment', () => {
+  const project = testProject();
+  const miseFile = new MiseFile(project, { config: { tools: { node: ['24'] }, minVersion: '2024.1.1' } });
+
+  miseFile.merge({ minVersion: undefined, tools: { pnpm: ['11'] } });
+
+  const snapshot = Testing.synth(project);
+  const toml = snapshot['mise.toml'] as string;
+  expect(toml).toContain('min_version = "2024.1.1"');
+  expect(toml).toContain('node');
+  expect(toml).toContain('pnpm');
+});
+
+test('merge overwrites scalar fields with the latest value', () => {
+  const project = testProject();
+  const miseFile = new MiseFile(project, { config: { minVersion: '2024.1.1' } });
+
+  miseFile.merge({ minVersion: '2025.1.1' });
+
+  const snapshot = Testing.synth(project);
+  expect(snapshot['mise.toml']).toContain('min_version = "2025.1.1"');
+});
+
+test('applyTo is a no-op for constructs the mixin does not support', () => {
+  const project = testProject();
+  const unsupported = project.node.children[0];
+  const mixin = new Mise({ config: { tools: { node: ['24'] } } });
+
+  expect(mixin.supports(unsupported)).toBe(false);
+  expect(() => mixin.applyTo(unsupported)).not.toThrow();
+  expect(MiseFile.of(project)).toBeUndefined();
 });

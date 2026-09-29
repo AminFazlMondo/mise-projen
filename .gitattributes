@@ -24,6 +24,6 @@
 /pnpm-lock.yaml linguist-generated
 /pnpm-workspace.yaml linguist-generated
 /projenrc/tsconfig.json linguist-generated linguist-language=JSON-with-Comments
-/src/mise-config.ts linguist-generated
+/src/miseConfig.ts linguist-generated
 /test/tsconfig.json linguist-generated linguist-language=JSON-with-Comments
 /tsconfig.json linguist-generated

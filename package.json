@@ -109,11 +109,11 @@
     "coverageDirectory": "coverage",
     "coveragePathIgnorePatterns": [
       "/node_modules/",
-      "src/mise-config.ts"
+      "src/miseConfig.ts"
     ],
     "testPathIgnorePatterns": [
       "/node_modules/",
-      "src/mise-config.ts"
+      "src/miseConfig.ts"
     ],
     "watchPathIgnorePatterns": [
       "/node_modules/"

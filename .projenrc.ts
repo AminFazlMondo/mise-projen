@@ -53,7 +53,7 @@ const project = new cdk.JsiiProject({
 new JsiiFromJsonSchema(project, {
   structName: 'MiseTomlSchema',
   schemaPath: 'https://mise.jdx.dev/schema/mise.json',
-  filePath: path.join('src', 'mise-config.ts'),
+  filePath: path.join('src', 'miseConfig.ts'),
   transform: (schema) => dedupeAnyOfNumberTypes(stripUnderscoreProperties(schema)),
 });
 

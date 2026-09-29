@@ -45,7 +45,7 @@
     "node_modules/",
     "*.generated.ts",
     "coverage",
-    "src/mise-config.ts",
+    "src/miseConfig.ts",
     "!.projenrc.ts",
     "!projenrc/**/*.ts"
   ],

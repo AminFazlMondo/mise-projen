@@ -16,7 +16,7 @@
     ".projen/tasks.json",
     "LICENSE",
     "projenrc/tsconfig.json",
-    "src/mise-config.ts",
+    "src/miseConfig.ts",
     "test/tsconfig.json",
     "tsconfig.json"
   ],
