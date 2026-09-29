@@ -48,6 +48,7 @@ const project = new cdk.JsiiProject({
     'constructs@^10.5.0',
     'projen@^0.103.27',
   ],
+  npmTrustedPublishing: true,
 });
 
 new JsiiFromJsonSchema(project, {
