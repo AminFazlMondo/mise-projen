@@ -1,7 +1,7 @@
 import { IConstruct } from 'constructs';
 import { Component, Project, TomlFile } from 'projen';
 import { MiseTomlSchema, toJson_MiseTomlSchema } from './miseConfig';
-import { MiseOptions } from './types';
+import { MiseFileOptions } from './types';
 import { deepMerge, normalizeTools } from './util';
 
 const MISE_COMPONENT_ID = 'Mise';
@@ -28,7 +28,7 @@ export class MiseFile extends Component {
    * Returns the `MiseFile` instance attached to the given project, creating
    * one if it doesn't already exist.
    */
-  public static ensure(scope: IConstruct, options: MiseOptions = {}): MiseFile {
+  public static ensure(scope: IConstruct, options: MiseFileOptions = {}): MiseFile {
     return MiseFile.of(scope) ?? new MiseFile(scope, options);
   }
 
@@ -39,7 +39,7 @@ export class MiseFile extends Component {
 
   private config: MiseTomlSchema;
 
-  constructor(scope: IConstruct, options: MiseOptions = {}) {
+  constructor(scope: IConstruct, options: MiseFileOptions = {}) {
     super(scope, MISE_COMPONENT_ID);
 
     this.config = { ...options.config };
