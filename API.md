@@ -16,13 +16,13 @@ contribute configuration from multiple places - similar to how projen's
 ```typescript
 import { MiseFile } from 'mise-projen'
 
-new MiseFile(scope: IConstruct, options?: MiseOptions)
+new MiseFile(scope: IConstruct, options?: MiseFileOptions)
 ```
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#mise-projen.MiseFile.Initializer.parameter.scope">scope</a></code> | <code>constructs.IConstruct</code> | *No description.* |
-| <code><a href="#mise-projen.MiseFile.Initializer.parameter.options">options</a></code> | <code><a href="#mise-projen.MiseOptions">MiseOptions</a></code> | *No description.* |
+| <code><a href="#mise-projen.MiseFile.Initializer.parameter.options">options</a></code> | <code><a href="#mise-projen.MiseFileOptions">MiseFileOptions</a></code> | *No description.* |
 
 ---
 
@@ -34,7 +34,7 @@ new MiseFile(scope: IConstruct, options?: MiseOptions)
 
 ##### `options`<sup>Optional</sup> <a name="options" id="mise-projen.MiseFile.Initializer.parameter.options"></a>
 
-- *Type:* <a href="#mise-projen.MiseOptions">MiseOptions</a>
+- *Type:* <a href="#mise-projen.MiseFileOptions">MiseFileOptions</a>
 
 ---
 
@@ -251,7 +251,7 @@ Test whether the given construct is a component.
 ```typescript
 import { MiseFile } from 'mise-projen'
 
-MiseFile.ensure(scope: IConstruct, options?: MiseOptions)
+MiseFile.ensure(scope: IConstruct, options?: MiseFileOptions)
 ```
 
 Returns the `MiseFile` instance attached to the given project, creating one if it doesn't already exist.
@@ -264,7 +264,7 @@ Returns the `MiseFile` instance attached to the given project, creating one if i
 
 ###### `options`<sup>Optional</sup> <a name="options" id="mise-projen.MiseFile.ensure.parameter.options"></a>
 
-- *Type:* <a href="#mise-projen.MiseOptions">MiseOptions</a>
+- *Type:* <a href="#mise-projen.MiseFileOptions">MiseFileOptions</a>
 
 ---
 
@@ -777,9 +777,57 @@ public readonly weekday: number;
 
 ---
 
-### MiseOptions <a name="MiseOptions" id="mise-projen.MiseOptions"></a>
+### MiseFileOptions <a name="MiseFileOptions" id="mise-projen.MiseFileOptions"></a>
 
 Options for `Mise` / `MiseFile`.
+
+#### Initializer <a name="Initializer" id="mise-projen.MiseFileOptions.Initializer"></a>
+
+```typescript
+import { MiseFileOptions } from 'mise-projen'
+
+const miseFileOptions: MiseFileOptions = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#mise-projen.MiseFileOptions.property.config">config</a></code> | <code><a href="#mise-projen.MiseTomlSchema">MiseTomlSchema</a></code> | Initial mise configuration. |
+| <code><a href="#mise-projen.MiseFileOptions.property.fileName">fileName</a></code> | <code>string</code> | Name of the mise config file. |
+
+---
+
+##### `config`<sup>Optional</sup> <a name="config" id="mise-projen.MiseFileOptions.property.config"></a>
+
+```typescript
+public readonly config: MiseTomlSchema;
+```
+
+- *Type:* <a href="#mise-projen.MiseTomlSchema">MiseTomlSchema</a>
+- *Default:* {}
+
+Initial mise configuration.
+
+Further fragments can be merged in later via `merge()`, `addTools()`, or by
+applying additional `Mise` mixins to the same project.
+
+---
+
+##### `fileName`<sup>Optional</sup> <a name="fileName" id="mise-projen.MiseFileOptions.property.fileName"></a>
+
+```typescript
+public readonly fileName: string;
+```
+
+- *Type:* string
+- *Default:* "mise.toml"
+
+Name of the mise config file.
+
+---
+
+### MiseOptions <a name="MiseOptions" id="mise-projen.MiseOptions"></a>
 
 #### Initializer <a name="Initializer" id="mise-projen.MiseOptions.Initializer"></a>
 
@@ -795,6 +843,7 @@ const miseOptions: MiseOptions = { ... }
 | --- | --- | --- |
 | <code><a href="#mise-projen.MiseOptions.property.config">config</a></code> | <code><a href="#mise-projen.MiseTomlSchema">MiseTomlSchema</a></code> | Initial mise configuration. |
 | <code><a href="#mise-projen.MiseOptions.property.fileName">fileName</a></code> | <code>string</code> | Name of the mise config file. |
+| <code><a href="#mise-projen.MiseOptions.property.autoDiscover">autoDiscover</a></code> | <code>boolean</code> | Whether to automatically discover tools in the project. |
 
 ---
 
@@ -824,6 +873,19 @@ public readonly fileName: string;
 - *Default:* "mise.toml"
 
 Name of the mise config file.
+
+---
+
+##### `autoDiscover`<sup>Optional</sup> <a name="autoDiscover" id="mise-projen.MiseOptions.property.autoDiscover"></a>
+
+```typescript
+public readonly autoDiscover: boolean;
+```
+
+- *Type:* boolean
+- *Default:* true
+
+Whether to automatically discover tools in the project.
 
 ---
 
@@ -11056,6 +11118,7 @@ new Mise(options?: MiseOptions)
 | --- | --- |
 | <code><a href="#mise-projen.Mise.addTools">addTools</a></code> | Adds (or extends) dev tools managed by mise. |
 | <code><a href="#mise-projen.Mise.applyTo">applyTo</a></code> | Ensures a `MiseFile` exists on the project and merges this mixin's configuration into it. |
+| <code><a href="#mise-projen.Mise.discoverTools">discoverTools</a></code> | Discovers and adds tools to the mixin's configuration based on the project's setup. |
 | <code><a href="#mise-projen.Mise.merge">merge</a></code> | Deep-merges the given configuration fragment into this mixin's configuration. |
 | <code><a href="#mise-projen.Mise.supports">supports</a></code> | Returns true if the construct is a projen `Project`. |
 
@@ -11093,6 +11156,24 @@ Ensures a `MiseFile` exists on the project and merges this mixin's configuration
 ###### `construct`<sup>Required</sup> <a name="construct" id="mise-projen.Mise.applyTo.parameter.construct"></a>
 
 - *Type:* constructs.IConstruct
+
+---
+
+##### `discoverTools` <a name="discoverTools" id="mise-projen.Mise.discoverTools"></a>
+
+```typescript
+public discoverTools(project: Project): void
+```
+
+Discovers and adds tools to the mixin's configuration based on the project's setup.
+
+Currently only works for projects that have node package
+
+###### `project`<sup>Required</sup> <a name="project" id="mise-projen.Mise.discoverTools.parameter.project"></a>
+
+- *Type:* projen.Project
+
+The projen project instance to discover tools in.
 
 ---
 

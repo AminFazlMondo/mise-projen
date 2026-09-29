@@ -1,5 +1,6 @@
 import { IConstruct, IMixin } from 'constructs';
 import { Project } from 'projen';
+import { NodePackage } from 'projen/lib/javascript';
 import { MiseTomlSchema } from './miseConfig';
 import { MiseFile } from './miseFile';
 import { MiseOptions } from './types';
@@ -22,10 +23,12 @@ export * from './types';
 export class Mise implements IMixin {
   private readonly fileName?: string;
   private config: MiseTomlSchema;
+  private autoDiscover: boolean;
 
   constructor(options: MiseOptions = {}) {
     this.fileName = options.fileName;
     this.config = { ...options.config };
+    this.autoDiscover = options.autoDiscover ?? true;
   }
 
   /**
@@ -44,7 +47,50 @@ export class Mise implements IMixin {
       return;
     }
 
-    MiseFile.ensure(construct, { fileName: this.fileName }).merge(this.config);
+    const miseFile = MiseFile.ensure(construct, { fileName: this.fileName });
+
+    if (this.autoDiscover) {
+      this.discoverTools(construct);
+    }
+
+    miseFile.merge(this.config);
+  }
+
+  /**
+   * Discovers and adds tools to the mixin's configuration based on the project's setup.
+   * Currently only works for projects that have node package
+   * @param project The projen project instance to discover tools in.
+   */
+  public discoverTools(project: Project): void {
+    const nodePackage = NodePackage.of(project);
+    if (!nodePackage) {
+      return;
+    }
+
+    const nodeVersion = nodePackage.minNodeVersion;
+    if (nodeVersion) {
+      this.addTools({ node: nodeVersion });
+    }
+
+    const { packageManager } = nodePackage;
+
+    switch (packageManager) {
+      case 'yarn':
+      case 'yarn2':
+      case 'yarn_classic':
+      case 'yarn_berry':
+        nodePackage.yarnVersion && this.addTools({ yarn: nodePackage.yarnVersion });
+        break;
+      case 'pnpm':
+        nodePackage.pnpmVersion && this.addTools({ pnpm: nodePackage.pnpmVersion });
+        break;
+      case 'bun':
+        nodePackage.bunVersion && this.addTools({ bun: nodePackage.bunVersion });
+        break;
+      default:
+        project.logger.warn(`No package manager to be added for: ${packageManager}`);
+        break;
+    }
   }
 
   /**
