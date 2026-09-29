@@ -58,4 +58,6 @@ new JsiiFromJsonSchema(project, {
   transform: (schema) => dedupeAnyOfNumberTypes(stripUnderscoreProperties(schema)),
 });
 
+project.tasks.tryFind('post-upgrade')?.spawn(project.tasks.tryFind('update-schemas')!);
+
 project.synth();
