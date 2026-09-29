@@ -1,10 +1,10 @@
 import { IConstruct, IMixin } from 'constructs';
 import { Project } from 'projen';
+import { NodePackage } from 'projen/lib/javascript';
 import { MiseTomlSchema } from './miseConfig';
 import { MiseFile } from './miseFile';
 import { MiseOptions } from './types';
 import { deepMerge, normalizeTools } from './util';
-import { NodePackage } from 'projen/lib/javascript';
 
 export * from './miseFile';
 export * from './miseConfig';
@@ -66,13 +66,13 @@ export class Mise implements IMixin {
     if (!nodePackage) {
       return;
     }
-    
+
     const nodeVersion = nodePackage.minNodeVersion;
     if (nodeVersion) {
       this.addTools({ node: nodeVersion });
     }
-    
-    const {packageManager} = nodePackage;
+
+    const { packageManager } = nodePackage;
 
     switch (packageManager) {
       case 'yarn':
