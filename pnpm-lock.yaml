@@ -27,8 +27,8 @@ importers:
         specifier: ^13
         version: 13.2.1(conventional-commits-filter@6.0.1)(conventional-commits-parser@7.1.2)
       constructs:
-        specifier: ^10.0.0
-        version: 10.8.1
+        specifier: 10.5.0
+        version: 10.5.0
       eslint:
         specifier: ^9
         version: 9.39.5(supports-color@8.1.1)
@@ -63,8 +63,8 @@ importers:
         specifier: ^0.5.19
         version: 0.5.19
       projen:
-        specifier: ^0.103.27
-        version: 0.103.27(constructs@10.8.1)
+        specifier: 0.103.27
+        version: 0.103.27(constructs@10.5.0)
       ts-jest:
         specifier: ^29.4.14
         version: 29.4.14(@babel/core@7.29.7(supports-color@8.1.1))(@jest/transform@30.5.2(supports-color@8.1.1))(@jest/types@30.5.1)(babel-jest@30.5.2(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1))(jest-util@30.5.1)(jest@30.5.2(@types/node@24.19.0)(supports-color@8.1.1)(ts-node@10.9.2(@types/node@24.19.0)(typescript@6.0.3)))(typescript@6.0.3)
@@ -1096,8 +1096,8 @@ packages:
   concat-map@0.0.1:
     resolution: {integrity: sha512-/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==}
 
-  constructs@10.8.1:
-    resolution: {integrity: sha512-98yGXYyhePqPYh3cYu8nzBERmAhC0DONe3UD03okK0nehZ7hYP4wgZuf02a04+uOWxnTJ5Rpp5m0GRNpwyLGGA==}
+  constructs@10.5.0:
+    resolution: {integrity: sha512-zWjwqIgk4nAWmQGrPnDWv+M2Yly6m7ROyqmmQVLgJiHnWP762It22uWFaF2Pu/sSx0u8WsoUcvt0PZ4DQIQYwQ==}
 
   conventional-changelog-config-spec@2.1.0:
     resolution: {integrity: sha512-IpVePh16EbbB02V+UA+HQnnPIohgXvJRxHcS5+Uwk4AT5LjzCZJm5sp/yqs5C6KZJ1jMsV4paEV13BN1pvDuxQ==}
@@ -3971,7 +3971,7 @@ snapshots:
 
   concat-map@0.0.1: {}
 
-  constructs@10.8.1: {}
+  constructs@10.5.0: {}
 
   conventional-changelog-config-spec@2.1.0: {}
 
@@ -5543,9 +5543,9 @@ snapshots:
       '@jest/schemas': 30.5.0
       ansi-styles: 5.2.0
 
-  projen@0.103.27(constructs@10.8.1):
+  projen@0.103.27(constructs@10.5.0):
     dependencies:
-      constructs: 10.8.1
+      constructs: 10.5.0
 
   punycode@2.3.1: {}
 

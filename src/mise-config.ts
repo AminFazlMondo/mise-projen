@@ -195,11 +195,6 @@ export interface MiseTomlSchema {
   readonly watchFiles?: any[];
 
   /**
-   * @schema MiseTomlSchema#_
-   */
-  readonly _?: any;
-
-  /**
    * @schema MiseTomlSchema#doctor
    */
   readonly doctor?: Doctor;
@@ -268,7 +263,6 @@ export function toJson_MiseTomlSchema(obj: MiseTomlSchema | undefined): Record<s
     'hooks': toJson_Hooks(obj.hooks),
     'vars': toJson_Vars(obj.vars),
     'watch_files': obj.watchFiles?.map(y => y),
-    '_': obj._,
     'doctor': toJson_Doctor(obj.doctor),
     'daemons': ((obj.daemons) === undefined) ? undefined : (Object.entries(obj.daemons).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'daemon_providers': ((obj.daemonProviders) === undefined) ? undefined : (Object.entries(obj.daemonProviders).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: toJson_MiseTomlSchemaDaemonProviders(i[1]) }), {})),
@@ -286,12 +280,6 @@ export function toJson_MiseTomlSchema(obj: MiseTomlSchema | undefined): Record<s
  * @schema env
  */
 export interface Env {
-  /**
-   * environment modules
-   *
-   * @schema env#_
-   */
-  readonly _?: Env_;
 }
 
 /**
@@ -302,7 +290,6 @@ export interface Env {
 export function toJson_Env(obj: Env | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
-    '_': toJson_Env_(obj._),
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -2279,12 +2266,6 @@ export function toJson_Hooks(obj: Hooks | undefined): Record<string, any> | unde
  * @schema vars
  */
 export interface Vars {
-  /**
-   * vars modules
-   *
-   * @schema vars#_
-   */
-  readonly _?: Vars_;
 }
 
 /**
@@ -2295,7 +2276,6 @@ export interface Vars {
 export function toJson_Vars(obj: Vars | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
-    '_': toJson_Vars_(obj._),
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -2421,53 +2401,6 @@ export function toJson_MiseTomlSchemaDaemonsSettings(obj: MiseTomlSchemaDaemonsS
   const result = {
     'namespace': obj.namespace,
     'namespace_per_worktree': obj.namespacePerWorktree,
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
- * environment modules
- *
- * @schema Env_
- */
-export interface Env_ {
-  /**
-   * @schema Env_#file
-   */
-  readonly file?: any;
-
-  /**
-   * @schema Env_#path
-   */
-  readonly path?: any;
-
-  /**
-   * python environment
-   *
-   * @schema Env_#python
-   */
-  readonly python?: EnvPython;
-
-  /**
-   * @schema Env_#source
-   */
-  readonly source?: any;
-}
-
-/**
- * Converts an object of type 'Env_' to JSON representation.
- * @internal
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_Env_(obj: Env_ | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'file': obj.file,
-    'path': obj.path,
-    'python': toJson_EnvPython(obj.python),
-    'source': obj.source,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -5804,39 +5737,6 @@ export function toJson_TaskConfigCache(obj: TaskConfigCache | undefined): Record
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * vars modules
- *
- * @schema Vars_
- */
-export interface Vars_ {
-  /**
-   * @schema Vars_#file
-   */
-  readonly file?: string[];
-
-  /**
-   * @schema Vars_#source
-   */
-  readonly source?: string[];
-}
-
-/**
- * Converts an object of type 'Vars_' to JSON representation.
- * @internal
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_Vars_(obj: Vars_ | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'file': obj.file?.map(y => y),
-    'source': obj.source?.map(y => y),
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
  * @schema DoctorChecks
  */
 export interface DoctorChecks {
@@ -5923,33 +5823,6 @@ export enum MiseTomlSchemaDaemonProvidersPreset {
   /** nats */
   NATS = "nats",
 }
-
-/**
- * python environment
- *
- * @schema EnvPython
- */
-export interface EnvPython {
-  /**
-   * @schema EnvPython#venv
-   */
-  readonly venv?: any;
-}
-
-/**
- * Converts an object of type 'EnvPython' to JSON representation.
- * @internal
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_EnvPython(obj: EnvPython | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'venv': obj.venv,
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * What the history watcher does with a connected setup repository on its own: `sync` publishes after saves, fetches periodically, and applies incoming changes. Any conflict pauses publication and incoming application for the entire setup; local commits and fetching continue. `fetch-only` only fetches; `manual` does nothing automatically. `mise bootstrap dotfiles sync` and `pull` work on request in every mode.

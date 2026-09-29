@@ -182,6 +182,33 @@ class UpdateSchemasTask extends Component {
   }
 }
 
+// The mise schema uses a literal "_" property key (e.g. `env._`, `vars._`, and
+// the config root) for advanced/undocumented catch-all sections. json2jsii
+// carries that name straight into the generated TypeScript (member name "_"
+// and, for the nested object, a type name built from it, e.g. "Env_"), which
+// jsii rejects (members can't start with "_" unless `@internal`, and type
+// names must be PascalCased). Drop these properties from the schema so the
+// generated struct stays jsii-compatible; the underlying `TomlFile` object
+// remains mutable directly (e.g. via `addOverride`) for anyone who needs them.
+export function stripUnderscoreProperties(node: any): any {
+  if (Array.isArray(node)) {
+    return node.map(stripUnderscoreProperties);
+  }
+  if (node && typeof node === 'object') {
+    const result: any = {};
+    for (const [key, value] of Object.entries(node)) {
+      if (key === 'properties' && value && typeof value === 'object') {
+        const { _, ...rest } = value as Record<string, any>;
+        result[key] = stripUnderscoreProperties(rest);
+        continue;
+      }
+      result[key] = stripUnderscoreProperties(value);
+    }
+    return result;
+  }
+  return node;
+}
+
 // json2jsii generates a `fromNumber` factory per anyOf branch, so sibling
 // "integer"/"number" branches (both map to TS `number`) cause a duplicate
 // function implementation. Collapse them into a single "number" branch.
