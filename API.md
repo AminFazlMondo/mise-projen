@@ -4607,6 +4607,7 @@ const miseTomlSchemaHistory: MiseTomlSchemaHistory = { ... }
 | --- | --- | --- |
 | <code><a href="#mise-projen.MiseTomlSchemaHistory.property.encryption">encryption</a></code> | <code><a href="#mise-projen.MiseTomlSchemaHistoryEncryption">MiseTomlSchemaHistoryEncryption</a></code> | *No description.* |
 | <code><a href="#mise-projen.MiseTomlSchemaHistory.property.exclude">exclude</a></code> | <code>string[]</code> | globs never captured by dotfiles history; |
+| <code><a href="#mise-projen.MiseTomlSchemaHistory.property.gitEmail">gitEmail</a></code> | <code>string</code> | email used for history commit authors and committers; |
 | <code><a href="#mise-projen.MiseTomlSchemaHistory.property.origin">origin</a></code> | <code><a href="#mise-projen.MiseTomlSchemaHistoryOrigin">MiseTomlSchemaHistoryOrigin</a></code> | the setup repository this machine publishes to and fetches from; |
 | <code><a href="#mise-projen.MiseTomlSchemaHistory.property.reload">reload</a></code> | <code>{[ key: string ]: string}</code> | commands run once after a rollback or undo writes a path matching the glob (trusted global or system config only). |
 
@@ -4633,6 +4634,20 @@ public readonly exclude: string[];
 globs never captured by dotfiles history;
 
 a `!glob` entry re-includes a path an earlier glob excluded
+
+---
+
+##### `gitEmail`<sup>Optional</sup> <a name="gitEmail" id="mise-projen.MiseTomlSchemaHistory.property.gitEmail"></a>
+
+```typescript
+public readonly gitEmail: string;
+```
+
+- *Type:* string
+
+email used for history commit authors and committers;
+
+{hostname} expands to this machine's hostname
 
 ---
 
@@ -5253,6 +5268,7 @@ const settings: Settings = { ... }
 | <code><a href="#mise-projen.Settings.property.noEnv">noEnv</a></code> | <code>boolean</code> | Do not load environment variables from config files. |
 | <code><a href="#mise-projen.Settings.property.noHooks">noHooks</a></code> | <code>boolean</code> | Do not execute hooks from config files. |
 | <code><a href="#mise-projen.Settings.property.notFoundAutoInstall">notFoundAutoInstall</a></code> | <code>boolean</code> | Set to false to disable the "command not found" handler to autoinstall missing tool versions. |
+| <code><a href="#mise-projen.Settings.property.notFoundAutoInstallRegistry">notFoundAutoInstallRegistry</a></code> | <code>boolean</code> | Automatically install an unconfigured tool when its registry bin matches a missing command. |
 | <code><a href="#mise-projen.Settings.property.notFoundSystemFallback">notFoundSystemFallback</a></code> | <code>boolean</code> | Set to false to stop shims from falling back to a same-named binary found elsewhere on PATH. |
 | <code><a href="#mise-projen.Settings.property.npm">npm</a></code> | <code><a href="#mise-projen.SettingsNpm">SettingsNpm</a></code> | *No description.* |
 | <code><a href="#mise-projen.Settings.property.oci">oci</a></code> | <code><a href="#mise-projen.SettingsOci">SettingsOci</a></code> | *No description.* |
@@ -6439,6 +6455,18 @@ public readonly notFoundAutoInstall: boolean;
 - *Type:* boolean
 
 Set to false to disable the "command not found" handler to autoinstall missing tool versions.
+
+---
+
+##### `notFoundAutoInstallRegistry`<sup>Optional</sup> <a name="notFoundAutoInstallRegistry" id="mise-projen.Settings.property.notFoundAutoInstallRegistry"></a>
+
+```typescript
+public readonly notFoundAutoInstallRegistry: boolean;
+```
+
+- *Type:* boolean
+
+Automatically install an unconfigured tool when its registry bin matches a missing command.
 
 ---
 
@@ -9636,6 +9664,7 @@ const settingsSelfUpdate: SettingsSelfUpdate = { ... }
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#mise-projen.SettingsSelfUpdate.property.apiUrl">apiUrl</a></code> | <code>string</code> | GitHub API base URL used by `mise self-update`. |
+| <code><a href="#mise-projen.SettingsSelfUpdate.property.minimumReleaseAge">minimumReleaseAge</a></code> | <code>string</code> | Minimum release age for mise itself; |
 | <code><a href="#mise-projen.SettingsSelfUpdate.property.repository">repository</a></code> | <code>string</code> | GitHub repository used by `mise self-update`. |
 
 ---
@@ -9649,6 +9678,20 @@ public readonly apiUrl: string;
 - *Type:* string
 
 GitHub API base URL used by `mise self-update`.
+
+---
+
+##### `minimumReleaseAge`<sup>Optional</sup> <a name="minimumReleaseAge" id="mise-projen.SettingsSelfUpdate.property.minimumReleaseAge"></a>
+
+```typescript
+public readonly minimumReleaseAge: string;
+```
+
+- *Type:* string
+
+Minimum release age for mise itself;
+
+inherits minimum_release_age (24h by default).
 
 ---
 
