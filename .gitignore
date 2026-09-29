@@ -53,4 +53,5 @@ junit.xml
 !/projenrc/tsconfig.json
 .jsii
 !/API.md
+!/src/miseConfig.ts
 !/.projenrc.ts
