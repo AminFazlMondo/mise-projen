@@ -76,6 +76,9 @@ export class Mise implements IMixin {
 
     switch (packageManager) {
       case 'yarn':
+      case 'yarn2':
+      case 'yarn_classic':
+      case 'yarn_berry':
         nodePackage.yarnVersion && this.addTools({ yarn: nodePackage.yarnVersion });
         break;
       case 'pnpm':
