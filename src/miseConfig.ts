@@ -1227,6 +1227,13 @@ export interface Settings {
   readonly notFoundAutoInstall?: boolean;
 
   /**
+   * Automatically install an unconfigured tool when its registry bin matches a missing command.
+   *
+   * @schema settings#not_found_auto_install_registry
+   */
+  readonly notFoundAutoInstallRegistry?: boolean;
+
+  /**
    * Set to false to stop shims from falling back to a same-named binary found elsewhere on PATH.
    *
    * @schema settings#not_found_system_fallback
@@ -1807,6 +1814,7 @@ export function toJson_Settings(obj: Settings | undefined): Record<string, any> 
     'no_hooks': obj.noHooks,
     'node': toJson_SettingsNode(obj.node),
     'not_found_auto_install': obj.notFoundAutoInstall,
+    'not_found_auto_install_registry': obj.notFoundAutoInstallRegistry,
     'not_found_system_fallback': obj.notFoundSystemFallback,
     'npm': toJson_SettingsNpm(obj.npm),
     'oci': toJson_SettingsOci(obj.oci),
@@ -2039,6 +2047,13 @@ export interface MiseTomlSchemaHistory {
   readonly exclude?: string[];
 
   /**
+   * email used for history commit authors and committers; {hostname} expands to this machine's hostname
+   *
+   * @schema MiseTomlSchemaHistory#git_email
+   */
+  readonly gitEmail?: string;
+
+  /**
    * commands run once after a rollback or undo writes a path matching the glob (trusted global or system config only)
    *
    * @schema MiseTomlSchemaHistory#reload
@@ -2063,6 +2078,7 @@ export function toJson_MiseTomlSchemaHistory(obj: MiseTomlSchemaHistory | undefi
   const result = {
     'encryption': toJson_MiseTomlSchemaHistoryEncryption(obj.encryption),
     'exclude': obj.exclude?.map(y => y),
+    'git_email': obj.gitEmail,
     'reload': ((obj.reload) === undefined) ? undefined : (Object.entries(obj.reload).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'origin': toJson_MiseTomlSchemaHistoryOrigin(obj.origin),
   };
@@ -4264,6 +4280,13 @@ export interface SettingsSelfUpdate {
   readonly apiUrl?: string;
 
   /**
+   * Minimum release age for mise itself; inherits minimum_release_age (24h by default).
+   *
+   * @schema SettingsSelfUpdate#minimum_release_age
+   */
+  readonly minimumReleaseAge?: string;
+
+  /**
    * GitHub repository used by `mise self-update`.
    *
    * @schema SettingsSelfUpdate#repository
@@ -4280,6 +4303,7 @@ export function toJson_SettingsSelfUpdate(obj: SettingsSelfUpdate | undefined): 
   if (obj === undefined) { return undefined; }
   const result = {
     'api_url': obj.apiUrl,
+    'minimum_release_age': obj.minimumReleaseAge,
     'repository': obj.repository,
   };
   // filter undefined values
