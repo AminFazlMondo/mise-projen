@@ -1,4 +1,6 @@
+import path from 'path';
 import { cdk, javascript } from 'projen';
+import { dedupeAnyOfNumberTypes, JsiiFromJsonSchema } from './projenrc/json2jsii';
 
 const nodeVersion = '24';
 const project = new cdk.JsiiProject({
@@ -39,5 +41,16 @@ const project = new cdk.JsiiProject({
     allowedUsernames: ['AminFazlMondo'],
   },
   autoApproveUpgrades: true,
+  devDeps: [
+    'json2jsii',
+  ],
 });
+
+new JsiiFromJsonSchema(project, {
+  structName: 'MiseTomlSchema',
+  schemaPath: 'https://mise.jdx.dev/schema/mise.json',
+  filePath: path.join('src', 'mise-config.ts'),
+  transform: dedupeAnyOfNumberTypes,
+});
+
 project.synth();

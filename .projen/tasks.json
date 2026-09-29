@@ -350,6 +350,16 @@
         }
       ]
     },
+    "update-schemas": {
+      "name": "update-schemas",
+      "description": "Updates vendored JSON schemas from their source URL",
+      "steps": [
+        {
+          "exec": "node scripts/update-schema.js https://mise.jdx.dev/schema/mise.json schemas/mise.json",
+          "name": "update schema: schemas/mise.json"
+        }
+      ]
+    },
     "upgrade": {
       "name": "upgrade",
       "description": "upgrade dependencies",
@@ -367,7 +377,7 @@
             "--peer",
             "--no-deprecated",
             "--dep=dev,prod,peer,optional",
-            "--filter=@types/jest,eslint-import-resolver-typescript,eslint-plugin-import,jest,jsii-diff,jsii-pacmak,projen,ts-jest,ts-node"
+            "--filter=@types/jest,eslint-import-resolver-typescript,eslint-plugin-import,jest,jsii-diff,jsii-pacmak,json2jsii,projen,ts-jest,ts-node"
           ]
         },
         {
@@ -394,6 +404,7 @@
             "jsii-pacmak",
             "jsii-rosetta",
             "jsii",
+            "json2jsii",
             "projen",
             "ts-jest",
             "ts-node",

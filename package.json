@@ -25,6 +25,7 @@
     "test": "projen test",
     "test:watch": "projen test:watch",
     "unbump": "projen unbump",
+    "update-schemas": "projen update-schemas",
     "upgrade": "projen upgrade",
     "watch": "projen watch",
     "projen": "projen"
@@ -52,6 +53,7 @@
     "jsii-docgen": "^10.5.0",
     "jsii-pacmak": "^1.140.0",
     "jsii-rosetta": "~6.0.0",
+    "json2jsii": "^0.5.19",
     "projen": "^0.103.27",
     "ts-jest": "^29.4.14",
     "ts-node": "^10.9.2",
@@ -102,10 +104,12 @@
     ],
     "coverageDirectory": "coverage",
     "coveragePathIgnorePatterns": [
-      "/node_modules/"
+      "/node_modules/",
+      "src/mise-config.ts"
     ],
     "testPathIgnorePatterns": [
-      "/node_modules/"
+      "/node_modules/",
+      "src/mise-config.ts"
     ],
     "watchPathIgnorePatterns": [
       "/node_modules/"

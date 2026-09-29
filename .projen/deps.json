@@ -80,6 +80,10 @@
       "type": "build"
     },
     {
+      "name": "json2jsii",
+      "type": "build"
+    },
+    {
       "name": "projen",
       "type": "build"
     },
