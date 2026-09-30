@@ -89,13 +89,13 @@ describe('autoDiscover', () => {
   test('discovers node and pnpm from a node project', () => {
     const project = testNodeProject({
       packageManager: javascript.NodePackageManager.PNPM,
-      pnpmVersion: '10',
+      pnpmVersion: '10.33.1',
       minNodeVersion: '20.0.0',
     });
 
     project.with(new Mise());
 
-    expect(toml(project)).toMatch(/node = \[.*"20\.0\.0".*\]/);
+    expect(toml(project)).toMatch(/node = \[.*"20".*\]/);
     expect(toml(project)).toMatch(/pnpm = \[.*"10".*\]/);
   });
 
@@ -118,7 +118,7 @@ describe('autoDiscover', () => {
 
     project.with(new Mise());
 
-    expect(toml(project)).toMatch(/bun = \[.*"1\.2\.0".*\]/);
+    expect(toml(project)).toMatch(/bun = \[.*"1".*\]/);
   });
 
   test('warns and adds no package manager tool for npm', () => {

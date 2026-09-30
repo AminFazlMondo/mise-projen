@@ -27,7 +27,8 @@
     "target": "ES2022",
     "types": [
       "jest",
-      "node"
+      "node",
+      "semver"
     ],
     "skipLibCheck": true
   },

@@ -7,6 +7,10 @@ settings:
 importers:
 
   .:
+    dependencies:
+      semver:
+        specifier: ^7.8.5
+        version: 7.8.5
     devDependencies:
       '@stylistic/eslint-plugin':
         specifier: ^2
@@ -17,6 +21,9 @@ importers:
       '@types/node':
         specifier: ^24
         version: 24.19.0
+      '@types/semver':
+        specifier: ^7.8.0
+        version: 7.8.0
       '@typescript-eslint/eslint-plugin':
         specifier: ^8
         version: 8.71.0(@typescript-eslint/parser@8.71.0(eslint@9.39.5(supports-color@8.1.1))(supports-color@8.1.1)(typescript@6.0.3))(eslint@9.39.5(supports-color@8.1.1))(supports-color@8.1.1)(typescript@6.0.3)
@@ -650,6 +657,9 @@ packages:
 
   '@types/node@24.19.0':
     resolution: {integrity: sha512-zY+5tKxXdhGh1PYI0ac+7juvEu4OI6vWtVVoj5i2m42jxAY1U+zHGt6QCyOFwykdP62sM3MJ9stoYYUw5aCWew==}
+
+  '@types/semver@7.8.0':
+    resolution: {integrity: sha512-1mAINjtQCXXeLkJ9ehXkwOcBpqtLxiVtKhpUf83DdRNdQKV0iXZpaHYqRr7nj+wvxuJzoAmAwXI+sCNMv1CzLQ==}
 
   '@types/stack-utils@2.0.3':
     resolution: {integrity: sha512-9aEbYZ3TbYMznPdcdr3SmIrLXwC/AKZXQeCf9Pgao5CKb8CyHuEX5jzWPTkvregvhRJHcpRO6BFoGW9ycaOkYw==}
@@ -3490,6 +3500,8 @@ snapshots:
   '@types/node@24.19.0':
     dependencies:
       undici-types: 7.24.6
+
+  '@types/semver@7.8.0': {}
 
   '@types/stack-utils@2.0.3': {}
 

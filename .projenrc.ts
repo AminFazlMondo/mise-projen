@@ -25,6 +25,7 @@ const project = new cdk.JsiiProject({
       strictDepBuilds: false,
       sharedWorkspaceLockfile: true,
       minimumReleaseAge: 60,
+      nodeLinker: javascript.PnpmWorkspaceYamlSchemaNodeLinker.HOISTED,
       allowBuilds: {
         '@parcel/watcher': false,
         'unrs-resolver': false,
@@ -42,11 +43,15 @@ const project = new cdk.JsiiProject({
   },
   autoApproveUpgrades: true,
   devDeps: [
+    '@types/semver',
     'json2jsii',
   ],
   peerDeps: [
     'constructs@^10.5.0',
     'projen@^0.103.27',
+  ],
+  bundledDeps: [
+    'semver',
   ],
   npmTrustedPublishing: true,
 });
