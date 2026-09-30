@@ -1,6 +1,7 @@
 import { IConstruct, IMixin } from 'constructs';
 import { Project } from 'projen';
 import { NodePackage } from 'projen/lib/javascript';
+import * as semver from 'semver';
 import { MiseTomlSchema } from './miseConfig';
 import { MiseFile } from './miseFile';
 import { MiseOptions } from './types';
@@ -68,8 +69,9 @@ export class Mise implements IMixin {
     }
 
     const nodeVersion = nodePackage.minNodeVersion;
-    if (nodeVersion) {
-      this.addTools({ node: nodeVersion });
+    const parsedMajorVersion = semver.coerce(nodeVersion)?.major?.toString();
+    if (parsedMajorVersion) {
+      this.addTools({ node: parsedMajorVersion });
     }
 
     const { packageManager } = nodePackage;
@@ -79,13 +81,16 @@ export class Mise implements IMixin {
       case 'yarn2':
       case 'yarn_classic':
       case 'yarn_berry':
-        nodePackage.yarnVersion && this.addTools({ yarn: nodePackage.yarnVersion });
+        const parsedYarnMajorVersion = nodePackage.yarnVersion && semver.coerce(nodePackage.yarnVersion)?.major?.toString();
+        parsedYarnMajorVersion && this.addTools({ yarn: parsedYarnMajorVersion });
         break;
       case 'pnpm':
-        nodePackage.pnpmVersion && this.addTools({ pnpm: nodePackage.pnpmVersion });
+        const parsedPnpmMajorVersion = nodePackage.pnpmVersion && semver.coerce(nodePackage.pnpmVersion)?.major?.toString();
+        parsedPnpmMajorVersion && this.addTools({ pnpm: parsedPnpmMajorVersion });
         break;
       case 'bun':
-        nodePackage.bunVersion && this.addTools({ bun: nodePackage.bunVersion });
+        const parsedBunMajorVersion = nodePackage.bunVersion && semver.coerce(nodePackage.bunVersion)?.major?.toString();
+        parsedBunMajorVersion && this.addTools({ bun: parsedBunMajorVersion });
         break;
       default:
         project.logger.warn(`No package manager to be added for: ${packageManager}`);
