@@ -920,6 +920,7 @@ const miseTomlSchema: MiseTomlSchema = { ... }
 | <code><a href="#mise-projen.MiseTomlSchema.property.envPath">envPath</a></code> | <code>any</code> | PATH entries to add. |
 | <code><a href="#mise-projen.MiseTomlSchema.property.history">history</a></code> | <code><a href="#mise-projen.MiseTomlSchemaHistory">MiseTomlSchemaHistory</a></code> | dotfiles history: what is never captured, reload commands, and the setup repository (https://mise.jdx.dev/history.html). |
 | <code><a href="#mise-projen.MiseTomlSchema.property.hooks">hooks</a></code> | <code><a href="#mise-projen.Hooks">Hooks</a></code> | hooks to run on events like cd, enter, leave. |
+| <code><a href="#mise-projen.MiseTomlSchema.property.include">include</a></code> | <code>any</code> | remote config files merged into this one, ranking just below it: git::<url>//<path>.toml?ref=<ref> or oci::<registry>/<repo>[:tag\|@sha256:<digest>] (the artifact holds a mise.toml). Paranoid mode requires a commit sha or digest; otherwise a branch or tag is refreshed after fetch_remote_versions_cache. |
 | <code><a href="#mise-projen.MiseTomlSchema.property.minVersion">minVersion</a></code> | <code>any</code> | minimum version of mise required to use this config. |
 | <code><a href="#mise-projen.MiseTomlSchema.property.monorepo">monorepo</a></code> | <code><a href="#mise-projen.Monorepo">Monorepo</a></code> | configuration for monorepo task discovery. |
 | <code><a href="#mise-projen.MiseTomlSchema.property.monorepoRoot">monorepoRoot</a></code> | <code>boolean</code> | marks this config as a monorepo root for task path syntax. |
@@ -1127,6 +1128,18 @@ public readonly hooks: Hooks;
 - *Type:* <a href="#mise-projen.Hooks">Hooks</a>
 
 hooks to run on events like cd, enter, leave.
+
+---
+
+##### `include`<sup>Optional</sup> <a name="include" id="mise-projen.MiseTomlSchema.property.include"></a>
+
+```typescript
+public readonly include: any;
+```
+
+- *Type:* any
+
+remote config files merged into this one, ranking just below it: git::<url>//<path>.toml?ref=<ref> or oci::<registry>/<repo>[:tag|@sha256:<digest>] (the artifact holds a mise.toml). Paranoid mode requires a commit sha or digest; otherwise a branch or tag is refreshed after fetch_remote_versions_cache.
 
 ---
 
@@ -10856,7 +10869,7 @@ public readonly includes: string[];
 
 files/directories to include searching for tasks.
 
-Can be local paths or git repository URLs using git:: prefix (e.g., git::https://github.com/org/repo.git//path?ref=branch)
+Can be local paths, git repository URLs using git:: prefix (e.g., git::https://github.com/org/repo.git//path?ref=branch), or OCI artifacts using oci:: prefix (e.g., oci::ghcr.io/org/tasks:1.0.0)
 
 ---
 

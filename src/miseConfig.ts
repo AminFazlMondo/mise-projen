@@ -41,6 +41,13 @@ export interface MiseTomlSchema {
   readonly env?: Env[];
 
   /**
+   * remote config files merged into this one, ranking just below it: git::<url>//<path>.toml?ref=<ref> or oci::<registry>/<repo>[:tag|@sha256:<digest>] (the artifact holds a mise.toml). Paranoid mode requires a commit sha or digest; otherwise a branch or tag is refreshed after fetch_remote_versions_cache
+   *
+   * @schema MiseTomlSchema#include
+   */
+  readonly include?: any;
+
+  /**
    * dotenv file(s) to load. Deprecated; use env._.file instead. This will be removed in mise 2027.4.0.
    *
    * @schema MiseTomlSchema#env_file
@@ -241,6 +248,7 @@ export function toJson_MiseTomlSchema(obj: MiseTomlSchema | undefined): Record<s
     'shell_alias': ((obj.shellAlias) === undefined) ? undefined : (Object.entries(obj.shellAlias).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'wrappers': ((obj.wrappers) === undefined) ? undefined : (Object.entries(obj.wrappers).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'env': obj.env?.map(y => toJson_Env(y)),
+    'include': obj.include,
     'env_file': obj.envFile,
     'dotenv': obj.dotenv,
     'env_path': obj.envPath,
@@ -2157,7 +2165,7 @@ export interface TaskConfig {
   readonly inputGroups?: { [key: string]: string[] };
 
   /**
-   * files/directories to include searching for tasks. Can be local paths or git repository URLs using git:: prefix (e.g., git::https://github.com/org/repo.git//path?ref=branch)
+   * files/directories to include searching for tasks. Can be local paths, git repository URLs using git:: prefix (e.g., git::https://github.com/org/repo.git//path?ref=branch), or OCI artifacts using oci:: prefix (e.g., oci::ghcr.io/org/tasks:1.0.0)
    *
    * @schema task_config#includes
    */
