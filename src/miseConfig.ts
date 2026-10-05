@@ -76,6 +76,13 @@ export interface MiseTomlSchema {
   readonly monorepoRoot?: boolean;
 
   /**
+   * deprecated alias of monorepo_root
+   *
+   * @schema MiseTomlSchema#experimental_monorepo_root
+   */
+  readonly experimentalMonorepoRoot?: boolean;
+
+  /**
    * configuration for monorepo task discovery
    *
    * @schema MiseTomlSchema#monorepo
@@ -253,6 +260,7 @@ export function toJson_MiseTomlSchema(obj: MiseTomlSchema | undefined): Record<s
     'dotenv': obj.dotenv,
     'env_path': obj.envPath,
     'monorepo_root': obj.monorepoRoot,
+    'experimental_monorepo_root': obj.experimentalMonorepoRoot,
     'monorepo': toJson_Monorepo(obj.monorepo),
     'min_version': obj.minVersion,
     'redactions': obj.redactions?.map(y => y),
