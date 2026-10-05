@@ -918,6 +918,7 @@ const miseTomlSchema: MiseTomlSchema = { ... }
 | <code><a href="#mise-projen.MiseTomlSchema.property.env">env</a></code> | <code><a href="#mise-projen.Env">Env</a>[]</code> | environment variables to set. |
 | <code><a href="#mise-projen.MiseTomlSchema.property.envFile">envFile</a></code> | <code>any</code> | dotenv file(s) to load. |
 | <code><a href="#mise-projen.MiseTomlSchema.property.envPath">envPath</a></code> | <code>any</code> | PATH entries to add. |
+| <code><a href="#mise-projen.MiseTomlSchema.property.experimentalMonorepoRoot">experimentalMonorepoRoot</a></code> | <code>boolean</code> | deprecated alias of monorepo_root. |
 | <code><a href="#mise-projen.MiseTomlSchema.property.history">history</a></code> | <code><a href="#mise-projen.MiseTomlSchemaHistory">MiseTomlSchemaHistory</a></code> | dotfiles history: what is never captured, reload commands, and the setup repository (https://mise.jdx.dev/history.html). |
 | <code><a href="#mise-projen.MiseTomlSchema.property.hooks">hooks</a></code> | <code><a href="#mise-projen.Hooks">Hooks</a></code> | hooks to run on events like cd, enter, leave. |
 | <code><a href="#mise-projen.MiseTomlSchema.property.include">include</a></code> | <code>any</code> | remote config files merged into this one, ranking just below it: git::<url>//<path>.toml?ref=<ref> or oci::<registry>/<repo>[:tag\|@sha256:<digest>] (the artifact holds a mise.toml). Paranoid mode requires a commit sha or digest; otherwise a branch or tag is refreshed after fetch_remote_versions_cache. |
@@ -1104,6 +1105,18 @@ public readonly envPath: any;
 PATH entries to add.
 
 Deprecated; use env._.path instead. This will be removed in mise 2027.4.0.
+
+---
+
+##### `experimentalMonorepoRoot`<sup>Optional</sup> <a name="experimentalMonorepoRoot" id="mise-projen.MiseTomlSchema.property.experimentalMonorepoRoot"></a>
+
+```typescript
+public readonly experimentalMonorepoRoot: boolean;
+```
+
+- *Type:* boolean
+
+deprecated alias of monorepo_root.
 
 ---
 
