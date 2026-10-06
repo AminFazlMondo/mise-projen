@@ -914,6 +914,7 @@ const miseTomlSchema: MiseTomlSchema = { ... }
 | <code><a href="#mise-projen.MiseTomlSchema.property.deps">deps</a></code> | <code><a href="#mise-projen.MiseTomlSchemaDeps">MiseTomlSchemaDeps</a></code> | configure deps providers. |
 | <code><a href="#mise-projen.MiseTomlSchema.property.doctor">doctor</a></code> | <code><a href="#mise-projen.Doctor">Doctor</a></code> | *No description.* |
 | <code><a href="#mise-projen.MiseTomlSchema.property.dotenv">dotenv</a></code> | <code>any</code> | dotenv file(s) to load. |
+| <code><a href="#mise-projen.MiseTomlSchema.property.dotfileGroups">dotfileGroups</a></code> | <code>{[ key: string ]: <a href="#mise-projen.MiseTomlSchemaDotfileGroups">MiseTomlSchemaDotfileGroups</a>}</code> | named directory trees of dotfiles, applied with `mise dotfiles apply` or `mise bootstrap` while [bootstrap] dotfile_groups selects them (or is unset). |
 | <code><a href="#mise-projen.MiseTomlSchema.property.dotfiles">dotfiles</a></code> | <code>{[ key: string ]: any}</code> | dotfiles applied with `mise dotfiles apply` or `mise bootstrap`, keyed by target path or a logical name when every variant overrides the target; |
 | <code><a href="#mise-projen.MiseTomlSchema.property.env">env</a></code> | <code><a href="#mise-projen.Env">Env</a>[]</code> | environment variables to set. |
 | <code><a href="#mise-projen.MiseTomlSchema.property.envFile">envFile</a></code> | <code>any</code> | dotenv file(s) to load. |
@@ -1051,6 +1052,18 @@ public readonly dotenv: any;
 dotenv file(s) to load.
 
 Deprecated; use env._.file instead. This will be removed in mise 2027.4.0.
+
+---
+
+##### `dotfileGroups`<sup>Optional</sup> <a name="dotfileGroups" id="mise-projen.MiseTomlSchema.property.dotfileGroups"></a>
+
+```typescript
+public readonly dotfileGroups: {[ key: string ]: MiseTomlSchemaDotfileGroups};
+```
+
+- *Type:* {[ key: string ]: <a href="#mise-projen.MiseTomlSchemaDotfileGroups">MiseTomlSchemaDotfileGroups</a>}
+
+named directory trees of dotfiles, applied with `mise dotfiles apply` or `mise bootstrap` while [bootstrap] dotfile_groups selects them (or is unset).
 
 ---
 
@@ -1377,8 +1390,10 @@ const miseTomlSchemaBootstrap: MiseTomlSchemaBootstrap = { ... }
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrap.property.brew">brew</a></code> | <code><a href="#mise-projen.MiseTomlSchemaBootstrapBrew">MiseTomlSchemaBootstrapBrew</a></code> | Homebrew-specific bootstrap package config. |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrap.property.compose">compose</a></code> | <code>{[ key: string ]: <a href="#mise-projen.MiseTomlSchemaBootstrapCompose">MiseTomlSchemaBootstrapCompose</a>}</code> | Docker Compose projects managed with `mise bootstrap compose`, keyed by project name. |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrap.property.configRoots">configRoots</a></code> | <code>string[]</code> | deprecated and will be removed in mise 2027.3.3; move each selected root into a conf.d folder instead (https://mise.jdx.dev/configuration.html#conf-d-folders). |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrap.property.directories">directories</a></code> | <code>{[ key: string ]: <a href="#mise-projen.MiseTomlSchemaBootstrapDirectories">MiseTomlSchemaBootstrapDirectories</a>}</code> | Managed system directories keyed by absolute target path. |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrap.property.dotfileGroups">dotfileGroups</a></code> | <code>string[]</code> | the dotfile groups this machine applies; |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrap.property.files">files</a></code> | <code>{[ key: string ]: <a href="#mise-projen.MiseTomlSchemaBootstrapFiles">MiseTomlSchemaBootstrapFiles</a>}</code> | Managed system files keyed by absolute target path. |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrap.property.hooks">hooks</a></code> | <code><a href="#mise-projen.MiseTomlSchemaBootstrapHooks">MiseTomlSchemaBootstrapHooks</a></code> | commands to run before and after bootstrap phases. |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrap.property.linux">linux</a></code> | <code><a href="#mise-projen.MiseTomlSchemaBootstrapLinux">MiseTomlSchemaBootstrapLinux</a></code> | Linux-specific bootstrap config. |
@@ -1405,6 +1420,20 @@ Homebrew-specific bootstrap package config.
 
 ---
 
+##### `compose`<sup>Optional</sup> <a name="compose" id="mise-projen.MiseTomlSchemaBootstrap.property.compose"></a>
+
+```typescript
+public readonly compose: {[ key: string ]: MiseTomlSchemaBootstrapCompose};
+```
+
+- *Type:* {[ key: string ]: <a href="#mise-projen.MiseTomlSchemaBootstrapCompose">MiseTomlSchemaBootstrapCompose</a>}
+
+Docker Compose projects managed with `mise bootstrap compose`, keyed by project name.
+
+Text fields support Tera templates.
+
+---
+
 ##### `configRoots`<sup>Optional</sup> <a name="configRoots" id="mise-projen.MiseTomlSchemaBootstrap.property.configRoots"></a>
 
 ```typescript
@@ -1426,6 +1455,20 @@ public readonly directories: {[ key: string ]: MiseTomlSchemaBootstrapDirectorie
 - *Type:* {[ key: string ]: <a href="#mise-projen.MiseTomlSchemaBootstrapDirectories">MiseTomlSchemaBootstrapDirectories</a>}
 
 Managed system directories keyed by absolute target path.
+
+---
+
+##### `dotfileGroups`<sup>Optional</sup> <a name="dotfileGroups" id="mise-projen.MiseTomlSchemaBootstrap.property.dotfileGroups"></a>
+
+```typescript
+public readonly dotfileGroups: string[];
+```
+
+- *Type:* string[]
+
+the dotfile groups this machine applies;
+
+when unset, every group applies. Entries without a group always apply, and a more local config's list replaces the others
 
 ---
 
@@ -1603,6 +1646,283 @@ public readonly taps: {[ key: string ]: string};
 - *Type:* {[ key: string ]: string}
 
 Homebrew tap names mapped to custom git URLs.
+
+---
+
+### MiseTomlSchemaBootstrapCompose <a name="MiseTomlSchemaBootstrapCompose" id="mise-projen.MiseTomlSchemaBootstrapCompose"></a>
+
+#### Initializer <a name="Initializer" id="mise-projen.MiseTomlSchemaBootstrapCompose.Initializer"></a>
+
+```typescript
+import { MiseTomlSchemaBootstrapCompose } from 'mise-projen'
+
+const miseTomlSchemaBootstrapCompose: MiseTomlSchemaBootstrapCompose = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapCompose.property.projectDir">projectDir</a></code> | <code>string</code> | absolute directory containing the Compose project. |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapCompose.property.buildValue">buildValue</a></code> | <code><a href="#mise-projen.MiseTomlSchemaBootstrapComposeBuild">MiseTomlSchemaBootstrapComposeBuild</a></code> | *No description.* |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapCompose.property.command">command</a></code> | <code>string[]</code> | standalone Compose command. |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapCompose.property.dependsOn">dependsOn</a></code> | <code>string[]</code> | bootstrap resource dependencies. |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapCompose.property.downImages">downImages</a></code> | <code><a href="#mise-projen.MiseTomlSchemaBootstrapComposeDownImages">MiseTomlSchemaBootstrapComposeDownImages</a></code> | *No description.* |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapCompose.property.downVolumes">downVolumes</a></code> | <code>boolean</code> | *No description.* |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapCompose.property.engineCommand">engineCommand</a></code> | <code>string[]</code> | container engine command. |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapCompose.property.envFiles">envFiles</a></code> | <code>string[]</code> | environment file paths relative to project_dir unless absolute. |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapCompose.property.files">files</a></code> | <code>string[]</code> | Compose file paths relative to project_dir unless absolute. |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapCompose.property.oneshot">oneshot</a></code> | <code>string[]</code> | *No description.* |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapCompose.property.profiles">profiles</a></code> | <code>string[]</code> | *No description.* |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapCompose.property.projectName">projectName</a></code> | <code>string</code> | optional Compose project name. |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapCompose.property.pull">pull</a></code> | <code><a href="#mise-projen.MiseTomlSchemaBootstrapComposePull">MiseTomlSchemaBootstrapComposePull</a></code> | *No description.* |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapCompose.property.recreate">recreate</a></code> | <code><a href="#mise-projen.MiseTomlSchemaBootstrapComposeRecreate">MiseTomlSchemaBootstrapComposeRecreate</a></code> | *No description.* |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapCompose.property.removeOrphans">removeOrphans</a></code> | <code>boolean</code> | *No description.* |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapCompose.property.renewAnonymousVolumes">renewAnonymousVolumes</a></code> | <code>boolean</code> | *No description.* |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapCompose.property.services">services</a></code> | <code>string[]</code> | *No description.* |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapCompose.property.state">state</a></code> | <code><a href="#mise-projen.MiseTomlSchemaBootstrapComposeState">MiseTomlSchemaBootstrapComposeState</a></code> | *No description.* |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapCompose.property.sudo">sudo</a></code> | <code>boolean</code> | *No description.* |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapCompose.property.timeout">timeout</a></code> | <code>number</code> | Compose shutdown timeout in seconds. |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapCompose.property.wait">wait</a></code> | <code>boolean</code> | *No description.* |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapCompose.property.waitTimeout">waitTimeout</a></code> | <code>number</code> | wait timeout in seconds. |
+
+---
+
+##### `projectDir`<sup>Required</sup> <a name="projectDir" id="mise-projen.MiseTomlSchemaBootstrapCompose.property.projectDir"></a>
+
+```typescript
+public readonly projectDir: string;
+```
+
+- *Type:* string
+
+absolute directory containing the Compose project.
+
+---
+
+##### `buildValue`<sup>Optional</sup> <a name="buildValue" id="mise-projen.MiseTomlSchemaBootstrapCompose.property.buildValue"></a>
+
+```typescript
+public readonly buildValue: MiseTomlSchemaBootstrapComposeBuild;
+```
+
+- *Type:* <a href="#mise-projen.MiseTomlSchemaBootstrapComposeBuild">MiseTomlSchemaBootstrapComposeBuild</a>
+
+---
+
+##### `command`<sup>Optional</sup> <a name="command" id="mise-projen.MiseTomlSchemaBootstrapCompose.property.command"></a>
+
+```typescript
+public readonly command: string[];
+```
+
+- *Type:* string[]
+
+standalone Compose command.
+
+---
+
+##### `dependsOn`<sup>Optional</sup> <a name="dependsOn" id="mise-projen.MiseTomlSchemaBootstrapCompose.property.dependsOn"></a>
+
+```typescript
+public readonly dependsOn: string[];
+```
+
+- *Type:* string[]
+
+bootstrap resource dependencies.
+
+---
+
+##### `downImages`<sup>Optional</sup> <a name="downImages" id="mise-projen.MiseTomlSchemaBootstrapCompose.property.downImages"></a>
+
+```typescript
+public readonly downImages: MiseTomlSchemaBootstrapComposeDownImages;
+```
+
+- *Type:* <a href="#mise-projen.MiseTomlSchemaBootstrapComposeDownImages">MiseTomlSchemaBootstrapComposeDownImages</a>
+
+---
+
+##### `downVolumes`<sup>Optional</sup> <a name="downVolumes" id="mise-projen.MiseTomlSchemaBootstrapCompose.property.downVolumes"></a>
+
+```typescript
+public readonly downVolumes: boolean;
+```
+
+- *Type:* boolean
+
+---
+
+##### `engineCommand`<sup>Optional</sup> <a name="engineCommand" id="mise-projen.MiseTomlSchemaBootstrapCompose.property.engineCommand"></a>
+
+```typescript
+public readonly engineCommand: string[];
+```
+
+- *Type:* string[]
+
+container engine command.
+
+---
+
+##### `envFiles`<sup>Optional</sup> <a name="envFiles" id="mise-projen.MiseTomlSchemaBootstrapCompose.property.envFiles"></a>
+
+```typescript
+public readonly envFiles: string[];
+```
+
+- *Type:* string[]
+
+environment file paths relative to project_dir unless absolute.
+
+---
+
+##### `files`<sup>Optional</sup> <a name="files" id="mise-projen.MiseTomlSchemaBootstrapCompose.property.files"></a>
+
+```typescript
+public readonly files: string[];
+```
+
+- *Type:* string[]
+
+Compose file paths relative to project_dir unless absolute.
+
+---
+
+##### `oneshot`<sup>Optional</sup> <a name="oneshot" id="mise-projen.MiseTomlSchemaBootstrapCompose.property.oneshot"></a>
+
+```typescript
+public readonly oneshot: string[];
+```
+
+- *Type:* string[]
+
+---
+
+##### `profiles`<sup>Optional</sup> <a name="profiles" id="mise-projen.MiseTomlSchemaBootstrapCompose.property.profiles"></a>
+
+```typescript
+public readonly profiles: string[];
+```
+
+- *Type:* string[]
+
+---
+
+##### `projectName`<sup>Optional</sup> <a name="projectName" id="mise-projen.MiseTomlSchemaBootstrapCompose.property.projectName"></a>
+
+```typescript
+public readonly projectName: string;
+```
+
+- *Type:* string
+
+optional Compose project name.
+
+---
+
+##### `pull`<sup>Optional</sup> <a name="pull" id="mise-projen.MiseTomlSchemaBootstrapCompose.property.pull"></a>
+
+```typescript
+public readonly pull: MiseTomlSchemaBootstrapComposePull;
+```
+
+- *Type:* <a href="#mise-projen.MiseTomlSchemaBootstrapComposePull">MiseTomlSchemaBootstrapComposePull</a>
+
+---
+
+##### `recreate`<sup>Optional</sup> <a name="recreate" id="mise-projen.MiseTomlSchemaBootstrapCompose.property.recreate"></a>
+
+```typescript
+public readonly recreate: MiseTomlSchemaBootstrapComposeRecreate;
+```
+
+- *Type:* <a href="#mise-projen.MiseTomlSchemaBootstrapComposeRecreate">MiseTomlSchemaBootstrapComposeRecreate</a>
+
+---
+
+##### `removeOrphans`<sup>Optional</sup> <a name="removeOrphans" id="mise-projen.MiseTomlSchemaBootstrapCompose.property.removeOrphans"></a>
+
+```typescript
+public readonly removeOrphans: boolean;
+```
+
+- *Type:* boolean
+
+---
+
+##### `renewAnonymousVolumes`<sup>Optional</sup> <a name="renewAnonymousVolumes" id="mise-projen.MiseTomlSchemaBootstrapCompose.property.renewAnonymousVolumes"></a>
+
+```typescript
+public readonly renewAnonymousVolumes: boolean;
+```
+
+- *Type:* boolean
+
+---
+
+##### `services`<sup>Optional</sup> <a name="services" id="mise-projen.MiseTomlSchemaBootstrapCompose.property.services"></a>
+
+```typescript
+public readonly services: string[];
+```
+
+- *Type:* string[]
+
+---
+
+##### `state`<sup>Optional</sup> <a name="state" id="mise-projen.MiseTomlSchemaBootstrapCompose.property.state"></a>
+
+```typescript
+public readonly state: MiseTomlSchemaBootstrapComposeState;
+```
+
+- *Type:* <a href="#mise-projen.MiseTomlSchemaBootstrapComposeState">MiseTomlSchemaBootstrapComposeState</a>
+
+---
+
+##### `sudo`<sup>Optional</sup> <a name="sudo" id="mise-projen.MiseTomlSchemaBootstrapCompose.property.sudo"></a>
+
+```typescript
+public readonly sudo: boolean;
+```
+
+- *Type:* boolean
+
+---
+
+##### `timeout`<sup>Optional</sup> <a name="timeout" id="mise-projen.MiseTomlSchemaBootstrapCompose.property.timeout"></a>
+
+```typescript
+public readonly timeout: number;
+```
+
+- *Type:* number
+
+Compose shutdown timeout in seconds.
+
+---
+
+##### `wait`<sup>Optional</sup> <a name="wait" id="mise-projen.MiseTomlSchemaBootstrapCompose.property.wait"></a>
+
+```typescript
+public readonly wait: boolean;
+```
+
+- *Type:* boolean
+
+---
+
+##### `waitTimeout`<sup>Optional</sup> <a name="waitTimeout" id="mise-projen.MiseTomlSchemaBootstrapCompose.property.waitTimeout"></a>
+
+```typescript
+public readonly waitTimeout: number;
+```
+
+- *Type:* number
+
+wait timeout in seconds.
 
 ---
 
@@ -4674,6 +4994,133 @@ public readonly yarn: DepsProvider;
 ```
 
 - *Type:* <a href="#mise-projen.DepsProvider">DepsProvider</a>
+
+---
+
+### MiseTomlSchemaDotfileGroups <a name="MiseTomlSchemaDotfileGroups" id="mise-projen.MiseTomlSchemaDotfileGroups"></a>
+
+#### Initializer <a name="Initializer" id="mise-projen.MiseTomlSchemaDotfileGroups.Initializer"></a>
+
+```typescript
+import { MiseTomlSchemaDotfileGroups } from 'mise-projen'
+
+const miseTomlSchemaDotfileGroups: MiseTomlSchemaDotfileGroups = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#mise-projen.MiseTomlSchemaDotfileGroups.property.root">root</a></code> | <code>string</code> | the directory tree the group deploys; |
+| <code><a href="#mise-projen.MiseTomlSchemaDotfileGroups.property.dotPrefix">dotPrefix</a></code> | <code>boolean</code> | deploy each source path component named "dot-<name>" as ".<name>", like GNU Stow's --dotfiles. |
+| <code><a href="#mise-projen.MiseTomlSchemaDotfileGroups.property.entries">entries</a></code> | <code>{[ key: string ]: any}</code> | whole-file entries for parts of the tree, keyed by target path inside the group's target and written like [dotfiles] entries; |
+| <code><a href="#mise-projen.MiseTomlSchemaDotfileGroups.property.exclude">exclude</a></code> | <code>string[]</code> | glob patterns of source paths to skip, as for [dotfiles] exclude. |
+| <code><a href="#mise-projen.MiseTomlSchemaDotfileGroups.property.manifest">manifest</a></code> | <code><a href="#mise-projen.MiseTomlSchemaDotfileGroupsManifest">MiseTomlSchemaDotfileGroupsManifest</a></code> | source manifest used to select managed files from the tree. |
+| <code><a href="#mise-projen.MiseTomlSchemaDotfileGroups.property.mode">mode</a></code> | <code><a href="#mise-projen.MiseTomlSchemaDotfileGroupsMode">MiseTomlSchemaDotfileGroupsMode</a></code> | how the tree is deployed. |
+| <code><a href="#mise-projen.MiseTomlSchemaDotfileGroups.property.relative">relative</a></code> | <code>boolean</code> | link by a path relative to the link's directory; |
+| <code><a href="#mise-projen.MiseTomlSchemaDotfileGroups.property.target">target</a></code> | <code>string</code> | target directory, absolute or starting with ~/. |
+
+---
+
+##### `root`<sup>Required</sup> <a name="root" id="mise-projen.MiseTomlSchemaDotfileGroups.property.root"></a>
+
+```typescript
+public readonly root: string;
+```
+
+- *Type:* string
+
+the directory tree the group deploys;
+
+a relative path resolves against dotfiles.root
+
+---
+
+##### `dotPrefix`<sup>Optional</sup> <a name="dotPrefix" id="mise-projen.MiseTomlSchemaDotfileGroups.property.dotPrefix"></a>
+
+```typescript
+public readonly dotPrefix: boolean;
+```
+
+- *Type:* boolean
+
+deploy each source path component named "dot-<name>" as ".<name>", like GNU Stow's --dotfiles.
+
+---
+
+##### `entries`<sup>Optional</sup> <a name="entries" id="mise-projen.MiseTomlSchemaDotfileGroups.property.entries"></a>
+
+```typescript
+public readonly entries: {[ key: string ]: any};
+```
+
+- *Type:* {[ key: string ]: any}
+
+whole-file entries for parts of the tree, keyed by target path inside the group's target and written like [dotfiles] entries;
+
+each is cut out of the walk. A missing source is found under the root at the entry's path inside the target, and a relative source starts at the root
+
+---
+
+##### `exclude`<sup>Optional</sup> <a name="exclude" id="mise-projen.MiseTomlSchemaDotfileGroups.property.exclude"></a>
+
+```typescript
+public readonly exclude: string[];
+```
+
+- *Type:* string[]
+
+glob patterns of source paths to skip, as for [dotfiles] exclude.
+
+---
+
+##### `manifest`<sup>Optional</sup> <a name="manifest" id="mise-projen.MiseTomlSchemaDotfileGroups.property.manifest"></a>
+
+```typescript
+public readonly manifest: MiseTomlSchemaDotfileGroupsManifest;
+```
+
+- *Type:* <a href="#mise-projen.MiseTomlSchemaDotfileGroupsManifest">MiseTomlSchemaDotfileGroupsManifest</a>
+
+source manifest used to select managed files from the tree.
+
+---
+
+##### `mode`<sup>Optional</sup> <a name="mode" id="mise-projen.MiseTomlSchemaDotfileGroups.property.mode"></a>
+
+```typescript
+public readonly mode: MiseTomlSchemaDotfileGroupsMode;
+```
+
+- *Type:* <a href="#mise-projen.MiseTomlSchemaDotfileGroupsMode">MiseTomlSchemaDotfileGroupsMode</a>
+
+how the tree is deployed.
+
+---
+
+##### `relative`<sup>Optional</sup> <a name="relative" id="mise-projen.MiseTomlSchemaDotfileGroups.property.relative"></a>
+
+```typescript
+public readonly relative: boolean;
+```
+
+- *Type:* boolean
+
+link by a path relative to the link's directory;
+
+overrides the dotfiles.relative_symlinks setting (ignored on Windows)
+
+---
+
+##### `target`<sup>Optional</sup> <a name="target" id="mise-projen.MiseTomlSchemaDotfileGroups.property.target"></a>
+
+```typescript
+public readonly target: string;
+```
+
+- *Type:* string
+
+target directory, absolute or starting with ~/.
 
 ---
 
@@ -11467,6 +11914,163 @@ post-packages.
 ---
 
 
+### MiseTomlSchemaBootstrapComposeBuild <a name="MiseTomlSchemaBootstrapComposeBuild" id="mise-projen.MiseTomlSchemaBootstrapComposeBuild"></a>
+
+#### Members <a name="Members" id="Members"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapComposeBuild.AUTO">AUTO</a></code> | auto. |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapComposeBuild.ALWAYS">ALWAYS</a></code> | always. |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapComposeBuild.NEVER">NEVER</a></code> | never. |
+
+---
+
+##### `AUTO` <a name="AUTO" id="mise-projen.MiseTomlSchemaBootstrapComposeBuild.AUTO"></a>
+
+auto.
+
+---
+
+
+##### `ALWAYS` <a name="ALWAYS" id="mise-projen.MiseTomlSchemaBootstrapComposeBuild.ALWAYS"></a>
+
+always.
+
+---
+
+
+##### `NEVER` <a name="NEVER" id="mise-projen.MiseTomlSchemaBootstrapComposeBuild.NEVER"></a>
+
+never.
+
+---
+
+
+### MiseTomlSchemaBootstrapComposeDownImages <a name="MiseTomlSchemaBootstrapComposeDownImages" id="mise-projen.MiseTomlSchemaBootstrapComposeDownImages"></a>
+
+#### Members <a name="Members" id="Members"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapComposeDownImages.LOCAL">LOCAL</a></code> | local. |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapComposeDownImages.ALL">ALL</a></code> | all. |
+
+---
+
+##### `LOCAL` <a name="LOCAL" id="mise-projen.MiseTomlSchemaBootstrapComposeDownImages.LOCAL"></a>
+
+local.
+
+---
+
+
+##### `ALL` <a name="ALL" id="mise-projen.MiseTomlSchemaBootstrapComposeDownImages.ALL"></a>
+
+all.
+
+---
+
+
+### MiseTomlSchemaBootstrapComposePull <a name="MiseTomlSchemaBootstrapComposePull" id="mise-projen.MiseTomlSchemaBootstrapComposePull"></a>
+
+#### Members <a name="Members" id="Members"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapComposePull.ALWAYS">ALWAYS</a></code> | always. |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapComposePull.MISSING">MISSING</a></code> | missing. |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapComposePull.NEVER">NEVER</a></code> | never. |
+
+---
+
+##### `ALWAYS` <a name="ALWAYS" id="mise-projen.MiseTomlSchemaBootstrapComposePull.ALWAYS"></a>
+
+always.
+
+---
+
+
+##### `MISSING` <a name="MISSING" id="mise-projen.MiseTomlSchemaBootstrapComposePull.MISSING"></a>
+
+missing.
+
+---
+
+
+##### `NEVER` <a name="NEVER" id="mise-projen.MiseTomlSchemaBootstrapComposePull.NEVER"></a>
+
+never.
+
+---
+
+
+### MiseTomlSchemaBootstrapComposeRecreate <a name="MiseTomlSchemaBootstrapComposeRecreate" id="mise-projen.MiseTomlSchemaBootstrapComposeRecreate"></a>
+
+#### Members <a name="Members" id="Members"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapComposeRecreate.AUTO">AUTO</a></code> | auto. |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapComposeRecreate.ALWAYS">ALWAYS</a></code> | always. |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapComposeRecreate.NEVER">NEVER</a></code> | never. |
+
+---
+
+##### `AUTO` <a name="AUTO" id="mise-projen.MiseTomlSchemaBootstrapComposeRecreate.AUTO"></a>
+
+auto.
+
+---
+
+
+##### `ALWAYS` <a name="ALWAYS" id="mise-projen.MiseTomlSchemaBootstrapComposeRecreate.ALWAYS"></a>
+
+always.
+
+---
+
+
+##### `NEVER` <a name="NEVER" id="mise-projen.MiseTomlSchemaBootstrapComposeRecreate.NEVER"></a>
+
+never.
+
+---
+
+
+### MiseTomlSchemaBootstrapComposeState <a name="MiseTomlSchemaBootstrapComposeState" id="mise-projen.MiseTomlSchemaBootstrapComposeState"></a>
+
+#### Members <a name="Members" id="Members"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapComposeState.RUNNING">RUNNING</a></code> | running. |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapComposeState.STOPPED">STOPPED</a></code> | stopped. |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapComposeState.ABSENT">ABSENT</a></code> | absent. |
+
+---
+
+##### `RUNNING` <a name="RUNNING" id="mise-projen.MiseTomlSchemaBootstrapComposeState.RUNNING"></a>
+
+running.
+
+---
+
+
+##### `STOPPED` <a name="STOPPED" id="mise-projen.MiseTomlSchemaBootstrapComposeState.STOPPED"></a>
+
+stopped.
+
+---
+
+
+##### `ABSENT` <a name="ABSENT" id="mise-projen.MiseTomlSchemaBootstrapComposeState.ABSENT"></a>
+
+absent.
+
+---
+
+
 ### MiseTomlSchemaBootstrapDirectoriesState <a name="MiseTomlSchemaBootstrapDirectoriesState" id="mise-projen.MiseTomlSchemaBootstrapDirectoriesState"></a>
 
 #### Members <a name="Members" id="Members"></a>
@@ -12206,6 +12810,60 @@ cockroachdb.
 ##### `NATS` <a name="NATS" id="mise-projen.MiseTomlSchemaDaemonProvidersPreset.NATS"></a>
 
 nats.
+
+---
+
+
+### MiseTomlSchemaDotfileGroupsManifest <a name="MiseTomlSchemaDotfileGroupsManifest" id="mise-projen.MiseTomlSchemaDotfileGroupsManifest"></a>
+
+source manifest used to select managed files from the tree.
+
+#### Members <a name="Members" id="Members"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#mise-projen.MiseTomlSchemaDotfileGroupsManifest.GIT">GIT</a></code> | git. |
+
+---
+
+##### `GIT` <a name="GIT" id="mise-projen.MiseTomlSchemaDotfileGroupsManifest.GIT"></a>
+
+git.
+
+---
+
+
+### MiseTomlSchemaDotfileGroupsMode <a name="MiseTomlSchemaDotfileGroupsMode" id="mise-projen.MiseTomlSchemaDotfileGroupsMode"></a>
+
+how the tree is deployed.
+
+#### Members <a name="Members" id="Members"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#mise-projen.MiseTomlSchemaDotfileGroupsMode.SYMLINK_HYPHEN_EACH">SYMLINK_HYPHEN_EACH</a></code> | symlink-each. |
+| <code><a href="#mise-projen.MiseTomlSchemaDotfileGroupsMode.COPY">COPY</a></code> | copy. |
+| <code><a href="#mise-projen.MiseTomlSchemaDotfileGroupsMode.SYMLINK">SYMLINK</a></code> | symlink. |
+
+---
+
+##### `SYMLINK_HYPHEN_EACH` <a name="SYMLINK_HYPHEN_EACH" id="mise-projen.MiseTomlSchemaDotfileGroupsMode.SYMLINK_HYPHEN_EACH"></a>
+
+symlink-each.
+
+---
+
+
+##### `COPY` <a name="COPY" id="mise-projen.MiseTomlSchemaDotfileGroupsMode.COPY"></a>
+
+copy.
+
+---
+
+
+##### `SYMLINK` <a name="SYMLINK" id="mise-projen.MiseTomlSchemaDotfileGroupsMode.SYMLINK"></a>
+
+symlink.
 
 ---
 

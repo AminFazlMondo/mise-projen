@@ -95,9 +95,27 @@ export class JsiiFromJsonSchema extends TextFile {
   protected synthesizeContent(_: IResolver): string | undefined {
     return [
       ...(this.marker ? [`// ${this.marker}`] : []),
-      this.generator.render(),
+      renameProhibitedMembers(this.generator.render()),
     ].join('\n');
   }
+}
+
+// json2jsii appends a trailing "_" to properties named "build", "equals" or
+// "hashcode" (reserved struct method names across jsii target languages), but
+// that trailing underscore itself violates jsii's camelCase naming rule. Fix
+// up the generated TypeScript identifiers; the schema/TOML key (e.g. the
+// quoted 'build' in the generated toJson function) is left untouched.
+const PROHIBITED_MEMBER_RENAMES: Record<string, string> = {
+  build_: 'buildValue',
+  equals_: 'equalsValue',
+  hashcode_: 'hashcodeValue',
+};
+
+export function renameProhibitedMembers(code: string): string {
+  return Object.entries(PROHIBITED_MEMBER_RENAMES).reduce(
+    (result, [from, to]) => result.replace(new RegExp(`\\b${from}\\b`, 'g'), to),
+    code,
+  );
 }
 
 /**
