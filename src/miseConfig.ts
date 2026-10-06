@@ -139,6 +139,13 @@ export interface MiseTomlSchema {
   readonly dotfiles?: { [key: string]: any };
 
   /**
+   * named directory trees of dotfiles, applied with `mise dotfiles apply` or `mise bootstrap` while [bootstrap] dotfile_groups selects them (or is unset)
+   *
+   * @schema MiseTomlSchema#dotfile_groups
+   */
+  readonly dotfileGroups?: { [key: string]: MiseTomlSchemaDotfileGroups };
+
+  /**
    * machine-global bootstrapping (system packages, repos, macOS defaults, launchd agents, login shell)
    *
    * @schema MiseTomlSchema#bootstrap
@@ -269,6 +276,7 @@ export function toJson_MiseTomlSchema(obj: MiseTomlSchema | undefined): Record<s
     'oci': toJson_MiseTomlSchemaOci(obj.oci),
     'settings': toJson_Settings(obj.settings),
     'dotfiles': ((obj.dotfiles) === undefined) ? undefined : (Object.entries(obj.dotfiles).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    'dotfile_groups': ((obj.dotfileGroups) === undefined) ? undefined : (Object.entries(obj.dotfileGroups).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: toJson_MiseTomlSchemaDotfileGroups(i[1]) }), {})),
     'bootstrap': toJson_MiseTomlSchemaBootstrap(obj.bootstrap),
     'history': toJson_MiseTomlSchemaHistory(obj.history),
     'task_config': toJson_TaskConfig(obj.taskConfig),
@@ -1912,6 +1920,89 @@ export function toJson_Settings(obj: Settings | undefined): Record<string, any> 
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * @schema MiseTomlSchemaDotfileGroups
+ */
+export interface MiseTomlSchemaDotfileGroups {
+  /**
+   * the directory tree the group deploys; a relative path resolves against dotfiles.root
+   *
+   * @schema MiseTomlSchemaDotfileGroups#root
+   */
+  readonly root: string;
+
+  /**
+   * target directory, absolute or starting with ~/
+   *
+   * @schema MiseTomlSchemaDotfileGroups#target
+   */
+  readonly target?: string;
+
+  /**
+   * how the tree is deployed
+   *
+   * @schema MiseTomlSchemaDotfileGroups#mode
+   */
+  readonly mode?: MiseTomlSchemaDotfileGroupsMode;
+
+  /**
+   * glob patterns of source paths to skip, as for [dotfiles] exclude
+   *
+   * @schema MiseTomlSchemaDotfileGroups#exclude
+   */
+  readonly exclude?: string[];
+
+  /**
+   * deploy each source path component named "dot-<name>" as ".<name>", like GNU Stow's --dotfiles
+   *
+   * @schema MiseTomlSchemaDotfileGroups#dot_prefix
+   */
+  readonly dotPrefix?: boolean;
+
+  /**
+   * source manifest used to select managed files from the tree
+   *
+   * @schema MiseTomlSchemaDotfileGroups#manifest
+   */
+  readonly manifest?: MiseTomlSchemaDotfileGroupsManifest;
+
+  /**
+   * link by a path relative to the link's directory; overrides the dotfiles.relative_symlinks setting (ignored on Windows)
+   *
+   * @schema MiseTomlSchemaDotfileGroups#relative
+   */
+  readonly relative?: boolean;
+
+  /**
+   * whole-file entries for parts of the tree, keyed by target path inside the group's target and written like [dotfiles] entries; each is cut out of the walk. A missing source is found under the root at the entry's path inside the target, and a relative source starts at the root
+   *
+   * @schema MiseTomlSchemaDotfileGroups#entries
+   */
+  readonly entries?: { [key: string]: any };
+}
+
+/**
+ * Converts an object of type 'MiseTomlSchemaDotfileGroups' to JSON representation.
+ * @internal
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_MiseTomlSchemaDotfileGroups(obj: MiseTomlSchemaDotfileGroups | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'root': obj.root,
+    'target': obj.target,
+    'mode': obj.mode,
+    'exclude': obj.exclude?.map(y => y),
+    'dot_prefix': obj.dotPrefix,
+    'manifest': obj.manifest,
+    'relative': obj.relative,
+    'entries': ((obj.entries) === undefined) ? undefined : (Object.entries(obj.entries).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
  * machine-global bootstrapping (system packages, repos, macOS defaults, launchd agents, login shell)
  *
  * @schema MiseTomlSchemaBootstrap
@@ -1930,6 +2021,13 @@ export interface MiseTomlSchemaBootstrap {
    * @schema MiseTomlSchemaBootstrap#directories
    */
   readonly directories?: { [key: string]: MiseTomlSchemaBootstrapDirectories };
+
+  /**
+   * the dotfile groups this machine applies; when unset, every group applies. Entries without a group always apply, and a more local config's list replaces the others
+   *
+   * @schema MiseTomlSchemaBootstrap#dotfile_groups
+   */
+  readonly dotfileGroups?: string[];
 
   /**
    * deprecated and will be removed in mise 2027.3.3; move each selected root into a conf.d folder instead (https://mise.jdx.dev/configuration.html#conf-d-folders)
@@ -1951,6 +2049,13 @@ export interface MiseTomlSchemaBootstrap {
    * @schema MiseTomlSchemaBootstrap#services
    */
   readonly services?: { [key: string]: MiseTomlSchemaBootstrapServices };
+
+  /**
+   * Docker Compose projects managed with `mise bootstrap compose`, keyed by project name. Text fields support Tera templates.
+   *
+   * @schema MiseTomlSchemaBootstrap#compose
+   */
+  readonly compose?: { [key: string]: MiseTomlSchemaBootstrapCompose };
 
   /**
    * package manager plugins to install with `mise bootstrap plugins apply`, keyed by manager name
@@ -2026,9 +2131,11 @@ export function toJson_MiseTomlSchemaBootstrap(obj: MiseTomlSchemaBootstrap | un
   const result = {
     'files': ((obj.files) === undefined) ? undefined : (Object.entries(obj.files).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: toJson_MiseTomlSchemaBootstrapFiles(i[1]) }), {})),
     'directories': ((obj.directories) === undefined) ? undefined : (Object.entries(obj.directories).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: toJson_MiseTomlSchemaBootstrapDirectories(i[1]) }), {})),
+    'dotfile_groups': obj.dotfileGroups?.map(y => y),
     'config_roots': obj.configRoots?.map(y => y),
     'remote': toJson_MiseTomlSchemaBootstrapRemote(obj.remote),
     'services': ((obj.services) === undefined) ? undefined : (Object.entries(obj.services).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: toJson_MiseTomlSchemaBootstrapServices(i[1]) }), {})),
+    'compose': ((obj.compose) === undefined) ? undefined : (Object.entries(obj.compose).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: toJson_MiseTomlSchemaBootstrapCompose(i[1]) }), {})),
     'plugins': ((obj.plugins) === undefined) ? undefined : (Object.entries(obj.plugins).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'packages': ((obj.packages) === undefined) ? undefined : (Object.entries(obj.packages).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'repos': ((obj.repos) === undefined) ? undefined : (Object.entries(obj.repos).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: toJson_MiseTomlSchemaBootstrapRepos(i[1]) }), {})),
@@ -4932,6 +5039,30 @@ export function toJson_SettingsZig(obj: SettingsZig | undefined): Record<string,
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * how the tree is deployed
+ *
+ * @schema MiseTomlSchemaDotfileGroupsMode
+ */
+export enum MiseTomlSchemaDotfileGroupsMode {
+  /** symlink-each */
+  SYMLINK_HYPHEN_EACH = "symlink-each",
+  /** copy */
+  COPY = "copy",
+  /** symlink */
+  SYMLINK = "symlink",
+}
+
+/**
+ * source manifest used to select managed files from the tree
+ *
+ * @schema MiseTomlSchemaDotfileGroupsManifest
+ */
+export enum MiseTomlSchemaDotfileGroupsManifest {
+  /** git */
+  GIT = "git",
+}
+
+/**
  * @schema MiseTomlSchemaBootstrapFiles
  */
 export interface MiseTomlSchemaBootstrapFiles {
@@ -5258,6 +5389,175 @@ export function toJson_MiseTomlSchemaBootstrapServices(obj: MiseTomlSchemaBootst
     'environment': ((obj.environment) === undefined) ? undefined : (Object.entries(obj.environment).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'working_directory': obj.workingDirectory,
     'requires_tools': obj.requiresTools,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * @schema MiseTomlSchemaBootstrapCompose
+ */
+export interface MiseTomlSchemaBootstrapCompose {
+  /**
+   * absolute directory containing the Compose project
+   *
+   * @schema MiseTomlSchemaBootstrapCompose#project_dir
+   */
+  readonly projectDir: string;
+
+  /**
+   * Compose file paths relative to project_dir unless absolute
+   *
+   * @schema MiseTomlSchemaBootstrapCompose#files
+   */
+  readonly files?: string[];
+
+  /**
+   * environment file paths relative to project_dir unless absolute
+   *
+   * @schema MiseTomlSchemaBootstrapCompose#env_files
+   */
+  readonly envFiles?: string[];
+
+  /**
+   * optional Compose project name
+   *
+   * @schema MiseTomlSchemaBootstrapCompose#project_name
+   */
+  readonly projectName?: string;
+
+  /**
+   * @schema MiseTomlSchemaBootstrapCompose#profiles
+   */
+  readonly profiles?: string[];
+
+  /**
+   * @schema MiseTomlSchemaBootstrapCompose#services
+   */
+  readonly services?: string[];
+
+  /**
+   * @schema MiseTomlSchemaBootstrapCompose#oneshot
+   */
+  readonly oneshot?: string[];
+
+  /**
+   * @schema MiseTomlSchemaBootstrapCompose#state
+   */
+  readonly state?: MiseTomlSchemaBootstrapComposeState;
+
+  /**
+   * @schema MiseTomlSchemaBootstrapCompose#pull
+   */
+  readonly pull?: MiseTomlSchemaBootstrapComposePull;
+
+  /**
+   * @schema MiseTomlSchemaBootstrapCompose#build
+   */
+  readonly buildValue?: MiseTomlSchemaBootstrapComposeBuild;
+
+  /**
+   * @schema MiseTomlSchemaBootstrapCompose#recreate
+   */
+  readonly recreate?: MiseTomlSchemaBootstrapComposeRecreate;
+
+  /**
+   * @schema MiseTomlSchemaBootstrapCompose#wait
+   */
+  readonly wait?: boolean;
+
+  /**
+   * wait timeout in seconds
+   *
+   * @schema MiseTomlSchemaBootstrapCompose#wait_timeout
+   */
+  readonly waitTimeout?: number;
+
+  /**
+   * Compose shutdown timeout in seconds
+   *
+   * @schema MiseTomlSchemaBootstrapCompose#timeout
+   */
+  readonly timeout?: number;
+
+  /**
+   * @schema MiseTomlSchemaBootstrapCompose#remove_orphans
+   */
+  readonly removeOrphans?: boolean;
+
+  /**
+   * @schema MiseTomlSchemaBootstrapCompose#renew_anonymous_volumes
+   */
+  readonly renewAnonymousVolumes?: boolean;
+
+  /**
+   * @schema MiseTomlSchemaBootstrapCompose#down_volumes
+   */
+  readonly downVolumes?: boolean;
+
+  /**
+   * @schema MiseTomlSchemaBootstrapCompose#down_images
+   */
+  readonly downImages?: MiseTomlSchemaBootstrapComposeDownImages;
+
+  /**
+   * @schema MiseTomlSchemaBootstrapCompose#sudo
+   */
+  readonly sudo?: boolean;
+
+  /**
+   * standalone Compose command
+   *
+   * @schema MiseTomlSchemaBootstrapCompose#command
+   */
+  readonly command?: string[];
+
+  /**
+   * container engine command
+   *
+   * @schema MiseTomlSchemaBootstrapCompose#engine_command
+   */
+  readonly engineCommand?: string[];
+
+  /**
+   * bootstrap resource dependencies
+   *
+   * @schema MiseTomlSchemaBootstrapCompose#depends_on
+   */
+  readonly dependsOn?: string[];
+}
+
+/**
+ * Converts an object of type 'MiseTomlSchemaBootstrapCompose' to JSON representation.
+ * @internal
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_MiseTomlSchemaBootstrapCompose(obj: MiseTomlSchemaBootstrapCompose | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'project_dir': obj.projectDir,
+    'files': obj.files?.map(y => y),
+    'env_files': obj.envFiles?.map(y => y),
+    'project_name': obj.projectName,
+    'profiles': obj.profiles?.map(y => y),
+    'services': obj.services?.map(y => y),
+    'oneshot': obj.oneshot?.map(y => y),
+    'state': obj.state,
+    'pull': obj.pull,
+    'build': obj.buildValue,
+    'recreate': obj.recreate,
+    'wait': obj.wait,
+    'wait_timeout': obj.waitTimeout,
+    'timeout': obj.timeout,
+    'remove_orphans': obj.removeOrphans,
+    'renew_anonymous_volumes': obj.renewAnonymousVolumes,
+    'down_volumes': obj.downVolumes,
+    'down_images': obj.downImages,
+    'sudo': obj.sudo,
+    'command': obj.command?.map(y => y),
+    'engine_command': obj.engineCommand?.map(y => y),
+    'depends_on': obj.dependsOn?.map(y => y),
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -6322,6 +6622,64 @@ export enum MiseTomlSchemaBootstrapServicesRestart {
   ON_HYPHEN_FAILURE = "on-failure",
   /** never */
   NEVER = "never",
+}
+
+/**
+ * @schema MiseTomlSchemaBootstrapComposeState
+ */
+export enum MiseTomlSchemaBootstrapComposeState {
+  /** running */
+  RUNNING = "running",
+  /** stopped */
+  STOPPED = "stopped",
+  /** absent */
+  ABSENT = "absent",
+}
+
+/**
+ * @schema MiseTomlSchemaBootstrapComposePull
+ */
+export enum MiseTomlSchemaBootstrapComposePull {
+  /** always */
+  ALWAYS = "always",
+  /** missing */
+  MISSING = "missing",
+  /** never */
+  NEVER = "never",
+}
+
+/**
+ * @schema MiseTomlSchemaBootstrapComposeBuild
+ */
+export enum MiseTomlSchemaBootstrapComposeBuild {
+  /** auto */
+  AUTO = "auto",
+  /** always */
+  ALWAYS = "always",
+  /** never */
+  NEVER = "never",
+}
+
+/**
+ * @schema MiseTomlSchemaBootstrapComposeRecreate
+ */
+export enum MiseTomlSchemaBootstrapComposeRecreate {
+  /** auto */
+  AUTO = "auto",
+  /** always */
+  ALWAYS = "always",
+  /** never */
+  NEVER = "never",
+}
+
+/**
+ * @schema MiseTomlSchemaBootstrapComposeDownImages
+ */
+export enum MiseTomlSchemaBootstrapComposeDownImages {
+  /** local */
+  LOCAL = "local",
+  /** all */
+  ALL = "all",
 }
 
 /**
