@@ -97,6 +97,13 @@ export interface MiseTomlSchema {
   readonly minVersion?: any;
 
   /**
+   * [experimental] Sources for mise secrets: values resolved only when mise starts a task or `mise x` command that was granted them. Project config only.
+   *
+   * @schema MiseTomlSchema#secrets
+   */
+  readonly secrets?: MiseTomlSchemaSecrets;
+
+  /**
    * env or vars keys to redact from logs
    *
    * @schema MiseTomlSchema#redactions
@@ -270,6 +277,7 @@ export function toJson_MiseTomlSchema(obj: MiseTomlSchema | undefined): Record<s
     'experimental_monorepo_root': obj.experimentalMonorepoRoot,
     'monorepo': toJson_Monorepo(obj.monorepo),
     'min_version': obj.minVersion,
+    'secrets': toJson_MiseTomlSchemaSecrets(obj.secrets),
     'redactions': obj.redactions?.map(y => y),
     'plugins': ((obj.plugins) === undefined) ? undefined : (Object.entries(obj.plugins).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'deps': toJson_MiseTomlSchemaDeps(obj.deps),
@@ -375,6 +383,35 @@ export function toJson_Monorepo(obj: Monorepo | undefined): Record<string, any> 
     'lockfile': obj.lockfile,
     'task_defaults': ((obj.taskDefaults) === undefined) ? undefined : (Object.entries(obj.taskDefaults).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'projects': ((obj.projects) === undefined) ? undefined : (Object.entries(obj.projects).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: toJson_MonorepoProjects(i[1]) }), {})),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * [experimental] Sources for mise secrets: values resolved only when mise starts a task or `mise x` command that was granted them. Project config only.
+ *
+ * @schema MiseTomlSchemaSecrets
+ */
+export interface MiseTomlSchemaSecrets {
+  /**
+   * Use fnox (fnox.toml discovered from this config's directory). https://mise.jdx.dev/environments/secrets/fnox.html
+   *
+   * @schema MiseTomlSchemaSecrets#fnox
+   */
+  readonly fnox?: MiseTomlSchemaSecretsFnox;
+}
+
+/**
+ * Converts an object of type 'MiseTomlSchemaSecrets' to JSON representation.
+ * @internal
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_MiseTomlSchemaSecrets(obj: MiseTomlSchemaSecrets | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'fnox': toJson_MiseTomlSchemaSecretsFnox(obj.fnox),
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -703,14 +740,14 @@ export interface Settings {
   readonly autoInstallDisableTools?: string[];
 
   /**
-   * Automatically update mise before running eligible commands.
+   * [deprecated] Use `self_update.auto` instead.
    *
    * @schema settings#auto_update
    */
   readonly autoUpdate?: boolean;
 
   /**
-   * How often to check for a new mise release when auto-update is enabled.
+   * [deprecated] Use `self_update.check_duration` instead.
    *
    * @schema settings#auto_update_check_duration
    */
@@ -1108,6 +1145,13 @@ export interface Settings {
   readonly installBefore?: string;
 
   /**
+   * [experimental] Name installations by what they are (`identity`) instead of `installs/<tool>/<version>` (`legacy`).
+   *
+   * @schema settings#install_layout
+   */
+  readonly installLayout?: SettingsInstallLayout;
+
+  /**
    * @schema settings#java
    */
   readonly java?: SettingsJava;
@@ -1174,6 +1218,13 @@ export interface Settings {
    * @schema settings#lockfile
    */
   readonly lockfile?: boolean;
+
+  /**
+   * Remove lockfile tools that are absent from the active configuration.
+   *
+   * @schema settings#lockfile_auto_prune
+   */
+  readonly lockfileAutoPrune?: boolean;
 
   /**
    * Choose incremental merging or complete lockfile generation.
@@ -1366,6 +1417,11 @@ export interface Settings {
    * @schema settings#provenance_api_failures_fatal
    */
   readonly provenanceApiFailuresFatal?: boolean;
+
+  /**
+   * @schema settings#prune
+   */
+  readonly prune?: SettingsPrune;
 
   /**
    * @schema settings#pypi
@@ -1614,6 +1670,11 @@ export interface Settings {
   readonly terminalProgress?: boolean;
 
   /**
+   * @schema settings#tool_update
+   */
+  readonly toolUpdate?: SettingsToolUpdate;
+
+  /**
    * Sets log level to trace
    *
    * @schema settings#trace
@@ -1724,6 +1785,11 @@ export interface Settings {
   readonly windowsShimMode?: string;
 
   /**
+   * @schema settings#write_targets
+   */
+  readonly writeTargets?: SettingsWriteTargets;
+
+  /**
    * This will automatically answer yes or no to prompts. This is useful for scripting.
    *
    * @schema settings#yes
@@ -1817,6 +1883,7 @@ export function toJson_Settings(obj: Settings | undefined): Record<string, any> 
     'idiomatic_version_file_ignore_minimum_versions': obj.idiomaticVersionFileIgnoreMinimumVersions,
     'ignored_config_paths': obj.ignoredConfigPaths?.map(y => y),
     'install_before': obj.installBefore,
+    'install_layout': obj.installLayout,
     'java': toJson_SettingsJava(obj.java),
     'jobs': obj.jobs,
     'legacy_version_file': obj.legacyVersionFile,
@@ -1827,6 +1894,7 @@ export function toJson_Settings(obj: Settings | undefined): Record<string, any> 
     'locked_scopes': obj.lockedScopes?.map(y => y),
     'locked_verify_provenance': obj.lockedVerifyProvenance,
     'lockfile': obj.lockfile,
+    'lockfile_auto_prune': obj.lockfileAutoPrune,
     'lockfile_mode': obj.lockfileMode,
     'lockfile_platforms': obj.lockfilePlatforms?.map(y => y),
     'log_level': obj.logLevel,
@@ -1856,6 +1924,7 @@ export function toJson_Settings(obj: Settings | undefined): Record<string, any> 
     'prereleases': obj.prereleases,
     'profile': obj.profile,
     'provenance_api_failures_fatal': obj.provenanceApiFailuresFatal,
+    'prune': toJson_SettingsPrune(obj.prune),
     'pypi': toJson_SettingsPypi(obj.pypi),
     'python': toJson_SettingsPython(obj.python),
     'quiet': obj.quiet,
@@ -1895,6 +1964,7 @@ export function toJson_Settings(obj: Settings | undefined): Record<string, any> 
     'task_timings': obj.taskTimings,
     'tera_v1': obj.teraV1,
     'terminal_progress': obj.terminalProgress,
+    'tool_update': toJson_SettingsToolUpdate(obj.toolUpdate),
     'trace': obj.trace,
     'truncate': obj.truncate,
     'trusted_config_paths': obj.trustedConfigPaths?.map(y => y),
@@ -1911,6 +1981,7 @@ export function toJson_Settings(obj: Settings | undefined): Record<string, any> 
     'windows_executable_extensions': obj.windowsExecutableExtensions?.map(y => y),
     'windows_powershell_no_profile': obj.windowsPowershellNoProfile,
     'windows_shim_mode': obj.windowsShimMode,
+    'write_targets': toJson_SettingsWriteTargets(obj.writeTargets),
     'yes': obj.yes,
     'zig': toJson_SettingsZig(obj.zig),
   };
@@ -2607,6 +2678,35 @@ export function toJson_MonorepoProjects(obj: MonorepoProjects | undefined): Reco
     'depends': obj.depends?.map(y => y),
     'depends_add': obj.dependsAdd?.map(y => y),
     'depends_remove': obj.dependsRemove?.map(y => y),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * Use fnox (fnox.toml discovered from this config's directory). https://mise.jdx.dev/environments/secrets/fnox.html
+ *
+ * @schema MiseTomlSchemaSecretsFnox
+ */
+export interface MiseTomlSchemaSecretsFnox {
+  /**
+   * fnox profile (fnox -P); defaults to FNOX_PROFILE, then "default"
+   *
+   * @schema MiseTomlSchemaSecretsFnox#profile
+   */
+  readonly profile?: string;
+}
+
+/**
+ * Converts an object of type 'MiseTomlSchemaSecretsFnox' to JSON representation.
+ * @internal
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_MiseTomlSchemaSecretsFnox(obj: MiseTomlSchemaSecretsFnox | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'profile': obj.profile,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -3562,6 +3662,18 @@ export function toJson_SettingsHookEnv(obj: SettingsHookEnv | undefined): Record
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * [experimental] Name installations by what they are (`identity`) instead of `installs/<tool>/<version>` (`legacy`).
+ *
+ * @schema SettingsInstallLayout
+ */
+export enum SettingsInstallLayout {
+  /** legacy */
+  LEGACY = "legacy",
+  /** identity */
+  IDENTITY = "identity",
+}
+
+/**
  * @schema SettingsJava
  */
 export interface SettingsJava {
@@ -3999,6 +4111,33 @@ export function toJson_SettingsPipx(obj: SettingsPipx | undefined): Record<strin
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * @schema SettingsPrune
+ */
+export interface SettingsPrune {
+  /**
+   * Tools that `mise prune` never removes, such as `node` or `aqua:BurntSushi/ripgrep`.
+   *
+   * @schema SettingsPrune#exclude
+   */
+  readonly exclude?: string[];
+}
+
+/**
+ * Converts an object of type 'SettingsPrune' to JSON representation.
+ * @internal
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_SettingsPrune(obj: SettingsPrune | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'exclude': obj.exclude?.map(y => y),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
  * @schema SettingsPypi
  */
 export interface SettingsPypi {
@@ -4403,6 +4542,20 @@ export interface SettingsSelfUpdate {
   readonly apiUrl?: string;
 
   /**
+   * Automatically update mise before running eligible commands.
+   *
+   * @schema SettingsSelfUpdate#auto
+   */
+  readonly auto?: boolean;
+
+  /**
+   * How often to check for a new mise release when `self_update.auto` is enabled.
+   *
+   * @schema SettingsSelfUpdate#check_duration
+   */
+  readonly checkDuration?: string;
+
+  /**
    * Minimum release age for mise itself; inherits minimum_release_age (24h by default).
    *
    * @schema SettingsSelfUpdate#minimum_release_age
@@ -4426,6 +4579,8 @@ export function toJson_SettingsSelfUpdate(obj: SettingsSelfUpdate | undefined): 
   if (obj === undefined) { return undefined; }
   const result = {
     'api_url': obj.apiUrl,
+    'auto': obj.auto,
+    'check_duration': obj.checkDuration,
     'minimum_release_age': obj.minimumReleaseAge,
     'repository': obj.repository,
   };
@@ -4977,6 +5132,33 @@ export function toJson_SettingsTask(obj: SettingsTask | undefined): Record<strin
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * @schema SettingsToolUpdate
+ */
+export interface SettingsToolUpdate {
+  /**
+   * How often to check for updates to a global tool with `auto_update = true`.
+   *
+   * @schema SettingsToolUpdate#check_duration
+   */
+  readonly checkDuration?: string;
+}
+
+/**
+ * Converts an object of type 'SettingsToolUpdate' to JSON representation.
+ * @internal
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_SettingsToolUpdate(obj: SettingsToolUpdate | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'check_duration': obj.checkDuration,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
  * @schema SettingsUpgrade
  */
 export interface SettingsUpgrade {
@@ -5005,6 +5187,49 @@ export function toJson_SettingsUpgrade(obj: SettingsUpgrade | undefined): Record
   const result = {
     'auto_prune': obj.autoPrune,
     'prune_after': obj.pruneAfter,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * @schema SettingsWriteTargets
+ */
+export interface SettingsWriteTargets {
+  /**
+   * Global config file to create new [dotfiles] entries in. Existing entries stay in the config file that already declares them.
+   *
+   * @schema SettingsWriteTargets#dotfiles
+   */
+  readonly dotfiles?: string;
+
+  /**
+   * Global config file to create new [bootstrap.packages] entries in. Existing entries stay in the config file that already declares them.
+   *
+   * @schema SettingsWriteTargets#packages
+   */
+  readonly packages?: string;
+
+  /**
+   * Global config file to create new [tools] entries in. Existing entries stay in the config file that already declares them.
+   *
+   * @schema SettingsWriteTargets#tools
+   */
+  readonly tools?: string;
+}
+
+/**
+ * Converts an object of type 'SettingsWriteTargets' to JSON representation.
+ * @internal
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_SettingsWriteTargets(obj: SettingsWriteTargets | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'dotfiles': obj.dotfiles,
+    'packages': obj.packages,
+    'tools': obj.tools,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -6610,6 +6835,8 @@ export enum MiseTomlSchemaBootstrapServicesScope {
 export enum MiseTomlSchemaBootstrapServicesBuiltin {
   /** history-watch */
   HISTORY_HYPHEN_WATCH = "history-watch",
+  /** tool-update */
+  TOOL_HYPHEN_UPDATE = "tool-update",
 }
 
 /**
