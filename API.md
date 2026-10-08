@@ -929,6 +929,7 @@ const miseTomlSchema: MiseTomlSchema = { ... }
 | <code><a href="#mise-projen.MiseTomlSchema.property.oci">oci</a></code> | <code><a href="#mise-projen.MiseTomlSchemaOci">MiseTomlSchemaOci</a></code> | configuration for `mise oci build`. |
 | <code><a href="#mise-projen.MiseTomlSchema.property.plugins">plugins</a></code> | <code>{[ key: string ]: string}</code> | plugins to use. |
 | <code><a href="#mise-projen.MiseTomlSchema.property.redactions">redactions</a></code> | <code>string[]</code> | env or vars keys to redact from logs. |
+| <code><a href="#mise-projen.MiseTomlSchema.property.secrets">secrets</a></code> | <code><a href="#mise-projen.MiseTomlSchemaSecrets">MiseTomlSchemaSecrets</a></code> | [experimental] Sources for mise secrets: values resolved only when mise starts a task or `mise x` command that was granted them. |
 | <code><a href="#mise-projen.MiseTomlSchema.property.settings">settings</a></code> | <code><a href="#mise-projen.Settings">Settings</a></code> | mise settings. |
 | <code><a href="#mise-projen.MiseTomlSchema.property.shellAlias">shellAlias</a></code> | <code>{[ key: string ]: string}</code> | shell aliases. |
 | <code><a href="#mise-projen.MiseTomlSchema.property.taskConfig">taskConfig</a></code> | <code><a href="#mise-projen.TaskConfig">TaskConfig</a></code> | configuration for task execution and management. |
@@ -1238,6 +1239,20 @@ public readonly redactions: string[];
 - *Type:* string[]
 
 env or vars keys to redact from logs.
+
+---
+
+##### `secrets`<sup>Optional</sup> <a name="secrets" id="mise-projen.MiseTomlSchema.property.secrets"></a>
+
+```typescript
+public readonly secrets: MiseTomlSchemaSecrets;
+```
+
+- *Type:* <a href="#mise-projen.MiseTomlSchemaSecrets">MiseTomlSchemaSecrets</a>
+
+[experimental] Sources for mise secrets: values resolved only when mise starts a task or `mise x` command that was granted them.
+
+Project config only.
 
 ---
 
@@ -5510,6 +5525,74 @@ absolute non-root image path without `.` or `..` components.
 
 ---
 
+### MiseTomlSchemaSecrets <a name="MiseTomlSchemaSecrets" id="mise-projen.MiseTomlSchemaSecrets"></a>
+
+[experimental] Sources for mise secrets: values resolved only when mise starts a task or `mise x` command that was granted them.
+
+Project config only.
+
+#### Initializer <a name="Initializer" id="mise-projen.MiseTomlSchemaSecrets.Initializer"></a>
+
+```typescript
+import { MiseTomlSchemaSecrets } from 'mise-projen'
+
+const miseTomlSchemaSecrets: MiseTomlSchemaSecrets = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#mise-projen.MiseTomlSchemaSecrets.property.fnox">fnox</a></code> | <code><a href="#mise-projen.MiseTomlSchemaSecretsFnox">MiseTomlSchemaSecretsFnox</a></code> | Use fnox (fnox.toml discovered from this config's directory). https://mise.jdx.dev/environments/secrets/fnox.html. |
+
+---
+
+##### `fnox`<sup>Optional</sup> <a name="fnox" id="mise-projen.MiseTomlSchemaSecrets.property.fnox"></a>
+
+```typescript
+public readonly fnox: MiseTomlSchemaSecretsFnox;
+```
+
+- *Type:* <a href="#mise-projen.MiseTomlSchemaSecretsFnox">MiseTomlSchemaSecretsFnox</a>
+
+Use fnox (fnox.toml discovered from this config's directory). https://mise.jdx.dev/environments/secrets/fnox.html.
+
+---
+
+### MiseTomlSchemaSecretsFnox <a name="MiseTomlSchemaSecretsFnox" id="mise-projen.MiseTomlSchemaSecretsFnox"></a>
+
+Use fnox (fnox.toml discovered from this config's directory). https://mise.jdx.dev/environments/secrets/fnox.html.
+
+#### Initializer <a name="Initializer" id="mise-projen.MiseTomlSchemaSecretsFnox.Initializer"></a>
+
+```typescript
+import { MiseTomlSchemaSecretsFnox } from 'mise-projen'
+
+const miseTomlSchemaSecretsFnox: MiseTomlSchemaSecretsFnox = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#mise-projen.MiseTomlSchemaSecretsFnox.property.profile">profile</a></code> | <code>string</code> | fnox profile (fnox -P); |
+
+---
+
+##### `profile`<sup>Optional</sup> <a name="profile" id="mise-projen.MiseTomlSchemaSecretsFnox.property.profile"></a>
+
+```typescript
+public readonly profile: string;
+```
+
+- *Type:* string
+
+fnox profile (fnox -P);
+
+defaults to FNOX_PROFILE, then "default"
+
+---
+
 ### Monorepo <a name="Monorepo" id="mise-projen.Monorepo"></a>
 
 Configuration for monorepo task discovery.
@@ -5721,8 +5804,8 @@ const settings: Settings = { ... }
 | <code><a href="#mise-projen.Settings.property.autoEnv">autoEnv</a></code> | <code>boolean</code> | Automatically enable platform config environments (unix, {os}, {os}-{arch}). |
 | <code><a href="#mise-projen.Settings.property.autoInstall">autoInstall</a></code> | <code>boolean</code> | Automatically install missing tools when running `mise x`, `mise run`, or as part of the 'not found' handler. |
 | <code><a href="#mise-projen.Settings.property.autoInstallDisableTools">autoInstallDisableTools</a></code> | <code>string[]</code> | List of tools to skip automatically installing when running `mise x`, `mise run`, or as part of the 'not found' handler. |
-| <code><a href="#mise-projen.Settings.property.autoUpdate">autoUpdate</a></code> | <code>boolean</code> | Automatically update mise before running eligible commands. |
-| <code><a href="#mise-projen.Settings.property.autoUpdateCheckDuration">autoUpdateCheckDuration</a></code> | <code>string</code> | How often to check for a new mise release when auto-update is enabled. |
+| <code><a href="#mise-projen.Settings.property.autoUpdate">autoUpdate</a></code> | <code>boolean</code> | [deprecated] Use `self_update.auto` instead. |
+| <code><a href="#mise-projen.Settings.property.autoUpdateCheckDuration">autoUpdateCheckDuration</a></code> | <code>string</code> | [deprecated] Use `self_update.check_duration` instead. |
 | <code><a href="#mise-projen.Settings.property.cachePruneAge">cachePruneAge</a></code> | <code>string</code> | Delete files in cache that have not been accessed in this duration. |
 | <code><a href="#mise-projen.Settings.property.cargo">cargo</a></code> | <code><a href="#mise-projen.SettingsCargo">SettingsCargo</a></code> | *No description.* |
 | <code><a href="#mise-projen.Settings.property.cd">cd</a></code> | <code>string</code> | Path to change to after launching mise. |
@@ -5782,6 +5865,7 @@ const settings: Settings = { ... }
 | <code><a href="#mise-projen.Settings.property.idiomaticVersionFileIgnoreMinimumVersions">idiomaticVersionFileIgnoreMinimumVersions</a></code> | <code>boolean</code> | Ignore idiomatic version file fields that only declare a minimum compatible version. |
 | <code><a href="#mise-projen.Settings.property.ignoredConfigPaths">ignoredConfigPaths</a></code> | <code>string[]</code> | This is a list of config paths that mise will ignore. |
 | <code><a href="#mise-projen.Settings.property.installBefore">installBefore</a></code> | <code>string</code> | Minimum release age / supply chain protection — only install versions released before this date. |
+| <code><a href="#mise-projen.Settings.property.installLayout">installLayout</a></code> | <code><a href="#mise-projen.SettingsInstallLayout">SettingsInstallLayout</a></code> | [experimental] Name installations by what they are (`identity`) instead of `installs/<tool>/<version>` (`legacy`). |
 | <code><a href="#mise-projen.Settings.property.java">java</a></code> | <code><a href="#mise-projen.SettingsJava">SettingsJava</a></code> | *No description.* |
 | <code><a href="#mise-projen.Settings.property.jobs">jobs</a></code> | <code>number</code> | How many jobs to run concurrently such as tool installs. |
 | <code><a href="#mise-projen.Settings.property.legacyVersionFile">legacyVersionFile</a></code> | <code>boolean</code> | Set to false to disable the idiomatic version files such as .node-version, .ruby-version, etc. |
@@ -5792,6 +5876,7 @@ const settings: Settings = { ... }
 | <code><a href="#mise-projen.Settings.property.lockedScopes">lockedScopes</a></code> | <code><a href="#mise-projen.SettingsLockedScopes">SettingsLockedScopes</a>[]</code> | Config scopes where invocation-wide locked mode is enforced. |
 | <code><a href="#mise-projen.Settings.property.lockedVerifyProvenance">lockedVerifyProvenance</a></code> | <code>boolean</code> | Re-verify provenance at install time even when the lockfile already has provenance. |
 | <code><a href="#mise-projen.Settings.property.lockfile">lockfile</a></code> | <code>boolean</code> | Create and read lockfiles for tool versions. |
+| <code><a href="#mise-projen.Settings.property.lockfileAutoPrune">lockfileAutoPrune</a></code> | <code>boolean</code> | Remove lockfile tools that are absent from the active configuration. |
 | <code><a href="#mise-projen.Settings.property.lockfileMode">lockfileMode</a></code> | <code><a href="#mise-projen.SettingsLockfileMode">SettingsLockfileMode</a></code> | Choose incremental merging or complete lockfile generation. |
 | <code><a href="#mise-projen.Settings.property.lockfilePlatforms">lockfilePlatforms</a></code> | <code>string[]</code> | Platforms to target in lockfile operations. |
 | <code><a href="#mise-projen.Settings.property.logLevel">logLevel</a></code> | <code><a href="#mise-projen.SettingsLogLevel">SettingsLogLevel</a></code> | Show more/less output. |
@@ -5821,6 +5906,7 @@ const settings: Settings = { ... }
 | <code><a href="#mise-projen.Settings.property.prereleases">prereleases</a></code> | <code>boolean</code> | Include pre-release versions in `ls-remote`, `latest` resolution, and fuzzy matching for all tools. |
 | <code><a href="#mise-projen.Settings.property.profile">profile</a></code> | <code>string</code> | Profile to use for mise.${MISE_PROFILE}.toml files. |
 | <code><a href="#mise-projen.Settings.property.provenanceApiFailuresFatal">provenanceApiFailuresFatal</a></code> | <code>boolean</code> | Fail when provenance API checks cannot be completed. |
+| <code><a href="#mise-projen.Settings.property.prune">prune</a></code> | <code><a href="#mise-projen.SettingsPrune">SettingsPrune</a></code> | *No description.* |
 | <code><a href="#mise-projen.Settings.property.pypi">pypi</a></code> | <code><a href="#mise-projen.SettingsPypi">SettingsPypi</a></code> | *No description.* |
 | <code><a href="#mise-projen.Settings.property.python">python</a></code> | <code><a href="#mise-projen.SettingsPython">SettingsPython</a></code> | *No description.* |
 | <code><a href="#mise-projen.Settings.property.quiet">quiet</a></code> | <code>boolean</code> | Suppress all output except errors. |
@@ -5860,6 +5946,7 @@ const settings: Settings = { ... }
 | <code><a href="#mise-projen.Settings.property.taskTimings">taskTimings</a></code> | <code>boolean</code> | Show completion message with elapsed time for each task on `mise run`. |
 | <code><a href="#mise-projen.Settings.property.teraV1">teraV1</a></code> | <code>boolean</code> | Use Tera v1 instead of Tera v2 for template rendering. |
 | <code><a href="#mise-projen.Settings.property.terminalProgress">terminalProgress</a></code> | <code>boolean</code> | Enable terminal progress indicators (OSC 9;4) for compatible terminals. |
+| <code><a href="#mise-projen.Settings.property.toolUpdate">toolUpdate</a></code> | <code><a href="#mise-projen.SettingsToolUpdate">SettingsToolUpdate</a></code> | *No description.* |
 | <code><a href="#mise-projen.Settings.property.trace">trace</a></code> | <code>boolean</code> | Sets log level to trace. |
 | <code><a href="#mise-projen.Settings.property.truncate">truncate</a></code> | <code>boolean</code> | Truncate long terminal output to fit the available width. |
 | <code><a href="#mise-projen.Settings.property.trustedConfigPaths">trustedConfigPaths</a></code> | <code>string[]</code> | This is a list of config paths that mise will automatically mark as trusted. |
@@ -5876,6 +5963,7 @@ const settings: Settings = { ... }
 | <code><a href="#mise-projen.Settings.property.windowsExecutableExtensions">windowsExecutableExtensions</a></code> | <code>string[]</code> | List of executable extensions for Windows. |
 | <code><a href="#mise-projen.Settings.property.windowsPowershellNoProfile">windowsPowershellNoProfile</a></code> | <code>boolean</code> | Pass `-NoProfile` to PowerShell (`pwsh`/`powershell`) shells that mise spawns for tasks and inline commands, so startup profiles are skipped. |
 | <code><a href="#mise-projen.Settings.property.windowsShimMode">windowsShimMode</a></code> | <code>string</code> | Shim file mode for Windows. |
+| <code><a href="#mise-projen.Settings.property.writeTargets">writeTargets</a></code> | <code><a href="#mise-projen.SettingsWriteTargets">SettingsWriteTargets</a></code> | *No description.* |
 | <code><a href="#mise-projen.Settings.property.yes">yes</a></code> | <code>boolean</code> | This will automatically answer yes or no to prompts. |
 | <code><a href="#mise-projen.Settings.property.zig">zig</a></code> | <code><a href="#mise-projen.SettingsZig">SettingsZig</a></code> | *No description.* |
 
@@ -6029,7 +6117,7 @@ public readonly autoUpdate: boolean;
 
 - *Type:* boolean
 
-Automatically update mise before running eligible commands.
+[deprecated] Use `self_update.auto` instead.
 
 ---
 
@@ -6041,7 +6129,7 @@ public readonly autoUpdateCheckDuration: string;
 
 - *Type:* string
 
-How often to check for a new mise release when auto-update is enabled.
+[deprecated] Use `self_update.check_duration` instead.
 
 ---
 
@@ -6743,6 +6831,18 @@ Minimum release age / supply chain protection — only install versions released
 
 ---
 
+##### `installLayout`<sup>Optional</sup> <a name="installLayout" id="mise-projen.Settings.property.installLayout"></a>
+
+```typescript
+public readonly installLayout: SettingsInstallLayout;
+```
+
+- *Type:* <a href="#mise-projen.SettingsInstallLayout">SettingsInstallLayout</a>
+
+[experimental] Name installations by what they are (`identity`) instead of `installs/<tool>/<version>` (`legacy`).
+
+---
+
 ##### `java`<sup>Optional</sup> <a name="java" id="mise-projen.Settings.property.java"></a>
 
 ```typescript
@@ -6860,6 +6960,18 @@ public readonly lockfile: boolean;
 - *Type:* boolean
 
 Create and read lockfiles for tool versions.
+
+---
+
+##### `lockfileAutoPrune`<sup>Optional</sup> <a name="lockfileAutoPrune" id="mise-projen.Settings.property.lockfileAutoPrune"></a>
+
+```typescript
+public readonly lockfileAutoPrune: boolean;
+```
+
+- *Type:* boolean
+
+Remove lockfile tools that are absent from the active configuration.
 
 ---
 
@@ -7199,6 +7311,16 @@ public readonly provenanceApiFailuresFatal: boolean;
 - *Type:* boolean
 
 Fail when provenance API checks cannot be completed.
+
+---
+
+##### `prune`<sup>Optional</sup> <a name="prune" id="mise-projen.Settings.property.prune"></a>
+
+```typescript
+public readonly prune: SettingsPrune;
+```
+
+- *Type:* <a href="#mise-projen.SettingsPrune">SettingsPrune</a>
 
 ---
 
@@ -7651,6 +7773,16 @@ Enable terminal progress indicators (OSC 9;4) for compatible terminals.
 
 ---
 
+##### `toolUpdate`<sup>Optional</sup> <a name="toolUpdate" id="mise-projen.Settings.property.toolUpdate"></a>
+
+```typescript
+public readonly toolUpdate: SettingsToolUpdate;
+```
+
+- *Type:* <a href="#mise-projen.SettingsToolUpdate">SettingsToolUpdate</a>
+
+---
+
 ##### `trace`<sup>Optional</sup> <a name="trace" id="mise-projen.Settings.property.trace"></a>
 
 ```typescript
@@ -7854,6 +7986,16 @@ public readonly windowsShimMode: string;
 Shim file mode for Windows.
 
 Options: `exe`, `file`, `hardlink`, `symlink`.
+
+---
+
+##### `writeTargets`<sup>Optional</sup> <a name="writeTargets" id="mise-projen.Settings.property.writeTargets"></a>
+
+```typescript
+public readonly writeTargets: SettingsWriteTargets;
+```
+
+- *Type:* <a href="#mise-projen.SettingsWriteTargets">SettingsWriteTargets</a>
 
 ---
 
@@ -9602,6 +9744,36 @@ Use uvx instead of pipx if uv is installed and on PATH.
 
 ---
 
+### SettingsPrune <a name="SettingsPrune" id="mise-projen.SettingsPrune"></a>
+
+#### Initializer <a name="Initializer" id="mise-projen.SettingsPrune.Initializer"></a>
+
+```typescript
+import { SettingsPrune } from 'mise-projen'
+
+const settingsPrune: SettingsPrune = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#mise-projen.SettingsPrune.property.exclude">exclude</a></code> | <code>string[]</code> | Tools that `mise prune` never removes, such as `node` or `aqua:BurntSushi/ripgrep`. |
+
+---
+
+##### `exclude`<sup>Optional</sup> <a name="exclude" id="mise-projen.SettingsPrune.property.exclude"></a>
+
+```typescript
+public readonly exclude: string[];
+```
+
+- *Type:* string[]
+
+Tools that `mise prune` never removes, such as `node` or `aqua:BurntSushi/ripgrep`.
+
+---
+
 ### SettingsPypi <a name="SettingsPypi" id="mise-projen.SettingsPypi"></a>
 
 #### Initializer <a name="Initializer" id="mise-projen.SettingsPypi.Initializer"></a>
@@ -10199,6 +10371,8 @@ const settingsSelfUpdate: SettingsSelfUpdate = { ... }
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#mise-projen.SettingsSelfUpdate.property.apiUrl">apiUrl</a></code> | <code>string</code> | GitHub API base URL used by `mise self-update`. |
+| <code><a href="#mise-projen.SettingsSelfUpdate.property.auto">auto</a></code> | <code>boolean</code> | Automatically update mise before running eligible commands. |
+| <code><a href="#mise-projen.SettingsSelfUpdate.property.checkDuration">checkDuration</a></code> | <code>string</code> | How often to check for a new mise release when `self_update.auto` is enabled. |
 | <code><a href="#mise-projen.SettingsSelfUpdate.property.minimumReleaseAge">minimumReleaseAge</a></code> | <code>string</code> | Minimum release age for mise itself; |
 | <code><a href="#mise-projen.SettingsSelfUpdate.property.repository">repository</a></code> | <code>string</code> | GitHub repository used by `mise self-update`. |
 
@@ -10213,6 +10387,30 @@ public readonly apiUrl: string;
 - *Type:* string
 
 GitHub API base URL used by `mise self-update`.
+
+---
+
+##### `auto`<sup>Optional</sup> <a name="auto" id="mise-projen.SettingsSelfUpdate.property.auto"></a>
+
+```typescript
+public readonly auto: boolean;
+```
+
+- *Type:* boolean
+
+Automatically update mise before running eligible commands.
+
+---
+
+##### `checkDuration`<sup>Optional</sup> <a name="checkDuration" id="mise-projen.SettingsSelfUpdate.property.checkDuration"></a>
+
+```typescript
+public readonly checkDuration: string;
+```
+
+- *Type:* string
+
+How often to check for a new mise release when `self_update.auto` is enabled.
 
 ---
 
@@ -11130,6 +11328,36 @@ public readonly statsReport: string;
 
 ---
 
+### SettingsToolUpdate <a name="SettingsToolUpdate" id="mise-projen.SettingsToolUpdate"></a>
+
+#### Initializer <a name="Initializer" id="mise-projen.SettingsToolUpdate.Initializer"></a>
+
+```typescript
+import { SettingsToolUpdate } from 'mise-projen'
+
+const settingsToolUpdate: SettingsToolUpdate = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#mise-projen.SettingsToolUpdate.property.checkDuration">checkDuration</a></code> | <code>string</code> | How often to check for updates to a global tool with `auto_update = true`. |
+
+---
+
+##### `checkDuration`<sup>Optional</sup> <a name="checkDuration" id="mise-projen.SettingsToolUpdate.property.checkDuration"></a>
+
+```typescript
+public readonly checkDuration: string;
+```
+
+- *Type:* string
+
+How often to check for updates to a global tool with `auto_update = true`.
+
+---
+
 ### SettingsUpgrade <a name="SettingsUpgrade" id="mise-projen.SettingsUpgrade"></a>
 
 #### Initializer <a name="Initializer" id="mise-projen.SettingsUpgrade.Initializer"></a>
@@ -11170,6 +11398,66 @@ public readonly pruneAfter: string;
 - *Type:* string
 
 Grace period before versions replaced by `mise upgrade` are automatically pruned.
+
+---
+
+### SettingsWriteTargets <a name="SettingsWriteTargets" id="mise-projen.SettingsWriteTargets"></a>
+
+#### Initializer <a name="Initializer" id="mise-projen.SettingsWriteTargets.Initializer"></a>
+
+```typescript
+import { SettingsWriteTargets } from 'mise-projen'
+
+const settingsWriteTargets: SettingsWriteTargets = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#mise-projen.SettingsWriteTargets.property.dotfiles">dotfiles</a></code> | <code>string</code> | Global config file to create new [dotfiles] entries in. |
+| <code><a href="#mise-projen.SettingsWriteTargets.property.packages">packages</a></code> | <code>string</code> | Global config file to create new [bootstrap.packages] entries in. Existing entries stay in the config file that already declares them. |
+| <code><a href="#mise-projen.SettingsWriteTargets.property.tools">tools</a></code> | <code>string</code> | Global config file to create new [tools] entries in. |
+
+---
+
+##### `dotfiles`<sup>Optional</sup> <a name="dotfiles" id="mise-projen.SettingsWriteTargets.property.dotfiles"></a>
+
+```typescript
+public readonly dotfiles: string;
+```
+
+- *Type:* string
+
+Global config file to create new [dotfiles] entries in.
+
+Existing entries stay in the config file that already declares them.
+
+---
+
+##### `packages`<sup>Optional</sup> <a name="packages" id="mise-projen.SettingsWriteTargets.property.packages"></a>
+
+```typescript
+public readonly packages: string;
+```
+
+- *Type:* string
+
+Global config file to create new [bootstrap.packages] entries in. Existing entries stay in the config file that already declares them.
+
+---
+
+##### `tools`<sup>Optional</sup> <a name="tools" id="mise-projen.SettingsWriteTargets.property.tools"></a>
+
+```typescript
+public readonly tools: string;
+```
+
+- *Type:* string
+
+Global config file to create new [tools] entries in.
+
+Existing entries stay in the config file that already declares them.
 
 ---
 
@@ -12633,12 +12921,20 @@ A mise-provided user service.
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapServicesBuiltin.HISTORY_HYPHEN_WATCH">HISTORY_HYPHEN_WATCH</a></code> | history-watch. |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapServicesBuiltin.TOOL_HYPHEN_UPDATE">TOOL_HYPHEN_UPDATE</a></code> | tool-update. |
 
 ---
 
 ##### `HISTORY_HYPHEN_WATCH` <a name="HISTORY_HYPHEN_WATCH" id="mise-projen.MiseTomlSchemaBootstrapServicesBuiltin.HISTORY_HYPHEN_WATCH"></a>
 
 history-watch.
+
+---
+
+
+##### `TOOL_HYPHEN_UPDATE` <a name="TOOL_HYPHEN_UPDATE" id="mise-projen.MiseTomlSchemaBootstrapServicesBuiltin.TOOL_HYPHEN_UPDATE"></a>
+
+tool-update.
 
 ---
 
@@ -12960,6 +13256,33 @@ fetch-only.
 ##### `MANUAL` <a name="MANUAL" id="mise-projen.SettingsHistorySync.MANUAL"></a>
 
 manual.
+
+---
+
+
+### SettingsInstallLayout <a name="SettingsInstallLayout" id="mise-projen.SettingsInstallLayout"></a>
+
+[experimental] Name installations by what they are (`identity`) instead of `installs/<tool>/<version>` (`legacy`).
+
+#### Members <a name="Members" id="Members"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#mise-projen.SettingsInstallLayout.LEGACY">LEGACY</a></code> | legacy. |
+| <code><a href="#mise-projen.SettingsInstallLayout.IDENTITY">IDENTITY</a></code> | identity. |
+
+---
+
+##### `LEGACY` <a name="LEGACY" id="mise-projen.SettingsInstallLayout.LEGACY"></a>
+
+legacy.
+
+---
+
+
+##### `IDENTITY` <a name="IDENTITY" id="mise-projen.SettingsInstallLayout.IDENTITY"></a>
+
+identity.
 
 ---
 
