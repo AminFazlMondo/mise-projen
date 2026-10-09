@@ -660,14 +660,14 @@ export function toJson_MiseTomlSchemaOci(obj: MiseTomlSchemaOci | undefined): Re
  */
 export interface Settings {
   /**
-   * Pushes tools' bin-paths to the front of PATH instead of allowing modifications of PATH after activation to take precedence.
+   * Keep mise's tool directories ahead of `PATH` entries added after `mise activate`.
    *
    * @schema settings#activate_aggressive
    */
   readonly activateAggressive?: boolean;
 
   /**
-   * Allow full shell activation to add tool shims to PATH.
+   * Let `mise activate` add the shims directories to `PATH` for auto-install and lazy tools.
    *
    * @schema settings#activate_shims
    */
@@ -679,21 +679,21 @@ export interface Settings {
   readonly age?: SettingsAge;
 
   /**
-   * do not use precompiled binaries for any tool
+   * Compile Node.js, Python, Ruby and Erlang from source instead of using precompiled builds.
    *
    * @schema settings#all_compile
    */
   readonly allCompile?: boolean;
 
   /**
-   * keep downloaded files after installation for debugging
+   * Keep downloaded archives and sources after installing, for debugging.
    *
    * @schema settings#always_keep_download
    */
   readonly alwaysKeepDownload?: boolean;
 
   /**
-   * should mise keep install files after installation even if the installation fails
+   * Keep a failed installation's partial install directory and downloads, for debugging.
    *
    * @schema settings#always_keep_install
    */
@@ -705,14 +705,14 @@ export interface Settings {
   readonly aqua?: SettingsAqua;
 
   /**
-   * Architecture to use for precompiled binaries.
+   * Architecture of the precompiled binaries mise downloads.
    *
    * @schema settings#arch
    */
   readonly arch?: string;
 
   /**
-   * set to true to ensure .tool-versions will be compatible with asdf
+   * Write `.tool-versions` files that asdf can read, with exact versions.
    *
    * @schema settings#asdf_compat
    */
@@ -726,35 +726,35 @@ export interface Settings {
   readonly autoEnv?: boolean;
 
   /**
-   * Automatically install missing tools when running `mise x`, `mise run`, or as part of the 'not found' handler.
+   * Install missing tools automatically when a command needs them.
    *
    * @schema settings#auto_install
    */
   readonly autoInstall?: boolean;
 
   /**
-   * List of tools to skip automatically installing when running `mise x`, `mise run`, or as part of the 'not found' handler.
+   * Tools that automatic installs skip, such as `node`.
    *
    * @schema settings#auto_install_disable_tools
    */
   readonly autoInstallDisableTools?: string[];
 
   /**
-   * [deprecated] Use `self_update.auto` instead.
+   * [deprecated] Old name for `self_update.auto`.
    *
    * @schema settings#auto_update
    */
   readonly autoUpdate?: boolean;
 
   /**
-   * [deprecated] Use `self_update.check_duration` instead.
+   * [deprecated] Old name for `self_update.check_duration`.
    *
    * @schema settings#auto_update_check_duration
    */
   readonly autoUpdateCheckDuration?: string;
 
   /**
-   * Delete files in cache that have not been accessed in this duration
+   * Delete cache files that have not been accessed for this long.
    *
    * @schema settings#cache_prune_age
    */
@@ -766,35 +766,35 @@ export interface Settings {
   readonly cargo?: SettingsCargo;
 
   /**
-   * Path to change to after launching mise
+   * Directory to change to after mise starts.
    *
    * @schema settings#cd
    */
   readonly cd?: string;
 
   /**
-   * Directories where mise stops searching for config files.
+   * Directories where mise stops searching parent directories for config files.
    *
    * @schema settings#ceiling_paths
    */
   readonly ceilingPaths?: string[];
 
   /**
-   * Set to true if running in a CI environment
+   * Behave as in CI, which answers yes to confirmation prompts; read from the `CI` variable.
    *
    * @schema settings#ci
    */
   readonly ci?: boolean;
 
   /**
-   * Use color in mise terminal output
+   * Use color in mise's terminal output.
    *
    * @schema settings#color
    */
   readonly color?: boolean;
 
   /**
-   * Theme for interactive prompts (auto/default, charm, base16, catppuccin, dracula)
+   * Color theme for interactive prompts, such as the task picker in `mise run`.
    *
    * @schema settings#color_theme
    */
@@ -806,49 +806,49 @@ export interface Settings {
   readonly conda?: SettingsConda;
 
   /**
-   * Sets log level to debug
+   * Set the log level to debug.
    *
    * @schema settings#debug
    */
   readonly debug?: boolean;
 
   /**
-   * The default config filename read. `mise use` and other commands that create new config files will use this value. This must be an env var.
+   * Extra project config filename mise reads, and the name it gives new config files.
    *
    * @schema settings#default_config_filename
    */
   readonly defaultConfigFilename?: string;
 
   /**
-   * The default .tool-versions filename read. This will not ignore .tool-versions—use override_tool_versions_filename for that. This must be an env var.
+   * Extra filename mise reads as a `.tool-versions` file.
    *
    * @schema settings#default_tool_versions_filename
    */
   readonly defaultToolVersionsFilename?: string;
 
   /**
-   * Backends to exclude from tool resolution and new installs, such as `asdf`, `pypi`, or a vfox-backend plugin name. Existing installations are left on disk and become available again if the backend is re-enabled.
+   * Backends mise ignores when resolving and installing tools, such as `asdf` or `pypi`.
    *
    * @schema settings#disable_backends
    */
   readonly disableBackends?: string[];
 
   /**
-   * Disable the default mapping of short tool names like `php` -> `asdf:mise-plugins/asdf-php`. This parameter disables only for the backends `vfox` and `asdf`.
+   * Stop mapping short names such as `php` to the asdf and vfox plugins listed in the registry.
    *
    * @schema settings#disable_default_registry
    */
   readonly disableDefaultRegistry?: boolean;
 
   /**
-   * Turns off helpful hints when using different mise features
+   * Hints to stop showing, by ID; `*` turns off every hint.
    *
    * @schema settings#disable_hints
    */
   readonly disableHints?: string[];
 
   /**
-   * Tools defined in mise.toml that should be ignored
+   * Tools mise ignores even when a config file lists them.
    *
    * @schema settings#disable_tools
    */
@@ -872,28 +872,28 @@ export interface Settings {
   readonly dotnet?: SettingsDotnet;
 
   /**
-   * Tools defined in mise.toml that should be used; unset enables all tools and empty disables all tools
+   * Allowlist of configured tools mise uses; other tools are ignored.
    *
    * @schema settings#enable_tools
    */
   readonly enableTools?: string[];
 
   /**
-   * Env to use for mise.<MISE_ENV>.toml files.
+   * Config environments to load, such as `development` for `mise.development.toml`.
    *
    * @schema settings#env
    */
   readonly env?: string[];
 
   /**
-   * [experimental] Enable environment caching for nested mise invocations
+   * [experimental] Cache computed environments on disk for nested mise commands.
    *
    * @schema settings#env_cache
    */
   readonly envCache?: boolean;
 
   /**
-   * TTL for cached environments
+   * How long a cached environment stays valid.
    *
    * @schema settings#env_cache_ttl
    */
@@ -907,14 +907,14 @@ export interface Settings {
   readonly envConfD?: boolean;
 
   /**
-   * Path to a file containing environment variables to automatically load.
+   * Dotenv file name to load from the current directory and each parent directory.
    *
    * @schema settings#env_file
    */
   readonly envFile?: string;
 
   /**
-   * Controls shell-style variable expansion in env values (e.g., $FOO, ${BAR:-default})
+   * Expand shell-style variables such as `$FOO` and `${BAR:-default}` in `[env]` values.
    *
    * @schema settings#env_shell_expand
    */
@@ -926,28 +926,28 @@ export interface Settings {
   readonly erlang?: SettingsErlang;
 
   /**
-   * Automatically install missing tools when running `mise x`.
+   * Install missing tools automatically when you run `mise exec`.
    *
    * @schema settings#exec_auto_install
    */
   readonly execAutoInstall?: boolean;
 
   /**
-   * Enable experimental mise features which are incomplete or unstable—breakings changes may occur
+   * Enable experimental features, which may change or be removed in any release.
    *
    * @schema settings#experimental
    */
   readonly experimental?: boolean;
 
   /**
-   * How long to cache remote versions for tools.
+   * How long a tool's cached list of available versions stays fresh.
    *
    * @schema settings#fetch_remote_versions_cache
    */
   readonly fetchRemoteVersionsCache?: string;
 
   /**
-   * Timeout in seconds for HTTP requests to fetch new tool versions in mise.
+   * Timeout for looking up a tool's available versions.
    *
    * @schema settings#fetch_remote_versions_timeout
    */
@@ -964,7 +964,7 @@ export interface Settings {
   readonly github?: SettingsGithub;
 
   /**
-   * Enable GitHub Artifact Attestations verification for supported tools.
+   * Verify GitHub artifact attestations for downloads whose publisher provides them.
    *
    * @schema settings#github_attestations
    */
@@ -981,24 +981,22 @@ export interface Settings {
   readonly gitlab?: SettingsGitlab;
 
   /**
-   * Use gix for git operations, set to false to shell out to git.
+   * Clone Git repositories with the built-in gix library instead of running `git`.
    *
    * @schema settings#gix
    */
   readonly gix?: boolean;
 
   /**
-   * Path to the global mise config file. Default is `~/.config/mise/config.toml`. This must be an env var.
+   * One file to use as the global config instead of the config files in `~/.config/mise`.
    *
-   * @default config/mise/config.toml`. This must be an env var.
    * @schema settings#global_config_file
    */
   readonly globalConfigFile?: string;
 
   /**
-   * Path which is used as `{{config_root}}` for the global config file. Default is `$HOME`. This must be an env var.
+   * Directory used as `config_root` for the global config, such as for `{{config_root}}` in templates.
    *
-   * @default HOME`. This must be an env var.
    * @schema settings#global_config_root
    */
   readonly globalConfigRoot?: string;
@@ -1009,56 +1007,56 @@ export interface Settings {
   readonly go?: SettingsGo;
 
   /**
-   * Path to a file containing default go packages to install when installing go.
+   * File listing Go packages to install with every Go version.
    *
    * @schema settings#go_default_packages_file
    */
   readonly goDefaultPackagesFile?: string;
 
   /**
-   * Mirror to download go sdk tarballs from.
+   * Base URL that mise downloads Go archives and their checksums from.
    *
    * @schema settings#go_download_mirror
    */
   readonly goDownloadMirror?: string;
 
   /**
-   * URL to fetch go from.
+   * Git repository mise lists Go versions from.
    *
    * @schema settings#go_repo
    */
   readonly goRepo?: string;
 
   /**
-   * Changes where `go install` installs binaries to.
+   * Set `GOBIN` so `go install` puts binaries in the active Go version's directory.
    *
    * @schema settings#go_set_gobin
    */
   readonly goSetGobin?: boolean;
 
   /**
-   * [deprecated] Set to true to set GOPATH=~/.local/share/mise/installs/go/.../packages.
+   * [deprecated] Set `GOPATH` to the `packages` directory inside the active Go install.
    *
    * @schema settings#go_set_gopath
    */
   readonly goSetGopath?: boolean;
 
   /**
-   * Sets GOROOT=~/.local/share/mise/installs/go/.../.
+   * Set `GOROOT` to the active Go version's install directory.
    *
    * @schema settings#go_set_goroot
    */
   readonly goSetGoroot?: boolean;
 
   /**
-   * Set to true to skip checksum verification when downloading go sdk tarballs.
+   * Skip SHA-256 verification of Go downloads.
    *
    * @schema settings#go_skip_checksum
    */
   readonly goSkipChecksum?: boolean;
 
   /**
-   * Verify OpenPGP signatures for all tools (built-in, no external gpg required). Set to false to disable.
+   * Verify OpenPGP signatures of Node.js and Swift downloads.
    *
    * @schema settings#gpg_verify
    */
@@ -1075,14 +1073,14 @@ export interface Settings {
   readonly hookEnv?: SettingsHookEnv;
 
   /**
-   * Total time allowed for an HTTP download, including retries.
+   * Total time allowed to download one file, including retries.
    *
    * @schema settings#http_download_timeout
    */
   readonly httpDownloadTimeout?: string;
 
   /**
-   * Number of retries for transient HTTP failures in mise.
+   * Number of retries after a transient HTTP failure.
    *
    * @schema settings#http_retries
    */
@@ -1096,28 +1094,28 @@ export interface Settings {
   readonly httpTimeout?: string;
 
   /**
-   * Set to false to disable the idiomatic version files such as .node-version, .ruby-version, etc.
+   * [deprecated] No effect; enable idiomatic version files per tool with `idiomatic_version_file_enable_tools`.
    *
    * @schema settings#idiomatic_version_file
    */
   readonly idiomaticVersionFile?: boolean;
 
   /**
-   * Specific idiomatic version files to disable for a tool.
+   * Idiomatic version files to ignore for one tool, as `tool:filename` pairs.
    *
    * @schema settings#idiomatic_version_file_disable_files
    */
   readonly idiomaticVersionFileDisableFiles?: string[];
 
   /**
-   * Specific tools to disable idiomatic version files for.
+   * [deprecated] No effect; idiomatic version files are off unless enabled with `idiomatic_version_file_enable_tools`.
    *
    * @schema settings#idiomatic_version_file_disable_tools
    */
   readonly idiomaticVersionFileDisableTools?: string[];
 
   /**
-   * Specific tools to enable idiomatic version files for like .node-version, .ruby-version, etc.
+   * Tools that read idiomatic version files such as `.node-version` or `.ruby-version`.
    *
    * @schema settings#idiomatic_version_file_enable_tools
    */
@@ -1131,14 +1129,14 @@ export interface Settings {
   readonly idiomaticVersionFileIgnoreMinimumVersions?: boolean;
 
   /**
-   * This is a list of config paths that mise will ignore.
+   * Config files and directories mise does not load.
    *
    * @schema settings#ignored_config_paths
    */
   readonly ignoredConfigPaths?: string[];
 
   /**
-   * Minimum release age / supply chain protection — only install versions released before this date
+   * [deprecated] Install only versions released before this date; use `minimum_release_age` instead.
    *
    * @schema settings#install_before
    */
@@ -1164,35 +1162,35 @@ export interface Settings {
   readonly jobs?: number;
 
   /**
-   * Set to false to disable the idiomatic version files such as .node-version, .ruby-version, etc.
+   * [deprecated] No effect; enable idiomatic version files per tool with `idiomatic_version_file_enable_tools`.
    *
    * @schema settings#legacy_version_file
    */
   readonly legacyVersionFile?: boolean;
 
   /**
-   * Specific tools to disable idiomatic version files for.
+   * [deprecated] No effect; idiomatic version files are off unless enabled with `idiomatic_version_file_enable_tools`.
    *
    * @schema settings#legacy_version_file_disable_tools
    */
   readonly legacyVersionFileDisableTools?: string[];
 
   /**
-   * Libc implementation to use for precompiled Linux binaries.
+   * Libc build to install on Linux when a tool publishes both glibc and musl builds.
    *
    * @schema settings#libc
    */
   readonly libc?: SettingsLibc;
 
   /**
-   * Use libgit2 for git operations, set to false to shell out to git.
+   * Clone Git repositories with the built-in gix library instead of running `git`; same as `gix`.
    *
    * @schema settings#libgit2
    */
   readonly libgit2?: boolean;
 
   /**
-   * Require lockfile URLs to be present during installation.
+   * Require tool versions and download URLs to come from the lockfile.
    *
    * @schema settings#locked
    */
@@ -1206,14 +1204,14 @@ export interface Settings {
   readonly lockedScopes?: SettingsLockedScopes[];
 
   /**
-   * Re-verify provenance at install time even when the lockfile already has provenance.
+   * Re-verify provenance at install time even when the lockfile already records it.
    *
    * @schema settings#locked_verify_provenance
    */
   readonly lockedVerifyProvenance?: boolean;
 
   /**
-   * Create and read lockfiles for tool versions.
+   * Create, read and update `mise.lock` lockfiles for tool versions.
    *
    * @schema settings#lockfile
    */
@@ -1227,35 +1225,35 @@ export interface Settings {
   readonly lockfileAutoPrune?: boolean;
 
   /**
-   * Choose incremental merging or complete lockfile generation.
+   * How lockfiles are written: entry by entry, or rebuilt from the current requests.
    *
    * @schema settings#lockfile_mode
    */
   readonly lockfileMode?: SettingsLockfileMode;
 
   /**
-   * Platforms to target in lockfile operations.
+   * Platforms to resolve lockfile URLs and checksums for.
    *
    * @schema settings#lockfile_platforms
    */
   readonly lockfilePlatforms?: string[];
 
   /**
-   * Show more/less output.
+   * Log level for mise's own output.
    *
    * @schema settings#log_level
    */
   readonly logLevel?: SettingsLogLevel;
 
   /**
-   * Minimum release age / supply chain protection — only install versions older than this threshold
+   * Skip versions published more recently than this duration or date.
    *
    * @schema settings#minimum_release_age
    */
   readonly minimumReleaseAge?: string;
 
   /**
-   * Tools and backends to exclude from the global/default minimum_release_age setting
+   * Tools and backends that the configured and default `minimum_release_age` do not apply to.
    *
    * @schema settings#minimum_release_age_excludes
    */
@@ -1269,7 +1267,7 @@ export interface Settings {
   readonly netrc?: boolean;
 
   /**
-   * Path to the netrc file to use for HTTP Basic authentication.
+   * Path of the netrc file to use instead of `~/.netrc` (`%USERPROFILE%\_netrc` on Windows).
    *
    * @schema settings#netrc_file
    */
@@ -1295,21 +1293,21 @@ export interface Settings {
   readonly node?: SettingsNode;
 
   /**
-   * Set to false to disable the "command not found" handler to autoinstall missing tool versions.
+   * Install the tool that provides a command when your shell cannot find that command.
    *
    * @schema settings#not_found_auto_install
    */
   readonly notFoundAutoInstall?: boolean;
 
   /**
-   * Automatically install an unconfigured tool when its registry bin matches a missing command.
+   * Install an unconfigured tool when exactly one registry entry provides a command your shell cannot find.
    *
    * @schema settings#not_found_auto_install_registry
    */
   readonly notFoundAutoInstallRegistry?: boolean;
 
   /**
-   * Set to false to stop shims from falling back to a same-named binary found elsewhere on PATH.
+   * Let a shim run a same-named executable from elsewhere on `PATH` when mise cannot resolve the tool.
    *
    * @schema settings#not_found_system_fallback
    */
@@ -1326,14 +1324,14 @@ export interface Settings {
   readonly oci?: SettingsOci;
 
   /**
-   * Disable all HTTP requests. Tools will only use locally cached data.
+   * Block every HTTP request, so mise uses only installed tools and cached data.
    *
    * @schema settings#offline
    */
   readonly offline?: boolean;
 
   /**
-   * OS to use for precompiled binaries.
+   * Operating system of the precompiled binaries mise downloads.
    *
    * @schema settings#os
    */
@@ -1345,14 +1343,14 @@ export interface Settings {
   readonly otel?: SettingsOtel;
 
   /**
-   * If set, mise will ignore default config files like `mise.toml` and use these filenames instead.
+   * Project config filenames that mise looks for instead of `mise.toml`, `.mise.toml` and the other standard names.
    *
    * @schema settings#override_config_filenames
    */
   readonly overrideConfigFilenames?: string[];
 
   /**
-   * If set, mise will ignore .tool-versions files and use these filenames instead. Can be set to `none` to disable .tool-versions.
+   * Filenames that mise reads as `.tool-versions` files instead of `.tool-versions`.
    *
    * @schema settings#override_tool_versions_filenames
    */
@@ -1364,16 +1362,15 @@ export interface Settings {
   readonly packslip?: SettingsPackslip;
 
   /**
-   * Enables extra-secure behavior.
+   * Require explicit, content-bound trust for project config, and re-verify provenance on every install.
    *
    * @schema settings#paranoid
    */
   readonly paranoid?: boolean;
 
   /**
-   * Default to pinning versions when running `mise use` in mise.toml files.
+   * Make `mise use` write the resolved version, such as `24.14.0` for `node@24`, instead of the requested one.
    *
-   * @default pinning versions when running `mise use` in mise.toml files.
    * @schema settings#pin
    */
   readonly pin?: boolean;
@@ -1384,35 +1381,35 @@ export interface Settings {
   readonly pipx?: SettingsPipx;
 
   /**
-   * How long to wait before updating plugins automatically (note this isn't currently implemented).
+   * [deprecated] Has no effect; it was never implemented.
    *
    * @schema settings#plugin_autoupdate_last_check_duration
    */
   readonly pluginAutoupdateLastCheckDuration?: string;
 
   /**
-   * Prefer locally cached data over remote fetches when possible.
+   * Use cached version lists instead of fetching new ones, and go to the network only when nothing is cached.
    *
    * @schema settings#prefer_offline
    */
   readonly preferOffline?: boolean;
 
   /**
-   * Include pre-release versions in `ls-remote`, `latest` resolution, and fuzzy matching for all tools.
+   * Include prereleases in `mise ls-remote`, `latest` and prefix matching for every tool.
    *
    * @schema settings#prereleases
    */
   readonly prereleases?: boolean;
 
   /**
-   * Profile to use for mise.${MISE_PROFILE}.toml files.
+   * Older name for the `env` setting; use `MISE_ENV` instead.
    *
    * @schema settings#profile
    */
   readonly profile?: string;
 
   /**
-   * Fail when provenance API checks cannot be completed.
+   * Fail an install when a provenance API, such as GitHub's attestation API, cannot be reached or queried.
    *
    * @schema settings#provenance_api_failures_fatal
    */
@@ -1434,28 +1431,28 @@ export interface Settings {
   readonly python?: SettingsPython;
 
   /**
-   * Suppress all output except errors.
+   * Hide mise's own non-error messages, such as progress and task headers; same as `--quiet`.
    *
    * @schema settings#quiet
    */
   readonly quiet?: boolean;
 
   /**
-   * Connect stdin/stdout/stderr to child processes.
+   * Connect tasks and install commands directly to the terminal's stdin, stdout and stderr.
    *
    * @schema settings#raw
    */
   readonly raw?: boolean;
 
   /**
-   * How long to cache the floating mise registry.
+   * How long a downloaded mise registry stays fresh when `registry_floating` is on.
    *
    * @schema settings#registry_cache_ttl
    */
   readonly registryCacheTtl?: string;
 
   /**
-   * Fetch the latest released mise registry and current aqua registry instead of using only the snapshots baked into this mise release.
+   * Use the latest released mise registry and the current aqua registry, not only the copies built into mise.
    *
    * @schema settings#registry_floating
    */
@@ -1472,7 +1469,7 @@ export interface Settings {
   readonly rust?: SettingsRust;
 
   /**
-   * Prevent project configuration from executing code during config loading and version resolution.
+   * Load project config without letting it run code or change the environment, for automation that reads untrusted config.
    *
    * @schema settings#safe
    */
@@ -1489,7 +1486,7 @@ export interface Settings {
   readonly selfUpdate?: SettingsSelfUpdate;
 
   /**
-   * Additional read-only directories to search for installed tool versions.
+   * Extra read-only directories that mise searches for installed tool versions.
    *
    * @schema settings#shared_install_dirs
    */
@@ -1501,21 +1498,21 @@ export interface Settings {
   readonly shims?: SettingsShims;
 
   /**
-   * Directory containing user shims.
+   * Directory where mise writes user shims.
    *
    * @schema settings#shims_dir
    */
   readonly shimsDir?: string;
 
   /**
-   * [deprecated] Path to a file containing custom tool shorthands.
+   * [deprecated] File of custom tool shorthands; use `[plugins]` instead.
    *
    * @schema settings#shorthands_file
    */
   readonly shorthandsFile?: string;
 
   /**
-   * Suppress all `mise run|watch` output except errors—including what tasks output.
+   * Hide all output from `mise run` and `mise watch`, including what tasks print, except errors; same as `--silent`.
    *
    * @schema settings#silent
    */
@@ -1527,7 +1524,7 @@ export interface Settings {
   readonly skills?: SettingsSkills;
 
   /**
-   * Enable SLSA provenance verification globally.
+   * Verify SLSA provenance of downloads whose publisher provides it.
    *
    * @schema settings#slsa
    */
@@ -1554,22 +1551,21 @@ export interface Settings {
   readonly swift?: SettingsSwift;
 
   /**
-   * Path to the system mise config file. Default is `/etc/mise/config.toml`. This must be an env var.
+   * One file to use as the system config instead of the config files in `/etc/mise`.
    *
-   * @default etc/mise/config.toml`. This must be an env var.
    * @schema settings#system_config_file
    */
   readonly systemConfigFile?: string;
 
   /**
-   * How to handle a plugin's declared system dependencies before installing a tool.
+   * What mise does when a plugin's declared system dependencies are missing before it installs a tool.
    *
    * @schema settings#system_deps
    */
   readonly systemDeps?: SettingsSystemDeps;
 
   /**
-   * Directory containing system tool installs.
+   * Directory that `mise install --system` installs into.
    *
    * @schema settings#system_installs_dir
    */
@@ -1581,7 +1577,7 @@ export interface Settings {
   readonly systemPackages?: SettingsSystemPackages;
 
   /**
-   * Directory containing system shims.
+   * Directory where `mise reshim --system` writes shims for system installs.
    *
    * @schema settings#system_shims_dir
    */
@@ -1593,77 +1589,77 @@ export interface Settings {
   readonly task?: SettingsTask;
 
   /**
-   * Paths that mise will not look for tasks in.
+   * Deprecated alias for `task.disable_paths`.
    *
    * @schema settings#task_disable_paths
    */
   readonly taskDisablePaths?: string[];
 
   /**
-   * Change output style when executing tasks.
+   * Deprecated alias for `task.output`.
    *
    * @schema settings#task_output
    */
   readonly taskOutput?: string;
 
   /**
-   * Mise will always fetch the latest tasks from the remote, by default the cache is used.
+   * Deprecated alias for `task.remote_no_cache`.
    *
    * @schema settings#task_remote_no_cache
    */
   readonly taskRemoteNoCache?: boolean;
 
   /**
-   * Automatically install missing tools when executing tasks.
+   * Deprecated alias for `task.run_auto_install`.
    *
    * @schema settings#task_run_auto_install
    */
   readonly taskRunAutoInstall?: boolean;
 
   /**
-   * Disable truncation of command lines in task execution output. When true, the full command line will be shown.
+   * Deprecated alias for `task.show_full_cmd`.
    *
    * @schema settings#task_show_full_cmd
    */
   readonly taskShowFullCmd?: boolean;
 
   /**
-   * Tasks to skip when running `mise run`.
+   * Deprecated alias for `task.skip`.
    *
    * @schema settings#task_skip
    */
   readonly taskSkip?: string[];
 
   /**
-   * Run only specified tasks skipping all dependencies.
+   * Deprecated alias for `task.skip_depends`.
    *
    * @schema settings#task_skip_depends
    */
   readonly taskSkipDepends?: boolean;
 
   /**
-   * Default timeout for tasks. Can be overridden by individual tasks.
+   * Deprecated alias for `task.timeout`.
    *
    * @schema settings#task_timeout
    */
   readonly taskTimeout?: string;
 
   /**
-   * Show completion message with elapsed time for each task on `mise run`. Default shows when output type is `prefix`.
+   * Deprecated alias for `task.timings`.
    *
    * @schema settings#task_timings
    */
   readonly taskTimings?: boolean;
 
   /**
-   * Use Tera v1 instead of Tera v2 for template rendering.
+   * [deprecated] Render templates with Tera v1 instead of Tera v2.
    *
    * @schema settings#tera_v1
    */
   readonly teraV1?: boolean;
 
   /**
-   * Enable terminal progress indicators (OSC 9;4) for compatible terminals.
+   * Show install progress in the terminal window's own progress indicator, with OSC 9;4 escape sequences.
    *
    * @schema settings#terminal_progress
    */
@@ -1675,7 +1671,7 @@ export interface Settings {
   readonly toolUpdate?: SettingsToolUpdate;
 
   /**
-   * Sets log level to trace
+   * Set the log level to trace.
    *
    * @schema settings#trace
    */
@@ -1689,21 +1685,21 @@ export interface Settings {
   readonly truncate?: boolean;
 
   /**
-   * This is a list of config paths that mise will automatically mark as trusted. Any config files under these paths will be trusted without prompting. Set to `["/"]` to trust all config files, effectively disabling the trust mechanism. Paths are separated by the OS path separator when using the environment variable, `mise settings set`, or `mise settings add` (`:` on Unix, `;` on Windows).
+   * Directories whose config files mise trusts without asking.
    *
    * @schema settings#trusted_config_paths
    */
   readonly trustedConfigPaths?: string[];
 
   /**
-   * Default shell arguments for Unix to be used for file commands. For example, `sh` for sh.
+   * Shell that runs a file task on Unix when the task sets no `shell` and the file has no shebang or known extension.
    *
    * @schema settings#unix_default_file_shell_args
    */
   readonly unixDefaultFileShellArgs?: string;
 
   /**
-   * Default shell arguments for Unix to be used for inline commands. For example, `sh -c` for sh.
+   * Shell and arguments that run inline scripts on Unix, such as a task's `run`, hooks and `postinstall`.
    *
    * @schema settings#unix_default_inline_shell_args
    */
@@ -1715,74 +1711,74 @@ export interface Settings {
   readonly upgrade?: SettingsUpgrade;
 
   /**
-   * Map of URL patterns to replacement URLs applied to all requests.
+   * URL patterns and replacements that mise's HTTP client applies before sending a request, for mirrors and proxies.
    *
    * @schema settings#url_replacements
    */
   readonly urlReplacements?: { [key: string]: string };
 
   /**
-   * Determines whether to use a specified shell for executing tasks in the tasks directory. When set to true, the shell defined in the file will be used, or the default shell specified by `windows_default_file_shell_args` or `unix_default_file_shell_args` will be applied. If set to false, tasks will be executed directly as programs.
+   * Run executable file tasks through a shell instead of executing them directly.
    *
    * @schema settings#use_file_shell_for_executable_tasks
    */
   readonly useFileShellForExecutableTasks?: boolean;
 
   /**
-   * Set to false to disable using the mise-versions API for version lists, public GitHub release metadata, and GitHub artifact attestations.
+   * Get version lists, public GitHub release metadata and attestations from mise-versions instead of upstream APIs.
    *
    * @schema settings#use_versions_host
    */
   readonly useVersionsHost?: boolean;
 
   /**
-   * Send anonymous download statistics when installing tools.
+   * Send anonymous download statistics to mise-versions after installing a tool.
    *
    * @schema settings#use_versions_host_track
    */
   readonly useVersionsHostTrack?: boolean;
 
   /**
-   * Shows more verbose output such as installation logs when installing tools.
+   * Show extra output, such as installation logs, and set the log level to debug; same as `--verbose`.
    *
    * @schema settings#verbose
    */
   readonly verbose?: boolean;
 
   /**
-   * Default shell arguments for Windows to be used for file commands. For example, `cmd /c` for cmd.exe.
+   * Shell that runs a file task on Windows when the task sets no `shell` and the file has no shebang or known extension.
    *
    * @schema settings#windows_default_file_shell_args
    */
   readonly windowsDefaultFileShellArgs?: string;
 
   /**
-   * Default shell arguments for Windows to be used for inline commands. For example, `cmd /c` for cmd.exe.
+   * Shell and arguments that run inline scripts on Windows, such as a task's `run`, hooks and `postinstall`.
    *
    * @schema settings#windows_default_inline_shell_args
    */
   readonly windowsDefaultInlineShellArgs?: string;
 
   /**
-   * List of executable extensions for Windows. For example, `exe` for .exe files, `bat` for .bat files, and so on.
+   * File extensions, without the dot, that mise treats as executable on Windows.
    *
    * @schema settings#windows_executable_extensions
    */
   readonly windowsExecutableExtensions?: string[];
 
   /**
-   * Pass `-NoProfile` to PowerShell (`pwsh`/`powershell`) shells that mise spawns for tasks and inline commands, so startup profiles are skipped.
+   * Pass `-NoProfile` to the PowerShell (`pwsh` or `powershell`) that mise starts, so startup profiles are skipped.
    *
    * @schema settings#windows_powershell_no_profile
    */
   readonly windowsPowershellNoProfile?: boolean;
 
   /**
-   * Shim file mode for Windows. Options: `exe`, `file`, `hardlink`, `symlink`.
+   * How mise creates shims on Windows.
    *
    * @schema settings#windows_shim_mode
    */
-  readonly windowsShimMode?: string;
+  readonly windowsShimMode?: SettingsWindowsShimMode;
 
   /**
    * @schema settings#write_targets
@@ -1790,7 +1786,7 @@ export interface Settings {
   readonly writeTargets?: SettingsWriteTargets;
 
   /**
-   * This will automatically answer yes or no to prompts. This is useful for scripting.
+   * Answer yes to every confirmation prompt, as `--yes` does.
    *
    * @schema settings#yes
    */
@@ -2248,6 +2244,13 @@ export interface MiseTomlSchemaHistory {
   readonly gitEmail?: string;
 
   /**
+   * this machine's name in per-machine streams (variants = [{ machine = true }]) instead of the name generated with the history store
+   *
+   * @schema MiseTomlSchemaHistory#machine
+   */
+  readonly machine?: string;
+
+  /**
    * commands run once after a rollback or undo writes a path matching the glob (trusted global or system config only)
    *
    * @schema MiseTomlSchemaHistory#reload
@@ -2273,6 +2276,7 @@ export function toJson_MiseTomlSchemaHistory(obj: MiseTomlSchemaHistory | undefi
     'encryption': toJson_MiseTomlSchemaHistoryEncryption(obj.encryption),
     'exclude': obj.exclude?.map(y => y),
     'git_email': obj.gitEmail,
+    'machine': obj.machine,
     'reload': ((obj.reload) === undefined) ? undefined : (Object.entries(obj.reload).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'origin': toJson_MiseTomlSchemaHistoryOrigin(obj.origin),
   };
@@ -2846,28 +2850,28 @@ export function toJson_MiseTomlSchemaOciCopy(obj: MiseTomlSchemaOciCopy | undefi
  */
 export interface SettingsAge {
   /**
-   * List of age identity files to use for decryption (encrypted shared dotfiles and the experimental `[env]` age directives).
+   * Age identity files to try when decrypting.
    *
    * @schema SettingsAge#identity_files
    */
   readonly identityFiles?: string[];
 
   /**
-   * Path to the age private key file to use for encryption/decryption: the default recipient and identity for encrypted shared dotfiles and the key for the experimental `[env]` age directives.
+   * Age private key file used to decrypt and as the default recipient when encrypting.
    *
    * @schema SettingsAge#key_file
    */
   readonly keyFile?: string;
 
   /**
-   * List of SSH identity files to use for age decryption (encrypted shared dotfiles and the experimental `[env]` age directives).
+   * SSH private keys to try when decrypting age values.
    *
    * @schema SettingsAge#ssh_identity_files
    */
   readonly sshIdentityFiles?: string[];
 
   /**
-   * If true, fail when age decryption fails (including when age is not available, the key is missing, or the key is invalid). If false, skip decryption and continue in these cases.
+   * Fail when an `[env]` age value cannot be decrypted, instead of skipping it.
    *
    * @schema SettingsAge#strict
    */
@@ -2897,56 +2901,56 @@ export function toJson_SettingsAge(obj: SettingsAge | undefined): Record<string,
  */
 export interface SettingsAqua {
   /**
-   * Use baked-in aqua registry.
+   * Use the aqua registry built into mise.
    *
    * @schema SettingsAqua#baked_registry
    */
   readonly bakedRegistry?: boolean;
 
   /**
-   * Use cosign to verify aqua tool signatures.
+   * Verify Cosign signatures for aqua packages that declare them.
    *
    * @schema SettingsAqua#cosign
    */
   readonly cosign?: boolean;
 
   /**
-   * Enable GitHub Artifact Attestations verification for aqua tools.
+   * Verify GitHub artifact attestations for aqua packages that declare them.
    *
    * @schema SettingsAqua#github_attestations
    */
   readonly githubAttestations?: boolean;
 
   /**
-   * Use minisign to verify aqua tool signatures.
+   * Verify Minisign signatures for aqua packages that declare them.
    *
    * @schema SettingsAqua#minisign
    */
   readonly minisign?: boolean;
 
   /**
-   * Aqua registry sources to load before the baked-in registry.
+   * Aqua registries to search, in order, before the baked-in registry.
    *
    * @schema SettingsAqua#registries
    */
   readonly registries?: string[];
 
   /**
-   * How long to cache downloaded aqua registry source files.
+   * How long a downloaded aqua registry stays fresh before mise downloads it again.
    *
    * @schema SettingsAqua#registry_cache_ttl
    */
   readonly registryCacheTtl?: string;
 
   /**
-   * [deprecated] URL of an aqua registry repository to fetch.
+   * [deprecated] URL of one aqua registry repository to search before the baked-in registry.
    *
    * @schema SettingsAqua#registry_url
    */
   readonly registryUrl?: string;
 
   /**
-   * Use SLSA to verify aqua tool signatures.
+   * Verify SLSA provenance for aqua packages that declare it.
    *
    * @schema SettingsAqua#slsa
    */
@@ -2980,35 +2984,35 @@ export function toJson_SettingsAqua(obj: SettingsAqua | undefined): Record<strin
  */
 export interface SettingsCargo {
   /**
-   * Use cargo-binstall instead of cargo install if available
+   * Install Cargo tools from cargo-binstall's prebuilt binaries when cargo-binstall is installed.
    *
    * @schema SettingsCargo#binstall
    */
   readonly binstall?: boolean;
 
   /**
-   * Use mise's native cargo binary installer when cargo-binstall is unavailable.
+   * Use mise's own prebuilt-binary installer for Cargo tools when cargo-binstall is not installed.
    *
    * @schema SettingsCargo#binstall_native
    */
   readonly binstallNative?: boolean;
 
   /**
-   * Require cargo-binstall for Cargo tools without an explicit Git source. Fail if no prebuilt binary is available or if tool options require cargo install.
+   * Require prebuilt binaries from cargo-binstall instead of falling back to `cargo install`.
    *
    * @schema SettingsCargo#binstall_only
    */
   readonly binstallOnly?: boolean;
 
   /**
-   * Allow cargo-binstall to use third-party cargo-quickinstall artifacts.
+   * Let cargo-binstall download third-party artifacts from cargo-quickinstall.
    *
    * @schema SettingsCargo#binstall_quickinstall
    */
   readonly binstallQuickinstall?: boolean;
 
   /**
-   * Name of the cargo registry to use.
+   * Cargo registry to install crates from instead of crates.io.
    *
    * @schema SettingsCargo#registry_name
    */
@@ -3035,7 +3039,7 @@ export function toJson_SettingsCargo(obj: SettingsCargo | undefined): Record<str
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * Theme for interactive prompts (auto/default, charm, base16, catppuccin, dracula)
+ * Color theme for interactive prompts, such as the task picker in `mise run`.
  *
  * @schema SettingsColorTheme
  */
@@ -3059,7 +3063,7 @@ export enum SettingsColorTheme {
  */
 export interface SettingsConda {
   /**
-   * Default channel for conda packages.
+   * Channel for `conda:` tools that do not set their own.
    *
    * @schema SettingsConda#channel
    */
@@ -3086,11 +3090,11 @@ export function toJson_SettingsConda(obj: SettingsConda | undefined): Record<str
  */
 export interface SettingsDotfiles {
   /**
-   * Default mode for dotfile entries when mode is omitted. Options: `symlink`, `symlink-each`, `copy`, `template`.
+   * Mode for `[dotfiles]` entries that do not set `mode`.
    *
    * @schema SettingsDotfiles#default_mode
    */
-  readonly defaultMode?: string;
+  readonly defaultMode?: SettingsDotfilesDefaultMode;
 
   /**
    * Create dotfile symlinks with relative targets instead of absolute ones.
@@ -3100,7 +3104,7 @@ export interface SettingsDotfiles {
   readonly relativeSymlinks?: boolean;
 
   /**
-   * Root directory used for implied dotfile sources.
+   * Directory that holds dotfile sources for entries without a `source`.
    *
    * @schema SettingsDotfiles#root
    */
@@ -3129,14 +3133,14 @@ export function toJson_SettingsDotfiles(obj: SettingsDotfiles | undefined): Reco
  */
 export interface SettingsDotnet {
   /**
-   * Set DOTNET_CLI_TELEMETRY_OPTOUT to opt out of .NET CLI telemetry.
+   * Set `DOTNET_CLI_TELEMETRY_OPTOUT` to opt out of .NET CLI telemetry.
    *
    * @schema SettingsDotnet#cli_telemetry_optout
    */
   readonly cliTelemetryOptout?: boolean;
 
   /**
-   * Path to the shared .NET SDK root directory.
+   * Shared directory that every .NET SDK version installs into.
    *
    * @schema SettingsDotnet#dotnet_root
    */
@@ -3150,7 +3154,7 @@ export interface SettingsDotnet {
   readonly isolated?: boolean;
 
   /**
-   * [deprecated] Extends dotnet search and install abilities.
+   * [deprecated] Flags for every `dotnet:` tool; the only flag, `prerelease`, includes prereleases.
    *
    * @schema SettingsDotnet#package_flags
    */
@@ -3188,18 +3192,18 @@ export function toJson_SettingsDotnet(obj: SettingsDotnet | undefined): Record<s
  */
 export interface SettingsErlang {
   /**
-   * If true, compile erlang from source. If false, use precompiled binaries. If not set, use precompiled binaries if available.
+   * Compile Erlang from source instead of using a precompiled build.
    *
    * @schema SettingsErlang#compile
    */
   readonly compile?: boolean;
 
   /**
-   * Ubuntu release target to use for precompiled Erlang builds from builds.hex.pm.
+   * Ubuntu release whose precompiled Erlang build from builds.hex.pm mise installs on Linux.
    *
    * @schema SettingsErlang#precompiled_os
    */
-  readonly precompiledOs?: string;
+  readonly precompiledOs?: SettingsErlangPrecompiledOs;
 }
 
 /**
@@ -3223,21 +3227,21 @@ export function toJson_SettingsErlang(obj: SettingsErlang | undefined): Record<s
  */
 export interface SettingsForgejo {
   /**
-   * Shell command to run to obtain a Forgejo token for mise.
+   * Command that prints a Forgejo token on stdout.
    *
    * @schema SettingsForgejo#credential_command
    */
   readonly credentialCommand?: string;
 
   /**
-   * Read Forgejo tokens from the fj CLI config.
+   * Read Forgejo tokens that the fj CLI stores in its `keys.json` file.
    *
    * @schema SettingsForgejo#fj_cli_tokens
    */
   readonly fjCliTokens?: boolean;
 
   /**
-   * Use git credential helpers to obtain Forgejo tokens.
+   * Get Forgejo tokens from your Git credential helpers with `git credential fill`.
    *
    * @schema SettingsForgejo#use_git_credentials
    */
@@ -3266,56 +3270,56 @@ export function toJson_SettingsForgejo(obj: SettingsForgejo | undefined): Record
  */
 export interface SettingsGithub {
   /**
-   * Shell command to run to obtain a GitHub token for mise.
+   * Command that prints a GitHub token on stdout.
    *
    * @schema SettingsGithub#credential_command
    */
   readonly credentialCommand?: string;
 
   /**
-   * Read GitHub tokens from the gh CLI's hosts.yml config.
+   * Read GitHub tokens that the gh CLI stores in its `hosts.yml` file.
    *
    * @schema SettingsGithub#gh_cli_tokens
    */
   readonly ghCliTokens?: boolean;
 
   /**
-   * Enable GitHub Artifact Attestations verification for github backend tools.
+   * Verify GitHub artifact attestations for github backend tools.
    *
    * @schema SettingsGithub#github_attestations
    */
   readonly githubAttestations?: boolean;
 
   /**
-   * GitHub API base URL for native OAuth token validation.
+   * GitHub API base URL mise uses to validate native OAuth tokens.
    *
    * @schema SettingsGithub#oauth_api_url
    */
   readonly oauthApiUrl?: string;
 
   /**
-   * GitHub OAuth endpoint base URL for native device-flow tokens.
+   * GitHub OAuth endpoint base URL for the native device flow.
    *
    * @schema SettingsGithub#oauth_auth_url
    */
   readonly oauthAuthUrl?: string;
 
   /**
-   * GitHub App client ID for native OAuth device-flow tokens.
+   * GitHub App client ID that turns on native OAuth device-flow tokens.
    *
    * @schema SettingsGithub#oauth_client_id
    */
   readonly oauthClientId?: string;
 
   /**
-   * Environment variable name to export the native GitHub OAuth token under (empty disables).
+   * Environment variable that mise exports the native GitHub OAuth token under; empty turns the export off.
    *
    * @schema SettingsGithub#oauth_export_env
    */
   readonly oauthExportEnv?: string;
 
   /**
-   * Open the browser during native GitHub OAuth device flow.
+   * Open the verification page in your browser during the native GitHub OAuth device flow.
    *
    * @schema SettingsGithub#oauth_open_browser
    */
@@ -3329,14 +3333,14 @@ export interface SettingsGithub {
   readonly oauthScopes?: string;
 
   /**
-   * Enable SLSA provenance verification for github backend tools.
+   * Verify SLSA provenance for github backend tools that name a signer.
    *
    * @schema SettingsGithub#slsa
    */
   readonly slsa?: boolean;
 
   /**
-   * Use git credential helpers to obtain GitHub tokens.
+   * Get GitHub tokens from your Git credential helpers with `git credential fill`.
    *
    * @schema SettingsGithub#use_git_credentials
    */
@@ -3373,35 +3377,35 @@ export function toJson_SettingsGithub(obj: SettingsGithub | undefined): Record<s
  */
 export interface SettingsGithubRelay {
   /**
-   * Maximum simultaneous GitHub relay requests (1-32); excess requests fail closed.
+   * Maximum relayed GitHub requests that run at once, from 1 to 32; more requests fail instead of waiting.
    *
    * @schema SettingsGithubRelay#concurrency
    */
   readonly concurrency?: number;
 
   /**
-   * GitHub relay request and summary output format: text or jsonl.
+   * Format of GitHub relay request logs and the end-of-session summary.
    *
    * @schema SettingsGithubRelay#log_format
    */
-  readonly logFormat?: string;
+  readonly logFormat?: SettingsGithubRelayLogFormat;
 
   /**
-   * Log sanitized GitHub relay requests on the initiating machine's stderr.
+   * Log each relayed GitHub request, without credentials, on this machine's stderr.
    *
    * @schema SettingsGithubRelay#log_requests
    */
   readonly logRequests?: boolean;
 
   /**
-   * Maximum borrowed GitHub access duration; 0s means until the session ends.
+   * How long a GitHub relay lends access; `0s` lasts until the session ends.
    *
    * @schema SettingsGithubRelay#max_duration
    */
   readonly maxDuration?: string;
 
   /**
-   * Total time limit for a relayed request, including response streaming.
+   * Time limit for one relayed GitHub request, including streaming its response.
    *
    * @schema SettingsGithubRelay#request_timeout
    */
@@ -3432,21 +3436,21 @@ export function toJson_SettingsGithubRelay(obj: SettingsGithubRelay | undefined)
  */
 export interface SettingsGitlab {
   /**
-   * Shell command to run to obtain a GitLab token for mise.
+   * Command that prints a GitLab token on stdout.
    *
    * @schema SettingsGitlab#credential_command
    */
   readonly credentialCommand?: string;
 
   /**
-   * Read GitLab tokens from the glab CLI config.
+   * Read GitLab tokens that the glab CLI stores in its `config.yml` file.
    *
    * @schema SettingsGitlab#glab_cli_tokens
    */
   readonly glabCliTokens?: boolean;
 
   /**
-   * Use git credential helpers to obtain GitLab tokens.
+   * Get GitLab tokens from your Git credential helpers with `git credential fill`.
    *
    * @schema SettingsGitlab#use_git_credentials
    */
@@ -3475,49 +3479,49 @@ export function toJson_SettingsGitlab(obj: SettingsGitlab | undefined): Record<s
  */
 export interface SettingsGo {
   /**
-   * Path to a file containing default go packages to install when installing go.
+   * [deprecated] File listing Go packages to install with every Go version.
    *
    * @schema SettingsGo#default_packages_file
    */
   readonly defaultPackagesFile?: string;
 
   /**
-   * Mirror to download go sdk tarballs from.
+   * Base URL that mise downloads Go archives and their checksums from.
    *
    * @schema SettingsGo#download_mirror
    */
   readonly downloadMirror?: string;
 
   /**
-   * URL to fetch go from.
+   * Git repository mise lists Go versions from.
    *
    * @schema SettingsGo#repo
    */
   readonly repo?: string;
 
   /**
-   * Changes where `go install` installs binaries to.
+   * Set `GOBIN` so `go install` puts binaries in the active Go version's directory.
    *
    * @schema SettingsGo#set_gobin
    */
   readonly setGobin?: boolean;
 
   /**
-   * [deprecated] Set to true to set GOPATH=~/.local/share/mise/installs/go/.../packages.
+   * [deprecated] Set `GOPATH` to the `packages` directory inside the active Go install.
    *
    * @schema SettingsGo#set_gopath
    */
   readonly setGopath?: boolean;
 
   /**
-   * Sets GOROOT=~/.local/share/mise/installs/go/.../.
+   * Set `GOROOT` to the active Go version's install directory.
    *
    * @schema SettingsGo#set_goroot
    */
   readonly setGoroot?: boolean;
 
   /**
-   * Set to true to skip checksum verification when downloading go sdk tarballs.
+   * Skip SHA-256 verification of Go downloads.
    *
    * @schema SettingsGo#skip_checksum
    */
@@ -3550,49 +3554,49 @@ export function toJson_SettingsGo(obj: SettingsGo | undefined): Record<string, a
  */
 export interface SettingsHistory {
   /**
-   * Allow publishing history that contains unencrypted versions of files now marked for encryption.
+   * Allow publishing or applying history that holds plaintext copies of files now marked for encryption, or publishing versions that look like they contain secrets.
    *
    * @schema SettingsHistory#allow_plaintext_history
    */
   readonly allowPlaintextHistory?: boolean;
 
   /**
-   * A command that names commits the watcher saves (an agent, say): it gets one JSON object on stdin (uuid, trigger, the computed description, changed tracked paths, and a unified diff of changed unencrypted files, at most 64 KiB) and prints one line of at most 200 characters, which becomes the description. Empty: computed descriptions only.
+   * Command, such as an AI agent, that writes the description of each checkpoint the history watcher saves.
    *
    * @schema SettingsHistory#describe_command
    */
   readonly describeCommand?: string;
 
   /**
-   * Record ordinary Git commits for explicitly tracked files around bootstrap operations and on explicit saves.
+   * Record Git checkpoints of tracked files around bootstrap operations and on explicit saves.
    *
    * @schema SettingsHistory#enabled
    */
   readonly enabled?: boolean;
 
   /**
-   * How often the history watcher fetches the origin branch. Values below one second use one second; use history.sync = 'manual' to disable automatic synchronization.
+   * How often the history watcher fetches from the setup repository.
    *
    * @schema SettingsHistory#fetch_interval
    */
   readonly fetchInterval?: string;
 
   /**
-   * Show a desktop notification when conflicts pause sharing for the setup. Enabled by default; retries stay silent until sharing recovers, and a notifier that is missing or failing never holds up history or sync.
+   * Show a desktop notification when a sync conflict pauses sharing.
    *
    * @schema SettingsHistory#notify
    */
   readonly notify?: boolean;
 
   /**
-   * What the history watcher does with a connected setup repository on its own: `sync` publishes after saves, fetches periodically, and applies incoming changes. Any conflict pauses publication and incoming application for the entire setup; local commits and fetching continue. `fetch-only` only fetches; `manual` does nothing automatically. `mise bootstrap dotfiles sync` and `pull` work on request in every mode.
+   * What the history watcher shares with a connected setup repository on its own.
    *
    * @schema SettingsHistory#sync
    */
   readonly sync?: SettingsHistorySync;
 
   /**
-   * How soon after a save the history watcher publishes to the setup repository, at most this often.
+   * Minimum time between automatic publishes to the setup repository after a save.
    *
    * @schema SettingsHistory#sync_interval
    */
@@ -3631,14 +3635,14 @@ export function toJson_SettingsHistory(obj: SettingsHistory | undefined): Record
  */
 export interface SettingsHookEnv {
   /**
-   * Cache hook-env directory checks for this duration. Useful for slow filesystems like NFS.
+   * How long the shell hook reuses its last config file check, for slow filesystems such as NFS.
    *
    * @schema SettingsHookEnv#cache_ttl
    */
   readonly cacheTtl?: string;
 
   /**
-   * Only run hook-env checks on directory change, not on every prompt.
+   * Run the shell hook's full config check only when you change directories, not at every prompt.
    *
    * @schema SettingsHookEnv#chpwd_only
    */
@@ -3678,7 +3682,7 @@ export enum SettingsInstallLayout {
  */
 export interface SettingsJava {
   /**
-   * Shorthand for Java. Used when installing Java without a vendor prefix.
+   * Vendor used for a Java version without a vendor prefix, such as `java@21`.
    *
    * @schema SettingsJava#shorthand_vendor
    */
@@ -3701,7 +3705,7 @@ export function toJson_SettingsJava(obj: SettingsJava | undefined): Record<strin
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * Libc implementation to use for precompiled Linux binaries.
+ * Libc build to install on Linux when a tool publishes both glibc and musl builds.
  *
  * @schema SettingsLibc
  */
@@ -3727,7 +3731,7 @@ export enum SettingsLockedScopes {
 }
 
 /**
- * Choose incremental merging or complete lockfile generation.
+ * How lockfiles are written: entry by entry, or rebuilt from the current requests.
  *
  * @schema SettingsLockfileMode
  */
@@ -3739,7 +3743,7 @@ export enum SettingsLockfileMode {
 }
 
 /**
- * Show more/less output.
+ * Log level for mise's own output.
  *
  * @schema SettingsLogLevel
  */
@@ -3761,126 +3765,126 @@ export enum SettingsLogLevel {
  */
 export interface SettingsNode {
   /**
-   * A list of patch files or URLs to apply to node source.
+   * Patch files or URLs to apply to the Node.js source before building it.
    *
    * @schema SettingsNode#apply_patches
    */
   readonly applyPatches?: string;
 
   /**
-   * Additional CFLAGS options (e.g., to override -O3).
+   * Extra `CFLAGS` for compiling Node.js, for example to replace `-O3`.
    *
    * @schema SettingsNode#cflags
    */
   readonly cflags?: string;
 
   /**
-   * Compile node from source.
+   * Compile Node.js from source instead of using a precompiled build.
    *
    * @schema SettingsNode#compile
    */
   readonly compile?: boolean;
 
   /**
-   * How many jobs should be used in compilation.
+   * Number of parallel jobs (`make -j`) when compiling Node.js.
    *
    * @schema SettingsNode#concurrency
    */
   readonly concurrency?: number;
 
   /**
-   * Additional ./configure options.
+   * Extra arguments for `./configure` when compiling Node.js.
    *
    * @schema SettingsNode#configure_opts
    */
   readonly configureOpts?: string;
 
   /**
-   * Installs the default corepack shims after installing any node version.
+   * Run `corepack enable` after installing a Node.js version, so `yarn` and `pnpm` go through Corepack.
    *
    * @schema SettingsNode#corepack
    */
   readonly corepack?: boolean;
 
   /**
-   * Path to a file containing default npm packages to install.
+   * [deprecated] File listing npm packages to install globally into each new Node.js version.
    *
    * @schema SettingsNode#default_packages_file
    */
   readonly defaultPackagesFile?: string;
 
   /**
-   * Install a specific node flavor like glibc-217 or musl. Use with unofficial node build repo.
+   * Linux build flavor of Node.js to download, such as `musl` or `glibc-217`.
    *
    * @schema SettingsNode#flavor
    */
   readonly flavor?: string;
 
   /**
-   * Verify OpenPGP signatures for node (built-in, no external gpg required). Set to false to disable.
+   * Check the OpenPGP signature of the `SHASUMS256.txt` file that `node.verify` checks downloads against.
    *
    * @schema SettingsNode#gpg_verify
    */
   readonly gpgVerify?: boolean;
 
   /**
-   * Make command to use.
+   * Command to run instead of `make` when compiling Node.js, such as `gmake`.
    *
    * @schema SettingsNode#make
    */
   readonly make?: string;
 
   /**
-   * Additional make install options.
+   * Extra arguments for `make install` when compiling Node.js.
    *
    * @schema SettingsNode#make_install_opts
    */
   readonly makeInstallOpts?: string;
 
   /**
-   * Additional make options.
+   * Extra arguments for `make` when compiling Node.js.
    *
    * @schema SettingsNode#make_opts
    */
   readonly makeOpts?: string;
 
   /**
-   * Mirror to download node tarballs from.
+   * Base URL that mise downloads Node.js archives and their `SHASUMS256.txt` checksums from.
    *
    * @schema SettingsNode#mirror_url
    */
   readonly mirrorUrl?: string;
 
   /**
-   * Use ninja instead of make to compile node.
+   * Build Node.js with ninja instead of make when compiling from source.
    *
    * @schema SettingsNode#ninja
    */
   readonly ninja?: boolean;
 
   /**
-   * Directory for nodenv.
+   * Root directory of nodenv, which `mise sync node --nodenv` imports Node.js versions from.
    *
    * @schema SettingsNode#nodenv_root
    */
   readonly nodenvRoot?: string;
 
   /**
-   * Install a bash wrapper at bin/npm that triggers `mise reshim` after `npm install -g`. Disable to let corepack or a global `npm install -g npm@...` manage `bin/npm` directly.
+   * Wrap each Node.js version's `npm` so that `npm install -g` runs `mise reshim` afterwards.
    *
    * @schema SettingsNode#npm_shim
    */
   readonly npmShim?: boolean;
 
   /**
-   * Directory for nvm.
+   * Directory of nvm, which `mise sync node --nvm` imports Node.js versions from.
    *
    * @schema SettingsNode#nvm_dir
    */
   readonly nvmDir?: string;
 
   /**
-   * Verify the downloaded assets using GPG.
+   * Verify downloaded Node.js archives against the SHA-256 checksums in `SHASUMS256.txt`.
    *
    * @schema SettingsNode#verify
    */
@@ -3924,21 +3928,21 @@ export function toJson_SettingsNode(obj: SettingsNode | undefined): Record<strin
  */
 export interface SettingsNpm {
   /**
-   * Use bun instead of npm if bun is installed and on PATH.
+   * [deprecated] Install `npm:` tools with bun; same as `npm.package_manager = "bun"`.
    *
    * @schema SettingsNpm#bun
    */
   readonly bun?: boolean;
 
   /**
-   * Package manager to use for installing npm packages.
+   * Package manager that installs `npm:` tools.
    *
    * @schema SettingsNpm#package_manager
    */
   readonly packageManager?: SettingsNpmPackageManager;
 
   /**
-   * Shell out to the npm CLI for `npm:` version metadata and installs instead of mise's built-in aube-based implementation.
+   * Use the npm CLI instead of mise's built-in client for `npm:` version metadata and default installs.
    *
    * @schema SettingsNpm#shell_out
    */
@@ -3967,21 +3971,21 @@ export function toJson_SettingsNpm(obj: SettingsNpm | undefined): Record<string,
  */
 export interface SettingsOci {
   /**
-   * Default base image for `mise oci build` when [oci].from is not set.
+   * [experimental] Base image for `mise oci` builds when neither `[oci].from` nor `--from` sets one.
    *
    * @schema SettingsOci#default_from
    */
   readonly defaultFrom?: string;
 
   /**
-   * Path inside OCI images where mise tools are installed.
+   * [experimental] Directory inside `mise oci` images that holds tool installs, unless `[oci].mount_point` sets one.
    *
    * @schema SettingsOci#default_mount_point
    */
   readonly defaultMountPoint?: string;
 
   /**
-   * Registries (host or host:port) contacted over plain HTTP instead of HTTPS.
+   * Registries, as `host` or `host:port`, that mise contacts over plain HTTP instead of HTTPS.
    *
    * @schema SettingsOci#insecure_registries
    */
@@ -4010,14 +4014,14 @@ export function toJson_SettingsOci(obj: SettingsOci | undefined): Record<string,
  */
 export interface SettingsOtel {
   /**
-   * [experimental] Enable OpenTelemetry trace export for task executions.
+   * [experimental] Export OpenTelemetry traces of `mise run`.
    *
    * @schema SettingsOtel#enabled
    */
   readonly enabled?: boolean;
 
   /**
-   * [experimental] Enable OpenTelemetry log export for task stdout/stderr.
+   * [experimental] Export each line of task stdout and stderr as an OpenTelemetry log record.
    *
    * @schema SettingsOtel#logs
    */
@@ -4045,14 +4049,14 @@ export function toJson_SettingsOtel(obj: SettingsOtel | undefined): Record<strin
  */
 export interface SettingsPackslip {
   /**
-   * Run a tool's own command at install time to produce a resource its packslip offers only as an exec entry, such as an agent skill.
+   * Let packslip tools run their own executable at install time to generate resources, such as an agent skill.
    *
    * @schema SettingsPackslip#exec
    */
   readonly exec?: boolean;
 
   /**
-   * Hosts whose signed stamp lists say which packslip releases may be installed, each with its pin.
+   * Hosts that must approve a packslip release before mise lists or installs it, each as `host=PIN`.
    *
    * @schema SettingsPackslip#stampers
    */
@@ -4080,14 +4084,14 @@ export function toJson_SettingsPackslip(obj: SettingsPackslip | undefined): Reco
  */
 export interface SettingsPipx {
   /**
-   * URL to use for pipx registry.
+   * Older name for `pypi.registry_url`.
    *
    * @schema SettingsPipx#registry_url
    */
   readonly registryUrl?: string;
 
   /**
-   * Use uvx instead of pipx if uv is installed and on PATH.
+   * Older name for `pypi.uvx`.
    *
    * @schema SettingsPipx#uvx
    */
@@ -4142,14 +4146,14 @@ export function toJson_SettingsPrune(obj: SettingsPrune | undefined): Record<str
  */
 export interface SettingsPypi {
   /**
-   * Package registry URL for Python tools (pipx.registry_url is a compatibility alias).
+   * Package index URL that `pypi:` tools list versions from, with `{}` in place of the package name.
    *
    * @schema SettingsPypi#registry_url
    */
   readonly registryUrl?: string;
 
   /**
-   * Use uv for Python tools when available (pipx.uvx is a compatibility alias).
+   * Install `pypi:` tools with uv when uv is available, and with pipx otherwise.
    *
    * @schema SettingsPypi#uvx
    */
@@ -4177,91 +4181,91 @@ export function toJson_SettingsPypi(obj: SettingsPypi | undefined): Record<strin
  */
 export interface SettingsPython {
   /**
-   * If true, compile python from source. If false, use precompiled binaries. If not set, use precompiled binaries if available.
+   * Compile Python from source with python-build instead of using a precompiled build.
    *
    * @schema SettingsPython#compile
    */
   readonly compile?: boolean;
 
   /**
-   * Path to a file containing default python packages to install when installing a python version.
+   * [deprecated] Requirements file that mise installs with pip into each new Python version.
    *
    * @schema SettingsPython#default_packages_file
    */
   readonly defaultPackagesFile?: string;
 
   /**
-   * Enable GitHub Artifact Attestations verification for precompiled Python binaries.
+   * Verify GitHub artifact attestations of precompiled Python builds from python-build-standalone.
    *
    * @schema SettingsPython#github_attestations
    */
   readonly githubAttestations?: boolean;
 
   /**
-   * URL to fetch python patches from to pass to python-build.
+   * URL of a patch that python-build applies to every Python version it compiles.
    *
    * @schema SettingsPython#patch_url
    */
   readonly patchUrl?: string;
 
   /**
-   * Directory to fetch python patches from.
+   * Directory of per-version patches for the Python versions that python-build compiles.
    *
    * @schema SettingsPython#patches_directory
    */
   readonly patchesDirectory?: string;
 
   /**
-   * Specify the architecture to use for precompiled binaries.
+   * Architecture of the python-build-standalone build that mise downloads, such as `x86_64_v3` or `aarch64`.
    *
    * @schema SettingsPython#precompiled_arch
    */
   readonly precompiledArch?: string;
 
   /**
-   * Specify the flavor to use for precompiled binaries.
+   * Build flavor of python-build-standalone to download, such as `install_only` or `freethreaded-install_only_stripped`.
    *
    * @schema SettingsPython#precompiled_flavor
    */
   readonly precompiledFlavor?: string;
 
   /**
-   * Specify the OS to use for precompiled binaries.
+   * OS part of the python-build-standalone build name that mise downloads, such as `unknown-linux-musl`.
    *
    * @schema SettingsPython#precompiled_os
    */
   readonly precompiledOs?: string;
 
   /**
-   * URL to fetch pyenv from for compiling python with python-build.
+   * Git repository that mise clones pyenv from to get python-build.
    *
    * @schema SettingsPython#pyenv_repo
    */
   readonly pyenvRepo?: string;
 
   /**
-   * Integrate with uv to manage project venvs when uv.lock is present.
+   * Activate, and optionally create, the virtualenv of the uv project around the current directory.
    *
    * @schema SettingsPython#uv_venv_auto
    */
   readonly uvVenvAuto?: SettingsPythonUvVenvAuto;
 
   /**
-   * Arguments to pass to uv when creating a venv.
+   * Arguments for `uv venv` when mise creates a virtualenv with uv.
    *
    * @schema SettingsPython#uv_venv_create_args
    */
   readonly uvVenvCreateArgs?: string[];
 
   /**
-   * Arguments to pass to python when creating a venv. (not used for uv venv creation)
+   * Arguments for `python -m venv` when `_.python.venv` creates a virtualenv without uv.
    *
    * @schema SettingsPython#venv_create_args
    */
   readonly venvCreateArgs?: string[];
 
   /**
-   * Prefer to use venv from Python's standard library.
+   * Create `_.python.venv` virtualenvs with `python -m venv` even when uv is installed.
    *
    * @schema SettingsPython#venv_stdlib
    */
@@ -4300,98 +4304,98 @@ export function toJson_SettingsPython(obj: SettingsPython | undefined): Record<s
  */
 export interface SettingsRuby {
   /**
-   * A list of patch files or URLs to apply to ruby source.
+   * Patch files or URLs to apply to the Ruby source before compiling it, one per line.
    *
    * @schema SettingsRuby#apply_patches
    */
   readonly applyPatches?: string;
 
   /**
-   * If true, compile ruby from source. If false, require precompiled binaries. If not set, use precompiled binaries if available.
+   * Compile Ruby from source instead of using a precompiled build.
    *
    * @schema SettingsRuby#compile
    */
   readonly compile?: boolean;
 
   /**
-   * Path to a file containing default ruby gems to install when installing ruby.
+   * [deprecated] File listing gems to install into each new Ruby version.
    *
    * @schema SettingsRuby#default_packages_file
    */
   readonly defaultPackagesFile?: string;
 
   /**
-   * Enable GitHub Artifact Attestations verification for precompiled Ruby binaries.
+   * Verify GitHub artifact attestations of precompiled Ruby builds.
    *
    * @schema SettingsRuby#github_attestations
    */
   readonly githubAttestations?: boolean;
 
   /**
-   * Override architecture identifier for precompiled Ruby binaries.
+   * Architecture name of precompiled Ruby builds, such as `x86_64` or `arm64`, used with `ruby.precompiled_os`.
    *
    * @schema SettingsRuby#precompiled_arch
    */
   readonly precompiledArch?: string;
 
   /**
-   * Override OS identifier for precompiled Ruby binaries.
+   * OS name of precompiled Ruby builds, such as `linux`, used with `ruby.precompiled_arch`.
    *
    * @schema SettingsRuby#precompiled_os
    */
   readonly precompiledOs?: string;
 
   /**
-   * URL template or GitHub repo for precompiled Ruby binaries.
+   * GitHub repository, as `owner/repo`, or URL template that mise downloads precompiled Ruby builds from.
    *
    * @schema SettingsRuby#precompiled_url
    */
   readonly precompiledUrl?: string;
 
   /**
-   * CLI options passed directly to ruby-build before the version and install prefix.
+   * Options for ruby-build itself, such as `--keep`, passed before the version and install directory.
    *
    * @schema SettingsRuby#ruby_build_cli_opts
    */
   readonly rubyBuildCliOpts?: string;
 
   /**
-   * Configure arguments passed through ruby-build after `--`.
+   * Arguments for Ruby's `configure`, such as `--enable-yjit`, passed through ruby-build.
    *
    * @schema SettingsRuby#ruby_build_opts
    */
   readonly rubyBuildOpts?: string;
 
   /**
-   * The URL used to fetch ruby-build. This accepts either a Git repository or a ZIP archive.
+   * Git repository or ZIP archive URL that mise gets ruby-build from.
    *
    * @schema SettingsRuby#ruby_build_repo
    */
   readonly rubyBuildRepo?: string;
 
   /**
-   * Use ruby-install instead of ruby-build.
+   * Compile Ruby with ruby-install instead of ruby-build.
    *
    * @schema SettingsRuby#ruby_install
    */
   readonly rubyInstall?: boolean;
 
   /**
-   * Options to pass to ruby-install.
+   * Arguments for Ruby's `configure`, passed through ruby-install.
    *
    * @schema SettingsRuby#ruby_install_opts
    */
   readonly rubyInstallOpts?: string;
 
   /**
-   * The URL used to fetch ruby-install. This accepts either a Git repository or a ZIP archive.
+   * Git repository or ZIP archive URL that mise gets ruby-install from.
    *
    * @schema SettingsRuby#ruby_install_repo
    */
   readonly rubyInstallRepo?: string;
 
   /**
-   * Set to true to enable verbose output during ruby installation.
+   * Show ruby-build's full output while compiling Ruby.
    *
    * @schema SettingsRuby#verbose_install
    */
@@ -4431,24 +4435,22 @@ export function toJson_SettingsRuby(obj: SettingsRuby | undefined): Record<strin
  */
 export interface SettingsRust {
   /**
-   * Path to the cargo home directory. Defaults to `~/.cargo` or `%USERPROFILE%\.cargo`
+   * Directory used as `CARGO_HOME` for the Rust toolchains that mise manages.
    *
-   * @default cargo` or `%USERPROFILE%\.cargo`
    * @schema SettingsRust#cargo_home
    */
   readonly cargoHome?: string;
 
   /**
-   * Default host triple to pass to `rustup init` via `--default-host`.
+   * Host triple that mise passes to `rustup init` as `--default-host`.
    *
    * @schema SettingsRust#default_host
    */
   readonly defaultHost?: string;
 
   /**
-   * Path to the rustup home directory. Defaults to `~/.rustup` or `%USERPROFILE%\.rustup`
+   * Directory used as `RUSTUP_HOME` for the Rust toolchains that mise manages.
    *
-   * @default rustup` or `%USERPROFILE%\.rustup`
    * @schema SettingsRust#rustup_home
    */
   readonly rustupHome?: string;
@@ -4476,7 +4478,7 @@ export function toJson_SettingsRust(obj: SettingsRust | undefined): Record<strin
  */
 export interface SettingsSandbox {
   /**
-   * Deny filesystem reads and writes, network access, and environment variable inheritance by default for `mise run` and `mise exec`.
+   * Deny filesystem access, network access and inherited environment variables by default for `mise run` and `mise exec`.
    *
    * @schema SettingsSandbox#deny_all
    */
@@ -4535,35 +4537,35 @@ export function toJson_SettingsSandbox(obj: SettingsSandbox | undefined): Record
  */
 export interface SettingsSelfUpdate {
   /**
-   * GitHub API base URL used by `mise self-update`.
+   * GitHub API base URL that `mise self-update` gets mise releases from.
    *
    * @schema SettingsSelfUpdate#api_url
    */
   readonly apiUrl?: string;
 
   /**
-   * Automatically update mise before running eligible commands.
+   * Update mise automatically before running eligible commands.
    *
    * @schema SettingsSelfUpdate#auto
    */
   readonly auto?: boolean;
 
   /**
-   * How often to check for a new mise release when `self_update.auto` is enabled.
+   * How often automatic updates check for a new mise release when `self_update.auto` is on.
    *
    * @schema SettingsSelfUpdate#check_duration
    */
   readonly checkDuration?: string;
 
   /**
-   * Minimum release age for mise itself; inherits minimum_release_age (24h by default).
+   * Skip mise releases published more recently than this, for `mise self-update` and automatic updates.
    *
    * @schema SettingsSelfUpdate#minimum_release_age
    */
   readonly minimumReleaseAge?: string;
 
   /**
-   * GitHub repository used by `mise self-update`.
+   * GitHub repository, as `owner/repo`, that mise gets its own releases from.
    *
    * @schema SettingsSelfUpdate#repository
    */
@@ -4594,7 +4596,7 @@ export function toJson_SettingsSelfUpdate(obj: SettingsSelfUpdate | undefined): 
  */
 export interface SettingsShims {
   /**
-   * Command names mise should never create shims for, leaving them to the system.
+   * Command names that mise never creates shims for, so they resolve to whatever else is on `PATH`.
    *
    * @schema SettingsShims#exclude
    */
@@ -4642,7 +4644,7 @@ export interface SettingsSkills {
   readonly fetch?: boolean;
 
   /**
-   * Remove links mise made for skills that are no longer active when syncing.
+   * Remove links mise made for skills that are no longer active, on every `mise skills sync`.
    *
    * @schema SettingsSkills#prune
    */
@@ -4672,35 +4674,35 @@ export function toJson_SettingsSkills(obj: SettingsSkills | undefined): Record<s
  */
 export interface SettingsSops {
   /**
-   * The age private key to use for sops secret decryption. Takes precedence over standard SOPS_AGE_KEY environment variable.
+   * Private age key for decrypting SOPS files, used before any other key source.
    *
    * @schema SettingsSops#age_key
    */
   readonly ageKey?: string;
 
   /**
-   * Path to the age private key file for sops secret decryption. Takes precedence over standard SOPS_AGE_KEY_FILE environment variable.
+   * Path of an age key file for decrypting SOPS files, used after `sops.age_key` and before `SOPS_AGE_KEY_FILE`.
    *
    * @schema SettingsSops#age_key_file
    */
   readonly ageKeyFile?: string;
 
   /**
-   * The age public keys to use for sops secret encryption.
+   * [deprecated] Has no effect; mise does not encrypt sops files.
    *
    * @schema SettingsSops#age_recipients
    */
   readonly ageRecipients?: string;
 
   /**
-   * Use rops to decrypt sops files. Disable to shell out to `sops` which will slow down mise but sops may offer features not available in rops. Required for TOML SOPS files because the sops CLI does not support TOML.
+   * Decrypt SOPS files with mise's built-in rops library instead of the `sops` CLI.
    *
    * @schema SettingsSops#rops
    */
   readonly rops?: boolean;
 
   /**
-   * If true, fail when sops decryption fails (including when sops is not available, the key is missing, or the key is invalid). If false, skip decryption and continue in these cases.
+   * Fail when a SOPS file cannot be decrypted, instead of skipping it.
    *
    * @schema SettingsSops#strict
    */
@@ -4731,7 +4733,7 @@ export function toJson_SettingsSops(obj: SettingsSops | undefined): Record<strin
  */
 export interface SettingsSpm {
   /**
-   * Only use SwiftPM artifact bundles for installation, fail if no matching bundle is available.
+   * Install `spm:` tools only from prebuilt artifact bundles, and fail instead of building from source.
    *
    * @schema SettingsSpm#artifactbundle_only
    */
@@ -4758,35 +4760,35 @@ export function toJson_SettingsSpm(obj: SettingsSpm | undefined): Record<string,
  */
 export interface SettingsStatus {
   /**
-   * Show a warning if tools are not installed when entering a directory with a mise.toml file.
+   * When to warn that tools requested by config are not installed.
    *
    * @schema SettingsStatus#missing_tools
    */
-  readonly missingTools?: string;
+  readonly missingTools?: SettingsStatusMissingTools;
 
   /**
-   * Show warning when deps providers have stale dependencies.
+   * Warn in an activated shell when a `[deps]` provider with `auto = true` is out of date.
    *
    * @schema SettingsStatus#show_deps_stale
    */
   readonly showDepsStale?: boolean;
 
   /**
-   * Show configured env vars when entering a directory with a mise.toml file.
+   * When you change directories in an activated shell, list the environment variables that mise adds, changes or removes.
    *
    * @schema SettingsStatus#show_env
    */
   readonly showEnv?: boolean;
 
   /**
-   * Show configured tools when entering a directory with a mise.toml file.
+   * When you change directories in an activated shell, list the tool versions that become active or inactive.
    *
    * @schema SettingsStatus#show_tools
    */
   readonly showTools?: boolean;
 
   /**
-   * Truncate status messages.
+   * Cut the lines from `status.show_env` and `status.show_tools` to the terminal width.
    *
    * @schema SettingsStatus#truncate
    */
@@ -4817,14 +4819,14 @@ export function toJson_SettingsStatus(obj: SettingsStatus | undefined): Record<s
  */
 export interface SettingsSwift {
   /**
-   * Verify OpenPGP signatures for swift (built-in, no external gpg required). Set to false to disable.
+   * Verify the OpenPGP signature of Swift downloads on Linux.
    *
    * @schema SettingsSwift#gpg_verify
    */
   readonly gpgVerify?: boolean;
 
   /**
-   * Override the distro build to use for precompiled binaries. By default the distro is detected and matched against what the Swift release actually publishes, which changes from release to release. Set this to force a specific build, or to install without reaching swift.org's release index.
+   * Linux distribution build of Swift to download, such as `ubuntu24.04` or `fedora41`.
    *
    * @schema SettingsSwift#platform
    */
@@ -4848,7 +4850,7 @@ export function toJson_SettingsSwift(obj: SettingsSwift | undefined): Record<str
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * How to handle a plugin's declared system dependencies before installing a tool.
+ * What mise does when a plugin's declared system dependencies are missing before it installs a tool.
  *
  * @schema SettingsSystemDeps
  */
@@ -4868,14 +4870,14 @@ export enum SettingsSystemDeps {
  */
 export interface SettingsSystemPackages {
   /**
-   * Restrict which system package managers mise will use.
+   * Package managers that mise may use for `[bootstrap.packages]` and missing plugin dependencies.
    *
    * @schema SettingsSystemPackages#managers
    */
   readonly managers?: string[];
 
   /**
-   * Allow `mise bootstrap` and `mise install --system` to elevate with sudo when not running as root.
+   * Let mise run `sudo` for steps that need root, such as system packages and `mise install --system`.
    *
    * @schema SettingsSystemPackages#sudo
    */
@@ -4903,7 +4905,7 @@ export function toJson_SettingsSystemPackages(obj: SettingsSystemPackages | unde
  */
 export interface SettingsTask {
   /**
-   * [experimental] Workspace providers from which to automatically infer tasks.
+   * [experimental] Workspace providers whose package scripts mise imports as tasks, such as `node`.
    *
    * @schema SettingsTask#auto_infer
    */
@@ -4915,175 +4917,175 @@ export interface SettingsTask {
   readonly cache?: SettingsTaskCache;
 
   /**
-   * [experimental] Directory for task output cache artifacts.
+   * [experimental] Directory for the task artifact cache.
    *
    * @schema SettingsTask#cache_dir
    */
   readonly cacheDir?: string;
 
   /**
-   * [experimental] Maximum age of task output cache entries since their last access.
+   * [experimental] Remove task artifact cache entries that have not been used for this long.
    *
    * @schema SettingsTask#cache_max_age
    */
   readonly cacheMaxAge?: string;
 
   /**
-   * [experimental] Maximum total size of task output cache entries.
+   * [experimental] Maximum total size of the task artifact cache, such as `500MB` or `2GiB`.
    *
    * @schema SettingsTask#cache_max_size
    */
   readonly cacheMaxSize?: string;
 
   /**
-   * Compatibility alias for task.cache.remote_mode.
+   * Deprecated alias for `task.cache.remote_mode`.
    *
    * @schema SettingsTask#cache_remote_mode
    */
   readonly cacheRemoteMode?: SettingsTaskCacheRemoteMode;
 
   /**
-   * Compatibility alias for task.cache.remote_namespace.
+   * Deprecated alias for `task.cache.remote_namespace`.
    *
    * @schema SettingsTask#cache_remote_namespace
    */
   readonly cacheRemoteNamespace?: string;
 
   /**
-   * Compatibility alias for task.cache.remote_oidc_audience.
+   * Deprecated alias for `task.cache.remote_oidc_audience`.
    *
    * @schema SettingsTask#cache_remote_oidc_audience
    */
   readonly cacheRemoteOidcAudience?: string;
 
   /**
-   * Compatibility alias for task.cache.remote_token.
+   * Deprecated alias for `task.cache.remote_token`.
    *
    * @schema SettingsTask#cache_remote_token
    */
   readonly cacheRemoteToken?: string;
 
   /**
-   * Compatibility alias for task.cache.remote_token_file.
+   * Deprecated alias for `task.cache.remote_token_file`.
    *
    * @schema SettingsTask#cache_remote_token_file
    */
   readonly cacheRemoteTokenFile?: string;
 
   /**
-   * Compatibility alias for task.cache.remote_url.
+   * Deprecated alias for `task.cache.remote_url`.
    *
    * @schema SettingsTask#cache_remote_url
    */
   readonly cacheRemoteUrl?: string;
 
   /**
-   * Paths that mise will not look for tasks in.
+   * Paths that mise does not look for tasks in.
    *
    * @schema SettingsTask#disable_paths
    */
   readonly disablePaths?: string[];
 
   /**
-   * Opt out of parsing task run scripts to infer the usage spec (arguments and flags). When enabled, mise will derive the usage spec only from the `usage` field, ignoring any `arg()`, `option()`, or `flag()` templates used in run scripts. This can restore previous behavior and avoid the extra template pass over run scripts when collecting specs.
+   * Build task usage specs only from the `usage` field, ignoring deprecated `arg()`, `option()` and `flag()` in run scripts.
    *
    * @schema SettingsTask#disable_spec_from_run_scripts
    */
   readonly disableSpecFromRunScripts?: boolean;
 
   /**
-   * Maximum depth to search for task files in monorepo subdirectories.
+   * Maximum directory depth for automatic monorepo discovery, which is deprecated.
    *
    * @schema SettingsTask#monorepo_depth
    */
   readonly monorepoDepth?: number;
 
   /**
-   * Directory patterns to exclude when discovering monorepo subdirectories.
+   * Directory names that automatic monorepo discovery skips.
    *
    * @schema SettingsTask#monorepo_exclude_dirs
    */
   readonly monorepoExcludeDirs?: string[];
 
   /**
-   * Whether to respect .gitignore files when discovering monorepo subdirectories.
+   * Skip directories that `.gitignore` files ignore during automatic monorepo discovery.
    *
    * @schema SettingsTask#monorepo_respect_gitignore
    */
   readonly monorepoRespectGitignore?: boolean;
 
   /**
-   * Change output style when executing tasks.
+   * Default output style for `mise run`.
    *
    * @schema SettingsTask#output
    */
   readonly output?: SettingsTaskOutput;
 
   /**
-   * Suppress mise's own output while executing tasks.
+   * Hide mise's own messages while tasks run, without changing other mise commands.
    *
    * @schema SettingsTask#quiet
    */
   readonly quiet?: boolean;
 
   /**
-   * Mise will always fetch the latest tasks from the remote, by default the cache is used.
+   * Download remote task files and task includes on every run instead of using the cached copy.
    *
    * @schema SettingsTask#remote_no_cache
    */
   readonly remoteNoCache?: boolean;
 
   /**
-   * Automatically install missing tools when executing tasks.
+   * Install missing tools automatically before tasks run.
    *
    * @schema SettingsTask#run_auto_install
    */
   readonly runAutoInstall?: boolean;
 
   /**
-   * Disable truncation of command lines in task execution output. When true, the full command line will be shown.
+   * Print each task's full command line instead of truncating it to the terminal width.
    *
    * @schema SettingsTask#show_full_cmd
    */
   readonly showFullCmd?: boolean;
 
   /**
-   * Tasks to skip when running `mise run`.
+   * Names of tasks that `mise run` skips.
    *
    * @schema SettingsTask#skip
    */
   readonly skip?: string[];
 
   /**
-   * Run only specified tasks skipping all dependencies.
+   * Run only the tasks named on the command line, skipping their dependencies; same as `mise run --skip-deps`.
    *
    * @schema SettingsTask#skip_depends
    */
   readonly skipDepends?: boolean;
 
   /**
-   * When source mtime equals output mtime, consider sources fresh (use <=). Default false uses strict < comparison.
+   * Treat a task as up to date when its newest source and its outputs have the same modification time.
    *
    * @schema SettingsTask#source_freshness_equal_mtime_is_fresh
    */
   readonly sourceFreshnessEqualMtimeIsFresh?: boolean;
 
   /**
-   * Use content hashing (blake3) instead of metadata for source freshness. More accurate but slower.
+   * Decide whether a task's sources changed by hashing their contents instead of comparing modification times.
    *
    * @schema SettingsTask#source_freshness_hash_contents
    */
   readonly sourceFreshnessHashContents?: boolean;
 
   /**
-   * Default timeout for tasks.
+   * Time limit for a whole `mise run` invocation, across every task it runs.
    *
    * @schema SettingsTask#timeout
    */
   readonly timeout?: string;
 
   /**
-   * Show completion message with elapsed time for each task on `mise run`. Default shows when output type is `prefix`.
+   * Print each task's elapsed time when it finishes.
    *
    * @schema SettingsTask#timings
    */
@@ -5136,7 +5138,7 @@ export function toJson_SettingsTask(obj: SettingsTask | undefined): Record<strin
  */
 export interface SettingsToolUpdate {
   /**
-   * How often to check for updates to a global tool with `auto_update = true`.
+   * How often mise checks for a newer version of a global tool that sets `auto_update = true`.
    *
    * @schema SettingsToolUpdate#check_duration
    */
@@ -5163,14 +5165,14 @@ export function toJson_SettingsToolUpdate(obj: SettingsToolUpdate | undefined): 
  */
 export interface SettingsUpgrade {
   /**
-   * Schedule the version `mise upgrade` replaced for pruning once the new one has installed.
+   * Remove the version that `mise upgrade` replaced once `upgrade.prune_after` has passed.
    *
    * @schema SettingsUpgrade#auto_prune
    */
   readonly autoPrune?: boolean;
 
   /**
-   * Grace period before versions replaced by `mise upgrade` are automatically pruned.
+   * Grace period before mise removes a version that `mise upgrade` replaced.
    *
    * @schema SettingsUpgrade#prune_after
    */
@@ -5194,25 +5196,41 @@ export function toJson_SettingsUpgrade(obj: SettingsUpgrade | undefined): Record
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * How mise creates shims on Windows.
+ *
+ * @schema SettingsWindowsShimMode
+ */
+export enum SettingsWindowsShimMode {
+  /** exe */
+  EXE = "exe",
+  /** file */
+  FILE = "file",
+  /** hardlink */
+  HARDLINK = "hardlink",
+  /** symlink */
+  SYMLINK = "symlink",
+}
+
+/**
  * @schema SettingsWriteTargets
  */
 export interface SettingsWriteTargets {
   /**
-   * Global config file to create new [dotfiles] entries in. Existing entries stay in the config file that already declares them.
+   * Global config file where `mise dot add` creates new `[dotfiles]` entries.
    *
    * @schema SettingsWriteTargets#dotfiles
    */
   readonly dotfiles?: string;
 
   /**
-   * Global config file to create new [bootstrap.packages] entries in. Existing entries stay in the config file that already declares them.
+   * Global config file where `--global` package commands create new `[bootstrap.packages]` entries.
    *
    * @schema SettingsWriteTargets#packages
    */
   readonly packages?: string;
 
   /**
-   * Global config file to create new [tools] entries in. Existing entries stay in the config file that already declares them.
+   * Global config file where `mise use --global` creates new `[tools]` entries.
    *
    * @schema SettingsWriteTargets#tools
    */
@@ -5241,7 +5259,7 @@ export function toJson_SettingsWriteTargets(obj: SettingsWriteTargets | undefine
  */
 export interface SettingsZig {
   /**
-   * Download Zig from community-maintained mirrors
+   * Download Zig from the community mirrors that ziglang.org recommends before trying ziglang.org itself.
    *
    * @schema SettingsZig#use_community_mirrors
    */
@@ -5344,6 +5362,13 @@ export interface MiseTomlSchemaBootstrapFiles {
   readonly replace?: boolean;
 
   /**
+   * OS or OS/arch selectors; entries on other platforms are skipped
+   *
+   * @schema MiseTomlSchemaBootstrapFiles#os
+   */
+  readonly os?: string[];
+
+  /**
    * @schema MiseTomlSchemaBootstrapFiles#notify
    */
   readonly notify?: string[];
@@ -5367,6 +5392,7 @@ export function toJson_MiseTomlSchemaBootstrapFiles(obj: MiseTomlSchemaBootstrap
     'remove_empty': obj.removeEmpty,
     'state': obj.state,
     'replace': obj.replace,
+    'os': obj.os?.map(y => y),
     'notify': obj.notify?.map(y => y),
   };
   // filter undefined values
@@ -5414,6 +5440,13 @@ export interface MiseTomlSchemaBootstrapDirectories {
   readonly replace?: boolean;
 
   /**
+   * OS or OS/arch selectors; entries on other platforms are skipped
+   *
+   * @schema MiseTomlSchemaBootstrapDirectories#os
+   */
+  readonly os?: string[];
+
+  /**
    * @schema MiseTomlSchemaBootstrapDirectories#notify
    */
   readonly notify?: string[];
@@ -5434,6 +5467,7 @@ export function toJson_MiseTomlSchemaBootstrapDirectories(obj: MiseTomlSchemaBoo
     'state': obj.state,
     'recursive': obj.recursive,
     'replace': obj.replace,
+    'os': obj.os?.map(y => y),
     'notify': obj.notify?.map(y => y),
   };
   // filter undefined values
@@ -6390,7 +6424,51 @@ export enum MiseTomlSchemaDaemonProvidersPreset {
 }
 
 /**
- * What the history watcher does with a connected setup repository on its own: `sync` publishes after saves, fetches periodically, and applies incoming changes. Any conflict pauses publication and incoming application for the entire setup; local commits and fetching continue. `fetch-only` only fetches; `manual` does nothing automatically. `mise bootstrap dotfiles sync` and `pull` work on request in every mode.
+ * Mode for `[dotfiles]` entries that do not set `mode`.
+ *
+ * @schema SettingsDotfilesDefaultMode
+ */
+export enum SettingsDotfilesDefaultMode {
+  /** symlink */
+  SYMLINK = "symlink",
+  /** symlink-each */
+  SYMLINK_HYPHEN_EACH = "symlink-each",
+  /** copy */
+  COPY = "copy",
+  /** template */
+  TEMPLATE = "template",
+}
+
+/**
+ * Ubuntu release whose precompiled Erlang build from builds.hex.pm mise installs on Linux.
+ *
+ * @schema SettingsErlangPrecompiledOs
+ */
+export enum SettingsErlangPrecompiledOs {
+  /** ubuntu-20.04 */
+  UBUNTU_HYPHEN_20_04 = "ubuntu-20.04",
+  /** ubuntu-22.04 */
+  UBUNTU_HYPHEN_22_04 = "ubuntu-22.04",
+  /** ubuntu-24.04 */
+  UBUNTU_HYPHEN_24_04 = "ubuntu-24.04",
+  /** ubuntu-26.04 */
+  UBUNTU_HYPHEN_26_04 = "ubuntu-26.04",
+}
+
+/**
+ * Format of GitHub relay request logs and the end-of-session summary.
+ *
+ * @schema SettingsGithubRelayLogFormat
+ */
+export enum SettingsGithubRelayLogFormat {
+  /** text */
+  TEXT = "text",
+  /** jsonl */
+  JSONL = "jsonl",
+}
+
+/**
+ * What the history watcher shares with a connected setup repository on its own.
  *
  * @schema SettingsHistorySync
  */
@@ -6408,21 +6486,21 @@ export enum SettingsHistorySync {
  */
 export interface SettingsHistoryWatch {
   /**
-   * How long a changed file must stay quiet before the history watcher saves it (the base autosave interval). A file that keeps changing is stretched on its own and never delays the others.
+   * How long a changed file must stay unchanged before the history watcher saves it.
    *
    * @schema SettingsHistoryWatch#debounce
    */
   readonly debounce?: string;
 
   /**
-   * The longest autosave interval the history watcher stretches a constantly changing file to. Sustained churn doubles a file's own interval up to this; a settled file is saved promptly again, and a sustained quiet period resets it.
+   * Longest save interval the history watcher uses for a file that changes constantly.
    *
    * @schema SettingsHistoryWatch#max_interval
    */
   readonly maxInterval?: string;
 
   /**
-   * How often the history watcher rescans the whole tracked set for changes its watches missed. `0` disables periodic reconciliation (startup and configuration changes still reconcile).
+   * How often the history watcher rescans all tracked files for changes it missed.
    *
    * @schema SettingsHistoryWatch#reconcile
    */
@@ -6447,7 +6525,7 @@ export function toJson_SettingsHistoryWatch(obj: SettingsHistoryWatch | undefine
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * Package manager to use for installing npm packages.
+ * Package manager that installs `npm:` tools.
  *
  * @schema SettingsNpmPackageManager
  */
@@ -6467,7 +6545,7 @@ export enum SettingsNpmPackageManager {
 }
 
 /**
- * Integrate with uv to manage project venvs when uv.lock is present.
+ * Activate, and optionally create, the virtualenv of the uv project around the current directory.
  *
  * @schema SettingsPythonUvVenvAuto
  */
@@ -6483,60 +6561,74 @@ export class SettingsPythonUvVenvAuto {
 }
 
 /**
+ * When to warn that tools requested by config are not installed.
+ *
+ * @schema SettingsStatusMissingTools
+ */
+export enum SettingsStatusMissingTools {
+  /** never */
+  NEVER = "never",
+  /** if_other_versions_installed */
+  IF_UNDERSCORE_OTHER_UNDERSCORE_VERSIONS_UNDERSCORE_INSTALLED = "if_other_versions_installed",
+  /** always */
+  ALWAYS = "always",
+}
+
+/**
  * @schema SettingsTaskCache
  */
 export interface SettingsTaskCache {
   /**
-   * [experimental] File to write the complete task cache audit report to.
+   * [experimental] File that receives every undeclared path found by the `cache.audit` task option.
    *
    * @schema SettingsTaskCache#audit_report
    */
   readonly auditReport?: string;
 
   /**
-   * [experimental] Remote task and action cache access mode.
+   * [experimental] How mise uses the remote task cache server.
    *
    * @schema SettingsTaskCache#remote_mode
    */
   readonly remoteMode?: SettingsTaskCacheRemoteMode;
 
   /**
-   * [experimental] Namespace sent to the remote build cache.
+   * [experimental] Namespace that keeps this project's entries apart on the remote task cache server.
    *
    * @schema SettingsTaskCache#remote_namespace
    */
   readonly remoteNamespace?: string;
 
   /**
-   * [experimental] Audience for an automatically acquired remote cache OIDC token.
+   * [experimental] Audience of the GitHub Actions OIDC token that mise requests for the remote task cache.
    *
    * @schema SettingsTaskCache#remote_oidc_audience
    */
   readonly remoteOidcAudience?: string;
 
   /**
-   * [experimental] Bearer token for remote build-cache authentication.
+   * [experimental] Bearer token that mise sends to the remote task cache server.
    *
    * @schema SettingsTaskCache#remote_token
    */
   readonly remoteToken?: string;
 
   /**
-   * [experimental] File containing a remote build-cache bearer token.
+   * [experimental] File that mise reads the remote task cache token from before each request.
    *
    * @schema SettingsTaskCache#remote_token_file
    */
   readonly remoteTokenFile?: string;
 
   /**
-   * [experimental] Base URL for the remote build-cache service.
+   * [experimental] Base URL of the remote task cache server.
    *
    * @schema SettingsTaskCache#remote_url
    */
   readonly remoteUrl?: string;
 
   /**
-   * [experimental] File to write action-cache session statistics to.
+   * [deprecated] Has no effect since the built-in action cache was removed.
    *
    * @schema SettingsTaskCache#stats_report
    */
@@ -6566,7 +6658,7 @@ export function toJson_SettingsTaskCache(obj: SettingsTaskCache | undefined): Re
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * [experimental] Remote task and action cache access mode.
+ * [experimental] How mise uses the remote task cache server.
  *
  * @schema SettingsTaskCacheRemoteMode
  */
@@ -6580,7 +6672,7 @@ export enum SettingsTaskCacheRemoteMode {
 }
 
 /**
- * Change output style when executing tasks.
+ * Default output style for `mise run`.
  *
  * @schema SettingsTaskOutput
  */
@@ -7979,6 +8071,13 @@ export interface MiseTomlSchemaBootstrapLinuxSystemdUnits {
    * @schema MiseTomlSchemaBootstrapLinuxSystemdUnits#wanted_by
    */
   readonly wantedBy?: string[];
+
+  /**
+   * present writes and manages the unit; absent stops, disables, and removes both dev.mise.<name>.service and dev.mise.<name>.timer
+   *
+   * @schema MiseTomlSchemaBootstrapLinuxSystemdUnits#state
+   */
+  readonly state?: MiseTomlSchemaBootstrapLinuxSystemdUnitsState;
 }
 
 /**
@@ -8027,6 +8126,7 @@ export function toJson_MiseTomlSchemaBootstrapLinuxSystemdUnits(obj: MiseTomlSch
     'unit': obj.unit,
     'start': obj.start,
     'wanted_by': obj.wantedBy?.map(y => y),
+    'state': obj.state,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -8186,4 +8286,16 @@ export enum MiseTomlSchemaBootstrapLinuxSystemdUnitsType {
   NOTIFY_HYPHEN_RELOAD = "notify-reload",
   /** idle */
   IDLE = "idle",
+}
+
+/**
+ * present writes and manages the unit; absent stops, disables, and removes both dev.mise.<name>.service and dev.mise.<name>.timer
+ *
+ * @schema MiseTomlSchemaBootstrapLinuxSystemdUnitsState
+ */
+export enum MiseTomlSchemaBootstrapLinuxSystemdUnitsState {
+  /** present */
+  PRESENT = "present",
+  /** absent */
+  ABSENT = "absent",
 }

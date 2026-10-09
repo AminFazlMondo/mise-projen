@@ -1958,6 +1958,7 @@ const miseTomlSchemaBootstrapDirectories: MiseTomlSchemaBootstrapDirectories = {
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapDirectories.property.group">group</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapDirectories.property.mode">mode</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapDirectories.property.notify">notify</a></code> | <code>string[]</code> | *No description.* |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapDirectories.property.os">os</a></code> | <code>string[]</code> | OS or OS/arch selectors; |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapDirectories.property.owner">owner</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapDirectories.property.phase">phase</a></code> | <code><a href="#mise-projen.BootstrapFilePhase">BootstrapFilePhase</a></code> | *No description.* |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapDirectories.property.recursive">recursive</a></code> | <code>boolean</code> | *No description.* |
@@ -1993,6 +1994,20 @@ public readonly notify: string[];
 ```
 
 - *Type:* string[]
+
+---
+
+##### `os`<sup>Optional</sup> <a name="os" id="mise-projen.MiseTomlSchemaBootstrapDirectories.property.os"></a>
+
+```typescript
+public readonly os: string[];
+```
+
+- *Type:* string[]
+
+OS or OS/arch selectors;
+
+entries on other platforms are skipped
 
 ---
 
@@ -2064,6 +2079,7 @@ const miseTomlSchemaBootstrapFiles: MiseTomlSchemaBootstrapFiles = { ... }
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapFiles.property.group">group</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapFiles.property.mode">mode</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapFiles.property.notify">notify</a></code> | <code>string[]</code> | *No description.* |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapFiles.property.os">os</a></code> | <code>string[]</code> | OS or OS/arch selectors; |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapFiles.property.owner">owner</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapFiles.property.phase">phase</a></code> | <code><a href="#mise-projen.BootstrapFilePhase">BootstrapFilePhase</a></code> | *No description.* |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapFiles.property.removeEmpty">removeEmpty</a></code> | <code>boolean</code> | remove the target when the template renders to empty or whitespace-only content; |
@@ -2111,6 +2127,20 @@ public readonly notify: string[];
 ```
 
 - *Type:* string[]
+
+---
+
+##### `os`<sup>Optional</sup> <a name="os" id="mise-projen.MiseTomlSchemaBootstrapFiles.property.os"></a>
+
+```typescript
+public readonly os: string[];
+```
+
+- *Type:* string[]
+
+OS or OS/arch selectors;
+
+entries on other platforms are skipped
 
 ---
 
@@ -2711,6 +2741,7 @@ const miseTomlSchemaBootstrapLinuxSystemdUnits: MiseTomlSchemaBootstrapLinuxSyst
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapLinuxSystemdUnits.property.standardError">standardError</a></code> | <code>string</code> | write StandardError in the [Service] section. |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapLinuxSystemdUnits.property.standardOutput">standardOutput</a></code> | <code>string</code> | write StandardOutput in the [Service] section. |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapLinuxSystemdUnits.property.start">start</a></code> | <code>boolean</code> | restart the unit after writing it; |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapLinuxSystemdUnits.property.state">state</a></code> | <code><a href="#mise-projen.MiseTomlSchemaBootstrapLinuxSystemdUnitsState">MiseTomlSchemaBootstrapLinuxSystemdUnitsState</a></code> | present writes and manages the unit; |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapLinuxSystemdUnits.property.timeoutStartSec">timeoutStartSec</a></code> | <code>string</code> | write TimeoutStartSec in the [Service] section. |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapLinuxSystemdUnits.property.timeoutStopSec">timeoutStopSec</a></code> | <code>string</code> | write TimeoutStopSec in the [Service] section. |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapLinuxSystemdUnits.property.type">type</a></code> | <code><a href="#mise-projen.MiseTomlSchemaBootstrapLinuxSystemdUnitsType">MiseTomlSchemaBootstrapLinuxSystemdUnitsType</a></code> | write Type in the [Service] section. |
@@ -3081,6 +3112,20 @@ public readonly start: boolean;
 restart the unit after writing it;
 
 when false, stop the unit after writing it
+
+---
+
+##### `state`<sup>Optional</sup> <a name="state" id="mise-projen.MiseTomlSchemaBootstrapLinuxSystemdUnits.property.state"></a>
+
+```typescript
+public readonly state: MiseTomlSchemaBootstrapLinuxSystemdUnitsState;
+```
+
+- *Type:* <a href="#mise-projen.MiseTomlSchemaBootstrapLinuxSystemdUnitsState">MiseTomlSchemaBootstrapLinuxSystemdUnitsState</a>
+
+present writes and manages the unit;
+
+absent stops, disables, and removes both dev.mise.<name>.service and dev.mise.<name>.timer
 
 ---
 
@@ -5158,6 +5203,7 @@ const miseTomlSchemaHistory: MiseTomlSchemaHistory = { ... }
 | <code><a href="#mise-projen.MiseTomlSchemaHistory.property.encryption">encryption</a></code> | <code><a href="#mise-projen.MiseTomlSchemaHistoryEncryption">MiseTomlSchemaHistoryEncryption</a></code> | *No description.* |
 | <code><a href="#mise-projen.MiseTomlSchemaHistory.property.exclude">exclude</a></code> | <code>string[]</code> | globs never captured by dotfiles history; |
 | <code><a href="#mise-projen.MiseTomlSchemaHistory.property.gitEmail">gitEmail</a></code> | <code>string</code> | email used for history commit authors and committers; |
+| <code><a href="#mise-projen.MiseTomlSchemaHistory.property.machine">machine</a></code> | <code>string</code> | this machine's name in per-machine streams (variants = [{ machine = true }]) instead of the name generated with the history store. |
 | <code><a href="#mise-projen.MiseTomlSchemaHistory.property.origin">origin</a></code> | <code><a href="#mise-projen.MiseTomlSchemaHistoryOrigin">MiseTomlSchemaHistoryOrigin</a></code> | the setup repository this machine publishes to and fetches from; |
 | <code><a href="#mise-projen.MiseTomlSchemaHistory.property.reload">reload</a></code> | <code>{[ key: string ]: string}</code> | commands run once after a rollback or undo writes a path matching the glob (trusted global or system config only). |
 
@@ -5198,6 +5244,18 @@ public readonly gitEmail: string;
 email used for history commit authors and committers;
 
 {hostname} expands to this machine's hostname
+
+---
+
+##### `machine`<sup>Optional</sup> <a name="machine" id="mise-projen.MiseTomlSchemaHistory.property.machine"></a>
+
+```typescript
+public readonly machine: string;
+```
+
+- *Type:* string
+
+this machine's name in per-machine streams (variants = [{ machine = true }]) instead of the name generated with the history store.
 
 ---
 
@@ -5792,179 +5850,179 @@ const settings: Settings = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#mise-projen.Settings.property.activateAggressive">activateAggressive</a></code> | <code>boolean</code> | Pushes tools' bin-paths to the front of PATH instead of allowing modifications of PATH after activation to take precedence. |
-| <code><a href="#mise-projen.Settings.property.activateShims">activateShims</a></code> | <code>boolean</code> | Allow full shell activation to add tool shims to PATH. |
+| <code><a href="#mise-projen.Settings.property.activateAggressive">activateAggressive</a></code> | <code>boolean</code> | Keep mise's tool directories ahead of `PATH` entries added after `mise activate`. |
+| <code><a href="#mise-projen.Settings.property.activateShims">activateShims</a></code> | <code>boolean</code> | Let `mise activate` add the shims directories to `PATH` for auto-install and lazy tools. |
 | <code><a href="#mise-projen.Settings.property.age">age</a></code> | <code><a href="#mise-projen.SettingsAge">SettingsAge</a></code> | *No description.* |
-| <code><a href="#mise-projen.Settings.property.allCompile">allCompile</a></code> | <code>boolean</code> | do not use precompiled binaries for any tool. |
-| <code><a href="#mise-projen.Settings.property.alwaysKeepDownload">alwaysKeepDownload</a></code> | <code>boolean</code> | keep downloaded files after installation for debugging. |
-| <code><a href="#mise-projen.Settings.property.alwaysKeepInstall">alwaysKeepInstall</a></code> | <code>boolean</code> | should mise keep install files after installation even if the installation fails. |
+| <code><a href="#mise-projen.Settings.property.allCompile">allCompile</a></code> | <code>boolean</code> | Compile Node.js, Python, Ruby and Erlang from source instead of using precompiled builds. |
+| <code><a href="#mise-projen.Settings.property.alwaysKeepDownload">alwaysKeepDownload</a></code> | <code>boolean</code> | Keep downloaded archives and sources after installing, for debugging. |
+| <code><a href="#mise-projen.Settings.property.alwaysKeepInstall">alwaysKeepInstall</a></code> | <code>boolean</code> | Keep a failed installation's partial install directory and downloads, for debugging. |
 | <code><a href="#mise-projen.Settings.property.aqua">aqua</a></code> | <code><a href="#mise-projen.SettingsAqua">SettingsAqua</a></code> | *No description.* |
-| <code><a href="#mise-projen.Settings.property.arch">arch</a></code> | <code>string</code> | Architecture to use for precompiled binaries. |
-| <code><a href="#mise-projen.Settings.property.asdfCompat">asdfCompat</a></code> | <code>boolean</code> | set to true to ensure .tool-versions will be compatible with asdf. |
+| <code><a href="#mise-projen.Settings.property.arch">arch</a></code> | <code>string</code> | Architecture of the precompiled binaries mise downloads. |
+| <code><a href="#mise-projen.Settings.property.asdfCompat">asdfCompat</a></code> | <code>boolean</code> | Write `.tool-versions` files that asdf can read, with exact versions. |
 | <code><a href="#mise-projen.Settings.property.autoEnv">autoEnv</a></code> | <code>boolean</code> | Automatically enable platform config environments (unix, {os}, {os}-{arch}). |
-| <code><a href="#mise-projen.Settings.property.autoInstall">autoInstall</a></code> | <code>boolean</code> | Automatically install missing tools when running `mise x`, `mise run`, or as part of the 'not found' handler. |
-| <code><a href="#mise-projen.Settings.property.autoInstallDisableTools">autoInstallDisableTools</a></code> | <code>string[]</code> | List of tools to skip automatically installing when running `mise x`, `mise run`, or as part of the 'not found' handler. |
-| <code><a href="#mise-projen.Settings.property.autoUpdate">autoUpdate</a></code> | <code>boolean</code> | [deprecated] Use `self_update.auto` instead. |
-| <code><a href="#mise-projen.Settings.property.autoUpdateCheckDuration">autoUpdateCheckDuration</a></code> | <code>string</code> | [deprecated] Use `self_update.check_duration` instead. |
-| <code><a href="#mise-projen.Settings.property.cachePruneAge">cachePruneAge</a></code> | <code>string</code> | Delete files in cache that have not been accessed in this duration. |
+| <code><a href="#mise-projen.Settings.property.autoInstall">autoInstall</a></code> | <code>boolean</code> | Install missing tools automatically when a command needs them. |
+| <code><a href="#mise-projen.Settings.property.autoInstallDisableTools">autoInstallDisableTools</a></code> | <code>string[]</code> | Tools that automatic installs skip, such as `node`. |
+| <code><a href="#mise-projen.Settings.property.autoUpdate">autoUpdate</a></code> | <code>boolean</code> | [deprecated] Old name for `self_update.auto`. |
+| <code><a href="#mise-projen.Settings.property.autoUpdateCheckDuration">autoUpdateCheckDuration</a></code> | <code>string</code> | [deprecated] Old name for `self_update.check_duration`. |
+| <code><a href="#mise-projen.Settings.property.cachePruneAge">cachePruneAge</a></code> | <code>string</code> | Delete cache files that have not been accessed for this long. |
 | <code><a href="#mise-projen.Settings.property.cargo">cargo</a></code> | <code><a href="#mise-projen.SettingsCargo">SettingsCargo</a></code> | *No description.* |
-| <code><a href="#mise-projen.Settings.property.cd">cd</a></code> | <code>string</code> | Path to change to after launching mise. |
-| <code><a href="#mise-projen.Settings.property.ceilingPaths">ceilingPaths</a></code> | <code>string[]</code> | Directories where mise stops searching for config files. |
-| <code><a href="#mise-projen.Settings.property.ci">ci</a></code> | <code>boolean</code> | Set to true if running in a CI environment. |
-| <code><a href="#mise-projen.Settings.property.color">color</a></code> | <code>boolean</code> | Use color in mise terminal output. |
-| <code><a href="#mise-projen.Settings.property.colorTheme">colorTheme</a></code> | <code><a href="#mise-projen.SettingsColorTheme">SettingsColorTheme</a></code> | Theme for interactive prompts (auto/default, charm, base16, catppuccin, dracula). |
+| <code><a href="#mise-projen.Settings.property.cd">cd</a></code> | <code>string</code> | Directory to change to after mise starts. |
+| <code><a href="#mise-projen.Settings.property.ceilingPaths">ceilingPaths</a></code> | <code>string[]</code> | Directories where mise stops searching parent directories for config files. |
+| <code><a href="#mise-projen.Settings.property.ci">ci</a></code> | <code>boolean</code> | Behave as in CI, which answers yes to confirmation prompts; |
+| <code><a href="#mise-projen.Settings.property.color">color</a></code> | <code>boolean</code> | Use color in mise's terminal output. |
+| <code><a href="#mise-projen.Settings.property.colorTheme">colorTheme</a></code> | <code><a href="#mise-projen.SettingsColorTheme">SettingsColorTheme</a></code> | Color theme for interactive prompts, such as the task picker in `mise run`. |
 | <code><a href="#mise-projen.Settings.property.conda">conda</a></code> | <code><a href="#mise-projen.SettingsConda">SettingsConda</a></code> | *No description.* |
-| <code><a href="#mise-projen.Settings.property.debug">debug</a></code> | <code>boolean</code> | Sets log level to debug. |
-| <code><a href="#mise-projen.Settings.property.defaultConfigFilename">defaultConfigFilename</a></code> | <code>string</code> | The default config filename read. |
-| <code><a href="#mise-projen.Settings.property.defaultToolVersionsFilename">defaultToolVersionsFilename</a></code> | <code>string</code> | The default .tool-versions filename read. This will not ignore .tool-versions—use override_tool_versions_filename for that. This must be an env var. |
-| <code><a href="#mise-projen.Settings.property.disableBackends">disableBackends</a></code> | <code>string[]</code> | Backends to exclude from tool resolution and new installs, such as `asdf`, `pypi`, or a vfox-backend plugin name. |
-| <code><a href="#mise-projen.Settings.property.disableDefaultRegistry">disableDefaultRegistry</a></code> | <code>boolean</code> | Disable the default mapping of short tool names like `php` -> `asdf:mise-plugins/asdf-php`. |
-| <code><a href="#mise-projen.Settings.property.disableHints">disableHints</a></code> | <code>string[]</code> | Turns off helpful hints when using different mise features. |
-| <code><a href="#mise-projen.Settings.property.disableTools">disableTools</a></code> | <code>string[]</code> | Tools defined in mise.toml that should be ignored. |
+| <code><a href="#mise-projen.Settings.property.debug">debug</a></code> | <code>boolean</code> | Set the log level to debug. |
+| <code><a href="#mise-projen.Settings.property.defaultConfigFilename">defaultConfigFilename</a></code> | <code>string</code> | Extra project config filename mise reads, and the name it gives new config files. |
+| <code><a href="#mise-projen.Settings.property.defaultToolVersionsFilename">defaultToolVersionsFilename</a></code> | <code>string</code> | Extra filename mise reads as a `.tool-versions` file. |
+| <code><a href="#mise-projen.Settings.property.disableBackends">disableBackends</a></code> | <code>string[]</code> | Backends mise ignores when resolving and installing tools, such as `asdf` or `pypi`. |
+| <code><a href="#mise-projen.Settings.property.disableDefaultRegistry">disableDefaultRegistry</a></code> | <code>boolean</code> | Stop mapping short names such as `php` to the asdf and vfox plugins listed in the registry. |
+| <code><a href="#mise-projen.Settings.property.disableHints">disableHints</a></code> | <code>string[]</code> | Hints to stop showing, by ID; |
+| <code><a href="#mise-projen.Settings.property.disableTools">disableTools</a></code> | <code>string[]</code> | Tools mise ignores even when a config file lists them. |
 | <code><a href="#mise-projen.Settings.property.disableUpdateWarning">disableUpdateWarning</a></code> | <code>boolean</code> | Suppress warnings when a newer mise version is available. |
 | <code><a href="#mise-projen.Settings.property.dotfiles">dotfiles</a></code> | <code><a href="#mise-projen.SettingsDotfiles">SettingsDotfiles</a></code> | *No description.* |
 | <code><a href="#mise-projen.Settings.property.dotnet">dotnet</a></code> | <code><a href="#mise-projen.SettingsDotnet">SettingsDotnet</a></code> | *No description.* |
-| <code><a href="#mise-projen.Settings.property.enableTools">enableTools</a></code> | <code>string[]</code> | Tools defined in mise.toml that should be used; unset enables all tools and empty disables all tools. |
-| <code><a href="#mise-projen.Settings.property.env">env</a></code> | <code>string[]</code> | Env to use for mise.<MISE_ENV>.toml files. |
-| <code><a href="#mise-projen.Settings.property.envCache">envCache</a></code> | <code>boolean</code> | [experimental] Enable environment caching for nested mise invocations. |
-| <code><a href="#mise-projen.Settings.property.envCacheTtl">envCacheTtl</a></code> | <code>string</code> | TTL for cached environments. |
+| <code><a href="#mise-projen.Settings.property.enableTools">enableTools</a></code> | <code>string[]</code> | Allowlist of configured tools mise uses; |
+| <code><a href="#mise-projen.Settings.property.env">env</a></code> | <code>string[]</code> | Config environments to load, such as `development` for `mise.development.toml`. |
+| <code><a href="#mise-projen.Settings.property.envCache">envCache</a></code> | <code>boolean</code> | [experimental] Cache computed environments on disk for nested mise commands. |
+| <code><a href="#mise-projen.Settings.property.envCacheTtl">envCacheTtl</a></code> | <code>string</code> | How long a cached environment stays valid. |
 | <code><a href="#mise-projen.Settings.property.envConfD">envConfD</a></code> | <code>boolean</code> | Enable environment-specific filenames in conf.d directories. |
-| <code><a href="#mise-projen.Settings.property.envFile">envFile</a></code> | <code>string</code> | Path to a file containing environment variables to automatically load. |
-| <code><a href="#mise-projen.Settings.property.envShellExpand">envShellExpand</a></code> | <code>boolean</code> | Controls shell-style variable expansion in env values (e.g., $FOO, ${BAR:-default}). |
+| <code><a href="#mise-projen.Settings.property.envFile">envFile</a></code> | <code>string</code> | Dotenv file name to load from the current directory and each parent directory. |
+| <code><a href="#mise-projen.Settings.property.envShellExpand">envShellExpand</a></code> | <code>boolean</code> | Expand shell-style variables such as `$FOO` and `${BAR:-default}` in `[env]` values. |
 | <code><a href="#mise-projen.Settings.property.erlang">erlang</a></code> | <code><a href="#mise-projen.SettingsErlang">SettingsErlang</a></code> | *No description.* |
-| <code><a href="#mise-projen.Settings.property.execAutoInstall">execAutoInstall</a></code> | <code>boolean</code> | Automatically install missing tools when running `mise x`. |
-| <code><a href="#mise-projen.Settings.property.experimental">experimental</a></code> | <code>boolean</code> | Enable experimental mise features which are incomplete or unstable—breakings changes may occur. |
-| <code><a href="#mise-projen.Settings.property.fetchRemoteVersionsCache">fetchRemoteVersionsCache</a></code> | <code>string</code> | How long to cache remote versions for tools. |
-| <code><a href="#mise-projen.Settings.property.fetchRemoteVersionsTimeout">fetchRemoteVersionsTimeout</a></code> | <code>string</code> | Timeout in seconds for HTTP requests to fetch new tool versions in mise. |
+| <code><a href="#mise-projen.Settings.property.execAutoInstall">execAutoInstall</a></code> | <code>boolean</code> | Install missing tools automatically when you run `mise exec`. |
+| <code><a href="#mise-projen.Settings.property.experimental">experimental</a></code> | <code>boolean</code> | Enable experimental features, which may change or be removed in any release. |
+| <code><a href="#mise-projen.Settings.property.fetchRemoteVersionsCache">fetchRemoteVersionsCache</a></code> | <code>string</code> | How long a tool's cached list of available versions stays fresh. |
+| <code><a href="#mise-projen.Settings.property.fetchRemoteVersionsTimeout">fetchRemoteVersionsTimeout</a></code> | <code>string</code> | Timeout for looking up a tool's available versions. |
 | <code><a href="#mise-projen.Settings.property.forgejo">forgejo</a></code> | <code><a href="#mise-projen.SettingsForgejo">SettingsForgejo</a></code> | *No description.* |
 | <code><a href="#mise-projen.Settings.property.github">github</a></code> | <code><a href="#mise-projen.SettingsGithub">SettingsGithub</a></code> | *No description.* |
-| <code><a href="#mise-projen.Settings.property.githubAttestations">githubAttestations</a></code> | <code>boolean</code> | Enable GitHub Artifact Attestations verification for supported tools. |
+| <code><a href="#mise-projen.Settings.property.githubAttestations">githubAttestations</a></code> | <code>boolean</code> | Verify GitHub artifact attestations for downloads whose publisher provides them. |
 | <code><a href="#mise-projen.Settings.property.githubRelay">githubRelay</a></code> | <code><a href="#mise-projen.SettingsGithubRelay">SettingsGithubRelay</a></code> | *No description.* |
 | <code><a href="#mise-projen.Settings.property.gitlab">gitlab</a></code> | <code><a href="#mise-projen.SettingsGitlab">SettingsGitlab</a></code> | *No description.* |
-| <code><a href="#mise-projen.Settings.property.gix">gix</a></code> | <code>boolean</code> | Use gix for git operations, set to false to shell out to git. |
-| <code><a href="#mise-projen.Settings.property.globalConfigFile">globalConfigFile</a></code> | <code>string</code> | Path to the global mise config file. |
-| <code><a href="#mise-projen.Settings.property.globalConfigRoot">globalConfigRoot</a></code> | <code>string</code> | Path which is used as `{{config_root}}` for the global config file. |
+| <code><a href="#mise-projen.Settings.property.gix">gix</a></code> | <code>boolean</code> | Clone Git repositories with the built-in gix library instead of running `git`. |
+| <code><a href="#mise-projen.Settings.property.globalConfigFile">globalConfigFile</a></code> | <code>string</code> | One file to use as the global config instead of the config files in `~/.config/mise`. |
+| <code><a href="#mise-projen.Settings.property.globalConfigRoot">globalConfigRoot</a></code> | <code>string</code> | Directory used as `config_root` for the global config, such as for `{{config_root}}` in templates. |
 | <code><a href="#mise-projen.Settings.property.go">go</a></code> | <code><a href="#mise-projen.SettingsGo">SettingsGo</a></code> | *No description.* |
-| <code><a href="#mise-projen.Settings.property.goDefaultPackagesFile">goDefaultPackagesFile</a></code> | <code>string</code> | Path to a file containing default go packages to install when installing go. |
-| <code><a href="#mise-projen.Settings.property.goDownloadMirror">goDownloadMirror</a></code> | <code>string</code> | Mirror to download go sdk tarballs from. |
-| <code><a href="#mise-projen.Settings.property.goRepo">goRepo</a></code> | <code>string</code> | URL to fetch go from. |
-| <code><a href="#mise-projen.Settings.property.goSetGobin">goSetGobin</a></code> | <code>boolean</code> | Changes where `go install` installs binaries to. |
-| <code><a href="#mise-projen.Settings.property.goSetGopath">goSetGopath</a></code> | <code>boolean</code> | [deprecated] Set to true to set GOPATH=~/.local/share/mise/installs/go/.../packages. |
-| <code><a href="#mise-projen.Settings.property.goSetGoroot">goSetGoroot</a></code> | <code>boolean</code> | Sets GOROOT=~/.local/share/mise/installs/go/.../. |
-| <code><a href="#mise-projen.Settings.property.goSkipChecksum">goSkipChecksum</a></code> | <code>boolean</code> | Set to true to skip checksum verification when downloading go sdk tarballs. |
-| <code><a href="#mise-projen.Settings.property.gpgVerify">gpgVerify</a></code> | <code>boolean</code> | Verify OpenPGP signatures for all tools (built-in, no external gpg required). |
+| <code><a href="#mise-projen.Settings.property.goDefaultPackagesFile">goDefaultPackagesFile</a></code> | <code>string</code> | File listing Go packages to install with every Go version. |
+| <code><a href="#mise-projen.Settings.property.goDownloadMirror">goDownloadMirror</a></code> | <code>string</code> | Base URL that mise downloads Go archives and their checksums from. |
+| <code><a href="#mise-projen.Settings.property.goRepo">goRepo</a></code> | <code>string</code> | Git repository mise lists Go versions from. |
+| <code><a href="#mise-projen.Settings.property.goSetGobin">goSetGobin</a></code> | <code>boolean</code> | Set `GOBIN` so `go install` puts binaries in the active Go version's directory. |
+| <code><a href="#mise-projen.Settings.property.goSetGopath">goSetGopath</a></code> | <code>boolean</code> | [deprecated] Set `GOPATH` to the `packages` directory inside the active Go install. |
+| <code><a href="#mise-projen.Settings.property.goSetGoroot">goSetGoroot</a></code> | <code>boolean</code> | Set `GOROOT` to the active Go version's install directory. |
+| <code><a href="#mise-projen.Settings.property.goSkipChecksum">goSkipChecksum</a></code> | <code>boolean</code> | Skip SHA-256 verification of Go downloads. |
+| <code><a href="#mise-projen.Settings.property.gpgVerify">gpgVerify</a></code> | <code>boolean</code> | Verify OpenPGP signatures of Node.js and Swift downloads. |
 | <code><a href="#mise-projen.Settings.property.history">history</a></code> | <code><a href="#mise-projen.SettingsHistory">SettingsHistory</a></code> | *No description.* |
 | <code><a href="#mise-projen.Settings.property.hookEnv">hookEnv</a></code> | <code><a href="#mise-projen.SettingsHookEnv">SettingsHookEnv</a></code> | *No description.* |
-| <code><a href="#mise-projen.Settings.property.httpDownloadTimeout">httpDownloadTimeout</a></code> | <code>string</code> | Total time allowed for an HTTP download, including retries. |
-| <code><a href="#mise-projen.Settings.property.httpRetries">httpRetries</a></code> | <code>number</code> | Number of retries for transient HTTP failures in mise. |
+| <code><a href="#mise-projen.Settings.property.httpDownloadTimeout">httpDownloadTimeout</a></code> | <code>string</code> | Total time allowed to download one file, including retries. |
+| <code><a href="#mise-projen.Settings.property.httpRetries">httpRetries</a></code> | <code>number</code> | Number of retries after a transient HTTP failure. |
 | <code><a href="#mise-projen.Settings.property.httpTimeout">httpTimeout</a></code> | <code>string</code> | Timeout for connecting or waiting between reads during HTTP requests. |
-| <code><a href="#mise-projen.Settings.property.idiomaticVersionFile">idiomaticVersionFile</a></code> | <code>boolean</code> | Set to false to disable the idiomatic version files such as .node-version, .ruby-version, etc. |
-| <code><a href="#mise-projen.Settings.property.idiomaticVersionFileDisableFiles">idiomaticVersionFileDisableFiles</a></code> | <code>string[]</code> | Specific idiomatic version files to disable for a tool. |
-| <code><a href="#mise-projen.Settings.property.idiomaticVersionFileDisableTools">idiomaticVersionFileDisableTools</a></code> | <code>string[]</code> | Specific tools to disable idiomatic version files for. |
-| <code><a href="#mise-projen.Settings.property.idiomaticVersionFileEnableTools">idiomaticVersionFileEnableTools</a></code> | <code>string[]</code> | Specific tools to enable idiomatic version files for like .node-version, .ruby-version, etc. |
+| <code><a href="#mise-projen.Settings.property.idiomaticVersionFile">idiomaticVersionFile</a></code> | <code>boolean</code> | [deprecated] No effect; |
+| <code><a href="#mise-projen.Settings.property.idiomaticVersionFileDisableFiles">idiomaticVersionFileDisableFiles</a></code> | <code>string[]</code> | Idiomatic version files to ignore for one tool, as `tool:filename` pairs. |
+| <code><a href="#mise-projen.Settings.property.idiomaticVersionFileDisableTools">idiomaticVersionFileDisableTools</a></code> | <code>string[]</code> | [deprecated] No effect; |
+| <code><a href="#mise-projen.Settings.property.idiomaticVersionFileEnableTools">idiomaticVersionFileEnableTools</a></code> | <code>string[]</code> | Tools that read idiomatic version files such as `.node-version` or `.ruby-version`. |
 | <code><a href="#mise-projen.Settings.property.idiomaticVersionFileIgnoreMinimumVersions">idiomaticVersionFileIgnoreMinimumVersions</a></code> | <code>boolean</code> | Ignore idiomatic version file fields that only declare a minimum compatible version. |
-| <code><a href="#mise-projen.Settings.property.ignoredConfigPaths">ignoredConfigPaths</a></code> | <code>string[]</code> | This is a list of config paths that mise will ignore. |
-| <code><a href="#mise-projen.Settings.property.installBefore">installBefore</a></code> | <code>string</code> | Minimum release age / supply chain protection — only install versions released before this date. |
+| <code><a href="#mise-projen.Settings.property.ignoredConfigPaths">ignoredConfigPaths</a></code> | <code>string[]</code> | Config files and directories mise does not load. |
+| <code><a href="#mise-projen.Settings.property.installBefore">installBefore</a></code> | <code>string</code> | [deprecated] Install only versions released before this date; |
 | <code><a href="#mise-projen.Settings.property.installLayout">installLayout</a></code> | <code><a href="#mise-projen.SettingsInstallLayout">SettingsInstallLayout</a></code> | [experimental] Name installations by what they are (`identity`) instead of `installs/<tool>/<version>` (`legacy`). |
 | <code><a href="#mise-projen.Settings.property.java">java</a></code> | <code><a href="#mise-projen.SettingsJava">SettingsJava</a></code> | *No description.* |
 | <code><a href="#mise-projen.Settings.property.jobs">jobs</a></code> | <code>number</code> | How many jobs to run concurrently such as tool installs. |
-| <code><a href="#mise-projen.Settings.property.legacyVersionFile">legacyVersionFile</a></code> | <code>boolean</code> | Set to false to disable the idiomatic version files such as .node-version, .ruby-version, etc. |
-| <code><a href="#mise-projen.Settings.property.legacyVersionFileDisableTools">legacyVersionFileDisableTools</a></code> | <code>string[]</code> | Specific tools to disable idiomatic version files for. |
-| <code><a href="#mise-projen.Settings.property.libc">libc</a></code> | <code><a href="#mise-projen.SettingsLibc">SettingsLibc</a></code> | Libc implementation to use for precompiled Linux binaries. |
-| <code><a href="#mise-projen.Settings.property.libgit2">libgit2</a></code> | <code>boolean</code> | Use libgit2 for git operations, set to false to shell out to git. |
-| <code><a href="#mise-projen.Settings.property.locked">locked</a></code> | <code>boolean</code> | Require lockfile URLs to be present during installation. |
+| <code><a href="#mise-projen.Settings.property.legacyVersionFile">legacyVersionFile</a></code> | <code>boolean</code> | [deprecated] No effect; |
+| <code><a href="#mise-projen.Settings.property.legacyVersionFileDisableTools">legacyVersionFileDisableTools</a></code> | <code>string[]</code> | [deprecated] No effect; |
+| <code><a href="#mise-projen.Settings.property.libc">libc</a></code> | <code><a href="#mise-projen.SettingsLibc">SettingsLibc</a></code> | Libc build to install on Linux when a tool publishes both glibc and musl builds. |
+| <code><a href="#mise-projen.Settings.property.libgit2">libgit2</a></code> | <code>boolean</code> | Clone Git repositories with the built-in gix library instead of running `git`; |
+| <code><a href="#mise-projen.Settings.property.locked">locked</a></code> | <code>boolean</code> | Require tool versions and download URLs to come from the lockfile. |
 | <code><a href="#mise-projen.Settings.property.lockedScopes">lockedScopes</a></code> | <code><a href="#mise-projen.SettingsLockedScopes">SettingsLockedScopes</a>[]</code> | Config scopes where invocation-wide locked mode is enforced. |
-| <code><a href="#mise-projen.Settings.property.lockedVerifyProvenance">lockedVerifyProvenance</a></code> | <code>boolean</code> | Re-verify provenance at install time even when the lockfile already has provenance. |
-| <code><a href="#mise-projen.Settings.property.lockfile">lockfile</a></code> | <code>boolean</code> | Create and read lockfiles for tool versions. |
+| <code><a href="#mise-projen.Settings.property.lockedVerifyProvenance">lockedVerifyProvenance</a></code> | <code>boolean</code> | Re-verify provenance at install time even when the lockfile already records it. |
+| <code><a href="#mise-projen.Settings.property.lockfile">lockfile</a></code> | <code>boolean</code> | Create, read and update `mise.lock` lockfiles for tool versions. |
 | <code><a href="#mise-projen.Settings.property.lockfileAutoPrune">lockfileAutoPrune</a></code> | <code>boolean</code> | Remove lockfile tools that are absent from the active configuration. |
-| <code><a href="#mise-projen.Settings.property.lockfileMode">lockfileMode</a></code> | <code><a href="#mise-projen.SettingsLockfileMode">SettingsLockfileMode</a></code> | Choose incremental merging or complete lockfile generation. |
-| <code><a href="#mise-projen.Settings.property.lockfilePlatforms">lockfilePlatforms</a></code> | <code>string[]</code> | Platforms to target in lockfile operations. |
-| <code><a href="#mise-projen.Settings.property.logLevel">logLevel</a></code> | <code><a href="#mise-projen.SettingsLogLevel">SettingsLogLevel</a></code> | Show more/less output. |
-| <code><a href="#mise-projen.Settings.property.minimumReleaseAge">minimumReleaseAge</a></code> | <code>string</code> | Minimum release age / supply chain protection — only install versions older than this threshold. |
-| <code><a href="#mise-projen.Settings.property.minimumReleaseAgeExcludes">minimumReleaseAgeExcludes</a></code> | <code>string[]</code> | Tools and backends to exclude from the global/default minimum_release_age setting. |
+| <code><a href="#mise-projen.Settings.property.lockfileMode">lockfileMode</a></code> | <code><a href="#mise-projen.SettingsLockfileMode">SettingsLockfileMode</a></code> | How lockfiles are written: entry by entry, or rebuilt from the current requests. |
+| <code><a href="#mise-projen.Settings.property.lockfilePlatforms">lockfilePlatforms</a></code> | <code>string[]</code> | Platforms to resolve lockfile URLs and checksums for. |
+| <code><a href="#mise-projen.Settings.property.logLevel">logLevel</a></code> | <code><a href="#mise-projen.SettingsLogLevel">SettingsLogLevel</a></code> | Log level for mise's own output. |
+| <code><a href="#mise-projen.Settings.property.minimumReleaseAge">minimumReleaseAge</a></code> | <code>string</code> | Skip versions published more recently than this duration or date. |
+| <code><a href="#mise-projen.Settings.property.minimumReleaseAgeExcludes">minimumReleaseAgeExcludes</a></code> | <code>string[]</code> | Tools and backends that the configured and default `minimum_release_age` do not apply to. |
 | <code><a href="#mise-projen.Settings.property.netrc">netrc</a></code> | <code>boolean</code> | Use a netrc file for HTTP Basic authentication. |
-| <code><a href="#mise-projen.Settings.property.netrcFile">netrcFile</a></code> | <code>string</code> | Path to the netrc file to use for HTTP Basic authentication. |
+| <code><a href="#mise-projen.Settings.property.netrcFile">netrcFile</a></code> | <code>string</code> | Path of the netrc file to use instead of `~/.netrc` (`%USERPROFILE%\_netrc` on Windows). |
 | <code><a href="#mise-projen.Settings.property.node">node</a></code> | <code><a href="#mise-projen.SettingsNode">SettingsNode</a></code> | *No description.* |
 | <code><a href="#mise-projen.Settings.property.noEnv">noEnv</a></code> | <code>boolean</code> | Do not load environment variables from config files. |
 | <code><a href="#mise-projen.Settings.property.noHooks">noHooks</a></code> | <code>boolean</code> | Do not execute hooks from config files. |
-| <code><a href="#mise-projen.Settings.property.notFoundAutoInstall">notFoundAutoInstall</a></code> | <code>boolean</code> | Set to false to disable the "command not found" handler to autoinstall missing tool versions. |
-| <code><a href="#mise-projen.Settings.property.notFoundAutoInstallRegistry">notFoundAutoInstallRegistry</a></code> | <code>boolean</code> | Automatically install an unconfigured tool when its registry bin matches a missing command. |
-| <code><a href="#mise-projen.Settings.property.notFoundSystemFallback">notFoundSystemFallback</a></code> | <code>boolean</code> | Set to false to stop shims from falling back to a same-named binary found elsewhere on PATH. |
+| <code><a href="#mise-projen.Settings.property.notFoundAutoInstall">notFoundAutoInstall</a></code> | <code>boolean</code> | Install the tool that provides a command when your shell cannot find that command. |
+| <code><a href="#mise-projen.Settings.property.notFoundAutoInstallRegistry">notFoundAutoInstallRegistry</a></code> | <code>boolean</code> | Install an unconfigured tool when exactly one registry entry provides a command your shell cannot find. |
+| <code><a href="#mise-projen.Settings.property.notFoundSystemFallback">notFoundSystemFallback</a></code> | <code>boolean</code> | Let a shim run a same-named executable from elsewhere on `PATH` when mise cannot resolve the tool. |
 | <code><a href="#mise-projen.Settings.property.npm">npm</a></code> | <code><a href="#mise-projen.SettingsNpm">SettingsNpm</a></code> | *No description.* |
 | <code><a href="#mise-projen.Settings.property.oci">oci</a></code> | <code><a href="#mise-projen.SettingsOci">SettingsOci</a></code> | *No description.* |
-| <code><a href="#mise-projen.Settings.property.offline">offline</a></code> | <code>boolean</code> | Disable all HTTP requests. |
-| <code><a href="#mise-projen.Settings.property.os">os</a></code> | <code>string</code> | OS to use for precompiled binaries. |
+| <code><a href="#mise-projen.Settings.property.offline">offline</a></code> | <code>boolean</code> | Block every HTTP request, so mise uses only installed tools and cached data. |
+| <code><a href="#mise-projen.Settings.property.os">os</a></code> | <code>string</code> | Operating system of the precompiled binaries mise downloads. |
 | <code><a href="#mise-projen.Settings.property.otel">otel</a></code> | <code><a href="#mise-projen.SettingsOtel">SettingsOtel</a></code> | *No description.* |
-| <code><a href="#mise-projen.Settings.property.overrideConfigFilenames">overrideConfigFilenames</a></code> | <code>string[]</code> | If set, mise will ignore default config files like `mise.toml` and use these filenames instead. |
-| <code><a href="#mise-projen.Settings.property.overrideToolVersionsFilenames">overrideToolVersionsFilenames</a></code> | <code>string[]</code> | If set, mise will ignore .tool-versions files and use these filenames instead. Can be set to `none` to disable .tool-versions. |
+| <code><a href="#mise-projen.Settings.property.overrideConfigFilenames">overrideConfigFilenames</a></code> | <code>string[]</code> | Project config filenames that mise looks for instead of `mise.toml`, `.mise.toml` and the other standard names. |
+| <code><a href="#mise-projen.Settings.property.overrideToolVersionsFilenames">overrideToolVersionsFilenames</a></code> | <code>string[]</code> | Filenames that mise reads as `.tool-versions` files instead of `.tool-versions`. |
 | <code><a href="#mise-projen.Settings.property.packslip">packslip</a></code> | <code><a href="#mise-projen.SettingsPackslip">SettingsPackslip</a></code> | *No description.* |
-| <code><a href="#mise-projen.Settings.property.paranoid">paranoid</a></code> | <code>boolean</code> | Enables extra-secure behavior. |
-| <code><a href="#mise-projen.Settings.property.pin">pin</a></code> | <code>boolean</code> | Default to pinning versions when running `mise use` in mise.toml files. |
+| <code><a href="#mise-projen.Settings.property.paranoid">paranoid</a></code> | <code>boolean</code> | Require explicit, content-bound trust for project config, and re-verify provenance on every install. |
+| <code><a href="#mise-projen.Settings.property.pin">pin</a></code> | <code>boolean</code> | Make `mise use` write the resolved version, such as `24.14.0` for `node@24`, instead of the requested one. |
 | <code><a href="#mise-projen.Settings.property.pipx">pipx</a></code> | <code><a href="#mise-projen.SettingsPipx">SettingsPipx</a></code> | *No description.* |
-| <code><a href="#mise-projen.Settings.property.pluginAutoupdateLastCheckDuration">pluginAutoupdateLastCheckDuration</a></code> | <code>string</code> | How long to wait before updating plugins automatically (note this isn't currently implemented). |
-| <code><a href="#mise-projen.Settings.property.preferOffline">preferOffline</a></code> | <code>boolean</code> | Prefer locally cached data over remote fetches when possible. |
-| <code><a href="#mise-projen.Settings.property.prereleases">prereleases</a></code> | <code>boolean</code> | Include pre-release versions in `ls-remote`, `latest` resolution, and fuzzy matching for all tools. |
-| <code><a href="#mise-projen.Settings.property.profile">profile</a></code> | <code>string</code> | Profile to use for mise.${MISE_PROFILE}.toml files. |
-| <code><a href="#mise-projen.Settings.property.provenanceApiFailuresFatal">provenanceApiFailuresFatal</a></code> | <code>boolean</code> | Fail when provenance API checks cannot be completed. |
+| <code><a href="#mise-projen.Settings.property.pluginAutoupdateLastCheckDuration">pluginAutoupdateLastCheckDuration</a></code> | <code>string</code> | [deprecated] Has no effect; |
+| <code><a href="#mise-projen.Settings.property.preferOffline">preferOffline</a></code> | <code>boolean</code> | Use cached version lists instead of fetching new ones, and go to the network only when nothing is cached. |
+| <code><a href="#mise-projen.Settings.property.prereleases">prereleases</a></code> | <code>boolean</code> | Include prereleases in `mise ls-remote`, `latest` and prefix matching for every tool. |
+| <code><a href="#mise-projen.Settings.property.profile">profile</a></code> | <code>string</code> | Older name for the `env` setting; |
+| <code><a href="#mise-projen.Settings.property.provenanceApiFailuresFatal">provenanceApiFailuresFatal</a></code> | <code>boolean</code> | Fail an install when a provenance API, such as GitHub's attestation API, cannot be reached or queried. |
 | <code><a href="#mise-projen.Settings.property.prune">prune</a></code> | <code><a href="#mise-projen.SettingsPrune">SettingsPrune</a></code> | *No description.* |
 | <code><a href="#mise-projen.Settings.property.pypi">pypi</a></code> | <code><a href="#mise-projen.SettingsPypi">SettingsPypi</a></code> | *No description.* |
 | <code><a href="#mise-projen.Settings.property.python">python</a></code> | <code><a href="#mise-projen.SettingsPython">SettingsPython</a></code> | *No description.* |
-| <code><a href="#mise-projen.Settings.property.quiet">quiet</a></code> | <code>boolean</code> | Suppress all output except errors. |
-| <code><a href="#mise-projen.Settings.property.raw">raw</a></code> | <code>boolean</code> | Connect stdin/stdout/stderr to child processes. |
-| <code><a href="#mise-projen.Settings.property.registryCacheTtl">registryCacheTtl</a></code> | <code>string</code> | How long to cache the floating mise registry. |
-| <code><a href="#mise-projen.Settings.property.registryFloating">registryFloating</a></code> | <code>boolean</code> | Fetch the latest released mise registry and current aqua registry instead of using only the snapshots baked into this mise release. |
+| <code><a href="#mise-projen.Settings.property.quiet">quiet</a></code> | <code>boolean</code> | Hide mise's own non-error messages, such as progress and task headers; |
+| <code><a href="#mise-projen.Settings.property.raw">raw</a></code> | <code>boolean</code> | Connect tasks and install commands directly to the terminal's stdin, stdout and stderr. |
+| <code><a href="#mise-projen.Settings.property.registryCacheTtl">registryCacheTtl</a></code> | <code>string</code> | How long a downloaded mise registry stays fresh when `registry_floating` is on. |
+| <code><a href="#mise-projen.Settings.property.registryFloating">registryFloating</a></code> | <code>boolean</code> | Use the latest released mise registry and the current aqua registry, not only the copies built into mise. |
 | <code><a href="#mise-projen.Settings.property.ruby">ruby</a></code> | <code><a href="#mise-projen.SettingsRuby">SettingsRuby</a></code> | *No description.* |
 | <code><a href="#mise-projen.Settings.property.rust">rust</a></code> | <code><a href="#mise-projen.SettingsRust">SettingsRust</a></code> | *No description.* |
-| <code><a href="#mise-projen.Settings.property.safe">safe</a></code> | <code>boolean</code> | Prevent project configuration from executing code during config loading and version resolution. |
+| <code><a href="#mise-projen.Settings.property.safe">safe</a></code> | <code>boolean</code> | Load project config without letting it run code or change the environment, for automation that reads untrusted config. |
 | <code><a href="#mise-projen.Settings.property.sandbox">sandbox</a></code> | <code><a href="#mise-projen.SettingsSandbox">SettingsSandbox</a></code> | *No description.* |
 | <code><a href="#mise-projen.Settings.property.selfUpdate">selfUpdate</a></code> | <code><a href="#mise-projen.SettingsSelfUpdate">SettingsSelfUpdate</a></code> | *No description.* |
-| <code><a href="#mise-projen.Settings.property.sharedInstallDirs">sharedInstallDirs</a></code> | <code>string[]</code> | Additional read-only directories to search for installed tool versions. |
+| <code><a href="#mise-projen.Settings.property.sharedInstallDirs">sharedInstallDirs</a></code> | <code>string[]</code> | Extra read-only directories that mise searches for installed tool versions. |
 | <code><a href="#mise-projen.Settings.property.shims">shims</a></code> | <code><a href="#mise-projen.SettingsShims">SettingsShims</a></code> | *No description.* |
-| <code><a href="#mise-projen.Settings.property.shimsDir">shimsDir</a></code> | <code>string</code> | Directory containing user shims. |
-| <code><a href="#mise-projen.Settings.property.shorthandsFile">shorthandsFile</a></code> | <code>string</code> | [deprecated] Path to a file containing custom tool shorthands. |
-| <code><a href="#mise-projen.Settings.property.silent">silent</a></code> | <code>boolean</code> | Suppress all `mise run\|watch` output except errors—including what tasks output. |
+| <code><a href="#mise-projen.Settings.property.shimsDir">shimsDir</a></code> | <code>string</code> | Directory where mise writes user shims. |
+| <code><a href="#mise-projen.Settings.property.shorthandsFile">shorthandsFile</a></code> | <code>string</code> | [deprecated] File of custom tool shorthands; |
+| <code><a href="#mise-projen.Settings.property.silent">silent</a></code> | <code>boolean</code> | Hide all output from `mise run` and `mise watch`, including what tasks print, except errors; |
 | <code><a href="#mise-projen.Settings.property.skills">skills</a></code> | <code><a href="#mise-projen.SettingsSkills">SettingsSkills</a></code> | *No description.* |
-| <code><a href="#mise-projen.Settings.property.slsa">slsa</a></code> | <code>boolean</code> | Enable SLSA provenance verification globally. |
+| <code><a href="#mise-projen.Settings.property.slsa">slsa</a></code> | <code>boolean</code> | Verify SLSA provenance of downloads whose publisher provides it. |
 | <code><a href="#mise-projen.Settings.property.sops">sops</a></code> | <code><a href="#mise-projen.SettingsSops">SettingsSops</a></code> | *No description.* |
 | <code><a href="#mise-projen.Settings.property.spm">spm</a></code> | <code><a href="#mise-projen.SettingsSpm">SettingsSpm</a></code> | *No description.* |
 | <code><a href="#mise-projen.Settings.property.status">status</a></code> | <code><a href="#mise-projen.SettingsStatus">SettingsStatus</a></code> | *No description.* |
 | <code><a href="#mise-projen.Settings.property.swift">swift</a></code> | <code><a href="#mise-projen.SettingsSwift">SettingsSwift</a></code> | *No description.* |
-| <code><a href="#mise-projen.Settings.property.systemConfigFile">systemConfigFile</a></code> | <code>string</code> | Path to the system mise config file. |
-| <code><a href="#mise-projen.Settings.property.systemDeps">systemDeps</a></code> | <code><a href="#mise-projen.SettingsSystemDeps">SettingsSystemDeps</a></code> | How to handle a plugin's declared system dependencies before installing a tool. |
-| <code><a href="#mise-projen.Settings.property.systemInstallsDir">systemInstallsDir</a></code> | <code>string</code> | Directory containing system tool installs. |
+| <code><a href="#mise-projen.Settings.property.systemConfigFile">systemConfigFile</a></code> | <code>string</code> | One file to use as the system config instead of the config files in `/etc/mise`. |
+| <code><a href="#mise-projen.Settings.property.systemDeps">systemDeps</a></code> | <code><a href="#mise-projen.SettingsSystemDeps">SettingsSystemDeps</a></code> | What mise does when a plugin's declared system dependencies are missing before it installs a tool. |
+| <code><a href="#mise-projen.Settings.property.systemInstallsDir">systemInstallsDir</a></code> | <code>string</code> | Directory that `mise install --system` installs into. |
 | <code><a href="#mise-projen.Settings.property.systemPackages">systemPackages</a></code> | <code><a href="#mise-projen.SettingsSystemPackages">SettingsSystemPackages</a></code> | *No description.* |
-| <code><a href="#mise-projen.Settings.property.systemShimsDir">systemShimsDir</a></code> | <code>string</code> | Directory containing system shims. |
+| <code><a href="#mise-projen.Settings.property.systemShimsDir">systemShimsDir</a></code> | <code>string</code> | Directory where `mise reshim --system` writes shims for system installs. |
 | <code><a href="#mise-projen.Settings.property.task">task</a></code> | <code><a href="#mise-projen.SettingsTask">SettingsTask</a></code> | *No description.* |
-| <code><a href="#mise-projen.Settings.property.taskDisablePaths">taskDisablePaths</a></code> | <code>string[]</code> | Paths that mise will not look for tasks in. |
-| <code><a href="#mise-projen.Settings.property.taskOutput">taskOutput</a></code> | <code>string</code> | Change output style when executing tasks. |
-| <code><a href="#mise-projen.Settings.property.taskRemoteNoCache">taskRemoteNoCache</a></code> | <code>boolean</code> | Mise will always fetch the latest tasks from the remote, by default the cache is used. |
-| <code><a href="#mise-projen.Settings.property.taskRunAutoInstall">taskRunAutoInstall</a></code> | <code>boolean</code> | Automatically install missing tools when executing tasks. |
-| <code><a href="#mise-projen.Settings.property.taskShowFullCmd">taskShowFullCmd</a></code> | <code>boolean</code> | Disable truncation of command lines in task execution output. |
-| <code><a href="#mise-projen.Settings.property.taskSkip">taskSkip</a></code> | <code>string[]</code> | Tasks to skip when running `mise run`. |
-| <code><a href="#mise-projen.Settings.property.taskSkipDepends">taskSkipDepends</a></code> | <code>boolean</code> | Run only specified tasks skipping all dependencies. |
-| <code><a href="#mise-projen.Settings.property.taskTimeout">taskTimeout</a></code> | <code>string</code> | Default timeout for tasks. |
-| <code><a href="#mise-projen.Settings.property.taskTimings">taskTimings</a></code> | <code>boolean</code> | Show completion message with elapsed time for each task on `mise run`. |
-| <code><a href="#mise-projen.Settings.property.teraV1">teraV1</a></code> | <code>boolean</code> | Use Tera v1 instead of Tera v2 for template rendering. |
-| <code><a href="#mise-projen.Settings.property.terminalProgress">terminalProgress</a></code> | <code>boolean</code> | Enable terminal progress indicators (OSC 9;4) for compatible terminals. |
+| <code><a href="#mise-projen.Settings.property.taskDisablePaths">taskDisablePaths</a></code> | <code>string[]</code> | Deprecated alias for `task.disable_paths`. |
+| <code><a href="#mise-projen.Settings.property.taskOutput">taskOutput</a></code> | <code>string</code> | Deprecated alias for `task.output`. |
+| <code><a href="#mise-projen.Settings.property.taskRemoteNoCache">taskRemoteNoCache</a></code> | <code>boolean</code> | Deprecated alias for `task.remote_no_cache`. |
+| <code><a href="#mise-projen.Settings.property.taskRunAutoInstall">taskRunAutoInstall</a></code> | <code>boolean</code> | Deprecated alias for `task.run_auto_install`. |
+| <code><a href="#mise-projen.Settings.property.taskShowFullCmd">taskShowFullCmd</a></code> | <code>boolean</code> | Deprecated alias for `task.show_full_cmd`. |
+| <code><a href="#mise-projen.Settings.property.taskSkip">taskSkip</a></code> | <code>string[]</code> | Deprecated alias for `task.skip`. |
+| <code><a href="#mise-projen.Settings.property.taskSkipDepends">taskSkipDepends</a></code> | <code>boolean</code> | Deprecated alias for `task.skip_depends`. |
+| <code><a href="#mise-projen.Settings.property.taskTimeout">taskTimeout</a></code> | <code>string</code> | Deprecated alias for `task.timeout`. |
+| <code><a href="#mise-projen.Settings.property.taskTimings">taskTimings</a></code> | <code>boolean</code> | Deprecated alias for `task.timings`. |
+| <code><a href="#mise-projen.Settings.property.teraV1">teraV1</a></code> | <code>boolean</code> | [deprecated] Render templates with Tera v1 instead of Tera v2. |
+| <code><a href="#mise-projen.Settings.property.terminalProgress">terminalProgress</a></code> | <code>boolean</code> | Show install progress in the terminal window's own progress indicator, with OSC 9;4 escape sequences. |
 | <code><a href="#mise-projen.Settings.property.toolUpdate">toolUpdate</a></code> | <code><a href="#mise-projen.SettingsToolUpdate">SettingsToolUpdate</a></code> | *No description.* |
-| <code><a href="#mise-projen.Settings.property.trace">trace</a></code> | <code>boolean</code> | Sets log level to trace. |
+| <code><a href="#mise-projen.Settings.property.trace">trace</a></code> | <code>boolean</code> | Set the log level to trace. |
 | <code><a href="#mise-projen.Settings.property.truncate">truncate</a></code> | <code>boolean</code> | Truncate long terminal output to fit the available width. |
-| <code><a href="#mise-projen.Settings.property.trustedConfigPaths">trustedConfigPaths</a></code> | <code>string[]</code> | This is a list of config paths that mise will automatically mark as trusted. |
-| <code><a href="#mise-projen.Settings.property.unixDefaultFileShellArgs">unixDefaultFileShellArgs</a></code> | <code>string</code> | Default shell arguments for Unix to be used for file commands. |
-| <code><a href="#mise-projen.Settings.property.unixDefaultInlineShellArgs">unixDefaultInlineShellArgs</a></code> | <code>string</code> | Default shell arguments for Unix to be used for inline commands. |
+| <code><a href="#mise-projen.Settings.property.trustedConfigPaths">trustedConfigPaths</a></code> | <code>string[]</code> | Directories whose config files mise trusts without asking. |
+| <code><a href="#mise-projen.Settings.property.unixDefaultFileShellArgs">unixDefaultFileShellArgs</a></code> | <code>string</code> | Shell that runs a file task on Unix when the task sets no `shell` and the file has no shebang or known extension. |
+| <code><a href="#mise-projen.Settings.property.unixDefaultInlineShellArgs">unixDefaultInlineShellArgs</a></code> | <code>string</code> | Shell and arguments that run inline scripts on Unix, such as a task's `run`, hooks and `postinstall`. |
 | <code><a href="#mise-projen.Settings.property.upgrade">upgrade</a></code> | <code><a href="#mise-projen.SettingsUpgrade">SettingsUpgrade</a></code> | *No description.* |
-| <code><a href="#mise-projen.Settings.property.urlReplacements">urlReplacements</a></code> | <code>{[ key: string ]: string}</code> | Map of URL patterns to replacement URLs applied to all requests. |
-| <code><a href="#mise-projen.Settings.property.useFileShellForExecutableTasks">useFileShellForExecutableTasks</a></code> | <code>boolean</code> | Determines whether to use a specified shell for executing tasks in the tasks directory. |
-| <code><a href="#mise-projen.Settings.property.useVersionsHost">useVersionsHost</a></code> | <code>boolean</code> | Set to false to disable using the mise-versions API for version lists, public GitHub release metadata, and GitHub artifact attestations. |
-| <code><a href="#mise-projen.Settings.property.useVersionsHostTrack">useVersionsHostTrack</a></code> | <code>boolean</code> | Send anonymous download statistics when installing tools. |
-| <code><a href="#mise-projen.Settings.property.verbose">verbose</a></code> | <code>boolean</code> | Shows more verbose output such as installation logs when installing tools. |
-| <code><a href="#mise-projen.Settings.property.windowsDefaultFileShellArgs">windowsDefaultFileShellArgs</a></code> | <code>string</code> | Default shell arguments for Windows to be used for file commands. |
-| <code><a href="#mise-projen.Settings.property.windowsDefaultInlineShellArgs">windowsDefaultInlineShellArgs</a></code> | <code>string</code> | Default shell arguments for Windows to be used for inline commands. |
-| <code><a href="#mise-projen.Settings.property.windowsExecutableExtensions">windowsExecutableExtensions</a></code> | <code>string[]</code> | List of executable extensions for Windows. |
-| <code><a href="#mise-projen.Settings.property.windowsPowershellNoProfile">windowsPowershellNoProfile</a></code> | <code>boolean</code> | Pass `-NoProfile` to PowerShell (`pwsh`/`powershell`) shells that mise spawns for tasks and inline commands, so startup profiles are skipped. |
-| <code><a href="#mise-projen.Settings.property.windowsShimMode">windowsShimMode</a></code> | <code>string</code> | Shim file mode for Windows. |
+| <code><a href="#mise-projen.Settings.property.urlReplacements">urlReplacements</a></code> | <code>{[ key: string ]: string}</code> | URL patterns and replacements that mise's HTTP client applies before sending a request, for mirrors and proxies. |
+| <code><a href="#mise-projen.Settings.property.useFileShellForExecutableTasks">useFileShellForExecutableTasks</a></code> | <code>boolean</code> | Run executable file tasks through a shell instead of executing them directly. |
+| <code><a href="#mise-projen.Settings.property.useVersionsHost">useVersionsHost</a></code> | <code>boolean</code> | Get version lists, public GitHub release metadata and attestations from mise-versions instead of upstream APIs. |
+| <code><a href="#mise-projen.Settings.property.useVersionsHostTrack">useVersionsHostTrack</a></code> | <code>boolean</code> | Send anonymous download statistics to mise-versions after installing a tool. |
+| <code><a href="#mise-projen.Settings.property.verbose">verbose</a></code> | <code>boolean</code> | Show extra output, such as installation logs, and set the log level to debug; |
+| <code><a href="#mise-projen.Settings.property.windowsDefaultFileShellArgs">windowsDefaultFileShellArgs</a></code> | <code>string</code> | Shell that runs a file task on Windows when the task sets no `shell` and the file has no shebang or known extension. |
+| <code><a href="#mise-projen.Settings.property.windowsDefaultInlineShellArgs">windowsDefaultInlineShellArgs</a></code> | <code>string</code> | Shell and arguments that run inline scripts on Windows, such as a task's `run`, hooks and `postinstall`. |
+| <code><a href="#mise-projen.Settings.property.windowsExecutableExtensions">windowsExecutableExtensions</a></code> | <code>string[]</code> | File extensions, without the dot, that mise treats as executable on Windows. |
+| <code><a href="#mise-projen.Settings.property.windowsPowershellNoProfile">windowsPowershellNoProfile</a></code> | <code>boolean</code> | Pass `-NoProfile` to the PowerShell (`pwsh` or `powershell`) that mise starts, so startup profiles are skipped. |
+| <code><a href="#mise-projen.Settings.property.windowsShimMode">windowsShimMode</a></code> | <code><a href="#mise-projen.SettingsWindowsShimMode">SettingsWindowsShimMode</a></code> | How mise creates shims on Windows. |
 | <code><a href="#mise-projen.Settings.property.writeTargets">writeTargets</a></code> | <code><a href="#mise-projen.SettingsWriteTargets">SettingsWriteTargets</a></code> | *No description.* |
-| <code><a href="#mise-projen.Settings.property.yes">yes</a></code> | <code>boolean</code> | This will automatically answer yes or no to prompts. |
+| <code><a href="#mise-projen.Settings.property.yes">yes</a></code> | <code>boolean</code> | Answer yes to every confirmation prompt, as `--yes` does. |
 | <code><a href="#mise-projen.Settings.property.zig">zig</a></code> | <code><a href="#mise-projen.SettingsZig">SettingsZig</a></code> | *No description.* |
 
 ---
@@ -5977,7 +6035,7 @@ public readonly activateAggressive: boolean;
 
 - *Type:* boolean
 
-Pushes tools' bin-paths to the front of PATH instead of allowing modifications of PATH after activation to take precedence.
+Keep mise's tool directories ahead of `PATH` entries added after `mise activate`.
 
 ---
 
@@ -5989,7 +6047,7 @@ public readonly activateShims: boolean;
 
 - *Type:* boolean
 
-Allow full shell activation to add tool shims to PATH.
+Let `mise activate` add the shims directories to `PATH` for auto-install and lazy tools.
 
 ---
 
@@ -6011,7 +6069,7 @@ public readonly allCompile: boolean;
 
 - *Type:* boolean
 
-do not use precompiled binaries for any tool.
+Compile Node.js, Python, Ruby and Erlang from source instead of using precompiled builds.
 
 ---
 
@@ -6023,7 +6081,7 @@ public readonly alwaysKeepDownload: boolean;
 
 - *Type:* boolean
 
-keep downloaded files after installation for debugging.
+Keep downloaded archives and sources after installing, for debugging.
 
 ---
 
@@ -6035,7 +6093,7 @@ public readonly alwaysKeepInstall: boolean;
 
 - *Type:* boolean
 
-should mise keep install files after installation even if the installation fails.
+Keep a failed installation's partial install directory and downloads, for debugging.
 
 ---
 
@@ -6057,7 +6115,7 @@ public readonly arch: string;
 
 - *Type:* string
 
-Architecture to use for precompiled binaries.
+Architecture of the precompiled binaries mise downloads.
 
 ---
 
@@ -6069,7 +6127,7 @@ public readonly asdfCompat: boolean;
 
 - *Type:* boolean
 
-set to true to ensure .tool-versions will be compatible with asdf.
+Write `.tool-versions` files that asdf can read, with exact versions.
 
 ---
 
@@ -6093,7 +6151,7 @@ public readonly autoInstall: boolean;
 
 - *Type:* boolean
 
-Automatically install missing tools when running `mise x`, `mise run`, or as part of the 'not found' handler.
+Install missing tools automatically when a command needs them.
 
 ---
 
@@ -6105,7 +6163,7 @@ public readonly autoInstallDisableTools: string[];
 
 - *Type:* string[]
 
-List of tools to skip automatically installing when running `mise x`, `mise run`, or as part of the 'not found' handler.
+Tools that automatic installs skip, such as `node`.
 
 ---
 
@@ -6117,7 +6175,7 @@ public readonly autoUpdate: boolean;
 
 - *Type:* boolean
 
-[deprecated] Use `self_update.auto` instead.
+[deprecated] Old name for `self_update.auto`.
 
 ---
 
@@ -6129,7 +6187,7 @@ public readonly autoUpdateCheckDuration: string;
 
 - *Type:* string
 
-[deprecated] Use `self_update.check_duration` instead.
+[deprecated] Old name for `self_update.check_duration`.
 
 ---
 
@@ -6141,7 +6199,7 @@ public readonly cachePruneAge: string;
 
 - *Type:* string
 
-Delete files in cache that have not been accessed in this duration.
+Delete cache files that have not been accessed for this long.
 
 ---
 
@@ -6163,7 +6221,7 @@ public readonly cd: string;
 
 - *Type:* string
 
-Path to change to after launching mise.
+Directory to change to after mise starts.
 
 ---
 
@@ -6175,7 +6233,7 @@ public readonly ceilingPaths: string[];
 
 - *Type:* string[]
 
-Directories where mise stops searching for config files.
+Directories where mise stops searching parent directories for config files.
 
 ---
 
@@ -6187,7 +6245,9 @@ public readonly ci: boolean;
 
 - *Type:* boolean
 
-Set to true if running in a CI environment.
+Behave as in CI, which answers yes to confirmation prompts;
+
+read from the `CI` variable.
 
 ---
 
@@ -6199,7 +6259,7 @@ public readonly color: boolean;
 
 - *Type:* boolean
 
-Use color in mise terminal output.
+Use color in mise's terminal output.
 
 ---
 
@@ -6211,7 +6271,7 @@ public readonly colorTheme: SettingsColorTheme;
 
 - *Type:* <a href="#mise-projen.SettingsColorTheme">SettingsColorTheme</a>
 
-Theme for interactive prompts (auto/default, charm, base16, catppuccin, dracula).
+Color theme for interactive prompts, such as the task picker in `mise run`.
 
 ---
 
@@ -6233,7 +6293,7 @@ public readonly debug: boolean;
 
 - *Type:* boolean
 
-Sets log level to debug.
+Set the log level to debug.
 
 ---
 
@@ -6245,9 +6305,7 @@ public readonly defaultConfigFilename: string;
 
 - *Type:* string
 
-The default config filename read.
-
-`mise use` and other commands that create new config files will use this value. This must be an env var.
+Extra project config filename mise reads, and the name it gives new config files.
 
 ---
 
@@ -6259,7 +6317,7 @@ public readonly defaultToolVersionsFilename: string;
 
 - *Type:* string
 
-The default .tool-versions filename read. This will not ignore .tool-versions—use override_tool_versions_filename for that. This must be an env var.
+Extra filename mise reads as a `.tool-versions` file.
 
 ---
 
@@ -6271,9 +6329,7 @@ public readonly disableBackends: string[];
 
 - *Type:* string[]
 
-Backends to exclude from tool resolution and new installs, such as `asdf`, `pypi`, or a vfox-backend plugin name.
-
-Existing installations are left on disk and become available again if the backend is re-enabled.
+Backends mise ignores when resolving and installing tools, such as `asdf` or `pypi`.
 
 ---
 
@@ -6285,9 +6341,7 @@ public readonly disableDefaultRegistry: boolean;
 
 - *Type:* boolean
 
-Disable the default mapping of short tool names like `php` -> `asdf:mise-plugins/asdf-php`.
-
-This parameter disables only for the backends `vfox` and `asdf`.
+Stop mapping short names such as `php` to the asdf and vfox plugins listed in the registry.
 
 ---
 
@@ -6299,7 +6353,9 @@ public readonly disableHints: string[];
 
 - *Type:* string[]
 
-Turns off helpful hints when using different mise features.
+Hints to stop showing, by ID;
+
+`*` turns off every hint.
 
 ---
 
@@ -6311,7 +6367,7 @@ public readonly disableTools: string[];
 
 - *Type:* string[]
 
-Tools defined in mise.toml that should be ignored.
+Tools mise ignores even when a config file lists them.
 
 ---
 
@@ -6355,7 +6411,9 @@ public readonly enableTools: string[];
 
 - *Type:* string[]
 
-Tools defined in mise.toml that should be used; unset enables all tools and empty disables all tools.
+Allowlist of configured tools mise uses;
+
+other tools are ignored.
 
 ---
 
@@ -6367,7 +6425,7 @@ public readonly env: string[];
 
 - *Type:* string[]
 
-Env to use for mise.<MISE_ENV>.toml files.
+Config environments to load, such as `development` for `mise.development.toml`.
 
 ---
 
@@ -6379,7 +6437,7 @@ public readonly envCache: boolean;
 
 - *Type:* boolean
 
-[experimental] Enable environment caching for nested mise invocations.
+[experimental] Cache computed environments on disk for nested mise commands.
 
 ---
 
@@ -6391,7 +6449,7 @@ public readonly envCacheTtl: string;
 
 - *Type:* string
 
-TTL for cached environments.
+How long a cached environment stays valid.
 
 ---
 
@@ -6415,7 +6473,7 @@ public readonly envFile: string;
 
 - *Type:* string
 
-Path to a file containing environment variables to automatically load.
+Dotenv file name to load from the current directory and each parent directory.
 
 ---
 
@@ -6427,7 +6485,7 @@ public readonly envShellExpand: boolean;
 
 - *Type:* boolean
 
-Controls shell-style variable expansion in env values (e.g., $FOO, ${BAR:-default}).
+Expand shell-style variables such as `$FOO` and `${BAR:-default}` in `[env]` values.
 
 ---
 
@@ -6449,7 +6507,7 @@ public readonly execAutoInstall: boolean;
 
 - *Type:* boolean
 
-Automatically install missing tools when running `mise x`.
+Install missing tools automatically when you run `mise exec`.
 
 ---
 
@@ -6461,7 +6519,7 @@ public readonly experimental: boolean;
 
 - *Type:* boolean
 
-Enable experimental mise features which are incomplete or unstable—breakings changes may occur.
+Enable experimental features, which may change or be removed in any release.
 
 ---
 
@@ -6473,7 +6531,7 @@ public readonly fetchRemoteVersionsCache: string;
 
 - *Type:* string
 
-How long to cache remote versions for tools.
+How long a tool's cached list of available versions stays fresh.
 
 ---
 
@@ -6485,7 +6543,7 @@ public readonly fetchRemoteVersionsTimeout: string;
 
 - *Type:* string
 
-Timeout in seconds for HTTP requests to fetch new tool versions in mise.
+Timeout for looking up a tool's available versions.
 
 ---
 
@@ -6517,7 +6575,7 @@ public readonly githubAttestations: boolean;
 
 - *Type:* boolean
 
-Enable GitHub Artifact Attestations verification for supported tools.
+Verify GitHub artifact attestations for downloads whose publisher provides them.
 
 ---
 
@@ -6549,7 +6607,7 @@ public readonly gix: boolean;
 
 - *Type:* boolean
 
-Use gix for git operations, set to false to shell out to git.
+Clone Git repositories with the built-in gix library instead of running `git`.
 
 ---
 
@@ -6560,11 +6618,8 @@ public readonly globalConfigFile: string;
 ```
 
 - *Type:* string
-- *Default:* config/mise/config.toml`. This must be an env var.
 
-Path to the global mise config file.
-
-Default is `~/.config/mise/config.toml`. This must be an env var.
+One file to use as the global config instead of the config files in `~/.config/mise`.
 
 ---
 
@@ -6575,11 +6630,8 @@ public readonly globalConfigRoot: string;
 ```
 
 - *Type:* string
-- *Default:* HOME`. This must be an env var.
 
-Path which is used as `{{config_root}}` for the global config file.
-
-Default is `$HOME`. This must be an env var.
+Directory used as `config_root` for the global config, such as for `{{config_root}}` in templates.
 
 ---
 
@@ -6601,7 +6653,7 @@ public readonly goDefaultPackagesFile: string;
 
 - *Type:* string
 
-Path to a file containing default go packages to install when installing go.
+File listing Go packages to install with every Go version.
 
 ---
 
@@ -6613,7 +6665,7 @@ public readonly goDownloadMirror: string;
 
 - *Type:* string
 
-Mirror to download go sdk tarballs from.
+Base URL that mise downloads Go archives and their checksums from.
 
 ---
 
@@ -6625,7 +6677,7 @@ public readonly goRepo: string;
 
 - *Type:* string
 
-URL to fetch go from.
+Git repository mise lists Go versions from.
 
 ---
 
@@ -6637,7 +6689,7 @@ public readonly goSetGobin: boolean;
 
 - *Type:* boolean
 
-Changes where `go install` installs binaries to.
+Set `GOBIN` so `go install` puts binaries in the active Go version's directory.
 
 ---
 
@@ -6649,7 +6701,7 @@ public readonly goSetGopath: boolean;
 
 - *Type:* boolean
 
-[deprecated] Set to true to set GOPATH=~/.local/share/mise/installs/go/.../packages.
+[deprecated] Set `GOPATH` to the `packages` directory inside the active Go install.
 
 ---
 
@@ -6661,7 +6713,7 @@ public readonly goSetGoroot: boolean;
 
 - *Type:* boolean
 
-Sets GOROOT=~/.local/share/mise/installs/go/.../.
+Set `GOROOT` to the active Go version's install directory.
 
 ---
 
@@ -6673,7 +6725,7 @@ public readonly goSkipChecksum: boolean;
 
 - *Type:* boolean
 
-Set to true to skip checksum verification when downloading go sdk tarballs.
+Skip SHA-256 verification of Go downloads.
 
 ---
 
@@ -6685,9 +6737,7 @@ public readonly gpgVerify: boolean;
 
 - *Type:* boolean
 
-Verify OpenPGP signatures for all tools (built-in, no external gpg required).
-
-Set to false to disable.
+Verify OpenPGP signatures of Node.js and Swift downloads.
 
 ---
 
@@ -6719,7 +6769,7 @@ public readonly httpDownloadTimeout: string;
 
 - *Type:* string
 
-Total time allowed for an HTTP download, including retries.
+Total time allowed to download one file, including retries.
 
 ---
 
@@ -6731,7 +6781,7 @@ public readonly httpRetries: number;
 
 - *Type:* number
 
-Number of retries for transient HTTP failures in mise.
+Number of retries after a transient HTTP failure.
 
 ---
 
@@ -6755,7 +6805,9 @@ public readonly idiomaticVersionFile: boolean;
 
 - *Type:* boolean
 
-Set to false to disable the idiomatic version files such as .node-version, .ruby-version, etc.
+[deprecated] No effect;
+
+enable idiomatic version files per tool with `idiomatic_version_file_enable_tools`.
 
 ---
 
@@ -6767,7 +6819,7 @@ public readonly idiomaticVersionFileDisableFiles: string[];
 
 - *Type:* string[]
 
-Specific idiomatic version files to disable for a tool.
+Idiomatic version files to ignore for one tool, as `tool:filename` pairs.
 
 ---
 
@@ -6779,7 +6831,9 @@ public readonly idiomaticVersionFileDisableTools: string[];
 
 - *Type:* string[]
 
-Specific tools to disable idiomatic version files for.
+[deprecated] No effect;
+
+idiomatic version files are off unless enabled with `idiomatic_version_file_enable_tools`.
 
 ---
 
@@ -6791,7 +6845,7 @@ public readonly idiomaticVersionFileEnableTools: string[];
 
 - *Type:* string[]
 
-Specific tools to enable idiomatic version files for like .node-version, .ruby-version, etc.
+Tools that read idiomatic version files such as `.node-version` or `.ruby-version`.
 
 ---
 
@@ -6815,7 +6869,7 @@ public readonly ignoredConfigPaths: string[];
 
 - *Type:* string[]
 
-This is a list of config paths that mise will ignore.
+Config files and directories mise does not load.
 
 ---
 
@@ -6827,7 +6881,9 @@ public readonly installBefore: string;
 
 - *Type:* string
 
-Minimum release age / supply chain protection — only install versions released before this date.
+[deprecated] Install only versions released before this date;
+
+use `minimum_release_age` instead.
 
 ---
 
@@ -6875,7 +6931,9 @@ public readonly legacyVersionFile: boolean;
 
 - *Type:* boolean
 
-Set to false to disable the idiomatic version files such as .node-version, .ruby-version, etc.
+[deprecated] No effect;
+
+enable idiomatic version files per tool with `idiomatic_version_file_enable_tools`.
 
 ---
 
@@ -6887,7 +6945,9 @@ public readonly legacyVersionFileDisableTools: string[];
 
 - *Type:* string[]
 
-Specific tools to disable idiomatic version files for.
+[deprecated] No effect;
+
+idiomatic version files are off unless enabled with `idiomatic_version_file_enable_tools`.
 
 ---
 
@@ -6899,7 +6959,7 @@ public readonly libc: SettingsLibc;
 
 - *Type:* <a href="#mise-projen.SettingsLibc">SettingsLibc</a>
 
-Libc implementation to use for precompiled Linux binaries.
+Libc build to install on Linux when a tool publishes both glibc and musl builds.
 
 ---
 
@@ -6911,7 +6971,9 @@ public readonly libgit2: boolean;
 
 - *Type:* boolean
 
-Use libgit2 for git operations, set to false to shell out to git.
+Clone Git repositories with the built-in gix library instead of running `git`;
+
+same as `gix`.
 
 ---
 
@@ -6923,7 +6985,7 @@ public readonly locked: boolean;
 
 - *Type:* boolean
 
-Require lockfile URLs to be present during installation.
+Require tool versions and download URLs to come from the lockfile.
 
 ---
 
@@ -6947,7 +7009,7 @@ public readonly lockedVerifyProvenance: boolean;
 
 - *Type:* boolean
 
-Re-verify provenance at install time even when the lockfile already has provenance.
+Re-verify provenance at install time even when the lockfile already records it.
 
 ---
 
@@ -6959,7 +7021,7 @@ public readonly lockfile: boolean;
 
 - *Type:* boolean
 
-Create and read lockfiles for tool versions.
+Create, read and update `mise.lock` lockfiles for tool versions.
 
 ---
 
@@ -6983,7 +7045,7 @@ public readonly lockfileMode: SettingsLockfileMode;
 
 - *Type:* <a href="#mise-projen.SettingsLockfileMode">SettingsLockfileMode</a>
 
-Choose incremental merging or complete lockfile generation.
+How lockfiles are written: entry by entry, or rebuilt from the current requests.
 
 ---
 
@@ -6995,7 +7057,7 @@ public readonly lockfilePlatforms: string[];
 
 - *Type:* string[]
 
-Platforms to target in lockfile operations.
+Platforms to resolve lockfile URLs and checksums for.
 
 ---
 
@@ -7007,7 +7069,7 @@ public readonly logLevel: SettingsLogLevel;
 
 - *Type:* <a href="#mise-projen.SettingsLogLevel">SettingsLogLevel</a>
 
-Show more/less output.
+Log level for mise's own output.
 
 ---
 
@@ -7019,7 +7081,7 @@ public readonly minimumReleaseAge: string;
 
 - *Type:* string
 
-Minimum release age / supply chain protection — only install versions older than this threshold.
+Skip versions published more recently than this duration or date.
 
 ---
 
@@ -7031,7 +7093,7 @@ public readonly minimumReleaseAgeExcludes: string[];
 
 - *Type:* string[]
 
-Tools and backends to exclude from the global/default minimum_release_age setting.
+Tools and backends that the configured and default `minimum_release_age` do not apply to.
 
 ---
 
@@ -7055,7 +7117,7 @@ public readonly netrcFile: string;
 
 - *Type:* string
 
-Path to the netrc file to use for HTTP Basic authentication.
+Path of the netrc file to use instead of `~/.netrc` (`%USERPROFILE%\_netrc` on Windows).
 
 ---
 
@@ -7101,7 +7163,7 @@ public readonly notFoundAutoInstall: boolean;
 
 - *Type:* boolean
 
-Set to false to disable the "command not found" handler to autoinstall missing tool versions.
+Install the tool that provides a command when your shell cannot find that command.
 
 ---
 
@@ -7113,7 +7175,7 @@ public readonly notFoundAutoInstallRegistry: boolean;
 
 - *Type:* boolean
 
-Automatically install an unconfigured tool when its registry bin matches a missing command.
+Install an unconfigured tool when exactly one registry entry provides a command your shell cannot find.
 
 ---
 
@@ -7125,7 +7187,7 @@ public readonly notFoundSystemFallback: boolean;
 
 - *Type:* boolean
 
-Set to false to stop shims from falling back to a same-named binary found elsewhere on PATH.
+Let a shim run a same-named executable from elsewhere on `PATH` when mise cannot resolve the tool.
 
 ---
 
@@ -7157,9 +7219,7 @@ public readonly offline: boolean;
 
 - *Type:* boolean
 
-Disable all HTTP requests.
-
-Tools will only use locally cached data.
+Block every HTTP request, so mise uses only installed tools and cached data.
 
 ---
 
@@ -7171,7 +7231,7 @@ public readonly os: string;
 
 - *Type:* string
 
-OS to use for precompiled binaries.
+Operating system of the precompiled binaries mise downloads.
 
 ---
 
@@ -7193,7 +7253,7 @@ public readonly overrideConfigFilenames: string[];
 
 - *Type:* string[]
 
-If set, mise will ignore default config files like `mise.toml` and use these filenames instead.
+Project config filenames that mise looks for instead of `mise.toml`, `.mise.toml` and the other standard names.
 
 ---
 
@@ -7205,7 +7265,7 @@ public readonly overrideToolVersionsFilenames: string[];
 
 - *Type:* string[]
 
-If set, mise will ignore .tool-versions files and use these filenames instead. Can be set to `none` to disable .tool-versions.
+Filenames that mise reads as `.tool-versions` files instead of `.tool-versions`.
 
 ---
 
@@ -7227,7 +7287,7 @@ public readonly paranoid: boolean;
 
 - *Type:* boolean
 
-Enables extra-secure behavior.
+Require explicit, content-bound trust for project config, and re-verify provenance on every install.
 
 ---
 
@@ -7238,9 +7298,8 @@ public readonly pin: boolean;
 ```
 
 - *Type:* boolean
-- *Default:* pinning versions when running `mise use` in mise.toml files.
 
-Default to pinning versions when running `mise use` in mise.toml files.
+Make `mise use` write the resolved version, such as `24.14.0` for `node@24`, instead of the requested one.
 
 ---
 
@@ -7262,7 +7321,9 @@ public readonly pluginAutoupdateLastCheckDuration: string;
 
 - *Type:* string
 
-How long to wait before updating plugins automatically (note this isn't currently implemented).
+[deprecated] Has no effect;
+
+it was never implemented.
 
 ---
 
@@ -7274,7 +7335,7 @@ public readonly preferOffline: boolean;
 
 - *Type:* boolean
 
-Prefer locally cached data over remote fetches when possible.
+Use cached version lists instead of fetching new ones, and go to the network only when nothing is cached.
 
 ---
 
@@ -7286,7 +7347,7 @@ public readonly prereleases: boolean;
 
 - *Type:* boolean
 
-Include pre-release versions in `ls-remote`, `latest` resolution, and fuzzy matching for all tools.
+Include prereleases in `mise ls-remote`, `latest` and prefix matching for every tool.
 
 ---
 
@@ -7298,7 +7359,9 @@ public readonly profile: string;
 
 - *Type:* string
 
-Profile to use for mise.${MISE_PROFILE}.toml files.
+Older name for the `env` setting;
+
+use `MISE_ENV` instead.
 
 ---
 
@@ -7310,7 +7373,7 @@ public readonly provenanceApiFailuresFatal: boolean;
 
 - *Type:* boolean
 
-Fail when provenance API checks cannot be completed.
+Fail an install when a provenance API, such as GitHub's attestation API, cannot be reached or queried.
 
 ---
 
@@ -7352,7 +7415,9 @@ public readonly quiet: boolean;
 
 - *Type:* boolean
 
-Suppress all output except errors.
+Hide mise's own non-error messages, such as progress and task headers;
+
+same as `--quiet`.
 
 ---
 
@@ -7364,7 +7429,7 @@ public readonly raw: boolean;
 
 - *Type:* boolean
 
-Connect stdin/stdout/stderr to child processes.
+Connect tasks and install commands directly to the terminal's stdin, stdout and stderr.
 
 ---
 
@@ -7376,7 +7441,7 @@ public readonly registryCacheTtl: string;
 
 - *Type:* string
 
-How long to cache the floating mise registry.
+How long a downloaded mise registry stays fresh when `registry_floating` is on.
 
 ---
 
@@ -7388,7 +7453,7 @@ public readonly registryFloating: boolean;
 
 - *Type:* boolean
 
-Fetch the latest released mise registry and current aqua registry instead of using only the snapshots baked into this mise release.
+Use the latest released mise registry and the current aqua registry, not only the copies built into mise.
 
 ---
 
@@ -7420,7 +7485,7 @@ public readonly safe: boolean;
 
 - *Type:* boolean
 
-Prevent project configuration from executing code during config loading and version resolution.
+Load project config without letting it run code or change the environment, for automation that reads untrusted config.
 
 ---
 
@@ -7452,7 +7517,7 @@ public readonly sharedInstallDirs: string[];
 
 - *Type:* string[]
 
-Additional read-only directories to search for installed tool versions.
+Extra read-only directories that mise searches for installed tool versions.
 
 ---
 
@@ -7474,7 +7539,7 @@ public readonly shimsDir: string;
 
 - *Type:* string
 
-Directory containing user shims.
+Directory where mise writes user shims.
 
 ---
 
@@ -7486,7 +7551,9 @@ public readonly shorthandsFile: string;
 
 - *Type:* string
 
-[deprecated] Path to a file containing custom tool shorthands.
+[deprecated] File of custom tool shorthands;
+
+use `[plugins]` instead.
 
 ---
 
@@ -7498,7 +7565,9 @@ public readonly silent: boolean;
 
 - *Type:* boolean
 
-Suppress all `mise run|watch` output except errors—including what tasks output.
+Hide all output from `mise run` and `mise watch`, including what tasks print, except errors;
+
+same as `--silent`.
 
 ---
 
@@ -7520,7 +7589,7 @@ public readonly slsa: boolean;
 
 - *Type:* boolean
 
-Enable SLSA provenance verification globally.
+Verify SLSA provenance of downloads whose publisher provides it.
 
 ---
 
@@ -7571,11 +7640,8 @@ public readonly systemConfigFile: string;
 ```
 
 - *Type:* string
-- *Default:* etc/mise/config.toml`. This must be an env var.
 
-Path to the system mise config file.
-
-Default is `/etc/mise/config.toml`. This must be an env var.
+One file to use as the system config instead of the config files in `/etc/mise`.
 
 ---
 
@@ -7587,7 +7653,7 @@ public readonly systemDeps: SettingsSystemDeps;
 
 - *Type:* <a href="#mise-projen.SettingsSystemDeps">SettingsSystemDeps</a>
 
-How to handle a plugin's declared system dependencies before installing a tool.
+What mise does when a plugin's declared system dependencies are missing before it installs a tool.
 
 ---
 
@@ -7599,7 +7665,7 @@ public readonly systemInstallsDir: string;
 
 - *Type:* string
 
-Directory containing system tool installs.
+Directory that `mise install --system` installs into.
 
 ---
 
@@ -7621,7 +7687,7 @@ public readonly systemShimsDir: string;
 
 - *Type:* string
 
-Directory containing system shims.
+Directory where `mise reshim --system` writes shims for system installs.
 
 ---
 
@@ -7643,7 +7709,7 @@ public readonly taskDisablePaths: string[];
 
 - *Type:* string[]
 
-Paths that mise will not look for tasks in.
+Deprecated alias for `task.disable_paths`.
 
 ---
 
@@ -7655,7 +7721,7 @@ public readonly taskOutput: string;
 
 - *Type:* string
 
-Change output style when executing tasks.
+Deprecated alias for `task.output`.
 
 ---
 
@@ -7667,7 +7733,7 @@ public readonly taskRemoteNoCache: boolean;
 
 - *Type:* boolean
 
-Mise will always fetch the latest tasks from the remote, by default the cache is used.
+Deprecated alias for `task.remote_no_cache`.
 
 ---
 
@@ -7679,7 +7745,7 @@ public readonly taskRunAutoInstall: boolean;
 
 - *Type:* boolean
 
-Automatically install missing tools when executing tasks.
+Deprecated alias for `task.run_auto_install`.
 
 ---
 
@@ -7691,9 +7757,7 @@ public readonly taskShowFullCmd: boolean;
 
 - *Type:* boolean
 
-Disable truncation of command lines in task execution output.
-
-When true, the full command line will be shown.
+Deprecated alias for `task.show_full_cmd`.
 
 ---
 
@@ -7705,7 +7769,7 @@ public readonly taskSkip: string[];
 
 - *Type:* string[]
 
-Tasks to skip when running `mise run`.
+Deprecated alias for `task.skip`.
 
 ---
 
@@ -7717,7 +7781,7 @@ public readonly taskSkipDepends: boolean;
 
 - *Type:* boolean
 
-Run only specified tasks skipping all dependencies.
+Deprecated alias for `task.skip_depends`.
 
 ---
 
@@ -7729,9 +7793,7 @@ public readonly taskTimeout: string;
 
 - *Type:* string
 
-Default timeout for tasks.
-
-Can be overridden by individual tasks.
+Deprecated alias for `task.timeout`.
 
 ---
 
@@ -7743,9 +7805,7 @@ public readonly taskTimings: boolean;
 
 - *Type:* boolean
 
-Show completion message with elapsed time for each task on `mise run`.
-
-Default shows when output type is `prefix`.
+Deprecated alias for `task.timings`.
 
 ---
 
@@ -7757,7 +7817,7 @@ public readonly teraV1: boolean;
 
 - *Type:* boolean
 
-Use Tera v1 instead of Tera v2 for template rendering.
+[deprecated] Render templates with Tera v1 instead of Tera v2.
 
 ---
 
@@ -7769,7 +7829,7 @@ public readonly terminalProgress: boolean;
 
 - *Type:* boolean
 
-Enable terminal progress indicators (OSC 9;4) for compatible terminals.
+Show install progress in the terminal window's own progress indicator, with OSC 9;4 escape sequences.
 
 ---
 
@@ -7791,7 +7851,7 @@ public readonly trace: boolean;
 
 - *Type:* boolean
 
-Sets log level to trace.
+Set the log level to trace.
 
 ---
 
@@ -7815,9 +7875,7 @@ public readonly trustedConfigPaths: string[];
 
 - *Type:* string[]
 
-This is a list of config paths that mise will automatically mark as trusted.
-
-Any config files under these paths will be trusted without prompting. Set to `["/"]` to trust all config files, effectively disabling the trust mechanism. Paths are separated by the OS path separator when using the environment variable, `mise settings set`, or `mise settings add` (`:` on Unix, `;` on Windows).
+Directories whose config files mise trusts without asking.
 
 ---
 
@@ -7829,9 +7887,7 @@ public readonly unixDefaultFileShellArgs: string;
 
 - *Type:* string
 
-Default shell arguments for Unix to be used for file commands.
-
-For example, `sh` for sh.
+Shell that runs a file task on Unix when the task sets no `shell` and the file has no shebang or known extension.
 
 ---
 
@@ -7843,9 +7899,7 @@ public readonly unixDefaultInlineShellArgs: string;
 
 - *Type:* string
 
-Default shell arguments for Unix to be used for inline commands.
-
-For example, `sh -c` for sh.
+Shell and arguments that run inline scripts on Unix, such as a task's `run`, hooks and `postinstall`.
 
 ---
 
@@ -7867,7 +7921,7 @@ public readonly urlReplacements: {[ key: string ]: string};
 
 - *Type:* {[ key: string ]: string}
 
-Map of URL patterns to replacement URLs applied to all requests.
+URL patterns and replacements that mise's HTTP client applies before sending a request, for mirrors and proxies.
 
 ---
 
@@ -7879,9 +7933,7 @@ public readonly useFileShellForExecutableTasks: boolean;
 
 - *Type:* boolean
 
-Determines whether to use a specified shell for executing tasks in the tasks directory.
-
-When set to true, the shell defined in the file will be used, or the default shell specified by `windows_default_file_shell_args` or `unix_default_file_shell_args` will be applied. If set to false, tasks will be executed directly as programs.
+Run executable file tasks through a shell instead of executing them directly.
 
 ---
 
@@ -7893,7 +7945,7 @@ public readonly useVersionsHost: boolean;
 
 - *Type:* boolean
 
-Set to false to disable using the mise-versions API for version lists, public GitHub release metadata, and GitHub artifact attestations.
+Get version lists, public GitHub release metadata and attestations from mise-versions instead of upstream APIs.
 
 ---
 
@@ -7905,7 +7957,7 @@ public readonly useVersionsHostTrack: boolean;
 
 - *Type:* boolean
 
-Send anonymous download statistics when installing tools.
+Send anonymous download statistics to mise-versions after installing a tool.
 
 ---
 
@@ -7917,7 +7969,9 @@ public readonly verbose: boolean;
 
 - *Type:* boolean
 
-Shows more verbose output such as installation logs when installing tools.
+Show extra output, such as installation logs, and set the log level to debug;
+
+same as `--verbose`.
 
 ---
 
@@ -7929,9 +7983,7 @@ public readonly windowsDefaultFileShellArgs: string;
 
 - *Type:* string
 
-Default shell arguments for Windows to be used for file commands.
-
-For example, `cmd /c` for cmd.exe.
+Shell that runs a file task on Windows when the task sets no `shell` and the file has no shebang or known extension.
 
 ---
 
@@ -7943,9 +7995,7 @@ public readonly windowsDefaultInlineShellArgs: string;
 
 - *Type:* string
 
-Default shell arguments for Windows to be used for inline commands.
-
-For example, `cmd /c` for cmd.exe.
+Shell and arguments that run inline scripts on Windows, such as a task's `run`, hooks and `postinstall`.
 
 ---
 
@@ -7957,9 +8007,7 @@ public readonly windowsExecutableExtensions: string[];
 
 - *Type:* string[]
 
-List of executable extensions for Windows.
-
-For example, `exe` for .exe files, `bat` for .bat files, and so on.
+File extensions, without the dot, that mise treats as executable on Windows.
 
 ---
 
@@ -7971,21 +8019,19 @@ public readonly windowsPowershellNoProfile: boolean;
 
 - *Type:* boolean
 
-Pass `-NoProfile` to PowerShell (`pwsh`/`powershell`) shells that mise spawns for tasks and inline commands, so startup profiles are skipped.
+Pass `-NoProfile` to the PowerShell (`pwsh` or `powershell`) that mise starts, so startup profiles are skipped.
 
 ---
 
 ##### `windowsShimMode`<sup>Optional</sup> <a name="windowsShimMode" id="mise-projen.Settings.property.windowsShimMode"></a>
 
 ```typescript
-public readonly windowsShimMode: string;
+public readonly windowsShimMode: SettingsWindowsShimMode;
 ```
 
-- *Type:* string
+- *Type:* <a href="#mise-projen.SettingsWindowsShimMode">SettingsWindowsShimMode</a>
 
-Shim file mode for Windows.
-
-Options: `exe`, `file`, `hardlink`, `symlink`.
+How mise creates shims on Windows.
 
 ---
 
@@ -8007,9 +8053,7 @@ public readonly yes: boolean;
 
 - *Type:* boolean
 
-This will automatically answer yes or no to prompts.
-
-This is useful for scripting.
+Answer yes to every confirmation prompt, as `--yes` does.
 
 ---
 
@@ -8037,10 +8081,10 @@ const settingsAge: SettingsAge = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#mise-projen.SettingsAge.property.identityFiles">identityFiles</a></code> | <code>string[]</code> | List of age identity files to use for decryption (encrypted shared dotfiles and the experimental `[env]` age directives). |
-| <code><a href="#mise-projen.SettingsAge.property.keyFile">keyFile</a></code> | <code>string</code> | Path to the age private key file to use for encryption/decryption: the default recipient and identity for encrypted shared dotfiles and the key for the experimental `[env]` age directives. |
-| <code><a href="#mise-projen.SettingsAge.property.sshIdentityFiles">sshIdentityFiles</a></code> | <code>string[]</code> | List of SSH identity files to use for age decryption (encrypted shared dotfiles and the experimental `[env]` age directives). |
-| <code><a href="#mise-projen.SettingsAge.property.strict">strict</a></code> | <code>boolean</code> | If true, fail when age decryption fails (including when age is not available, the key is missing, or the key is invalid). |
+| <code><a href="#mise-projen.SettingsAge.property.identityFiles">identityFiles</a></code> | <code>string[]</code> | Age identity files to try when decrypting. |
+| <code><a href="#mise-projen.SettingsAge.property.keyFile">keyFile</a></code> | <code>string</code> | Age private key file used to decrypt and as the default recipient when encrypting. |
+| <code><a href="#mise-projen.SettingsAge.property.sshIdentityFiles">sshIdentityFiles</a></code> | <code>string[]</code> | SSH private keys to try when decrypting age values. |
+| <code><a href="#mise-projen.SettingsAge.property.strict">strict</a></code> | <code>boolean</code> | Fail when an `[env]` age value cannot be decrypted, instead of skipping it. |
 
 ---
 
@@ -8052,7 +8096,7 @@ public readonly identityFiles: string[];
 
 - *Type:* string[]
 
-List of age identity files to use for decryption (encrypted shared dotfiles and the experimental `[env]` age directives).
+Age identity files to try when decrypting.
 
 ---
 
@@ -8064,7 +8108,7 @@ public readonly keyFile: string;
 
 - *Type:* string
 
-Path to the age private key file to use for encryption/decryption: the default recipient and identity for encrypted shared dotfiles and the key for the experimental `[env]` age directives.
+Age private key file used to decrypt and as the default recipient when encrypting.
 
 ---
 
@@ -8076,7 +8120,7 @@ public readonly sshIdentityFiles: string[];
 
 - *Type:* string[]
 
-List of SSH identity files to use for age decryption (encrypted shared dotfiles and the experimental `[env]` age directives).
+SSH private keys to try when decrypting age values.
 
 ---
 
@@ -8088,9 +8132,7 @@ public readonly strict: boolean;
 
 - *Type:* boolean
 
-If true, fail when age decryption fails (including when age is not available, the key is missing, or the key is invalid).
-
-If false, skip decryption and continue in these cases.
+Fail when an `[env]` age value cannot be decrypted, instead of skipping it.
 
 ---
 
@@ -8108,14 +8150,14 @@ const settingsAqua: SettingsAqua = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#mise-projen.SettingsAqua.property.bakedRegistry">bakedRegistry</a></code> | <code>boolean</code> | Use baked-in aqua registry. |
-| <code><a href="#mise-projen.SettingsAqua.property.cosign">cosign</a></code> | <code>boolean</code> | Use cosign to verify aqua tool signatures. |
-| <code><a href="#mise-projen.SettingsAqua.property.githubAttestations">githubAttestations</a></code> | <code>boolean</code> | Enable GitHub Artifact Attestations verification for aqua tools. |
-| <code><a href="#mise-projen.SettingsAqua.property.minisign">minisign</a></code> | <code>boolean</code> | Use minisign to verify aqua tool signatures. |
-| <code><a href="#mise-projen.SettingsAqua.property.registries">registries</a></code> | <code>string[]</code> | Aqua registry sources to load before the baked-in registry. |
-| <code><a href="#mise-projen.SettingsAqua.property.registryCacheTtl">registryCacheTtl</a></code> | <code>string</code> | How long to cache downloaded aqua registry source files. |
-| <code><a href="#mise-projen.SettingsAqua.property.registryUrl">registryUrl</a></code> | <code>string</code> | [deprecated] URL of an aqua registry repository to fetch. |
-| <code><a href="#mise-projen.SettingsAqua.property.slsa">slsa</a></code> | <code>boolean</code> | Use SLSA to verify aqua tool signatures. |
+| <code><a href="#mise-projen.SettingsAqua.property.bakedRegistry">bakedRegistry</a></code> | <code>boolean</code> | Use the aqua registry built into mise. |
+| <code><a href="#mise-projen.SettingsAqua.property.cosign">cosign</a></code> | <code>boolean</code> | Verify Cosign signatures for aqua packages that declare them. |
+| <code><a href="#mise-projen.SettingsAqua.property.githubAttestations">githubAttestations</a></code> | <code>boolean</code> | Verify GitHub artifact attestations for aqua packages that declare them. |
+| <code><a href="#mise-projen.SettingsAqua.property.minisign">minisign</a></code> | <code>boolean</code> | Verify Minisign signatures for aqua packages that declare them. |
+| <code><a href="#mise-projen.SettingsAqua.property.registries">registries</a></code> | <code>string[]</code> | Aqua registries to search, in order, before the baked-in registry. |
+| <code><a href="#mise-projen.SettingsAqua.property.registryCacheTtl">registryCacheTtl</a></code> | <code>string</code> | How long a downloaded aqua registry stays fresh before mise downloads it again. |
+| <code><a href="#mise-projen.SettingsAqua.property.registryUrl">registryUrl</a></code> | <code>string</code> | [deprecated] URL of one aqua registry repository to search before the baked-in registry. |
+| <code><a href="#mise-projen.SettingsAqua.property.slsa">slsa</a></code> | <code>boolean</code> | Verify SLSA provenance for aqua packages that declare it. |
 
 ---
 
@@ -8127,7 +8169,7 @@ public readonly bakedRegistry: boolean;
 
 - *Type:* boolean
 
-Use baked-in aqua registry.
+Use the aqua registry built into mise.
 
 ---
 
@@ -8139,7 +8181,7 @@ public readonly cosign: boolean;
 
 - *Type:* boolean
 
-Use cosign to verify aqua tool signatures.
+Verify Cosign signatures for aqua packages that declare them.
 
 ---
 
@@ -8151,7 +8193,7 @@ public readonly githubAttestations: boolean;
 
 - *Type:* boolean
 
-Enable GitHub Artifact Attestations verification for aqua tools.
+Verify GitHub artifact attestations for aqua packages that declare them.
 
 ---
 
@@ -8163,7 +8205,7 @@ public readonly minisign: boolean;
 
 - *Type:* boolean
 
-Use minisign to verify aqua tool signatures.
+Verify Minisign signatures for aqua packages that declare them.
 
 ---
 
@@ -8175,7 +8217,7 @@ public readonly registries: string[];
 
 - *Type:* string[]
 
-Aqua registry sources to load before the baked-in registry.
+Aqua registries to search, in order, before the baked-in registry.
 
 ---
 
@@ -8187,7 +8229,7 @@ public readonly registryCacheTtl: string;
 
 - *Type:* string
 
-How long to cache downloaded aqua registry source files.
+How long a downloaded aqua registry stays fresh before mise downloads it again.
 
 ---
 
@@ -8199,7 +8241,7 @@ public readonly registryUrl: string;
 
 - *Type:* string
 
-[deprecated] URL of an aqua registry repository to fetch.
+[deprecated] URL of one aqua registry repository to search before the baked-in registry.
 
 ---
 
@@ -8211,7 +8253,7 @@ public readonly slsa: boolean;
 
 - *Type:* boolean
 
-Use SLSA to verify aqua tool signatures.
+Verify SLSA provenance for aqua packages that declare it.
 
 ---
 
@@ -8229,11 +8271,11 @@ const settingsCargo: SettingsCargo = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#mise-projen.SettingsCargo.property.binstall">binstall</a></code> | <code>boolean</code> | Use cargo-binstall instead of cargo install if available. |
-| <code><a href="#mise-projen.SettingsCargo.property.binstallNative">binstallNative</a></code> | <code>boolean</code> | Use mise's native cargo binary installer when cargo-binstall is unavailable. |
-| <code><a href="#mise-projen.SettingsCargo.property.binstallOnly">binstallOnly</a></code> | <code>boolean</code> | Require cargo-binstall for Cargo tools without an explicit Git source. |
-| <code><a href="#mise-projen.SettingsCargo.property.binstallQuickinstall">binstallQuickinstall</a></code> | <code>boolean</code> | Allow cargo-binstall to use third-party cargo-quickinstall artifacts. |
-| <code><a href="#mise-projen.SettingsCargo.property.registryName">registryName</a></code> | <code>string</code> | Name of the cargo registry to use. |
+| <code><a href="#mise-projen.SettingsCargo.property.binstall">binstall</a></code> | <code>boolean</code> | Install Cargo tools from cargo-binstall's prebuilt binaries when cargo-binstall is installed. |
+| <code><a href="#mise-projen.SettingsCargo.property.binstallNative">binstallNative</a></code> | <code>boolean</code> | Use mise's own prebuilt-binary installer for Cargo tools when cargo-binstall is not installed. |
+| <code><a href="#mise-projen.SettingsCargo.property.binstallOnly">binstallOnly</a></code> | <code>boolean</code> | Require prebuilt binaries from cargo-binstall instead of falling back to `cargo install`. |
+| <code><a href="#mise-projen.SettingsCargo.property.binstallQuickinstall">binstallQuickinstall</a></code> | <code>boolean</code> | Let cargo-binstall download third-party artifacts from cargo-quickinstall. |
+| <code><a href="#mise-projen.SettingsCargo.property.registryName">registryName</a></code> | <code>string</code> | Cargo registry to install crates from instead of crates.io. |
 
 ---
 
@@ -8245,7 +8287,7 @@ public readonly binstall: boolean;
 
 - *Type:* boolean
 
-Use cargo-binstall instead of cargo install if available.
+Install Cargo tools from cargo-binstall's prebuilt binaries when cargo-binstall is installed.
 
 ---
 
@@ -8257,7 +8299,7 @@ public readonly binstallNative: boolean;
 
 - *Type:* boolean
 
-Use mise's native cargo binary installer when cargo-binstall is unavailable.
+Use mise's own prebuilt-binary installer for Cargo tools when cargo-binstall is not installed.
 
 ---
 
@@ -8269,9 +8311,7 @@ public readonly binstallOnly: boolean;
 
 - *Type:* boolean
 
-Require cargo-binstall for Cargo tools without an explicit Git source.
-
-Fail if no prebuilt binary is available or if tool options require cargo install.
+Require prebuilt binaries from cargo-binstall instead of falling back to `cargo install`.
 
 ---
 
@@ -8283,7 +8323,7 @@ public readonly binstallQuickinstall: boolean;
 
 - *Type:* boolean
 
-Allow cargo-binstall to use third-party cargo-quickinstall artifacts.
+Let cargo-binstall download third-party artifacts from cargo-quickinstall.
 
 ---
 
@@ -8295,7 +8335,7 @@ public readonly registryName: string;
 
 - *Type:* string
 
-Name of the cargo registry to use.
+Cargo registry to install crates from instead of crates.io.
 
 ---
 
@@ -8313,7 +8353,7 @@ const settingsConda: SettingsConda = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#mise-projen.SettingsConda.property.channel">channel</a></code> | <code>string</code> | Default channel for conda packages. |
+| <code><a href="#mise-projen.SettingsConda.property.channel">channel</a></code> | <code>string</code> | Channel for `conda:` tools that do not set their own. |
 
 ---
 
@@ -8325,7 +8365,7 @@ public readonly channel: string;
 
 - *Type:* string
 
-Default channel for conda packages.
+Channel for `conda:` tools that do not set their own.
 
 ---
 
@@ -8343,23 +8383,21 @@ const settingsDotfiles: SettingsDotfiles = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#mise-projen.SettingsDotfiles.property.defaultMode">defaultMode</a></code> | <code>string</code> | Default mode for dotfile entries when mode is omitted. |
+| <code><a href="#mise-projen.SettingsDotfiles.property.defaultMode">defaultMode</a></code> | <code><a href="#mise-projen.SettingsDotfilesDefaultMode">SettingsDotfilesDefaultMode</a></code> | Mode for `[dotfiles]` entries that do not set `mode`. |
 | <code><a href="#mise-projen.SettingsDotfiles.property.relativeSymlinks">relativeSymlinks</a></code> | <code>boolean</code> | Create dotfile symlinks with relative targets instead of absolute ones. |
-| <code><a href="#mise-projen.SettingsDotfiles.property.root">root</a></code> | <code>string</code> | Root directory used for implied dotfile sources. |
+| <code><a href="#mise-projen.SettingsDotfiles.property.root">root</a></code> | <code>string</code> | Directory that holds dotfile sources for entries without a `source`. |
 
 ---
 
 ##### `defaultMode`<sup>Optional</sup> <a name="defaultMode" id="mise-projen.SettingsDotfiles.property.defaultMode"></a>
 
 ```typescript
-public readonly defaultMode: string;
+public readonly defaultMode: SettingsDotfilesDefaultMode;
 ```
 
-- *Type:* string
+- *Type:* <a href="#mise-projen.SettingsDotfilesDefaultMode">SettingsDotfilesDefaultMode</a>
 
-Default mode for dotfile entries when mode is omitted.
-
-Options: `symlink`, `symlink-each`, `copy`, `template`.
+Mode for `[dotfiles]` entries that do not set `mode`.
 
 ---
 
@@ -8383,7 +8421,7 @@ public readonly root: string;
 
 - *Type:* string
 
-Root directory used for implied dotfile sources.
+Directory that holds dotfile sources for entries without a `source`.
 
 ---
 
@@ -8401,10 +8439,10 @@ const settingsDotnet: SettingsDotnet = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#mise-projen.SettingsDotnet.property.cliTelemetryOptout">cliTelemetryOptout</a></code> | <code>boolean</code> | Set DOTNET_CLI_TELEMETRY_OPTOUT to opt out of .NET CLI telemetry. |
-| <code><a href="#mise-projen.SettingsDotnet.property.dotnetRoot">dotnetRoot</a></code> | <code>string</code> | Path to the shared .NET SDK root directory. |
+| <code><a href="#mise-projen.SettingsDotnet.property.cliTelemetryOptout">cliTelemetryOptout</a></code> | <code>boolean</code> | Set `DOTNET_CLI_TELEMETRY_OPTOUT` to opt out of .NET CLI telemetry. |
+| <code><a href="#mise-projen.SettingsDotnet.property.dotnetRoot">dotnetRoot</a></code> | <code>string</code> | Shared directory that every .NET SDK version installs into. |
 | <code><a href="#mise-projen.SettingsDotnet.property.isolated">isolated</a></code> | <code>boolean</code> | Install each .NET SDK version in its own isolated directory. |
-| <code><a href="#mise-projen.SettingsDotnet.property.packageFlags">packageFlags</a></code> | <code>string[]</code> | [deprecated] Extends dotnet search and install abilities. |
+| <code><a href="#mise-projen.SettingsDotnet.property.packageFlags">packageFlags</a></code> | <code>string[]</code> | [deprecated] Flags for every `dotnet:` tool; |
 | <code><a href="#mise-projen.SettingsDotnet.property.registryUrl">registryUrl</a></code> | <code>string</code> | NuGet service index used to discover dotnet tool versions. |
 
 ---
@@ -8417,7 +8455,7 @@ public readonly cliTelemetryOptout: boolean;
 
 - *Type:* boolean
 
-Set DOTNET_CLI_TELEMETRY_OPTOUT to opt out of .NET CLI telemetry.
+Set `DOTNET_CLI_TELEMETRY_OPTOUT` to opt out of .NET CLI telemetry.
 
 ---
 
@@ -8429,7 +8467,7 @@ public readonly dotnetRoot: string;
 
 - *Type:* string
 
-Path to the shared .NET SDK root directory.
+Shared directory that every .NET SDK version installs into.
 
 ---
 
@@ -8453,7 +8491,9 @@ public readonly packageFlags: string[];
 
 - *Type:* string[]
 
-[deprecated] Extends dotnet search and install abilities.
+[deprecated] Flags for every `dotnet:` tool;
+
+the only flag, `prerelease`, includes prereleases.
 
 ---
 
@@ -8483,8 +8523,8 @@ const settingsErlang: SettingsErlang = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#mise-projen.SettingsErlang.property.compile">compile</a></code> | <code>boolean</code> | If true, compile erlang from source. |
-| <code><a href="#mise-projen.SettingsErlang.property.precompiledOs">precompiledOs</a></code> | <code>string</code> | Ubuntu release target to use for precompiled Erlang builds from builds.hex.pm. |
+| <code><a href="#mise-projen.SettingsErlang.property.compile">compile</a></code> | <code>boolean</code> | Compile Erlang from source instead of using a precompiled build. |
+| <code><a href="#mise-projen.SettingsErlang.property.precompiledOs">precompiledOs</a></code> | <code><a href="#mise-projen.SettingsErlangPrecompiledOs">SettingsErlangPrecompiledOs</a></code> | Ubuntu release whose precompiled Erlang build from builds.hex.pm mise installs on Linux. |
 
 ---
 
@@ -8496,21 +8536,19 @@ public readonly compile: boolean;
 
 - *Type:* boolean
 
-If true, compile erlang from source.
-
-If false, use precompiled binaries. If not set, use precompiled binaries if available.
+Compile Erlang from source instead of using a precompiled build.
 
 ---
 
 ##### `precompiledOs`<sup>Optional</sup> <a name="precompiledOs" id="mise-projen.SettingsErlang.property.precompiledOs"></a>
 
 ```typescript
-public readonly precompiledOs: string;
+public readonly precompiledOs: SettingsErlangPrecompiledOs;
 ```
 
-- *Type:* string
+- *Type:* <a href="#mise-projen.SettingsErlangPrecompiledOs">SettingsErlangPrecompiledOs</a>
 
-Ubuntu release target to use for precompiled Erlang builds from builds.hex.pm.
+Ubuntu release whose precompiled Erlang build from builds.hex.pm mise installs on Linux.
 
 ---
 
@@ -8528,9 +8566,9 @@ const settingsForgejo: SettingsForgejo = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#mise-projen.SettingsForgejo.property.credentialCommand">credentialCommand</a></code> | <code>string</code> | Shell command to run to obtain a Forgejo token for mise. |
-| <code><a href="#mise-projen.SettingsForgejo.property.fjCliTokens">fjCliTokens</a></code> | <code>boolean</code> | Read Forgejo tokens from the fj CLI config. |
-| <code><a href="#mise-projen.SettingsForgejo.property.useGitCredentials">useGitCredentials</a></code> | <code>boolean</code> | Use git credential helpers to obtain Forgejo tokens. |
+| <code><a href="#mise-projen.SettingsForgejo.property.credentialCommand">credentialCommand</a></code> | <code>string</code> | Command that prints a Forgejo token on stdout. |
+| <code><a href="#mise-projen.SettingsForgejo.property.fjCliTokens">fjCliTokens</a></code> | <code>boolean</code> | Read Forgejo tokens that the fj CLI stores in its `keys.json` file. |
+| <code><a href="#mise-projen.SettingsForgejo.property.useGitCredentials">useGitCredentials</a></code> | <code>boolean</code> | Get Forgejo tokens from your Git credential helpers with `git credential fill`. |
 
 ---
 
@@ -8542,7 +8580,7 @@ public readonly credentialCommand: string;
 
 - *Type:* string
 
-Shell command to run to obtain a Forgejo token for mise.
+Command that prints a Forgejo token on stdout.
 
 ---
 
@@ -8554,7 +8592,7 @@ public readonly fjCliTokens: boolean;
 
 - *Type:* boolean
 
-Read Forgejo tokens from the fj CLI config.
+Read Forgejo tokens that the fj CLI stores in its `keys.json` file.
 
 ---
 
@@ -8566,7 +8604,7 @@ public readonly useGitCredentials: boolean;
 
 - *Type:* boolean
 
-Use git credential helpers to obtain Forgejo tokens.
+Get Forgejo tokens from your Git credential helpers with `git credential fill`.
 
 ---
 
@@ -8584,17 +8622,17 @@ const settingsGithub: SettingsGithub = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#mise-projen.SettingsGithub.property.credentialCommand">credentialCommand</a></code> | <code>string</code> | Shell command to run to obtain a GitHub token for mise. |
-| <code><a href="#mise-projen.SettingsGithub.property.ghCliTokens">ghCliTokens</a></code> | <code>boolean</code> | Read GitHub tokens from the gh CLI's hosts.yml config. |
-| <code><a href="#mise-projen.SettingsGithub.property.githubAttestations">githubAttestations</a></code> | <code>boolean</code> | Enable GitHub Artifact Attestations verification for github backend tools. |
-| <code><a href="#mise-projen.SettingsGithub.property.oauthApiUrl">oauthApiUrl</a></code> | <code>string</code> | GitHub API base URL for native OAuth token validation. |
-| <code><a href="#mise-projen.SettingsGithub.property.oauthAuthUrl">oauthAuthUrl</a></code> | <code>string</code> | GitHub OAuth endpoint base URL for native device-flow tokens. |
-| <code><a href="#mise-projen.SettingsGithub.property.oauthClientId">oauthClientId</a></code> | <code>string</code> | GitHub App client ID for native OAuth device-flow tokens. |
-| <code><a href="#mise-projen.SettingsGithub.property.oauthExportEnv">oauthExportEnv</a></code> | <code>string</code> | Environment variable name to export the native GitHub OAuth token under (empty disables). |
-| <code><a href="#mise-projen.SettingsGithub.property.oauthOpenBrowser">oauthOpenBrowser</a></code> | <code>boolean</code> | Open the browser during native GitHub OAuth device flow. |
+| <code><a href="#mise-projen.SettingsGithub.property.credentialCommand">credentialCommand</a></code> | <code>string</code> | Command that prints a GitHub token on stdout. |
+| <code><a href="#mise-projen.SettingsGithub.property.ghCliTokens">ghCliTokens</a></code> | <code>boolean</code> | Read GitHub tokens that the gh CLI stores in its `hosts.yml` file. |
+| <code><a href="#mise-projen.SettingsGithub.property.githubAttestations">githubAttestations</a></code> | <code>boolean</code> | Verify GitHub artifact attestations for github backend tools. |
+| <code><a href="#mise-projen.SettingsGithub.property.oauthApiUrl">oauthApiUrl</a></code> | <code>string</code> | GitHub API base URL mise uses to validate native OAuth tokens. |
+| <code><a href="#mise-projen.SettingsGithub.property.oauthAuthUrl">oauthAuthUrl</a></code> | <code>string</code> | GitHub OAuth endpoint base URL for the native device flow. |
+| <code><a href="#mise-projen.SettingsGithub.property.oauthClientId">oauthClientId</a></code> | <code>string</code> | GitHub App client ID that turns on native OAuth device-flow tokens. |
+| <code><a href="#mise-projen.SettingsGithub.property.oauthExportEnv">oauthExportEnv</a></code> | <code>string</code> | Environment variable that mise exports the native GitHub OAuth token under; |
+| <code><a href="#mise-projen.SettingsGithub.property.oauthOpenBrowser">oauthOpenBrowser</a></code> | <code>boolean</code> | Open the verification page in your browser during the native GitHub OAuth device flow. |
 | <code><a href="#mise-projen.SettingsGithub.property.oauthScopes">oauthScopes</a></code> | <code>string</code> | OAuth scopes requested for native GitHub device-flow tokens. |
-| <code><a href="#mise-projen.SettingsGithub.property.slsa">slsa</a></code> | <code>boolean</code> | Enable SLSA provenance verification for github backend tools. |
-| <code><a href="#mise-projen.SettingsGithub.property.useGitCredentials">useGitCredentials</a></code> | <code>boolean</code> | Use git credential helpers to obtain GitHub tokens. |
+| <code><a href="#mise-projen.SettingsGithub.property.slsa">slsa</a></code> | <code>boolean</code> | Verify SLSA provenance for github backend tools that name a signer. |
+| <code><a href="#mise-projen.SettingsGithub.property.useGitCredentials">useGitCredentials</a></code> | <code>boolean</code> | Get GitHub tokens from your Git credential helpers with `git credential fill`. |
 
 ---
 
@@ -8606,7 +8644,7 @@ public readonly credentialCommand: string;
 
 - *Type:* string
 
-Shell command to run to obtain a GitHub token for mise.
+Command that prints a GitHub token on stdout.
 
 ---
 
@@ -8618,7 +8656,7 @@ public readonly ghCliTokens: boolean;
 
 - *Type:* boolean
 
-Read GitHub tokens from the gh CLI's hosts.yml config.
+Read GitHub tokens that the gh CLI stores in its `hosts.yml` file.
 
 ---
 
@@ -8630,7 +8668,7 @@ public readonly githubAttestations: boolean;
 
 - *Type:* boolean
 
-Enable GitHub Artifact Attestations verification for github backend tools.
+Verify GitHub artifact attestations for github backend tools.
 
 ---
 
@@ -8642,7 +8680,7 @@ public readonly oauthApiUrl: string;
 
 - *Type:* string
 
-GitHub API base URL for native OAuth token validation.
+GitHub API base URL mise uses to validate native OAuth tokens.
 
 ---
 
@@ -8654,7 +8692,7 @@ public readonly oauthAuthUrl: string;
 
 - *Type:* string
 
-GitHub OAuth endpoint base URL for native device-flow tokens.
+GitHub OAuth endpoint base URL for the native device flow.
 
 ---
 
@@ -8666,7 +8704,7 @@ public readonly oauthClientId: string;
 
 - *Type:* string
 
-GitHub App client ID for native OAuth device-flow tokens.
+GitHub App client ID that turns on native OAuth device-flow tokens.
 
 ---
 
@@ -8678,7 +8716,9 @@ public readonly oauthExportEnv: string;
 
 - *Type:* string
 
-Environment variable name to export the native GitHub OAuth token under (empty disables).
+Environment variable that mise exports the native GitHub OAuth token under;
+
+empty turns the export off.
 
 ---
 
@@ -8690,7 +8730,7 @@ public readonly oauthOpenBrowser: boolean;
 
 - *Type:* boolean
 
-Open the browser during native GitHub OAuth device flow.
+Open the verification page in your browser during the native GitHub OAuth device flow.
 
 ---
 
@@ -8714,7 +8754,7 @@ public readonly slsa: boolean;
 
 - *Type:* boolean
 
-Enable SLSA provenance verification for github backend tools.
+Verify SLSA provenance for github backend tools that name a signer.
 
 ---
 
@@ -8726,7 +8766,7 @@ public readonly useGitCredentials: boolean;
 
 - *Type:* boolean
 
-Use git credential helpers to obtain GitHub tokens.
+Get GitHub tokens from your Git credential helpers with `git credential fill`.
 
 ---
 
@@ -8744,11 +8784,11 @@ const settingsGithubRelay: SettingsGithubRelay = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#mise-projen.SettingsGithubRelay.property.concurrency">concurrency</a></code> | <code>number</code> | Maximum simultaneous GitHub relay requests (1-32); |
-| <code><a href="#mise-projen.SettingsGithubRelay.property.logFormat">logFormat</a></code> | <code>string</code> | GitHub relay request and summary output format: text or jsonl. |
-| <code><a href="#mise-projen.SettingsGithubRelay.property.logRequests">logRequests</a></code> | <code>boolean</code> | Log sanitized GitHub relay requests on the initiating machine's stderr. |
-| <code><a href="#mise-projen.SettingsGithubRelay.property.maxDuration">maxDuration</a></code> | <code>string</code> | Maximum borrowed GitHub access duration; |
-| <code><a href="#mise-projen.SettingsGithubRelay.property.requestTimeout">requestTimeout</a></code> | <code>string</code> | Total time limit for a relayed request, including response streaming. |
+| <code><a href="#mise-projen.SettingsGithubRelay.property.concurrency">concurrency</a></code> | <code>number</code> | Maximum relayed GitHub requests that run at once, from 1 to 32; |
+| <code><a href="#mise-projen.SettingsGithubRelay.property.logFormat">logFormat</a></code> | <code><a href="#mise-projen.SettingsGithubRelayLogFormat">SettingsGithubRelayLogFormat</a></code> | Format of GitHub relay request logs and the end-of-session summary. |
+| <code><a href="#mise-projen.SettingsGithubRelay.property.logRequests">logRequests</a></code> | <code>boolean</code> | Log each relayed GitHub request, without credentials, on this machine's stderr. |
+| <code><a href="#mise-projen.SettingsGithubRelay.property.maxDuration">maxDuration</a></code> | <code>string</code> | How long a GitHub relay lends access; |
+| <code><a href="#mise-projen.SettingsGithubRelay.property.requestTimeout">requestTimeout</a></code> | <code>string</code> | Time limit for one relayed GitHub request, including streaming its response. |
 
 ---
 
@@ -8760,21 +8800,21 @@ public readonly concurrency: number;
 
 - *Type:* number
 
-Maximum simultaneous GitHub relay requests (1-32);
+Maximum relayed GitHub requests that run at once, from 1 to 32;
 
-excess requests fail closed.
+more requests fail instead of waiting.
 
 ---
 
 ##### `logFormat`<sup>Optional</sup> <a name="logFormat" id="mise-projen.SettingsGithubRelay.property.logFormat"></a>
 
 ```typescript
-public readonly logFormat: string;
+public readonly logFormat: SettingsGithubRelayLogFormat;
 ```
 
-- *Type:* string
+- *Type:* <a href="#mise-projen.SettingsGithubRelayLogFormat">SettingsGithubRelayLogFormat</a>
 
-GitHub relay request and summary output format: text or jsonl.
+Format of GitHub relay request logs and the end-of-session summary.
 
 ---
 
@@ -8786,7 +8826,7 @@ public readonly logRequests: boolean;
 
 - *Type:* boolean
 
-Log sanitized GitHub relay requests on the initiating machine's stderr.
+Log each relayed GitHub request, without credentials, on this machine's stderr.
 
 ---
 
@@ -8798,9 +8838,9 @@ public readonly maxDuration: string;
 
 - *Type:* string
 
-Maximum borrowed GitHub access duration;
+How long a GitHub relay lends access;
 
-0s means until the session ends.
+`0s` lasts until the session ends.
 
 ---
 
@@ -8812,7 +8852,7 @@ public readonly requestTimeout: string;
 
 - *Type:* string
 
-Total time limit for a relayed request, including response streaming.
+Time limit for one relayed GitHub request, including streaming its response.
 
 ---
 
@@ -8830,9 +8870,9 @@ const settingsGitlab: SettingsGitlab = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#mise-projen.SettingsGitlab.property.credentialCommand">credentialCommand</a></code> | <code>string</code> | Shell command to run to obtain a GitLab token for mise. |
-| <code><a href="#mise-projen.SettingsGitlab.property.glabCliTokens">glabCliTokens</a></code> | <code>boolean</code> | Read GitLab tokens from the glab CLI config. |
-| <code><a href="#mise-projen.SettingsGitlab.property.useGitCredentials">useGitCredentials</a></code> | <code>boolean</code> | Use git credential helpers to obtain GitLab tokens. |
+| <code><a href="#mise-projen.SettingsGitlab.property.credentialCommand">credentialCommand</a></code> | <code>string</code> | Command that prints a GitLab token on stdout. |
+| <code><a href="#mise-projen.SettingsGitlab.property.glabCliTokens">glabCliTokens</a></code> | <code>boolean</code> | Read GitLab tokens that the glab CLI stores in its `config.yml` file. |
+| <code><a href="#mise-projen.SettingsGitlab.property.useGitCredentials">useGitCredentials</a></code> | <code>boolean</code> | Get GitLab tokens from your Git credential helpers with `git credential fill`. |
 
 ---
 
@@ -8844,7 +8884,7 @@ public readonly credentialCommand: string;
 
 - *Type:* string
 
-Shell command to run to obtain a GitLab token for mise.
+Command that prints a GitLab token on stdout.
 
 ---
 
@@ -8856,7 +8896,7 @@ public readonly glabCliTokens: boolean;
 
 - *Type:* boolean
 
-Read GitLab tokens from the glab CLI config.
+Read GitLab tokens that the glab CLI stores in its `config.yml` file.
 
 ---
 
@@ -8868,7 +8908,7 @@ public readonly useGitCredentials: boolean;
 
 - *Type:* boolean
 
-Use git credential helpers to obtain GitLab tokens.
+Get GitLab tokens from your Git credential helpers with `git credential fill`.
 
 ---
 
@@ -8886,13 +8926,13 @@ const settingsGo: SettingsGo = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#mise-projen.SettingsGo.property.defaultPackagesFile">defaultPackagesFile</a></code> | <code>string</code> | Path to a file containing default go packages to install when installing go. |
-| <code><a href="#mise-projen.SettingsGo.property.downloadMirror">downloadMirror</a></code> | <code>string</code> | Mirror to download go sdk tarballs from. |
-| <code><a href="#mise-projen.SettingsGo.property.repo">repo</a></code> | <code>string</code> | URL to fetch go from. |
-| <code><a href="#mise-projen.SettingsGo.property.setGobin">setGobin</a></code> | <code>boolean</code> | Changes where `go install` installs binaries to. |
-| <code><a href="#mise-projen.SettingsGo.property.setGopath">setGopath</a></code> | <code>boolean</code> | [deprecated] Set to true to set GOPATH=~/.local/share/mise/installs/go/.../packages. |
-| <code><a href="#mise-projen.SettingsGo.property.setGoroot">setGoroot</a></code> | <code>boolean</code> | Sets GOROOT=~/.local/share/mise/installs/go/.../. |
-| <code><a href="#mise-projen.SettingsGo.property.skipChecksum">skipChecksum</a></code> | <code>boolean</code> | Set to true to skip checksum verification when downloading go sdk tarballs. |
+| <code><a href="#mise-projen.SettingsGo.property.defaultPackagesFile">defaultPackagesFile</a></code> | <code>string</code> | [deprecated] File listing Go packages to install with every Go version. |
+| <code><a href="#mise-projen.SettingsGo.property.downloadMirror">downloadMirror</a></code> | <code>string</code> | Base URL that mise downloads Go archives and their checksums from. |
+| <code><a href="#mise-projen.SettingsGo.property.repo">repo</a></code> | <code>string</code> | Git repository mise lists Go versions from. |
+| <code><a href="#mise-projen.SettingsGo.property.setGobin">setGobin</a></code> | <code>boolean</code> | Set `GOBIN` so `go install` puts binaries in the active Go version's directory. |
+| <code><a href="#mise-projen.SettingsGo.property.setGopath">setGopath</a></code> | <code>boolean</code> | [deprecated] Set `GOPATH` to the `packages` directory inside the active Go install. |
+| <code><a href="#mise-projen.SettingsGo.property.setGoroot">setGoroot</a></code> | <code>boolean</code> | Set `GOROOT` to the active Go version's install directory. |
+| <code><a href="#mise-projen.SettingsGo.property.skipChecksum">skipChecksum</a></code> | <code>boolean</code> | Skip SHA-256 verification of Go downloads. |
 
 ---
 
@@ -8904,7 +8944,7 @@ public readonly defaultPackagesFile: string;
 
 - *Type:* string
 
-Path to a file containing default go packages to install when installing go.
+[deprecated] File listing Go packages to install with every Go version.
 
 ---
 
@@ -8916,7 +8956,7 @@ public readonly downloadMirror: string;
 
 - *Type:* string
 
-Mirror to download go sdk tarballs from.
+Base URL that mise downloads Go archives and their checksums from.
 
 ---
 
@@ -8928,7 +8968,7 @@ public readonly repo: string;
 
 - *Type:* string
 
-URL to fetch go from.
+Git repository mise lists Go versions from.
 
 ---
 
@@ -8940,7 +8980,7 @@ public readonly setGobin: boolean;
 
 - *Type:* boolean
 
-Changes where `go install` installs binaries to.
+Set `GOBIN` so `go install` puts binaries in the active Go version's directory.
 
 ---
 
@@ -8952,7 +8992,7 @@ public readonly setGopath: boolean;
 
 - *Type:* boolean
 
-[deprecated] Set to true to set GOPATH=~/.local/share/mise/installs/go/.../packages.
+[deprecated] Set `GOPATH` to the `packages` directory inside the active Go install.
 
 ---
 
@@ -8964,7 +9004,7 @@ public readonly setGoroot: boolean;
 
 - *Type:* boolean
 
-Sets GOROOT=~/.local/share/mise/installs/go/.../.
+Set `GOROOT` to the active Go version's install directory.
 
 ---
 
@@ -8976,7 +9016,7 @@ public readonly skipChecksum: boolean;
 
 - *Type:* boolean
 
-Set to true to skip checksum verification when downloading go sdk tarballs.
+Skip SHA-256 verification of Go downloads.
 
 ---
 
@@ -8994,13 +9034,13 @@ const settingsHistory: SettingsHistory = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#mise-projen.SettingsHistory.property.allowPlaintextHistory">allowPlaintextHistory</a></code> | <code>boolean</code> | Allow publishing history that contains unencrypted versions of files now marked for encryption. |
-| <code><a href="#mise-projen.SettingsHistory.property.describeCommand">describeCommand</a></code> | <code>string</code> | A command that names commits the watcher saves (an agent, say): it gets one JSON object on stdin (uuid, trigger, the computed description, changed tracked paths, and a unified diff of changed unencrypted files, at most 64 KiB) and prints one line of at most 200 characters, which becomes the description. |
-| <code><a href="#mise-projen.SettingsHistory.property.enabled">enabled</a></code> | <code>boolean</code> | Record ordinary Git commits for explicitly tracked files around bootstrap operations and on explicit saves. |
-| <code><a href="#mise-projen.SettingsHistory.property.fetchInterval">fetchInterval</a></code> | <code>string</code> | How often the history watcher fetches the origin branch. |
-| <code><a href="#mise-projen.SettingsHistory.property.notify">notify</a></code> | <code>boolean</code> | Show a desktop notification when conflicts pause sharing for the setup. |
-| <code><a href="#mise-projen.SettingsHistory.property.sync">sync</a></code> | <code><a href="#mise-projen.SettingsHistorySync">SettingsHistorySync</a></code> | What the history watcher does with a connected setup repository on its own: `sync` publishes after saves, fetches periodically, and applies incoming changes. |
-| <code><a href="#mise-projen.SettingsHistory.property.syncInterval">syncInterval</a></code> | <code>string</code> | How soon after a save the history watcher publishes to the setup repository, at most this often. |
+| <code><a href="#mise-projen.SettingsHistory.property.allowPlaintextHistory">allowPlaintextHistory</a></code> | <code>boolean</code> | Allow publishing or applying history that holds plaintext copies of files now marked for encryption, or publishing versions that look like they contain secrets. |
+| <code><a href="#mise-projen.SettingsHistory.property.describeCommand">describeCommand</a></code> | <code>string</code> | Command, such as an AI agent, that writes the description of each checkpoint the history watcher saves. |
+| <code><a href="#mise-projen.SettingsHistory.property.enabled">enabled</a></code> | <code>boolean</code> | Record Git checkpoints of tracked files around bootstrap operations and on explicit saves. |
+| <code><a href="#mise-projen.SettingsHistory.property.fetchInterval">fetchInterval</a></code> | <code>string</code> | How often the history watcher fetches from the setup repository. |
+| <code><a href="#mise-projen.SettingsHistory.property.notify">notify</a></code> | <code>boolean</code> | Show a desktop notification when a sync conflict pauses sharing. |
+| <code><a href="#mise-projen.SettingsHistory.property.sync">sync</a></code> | <code><a href="#mise-projen.SettingsHistorySync">SettingsHistorySync</a></code> | What the history watcher shares with a connected setup repository on its own. |
+| <code><a href="#mise-projen.SettingsHistory.property.syncInterval">syncInterval</a></code> | <code>string</code> | Minimum time between automatic publishes to the setup repository after a save. |
 | <code><a href="#mise-projen.SettingsHistory.property.watch">watch</a></code> | <code><a href="#mise-projen.SettingsHistoryWatch">SettingsHistoryWatch</a></code> | *No description.* |
 
 ---
@@ -9013,7 +9053,7 @@ public readonly allowPlaintextHistory: boolean;
 
 - *Type:* boolean
 
-Allow publishing history that contains unencrypted versions of files now marked for encryption.
+Allow publishing or applying history that holds plaintext copies of files now marked for encryption, or publishing versions that look like they contain secrets.
 
 ---
 
@@ -9025,9 +9065,7 @@ public readonly describeCommand: string;
 
 - *Type:* string
 
-A command that names commits the watcher saves (an agent, say): it gets one JSON object on stdin (uuid, trigger, the computed description, changed tracked paths, and a unified diff of changed unencrypted files, at most 64 KiB) and prints one line of at most 200 characters, which becomes the description.
-
-Empty: computed descriptions only.
+Command, such as an AI agent, that writes the description of each checkpoint the history watcher saves.
 
 ---
 
@@ -9039,7 +9077,7 @@ public readonly enabled: boolean;
 
 - *Type:* boolean
 
-Record ordinary Git commits for explicitly tracked files around bootstrap operations and on explicit saves.
+Record Git checkpoints of tracked files around bootstrap operations and on explicit saves.
 
 ---
 
@@ -9051,9 +9089,7 @@ public readonly fetchInterval: string;
 
 - *Type:* string
 
-How often the history watcher fetches the origin branch.
-
-Values below one second use one second; use history.sync = 'manual' to disable automatic synchronization.
+How often the history watcher fetches from the setup repository.
 
 ---
 
@@ -9065,9 +9101,7 @@ public readonly notify: boolean;
 
 - *Type:* boolean
 
-Show a desktop notification when conflicts pause sharing for the setup.
-
-Enabled by default; retries stay silent until sharing recovers, and a notifier that is missing or failing never holds up history or sync.
+Show a desktop notification when a sync conflict pauses sharing.
 
 ---
 
@@ -9079,9 +9113,7 @@ public readonly sync: SettingsHistorySync;
 
 - *Type:* <a href="#mise-projen.SettingsHistorySync">SettingsHistorySync</a>
 
-What the history watcher does with a connected setup repository on its own: `sync` publishes after saves, fetches periodically, and applies incoming changes.
-
-Any conflict pauses publication and incoming application for the entire setup; local commits and fetching continue. `fetch-only` only fetches; `manual` does nothing automatically. `mise bootstrap dotfiles sync` and `pull` work on request in every mode.
+What the history watcher shares with a connected setup repository on its own.
 
 ---
 
@@ -9093,7 +9125,7 @@ public readonly syncInterval: string;
 
 - *Type:* string
 
-How soon after a save the history watcher publishes to the setup repository, at most this often.
+Minimum time between automatic publishes to the setup repository after a save.
 
 ---
 
@@ -9121,9 +9153,9 @@ const settingsHistoryWatch: SettingsHistoryWatch = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#mise-projen.SettingsHistoryWatch.property.debounce">debounce</a></code> | <code>string</code> | How long a changed file must stay quiet before the history watcher saves it (the base autosave interval). |
-| <code><a href="#mise-projen.SettingsHistoryWatch.property.maxInterval">maxInterval</a></code> | <code>string</code> | The longest autosave interval the history watcher stretches a constantly changing file to. |
-| <code><a href="#mise-projen.SettingsHistoryWatch.property.reconcile">reconcile</a></code> | <code>string</code> | How often the history watcher rescans the whole tracked set for changes its watches missed. |
+| <code><a href="#mise-projen.SettingsHistoryWatch.property.debounce">debounce</a></code> | <code>string</code> | How long a changed file must stay unchanged before the history watcher saves it. |
+| <code><a href="#mise-projen.SettingsHistoryWatch.property.maxInterval">maxInterval</a></code> | <code>string</code> | Longest save interval the history watcher uses for a file that changes constantly. |
+| <code><a href="#mise-projen.SettingsHistoryWatch.property.reconcile">reconcile</a></code> | <code>string</code> | How often the history watcher rescans all tracked files for changes it missed. |
 
 ---
 
@@ -9135,9 +9167,7 @@ public readonly debounce: string;
 
 - *Type:* string
 
-How long a changed file must stay quiet before the history watcher saves it (the base autosave interval).
-
-A file that keeps changing is stretched on its own and never delays the others.
+How long a changed file must stay unchanged before the history watcher saves it.
 
 ---
 
@@ -9149,9 +9179,7 @@ public readonly maxInterval: string;
 
 - *Type:* string
 
-The longest autosave interval the history watcher stretches a constantly changing file to.
-
-Sustained churn doubles a file's own interval up to this; a settled file is saved promptly again, and a sustained quiet period resets it.
+Longest save interval the history watcher uses for a file that changes constantly.
 
 ---
 
@@ -9163,9 +9191,7 @@ public readonly reconcile: string;
 
 - *Type:* string
 
-How often the history watcher rescans the whole tracked set for changes its watches missed.
-
-`0` disables periodic reconciliation (startup and configuration changes still reconcile).
+How often the history watcher rescans all tracked files for changes it missed.
 
 ---
 
@@ -9183,8 +9209,8 @@ const settingsHookEnv: SettingsHookEnv = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#mise-projen.SettingsHookEnv.property.cacheTtl">cacheTtl</a></code> | <code>string</code> | Cache hook-env directory checks for this duration. |
-| <code><a href="#mise-projen.SettingsHookEnv.property.chpwdOnly">chpwdOnly</a></code> | <code>boolean</code> | Only run hook-env checks on directory change, not on every prompt. |
+| <code><a href="#mise-projen.SettingsHookEnv.property.cacheTtl">cacheTtl</a></code> | <code>string</code> | How long the shell hook reuses its last config file check, for slow filesystems such as NFS. |
+| <code><a href="#mise-projen.SettingsHookEnv.property.chpwdOnly">chpwdOnly</a></code> | <code>boolean</code> | Run the shell hook's full config check only when you change directories, not at every prompt. |
 
 ---
 
@@ -9196,9 +9222,7 @@ public readonly cacheTtl: string;
 
 - *Type:* string
 
-Cache hook-env directory checks for this duration.
-
-Useful for slow filesystems like NFS.
+How long the shell hook reuses its last config file check, for slow filesystems such as NFS.
 
 ---
 
@@ -9210,7 +9234,7 @@ public readonly chpwdOnly: boolean;
 
 - *Type:* boolean
 
-Only run hook-env checks on directory change, not on every prompt.
+Run the shell hook's full config check only when you change directories, not at every prompt.
 
 ---
 
@@ -9228,7 +9252,7 @@ const settingsJava: SettingsJava = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#mise-projen.SettingsJava.property.shorthandVendor">shorthandVendor</a></code> | <code>string</code> | Shorthand for Java. |
+| <code><a href="#mise-projen.SettingsJava.property.shorthandVendor">shorthandVendor</a></code> | <code>string</code> | Vendor used for a Java version without a vendor prefix, such as `java@21`. |
 
 ---
 
@@ -9240,9 +9264,7 @@ public readonly shorthandVendor: string;
 
 - *Type:* string
 
-Shorthand for Java.
-
-Used when installing Java without a vendor prefix.
+Vendor used for a Java version without a vendor prefix, such as `java@21`.
 
 ---
 
@@ -9260,24 +9282,24 @@ const settingsNode: SettingsNode = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#mise-projen.SettingsNode.property.applyPatches">applyPatches</a></code> | <code>string</code> | A list of patch files or URLs to apply to node source. |
-| <code><a href="#mise-projen.SettingsNode.property.cflags">cflags</a></code> | <code>string</code> | Additional CFLAGS options (e.g., to override -O3). |
-| <code><a href="#mise-projen.SettingsNode.property.compile">compile</a></code> | <code>boolean</code> | Compile node from source. |
-| <code><a href="#mise-projen.SettingsNode.property.concurrency">concurrency</a></code> | <code>number</code> | How many jobs should be used in compilation. |
-| <code><a href="#mise-projen.SettingsNode.property.configureOpts">configureOpts</a></code> | <code>string</code> | Additional ./configure options. |
-| <code><a href="#mise-projen.SettingsNode.property.corepack">corepack</a></code> | <code>boolean</code> | Installs the default corepack shims after installing any node version. |
-| <code><a href="#mise-projen.SettingsNode.property.defaultPackagesFile">defaultPackagesFile</a></code> | <code>string</code> | Path to a file containing default npm packages to install. |
-| <code><a href="#mise-projen.SettingsNode.property.flavor">flavor</a></code> | <code>string</code> | Install a specific node flavor like glibc-217 or musl. |
-| <code><a href="#mise-projen.SettingsNode.property.gpgVerify">gpgVerify</a></code> | <code>boolean</code> | Verify OpenPGP signatures for node (built-in, no external gpg required). |
-| <code><a href="#mise-projen.SettingsNode.property.make">make</a></code> | <code>string</code> | Make command to use. |
-| <code><a href="#mise-projen.SettingsNode.property.makeInstallOpts">makeInstallOpts</a></code> | <code>string</code> | Additional make install options. |
-| <code><a href="#mise-projen.SettingsNode.property.makeOpts">makeOpts</a></code> | <code>string</code> | Additional make options. |
-| <code><a href="#mise-projen.SettingsNode.property.mirrorUrl">mirrorUrl</a></code> | <code>string</code> | Mirror to download node tarballs from. |
-| <code><a href="#mise-projen.SettingsNode.property.ninja">ninja</a></code> | <code>boolean</code> | Use ninja instead of make to compile node. |
-| <code><a href="#mise-projen.SettingsNode.property.nodenvRoot">nodenvRoot</a></code> | <code>string</code> | Directory for nodenv. |
-| <code><a href="#mise-projen.SettingsNode.property.npmShim">npmShim</a></code> | <code>boolean</code> | Install a bash wrapper at bin/npm that triggers `mise reshim` after `npm install -g`. |
-| <code><a href="#mise-projen.SettingsNode.property.nvmDir">nvmDir</a></code> | <code>string</code> | Directory for nvm. |
-| <code><a href="#mise-projen.SettingsNode.property.verify">verify</a></code> | <code>boolean</code> | Verify the downloaded assets using GPG. |
+| <code><a href="#mise-projen.SettingsNode.property.applyPatches">applyPatches</a></code> | <code>string</code> | Patch files or URLs to apply to the Node.js source before building it. |
+| <code><a href="#mise-projen.SettingsNode.property.cflags">cflags</a></code> | <code>string</code> | Extra `CFLAGS` for compiling Node.js, for example to replace `-O3`. |
+| <code><a href="#mise-projen.SettingsNode.property.compile">compile</a></code> | <code>boolean</code> | Compile Node.js from source instead of using a precompiled build. |
+| <code><a href="#mise-projen.SettingsNode.property.concurrency">concurrency</a></code> | <code>number</code> | Number of parallel jobs (`make -j`) when compiling Node.js. |
+| <code><a href="#mise-projen.SettingsNode.property.configureOpts">configureOpts</a></code> | <code>string</code> | Extra arguments for `./configure` when compiling Node.js. |
+| <code><a href="#mise-projen.SettingsNode.property.corepack">corepack</a></code> | <code>boolean</code> | Run `corepack enable` after installing a Node.js version, so `yarn` and `pnpm` go through Corepack. |
+| <code><a href="#mise-projen.SettingsNode.property.defaultPackagesFile">defaultPackagesFile</a></code> | <code>string</code> | [deprecated] File listing npm packages to install globally into each new Node.js version. |
+| <code><a href="#mise-projen.SettingsNode.property.flavor">flavor</a></code> | <code>string</code> | Linux build flavor of Node.js to download, such as `musl` or `glibc-217`. |
+| <code><a href="#mise-projen.SettingsNode.property.gpgVerify">gpgVerify</a></code> | <code>boolean</code> | Check the OpenPGP signature of the `SHASUMS256.txt` file that `node.verify` checks downloads against. |
+| <code><a href="#mise-projen.SettingsNode.property.make">make</a></code> | <code>string</code> | Command to run instead of `make` when compiling Node.js, such as `gmake`. |
+| <code><a href="#mise-projen.SettingsNode.property.makeInstallOpts">makeInstallOpts</a></code> | <code>string</code> | Extra arguments for `make install` when compiling Node.js. |
+| <code><a href="#mise-projen.SettingsNode.property.makeOpts">makeOpts</a></code> | <code>string</code> | Extra arguments for `make` when compiling Node.js. |
+| <code><a href="#mise-projen.SettingsNode.property.mirrorUrl">mirrorUrl</a></code> | <code>string</code> | Base URL that mise downloads Node.js archives and their `SHASUMS256.txt` checksums from. |
+| <code><a href="#mise-projen.SettingsNode.property.ninja">ninja</a></code> | <code>boolean</code> | Build Node.js with ninja instead of make when compiling from source. |
+| <code><a href="#mise-projen.SettingsNode.property.nodenvRoot">nodenvRoot</a></code> | <code>string</code> | Root directory of nodenv, which `mise sync node --nodenv` imports Node.js versions from. |
+| <code><a href="#mise-projen.SettingsNode.property.npmShim">npmShim</a></code> | <code>boolean</code> | Wrap each Node.js version's `npm` so that `npm install -g` runs `mise reshim` afterwards. |
+| <code><a href="#mise-projen.SettingsNode.property.nvmDir">nvmDir</a></code> | <code>string</code> | Directory of nvm, which `mise sync node --nvm` imports Node.js versions from. |
+| <code><a href="#mise-projen.SettingsNode.property.verify">verify</a></code> | <code>boolean</code> | Verify downloaded Node.js archives against the SHA-256 checksums in `SHASUMS256.txt`. |
 
 ---
 
@@ -9289,7 +9311,7 @@ public readonly applyPatches: string;
 
 - *Type:* string
 
-A list of patch files or URLs to apply to node source.
+Patch files or URLs to apply to the Node.js source before building it.
 
 ---
 
@@ -9301,7 +9323,7 @@ public readonly cflags: string;
 
 - *Type:* string
 
-Additional CFLAGS options (e.g., to override -O3).
+Extra `CFLAGS` for compiling Node.js, for example to replace `-O3`.
 
 ---
 
@@ -9313,7 +9335,7 @@ public readonly compile: boolean;
 
 - *Type:* boolean
 
-Compile node from source.
+Compile Node.js from source instead of using a precompiled build.
 
 ---
 
@@ -9325,7 +9347,7 @@ public readonly concurrency: number;
 
 - *Type:* number
 
-How many jobs should be used in compilation.
+Number of parallel jobs (`make -j`) when compiling Node.js.
 
 ---
 
@@ -9337,7 +9359,7 @@ public readonly configureOpts: string;
 
 - *Type:* string
 
-Additional ./configure options.
+Extra arguments for `./configure` when compiling Node.js.
 
 ---
 
@@ -9349,7 +9371,7 @@ public readonly corepack: boolean;
 
 - *Type:* boolean
 
-Installs the default corepack shims after installing any node version.
+Run `corepack enable` after installing a Node.js version, so `yarn` and `pnpm` go through Corepack.
 
 ---
 
@@ -9361,7 +9383,7 @@ public readonly defaultPackagesFile: string;
 
 - *Type:* string
 
-Path to a file containing default npm packages to install.
+[deprecated] File listing npm packages to install globally into each new Node.js version.
 
 ---
 
@@ -9373,9 +9395,7 @@ public readonly flavor: string;
 
 - *Type:* string
 
-Install a specific node flavor like glibc-217 or musl.
-
-Use with unofficial node build repo.
+Linux build flavor of Node.js to download, such as `musl` or `glibc-217`.
 
 ---
 
@@ -9387,9 +9407,7 @@ public readonly gpgVerify: boolean;
 
 - *Type:* boolean
 
-Verify OpenPGP signatures for node (built-in, no external gpg required).
-
-Set to false to disable.
+Check the OpenPGP signature of the `SHASUMS256.txt` file that `node.verify` checks downloads against.
 
 ---
 
@@ -9401,7 +9419,7 @@ public readonly make: string;
 
 - *Type:* string
 
-Make command to use.
+Command to run instead of `make` when compiling Node.js, such as `gmake`.
 
 ---
 
@@ -9413,7 +9431,7 @@ public readonly makeInstallOpts: string;
 
 - *Type:* string
 
-Additional make install options.
+Extra arguments for `make install` when compiling Node.js.
 
 ---
 
@@ -9425,7 +9443,7 @@ public readonly makeOpts: string;
 
 - *Type:* string
 
-Additional make options.
+Extra arguments for `make` when compiling Node.js.
 
 ---
 
@@ -9437,7 +9455,7 @@ public readonly mirrorUrl: string;
 
 - *Type:* string
 
-Mirror to download node tarballs from.
+Base URL that mise downloads Node.js archives and their `SHASUMS256.txt` checksums from.
 
 ---
 
@@ -9449,7 +9467,7 @@ public readonly ninja: boolean;
 
 - *Type:* boolean
 
-Use ninja instead of make to compile node.
+Build Node.js with ninja instead of make when compiling from source.
 
 ---
 
@@ -9461,7 +9479,7 @@ public readonly nodenvRoot: string;
 
 - *Type:* string
 
-Directory for nodenv.
+Root directory of nodenv, which `mise sync node --nodenv` imports Node.js versions from.
 
 ---
 
@@ -9473,9 +9491,7 @@ public readonly npmShim: boolean;
 
 - *Type:* boolean
 
-Install a bash wrapper at bin/npm that triggers `mise reshim` after `npm install -g`.
-
-Disable to let corepack or a global `npm install -g npm@...` manage `bin/npm` directly.
+Wrap each Node.js version's `npm` so that `npm install -g` runs `mise reshim` afterwards.
 
 ---
 
@@ -9487,7 +9503,7 @@ public readonly nvmDir: string;
 
 - *Type:* string
 
-Directory for nvm.
+Directory of nvm, which `mise sync node --nvm` imports Node.js versions from.
 
 ---
 
@@ -9499,7 +9515,7 @@ public readonly verify: boolean;
 
 - *Type:* boolean
 
-Verify the downloaded assets using GPG.
+Verify downloaded Node.js archives against the SHA-256 checksums in `SHASUMS256.txt`.
 
 ---
 
@@ -9517,9 +9533,9 @@ const settingsNpm: SettingsNpm = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#mise-projen.SettingsNpm.property.bun">bun</a></code> | <code>boolean</code> | Use bun instead of npm if bun is installed and on PATH. |
-| <code><a href="#mise-projen.SettingsNpm.property.packageManager">packageManager</a></code> | <code><a href="#mise-projen.SettingsNpmPackageManager">SettingsNpmPackageManager</a></code> | Package manager to use for installing npm packages. |
-| <code><a href="#mise-projen.SettingsNpm.property.shellOut">shellOut</a></code> | <code>boolean</code> | Shell out to the npm CLI for `npm:` version metadata and installs instead of mise's built-in aube-based implementation. |
+| <code><a href="#mise-projen.SettingsNpm.property.bun">bun</a></code> | <code>boolean</code> | [deprecated] Install `npm:` tools with bun; |
+| <code><a href="#mise-projen.SettingsNpm.property.packageManager">packageManager</a></code> | <code><a href="#mise-projen.SettingsNpmPackageManager">SettingsNpmPackageManager</a></code> | Package manager that installs `npm:` tools. |
+| <code><a href="#mise-projen.SettingsNpm.property.shellOut">shellOut</a></code> | <code>boolean</code> | Use the npm CLI instead of mise's built-in client for `npm:` version metadata and default installs. |
 
 ---
 
@@ -9531,7 +9547,9 @@ public readonly bun: boolean;
 
 - *Type:* boolean
 
-Use bun instead of npm if bun is installed and on PATH.
+[deprecated] Install `npm:` tools with bun;
+
+same as `npm.package_manager = "bun"`.
 
 ---
 
@@ -9543,7 +9561,7 @@ public readonly packageManager: SettingsNpmPackageManager;
 
 - *Type:* <a href="#mise-projen.SettingsNpmPackageManager">SettingsNpmPackageManager</a>
 
-Package manager to use for installing npm packages.
+Package manager that installs `npm:` tools.
 
 ---
 
@@ -9555,7 +9573,7 @@ public readonly shellOut: boolean;
 
 - *Type:* boolean
 
-Shell out to the npm CLI for `npm:` version metadata and installs instead of mise's built-in aube-based implementation.
+Use the npm CLI instead of mise's built-in client for `npm:` version metadata and default installs.
 
 ---
 
@@ -9573,9 +9591,9 @@ const settingsOci: SettingsOci = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#mise-projen.SettingsOci.property.defaultFrom">defaultFrom</a></code> | <code>string</code> | Default base image for `mise oci build` when [oci].from is not set. |
-| <code><a href="#mise-projen.SettingsOci.property.defaultMountPoint">defaultMountPoint</a></code> | <code>string</code> | Path inside OCI images where mise tools are installed. |
-| <code><a href="#mise-projen.SettingsOci.property.insecureRegistries">insecureRegistries</a></code> | <code>string[]</code> | Registries (host or host:port) contacted over plain HTTP instead of HTTPS. |
+| <code><a href="#mise-projen.SettingsOci.property.defaultFrom">defaultFrom</a></code> | <code>string</code> | [experimental] Base image for `mise oci` builds when neither `[oci].from` nor `--from` sets one. |
+| <code><a href="#mise-projen.SettingsOci.property.defaultMountPoint">defaultMountPoint</a></code> | <code>string</code> | [experimental] Directory inside `mise oci` images that holds tool installs, unless `[oci].mount_point` sets one. |
+| <code><a href="#mise-projen.SettingsOci.property.insecureRegistries">insecureRegistries</a></code> | <code>string[]</code> | Registries, as `host` or `host:port`, that mise contacts over plain HTTP instead of HTTPS. |
 
 ---
 
@@ -9587,7 +9605,7 @@ public readonly defaultFrom: string;
 
 - *Type:* string
 
-Default base image for `mise oci build` when [oci].from is not set.
+[experimental] Base image for `mise oci` builds when neither `[oci].from` nor `--from` sets one.
 
 ---
 
@@ -9599,7 +9617,7 @@ public readonly defaultMountPoint: string;
 
 - *Type:* string
 
-Path inside OCI images where mise tools are installed.
+[experimental] Directory inside `mise oci` images that holds tool installs, unless `[oci].mount_point` sets one.
 
 ---
 
@@ -9611,7 +9629,7 @@ public readonly insecureRegistries: string[];
 
 - *Type:* string[]
 
-Registries (host or host:port) contacted over plain HTTP instead of HTTPS.
+Registries, as `host` or `host:port`, that mise contacts over plain HTTP instead of HTTPS.
 
 ---
 
@@ -9629,8 +9647,8 @@ const settingsOtel: SettingsOtel = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#mise-projen.SettingsOtel.property.enabled">enabled</a></code> | <code>boolean</code> | [experimental] Enable OpenTelemetry trace export for task executions. |
-| <code><a href="#mise-projen.SettingsOtel.property.logs">logs</a></code> | <code>boolean</code> | [experimental] Enable OpenTelemetry log export for task stdout/stderr. |
+| <code><a href="#mise-projen.SettingsOtel.property.enabled">enabled</a></code> | <code>boolean</code> | [experimental] Export OpenTelemetry traces of `mise run`. |
+| <code><a href="#mise-projen.SettingsOtel.property.logs">logs</a></code> | <code>boolean</code> | [experimental] Export each line of task stdout and stderr as an OpenTelemetry log record. |
 
 ---
 
@@ -9642,7 +9660,7 @@ public readonly enabled: boolean;
 
 - *Type:* boolean
 
-[experimental] Enable OpenTelemetry trace export for task executions.
+[experimental] Export OpenTelemetry traces of `mise run`.
 
 ---
 
@@ -9654,7 +9672,7 @@ public readonly logs: boolean;
 
 - *Type:* boolean
 
-[experimental] Enable OpenTelemetry log export for task stdout/stderr.
+[experimental] Export each line of task stdout and stderr as an OpenTelemetry log record.
 
 ---
 
@@ -9672,8 +9690,8 @@ const settingsPackslip: SettingsPackslip = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#mise-projen.SettingsPackslip.property.exec">exec</a></code> | <code>boolean</code> | Run a tool's own command at install time to produce a resource its packslip offers only as an exec entry, such as an agent skill. |
-| <code><a href="#mise-projen.SettingsPackslip.property.stampers">stampers</a></code> | <code>string[]</code> | Hosts whose signed stamp lists say which packslip releases may be installed, each with its pin. |
+| <code><a href="#mise-projen.SettingsPackslip.property.exec">exec</a></code> | <code>boolean</code> | Let packslip tools run their own executable at install time to generate resources, such as an agent skill. |
+| <code><a href="#mise-projen.SettingsPackslip.property.stampers">stampers</a></code> | <code>string[]</code> | Hosts that must approve a packslip release before mise lists or installs it, each as `host=PIN`. |
 
 ---
 
@@ -9685,7 +9703,7 @@ public readonly exec: boolean;
 
 - *Type:* boolean
 
-Run a tool's own command at install time to produce a resource its packslip offers only as an exec entry, such as an agent skill.
+Let packslip tools run their own executable at install time to generate resources, such as an agent skill.
 
 ---
 
@@ -9697,7 +9715,7 @@ public readonly stampers: string[];
 
 - *Type:* string[]
 
-Hosts whose signed stamp lists say which packslip releases may be installed, each with its pin.
+Hosts that must approve a packslip release before mise lists or installs it, each as `host=PIN`.
 
 ---
 
@@ -9715,8 +9733,8 @@ const settingsPipx: SettingsPipx = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#mise-projen.SettingsPipx.property.registryUrl">registryUrl</a></code> | <code>string</code> | URL to use for pipx registry. |
-| <code><a href="#mise-projen.SettingsPipx.property.uvx">uvx</a></code> | <code>boolean</code> | Use uvx instead of pipx if uv is installed and on PATH. |
+| <code><a href="#mise-projen.SettingsPipx.property.registryUrl">registryUrl</a></code> | <code>string</code> | Older name for `pypi.registry_url`. |
+| <code><a href="#mise-projen.SettingsPipx.property.uvx">uvx</a></code> | <code>boolean</code> | Older name for `pypi.uvx`. |
 
 ---
 
@@ -9728,7 +9746,7 @@ public readonly registryUrl: string;
 
 - *Type:* string
 
-URL to use for pipx registry.
+Older name for `pypi.registry_url`.
 
 ---
 
@@ -9740,7 +9758,7 @@ public readonly uvx: boolean;
 
 - *Type:* boolean
 
-Use uvx instead of pipx if uv is installed and on PATH.
+Older name for `pypi.uvx`.
 
 ---
 
@@ -9788,8 +9806,8 @@ const settingsPypi: SettingsPypi = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#mise-projen.SettingsPypi.property.registryUrl">registryUrl</a></code> | <code>string</code> | Package registry URL for Python tools (pipx.registry_url is a compatibility alias). |
-| <code><a href="#mise-projen.SettingsPypi.property.uvx">uvx</a></code> | <code>boolean</code> | Use uv for Python tools when available (pipx.uvx is a compatibility alias). |
+| <code><a href="#mise-projen.SettingsPypi.property.registryUrl">registryUrl</a></code> | <code>string</code> | Package index URL that `pypi:` tools list versions from, with `{}` in place of the package name. |
+| <code><a href="#mise-projen.SettingsPypi.property.uvx">uvx</a></code> | <code>boolean</code> | Install `pypi:` tools with uv when uv is available, and with pipx otherwise. |
 
 ---
 
@@ -9801,7 +9819,7 @@ public readonly registryUrl: string;
 
 - *Type:* string
 
-Package registry URL for Python tools (pipx.registry_url is a compatibility alias).
+Package index URL that `pypi:` tools list versions from, with `{}` in place of the package name.
 
 ---
 
@@ -9813,7 +9831,7 @@ public readonly uvx: boolean;
 
 - *Type:* boolean
 
-Use uv for Python tools when available (pipx.uvx is a compatibility alias).
+Install `pypi:` tools with uv when uv is available, and with pipx otherwise.
 
 ---
 
@@ -9831,19 +9849,19 @@ const settingsPython: SettingsPython = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#mise-projen.SettingsPython.property.compile">compile</a></code> | <code>boolean</code> | If true, compile python from source. |
-| <code><a href="#mise-projen.SettingsPython.property.defaultPackagesFile">defaultPackagesFile</a></code> | <code>string</code> | Path to a file containing default python packages to install when installing a python version. |
-| <code><a href="#mise-projen.SettingsPython.property.githubAttestations">githubAttestations</a></code> | <code>boolean</code> | Enable GitHub Artifact Attestations verification for precompiled Python binaries. |
-| <code><a href="#mise-projen.SettingsPython.property.patchesDirectory">patchesDirectory</a></code> | <code>string</code> | Directory to fetch python patches from. |
-| <code><a href="#mise-projen.SettingsPython.property.patchUrl">patchUrl</a></code> | <code>string</code> | URL to fetch python patches from to pass to python-build. |
-| <code><a href="#mise-projen.SettingsPython.property.precompiledArch">precompiledArch</a></code> | <code>string</code> | Specify the architecture to use for precompiled binaries. |
-| <code><a href="#mise-projen.SettingsPython.property.precompiledFlavor">precompiledFlavor</a></code> | <code>string</code> | Specify the flavor to use for precompiled binaries. |
-| <code><a href="#mise-projen.SettingsPython.property.precompiledOs">precompiledOs</a></code> | <code>string</code> | Specify the OS to use for precompiled binaries. |
-| <code><a href="#mise-projen.SettingsPython.property.pyenvRepo">pyenvRepo</a></code> | <code>string</code> | URL to fetch pyenv from for compiling python with python-build. |
-| <code><a href="#mise-projen.SettingsPython.property.uvVenvAuto">uvVenvAuto</a></code> | <code><a href="#mise-projen.SettingsPythonUvVenvAuto">SettingsPythonUvVenvAuto</a></code> | Integrate with uv to manage project venvs when uv.lock is present. |
-| <code><a href="#mise-projen.SettingsPython.property.uvVenvCreateArgs">uvVenvCreateArgs</a></code> | <code>string[]</code> | Arguments to pass to uv when creating a venv. |
-| <code><a href="#mise-projen.SettingsPython.property.venvCreateArgs">venvCreateArgs</a></code> | <code>string[]</code> | Arguments to pass to python when creating a venv. |
-| <code><a href="#mise-projen.SettingsPython.property.venvStdlib">venvStdlib</a></code> | <code>boolean</code> | Prefer to use venv from Python's standard library. |
+| <code><a href="#mise-projen.SettingsPython.property.compile">compile</a></code> | <code>boolean</code> | Compile Python from source with python-build instead of using a precompiled build. |
+| <code><a href="#mise-projen.SettingsPython.property.defaultPackagesFile">defaultPackagesFile</a></code> | <code>string</code> | [deprecated] Requirements file that mise installs with pip into each new Python version. |
+| <code><a href="#mise-projen.SettingsPython.property.githubAttestations">githubAttestations</a></code> | <code>boolean</code> | Verify GitHub artifact attestations of precompiled Python builds from python-build-standalone. |
+| <code><a href="#mise-projen.SettingsPython.property.patchesDirectory">patchesDirectory</a></code> | <code>string</code> | Directory of per-version patches for the Python versions that python-build compiles. |
+| <code><a href="#mise-projen.SettingsPython.property.patchUrl">patchUrl</a></code> | <code>string</code> | URL of a patch that python-build applies to every Python version it compiles. |
+| <code><a href="#mise-projen.SettingsPython.property.precompiledArch">precompiledArch</a></code> | <code>string</code> | Architecture of the python-build-standalone build that mise downloads, such as `x86_64_v3` or `aarch64`. |
+| <code><a href="#mise-projen.SettingsPython.property.precompiledFlavor">precompiledFlavor</a></code> | <code>string</code> | Build flavor of python-build-standalone to download, such as `install_only` or `freethreaded-install_only_stripped`. |
+| <code><a href="#mise-projen.SettingsPython.property.precompiledOs">precompiledOs</a></code> | <code>string</code> | OS part of the python-build-standalone build name that mise downloads, such as `unknown-linux-musl`. |
+| <code><a href="#mise-projen.SettingsPython.property.pyenvRepo">pyenvRepo</a></code> | <code>string</code> | Git repository that mise clones pyenv from to get python-build. |
+| <code><a href="#mise-projen.SettingsPython.property.uvVenvAuto">uvVenvAuto</a></code> | <code><a href="#mise-projen.SettingsPythonUvVenvAuto">SettingsPythonUvVenvAuto</a></code> | Activate, and optionally create, the virtualenv of the uv project around the current directory. |
+| <code><a href="#mise-projen.SettingsPython.property.uvVenvCreateArgs">uvVenvCreateArgs</a></code> | <code>string[]</code> | Arguments for `uv venv` when mise creates a virtualenv with uv. |
+| <code><a href="#mise-projen.SettingsPython.property.venvCreateArgs">venvCreateArgs</a></code> | <code>string[]</code> | Arguments for `python -m venv` when `_.python.venv` creates a virtualenv without uv. |
+| <code><a href="#mise-projen.SettingsPython.property.venvStdlib">venvStdlib</a></code> | <code>boolean</code> | Create `_.python.venv` virtualenvs with `python -m venv` even when uv is installed. |
 
 ---
 
@@ -9855,9 +9873,7 @@ public readonly compile: boolean;
 
 - *Type:* boolean
 
-If true, compile python from source.
-
-If false, use precompiled binaries. If not set, use precompiled binaries if available.
+Compile Python from source with python-build instead of using a precompiled build.
 
 ---
 
@@ -9869,7 +9885,7 @@ public readonly defaultPackagesFile: string;
 
 - *Type:* string
 
-Path to a file containing default python packages to install when installing a python version.
+[deprecated] Requirements file that mise installs with pip into each new Python version.
 
 ---
 
@@ -9881,7 +9897,7 @@ public readonly githubAttestations: boolean;
 
 - *Type:* boolean
 
-Enable GitHub Artifact Attestations verification for precompiled Python binaries.
+Verify GitHub artifact attestations of precompiled Python builds from python-build-standalone.
 
 ---
 
@@ -9893,7 +9909,7 @@ public readonly patchesDirectory: string;
 
 - *Type:* string
 
-Directory to fetch python patches from.
+Directory of per-version patches for the Python versions that python-build compiles.
 
 ---
 
@@ -9905,7 +9921,7 @@ public readonly patchUrl: string;
 
 - *Type:* string
 
-URL to fetch python patches from to pass to python-build.
+URL of a patch that python-build applies to every Python version it compiles.
 
 ---
 
@@ -9917,7 +9933,7 @@ public readonly precompiledArch: string;
 
 - *Type:* string
 
-Specify the architecture to use for precompiled binaries.
+Architecture of the python-build-standalone build that mise downloads, such as `x86_64_v3` or `aarch64`.
 
 ---
 
@@ -9929,7 +9945,7 @@ public readonly precompiledFlavor: string;
 
 - *Type:* string
 
-Specify the flavor to use for precompiled binaries.
+Build flavor of python-build-standalone to download, such as `install_only` or `freethreaded-install_only_stripped`.
 
 ---
 
@@ -9941,7 +9957,7 @@ public readonly precompiledOs: string;
 
 - *Type:* string
 
-Specify the OS to use for precompiled binaries.
+OS part of the python-build-standalone build name that mise downloads, such as `unknown-linux-musl`.
 
 ---
 
@@ -9953,7 +9969,7 @@ public readonly pyenvRepo: string;
 
 - *Type:* string
 
-URL to fetch pyenv from for compiling python with python-build.
+Git repository that mise clones pyenv from to get python-build.
 
 ---
 
@@ -9965,7 +9981,7 @@ public readonly uvVenvAuto: SettingsPythonUvVenvAuto;
 
 - *Type:* <a href="#mise-projen.SettingsPythonUvVenvAuto">SettingsPythonUvVenvAuto</a>
 
-Integrate with uv to manage project venvs when uv.lock is present.
+Activate, and optionally create, the virtualenv of the uv project around the current directory.
 
 ---
 
@@ -9977,7 +9993,7 @@ public readonly uvVenvCreateArgs: string[];
 
 - *Type:* string[]
 
-Arguments to pass to uv when creating a venv.
+Arguments for `uv venv` when mise creates a virtualenv with uv.
 
 ---
 
@@ -9989,9 +10005,7 @@ public readonly venvCreateArgs: string[];
 
 - *Type:* string[]
 
-Arguments to pass to python when creating a venv.
-
-(not used for uv venv creation)
+Arguments for `python -m venv` when `_.python.venv` creates a virtualenv without uv.
 
 ---
 
@@ -10003,7 +10017,7 @@ public readonly venvStdlib: boolean;
 
 - *Type:* boolean
 
-Prefer to use venv from Python's standard library.
+Create `_.python.venv` virtualenvs with `python -m venv` even when uv is installed.
 
 ---
 
@@ -10021,20 +10035,20 @@ const settingsRuby: SettingsRuby = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#mise-projen.SettingsRuby.property.applyPatches">applyPatches</a></code> | <code>string</code> | A list of patch files or URLs to apply to ruby source. |
-| <code><a href="#mise-projen.SettingsRuby.property.compile">compile</a></code> | <code>boolean</code> | If true, compile ruby from source. |
-| <code><a href="#mise-projen.SettingsRuby.property.defaultPackagesFile">defaultPackagesFile</a></code> | <code>string</code> | Path to a file containing default ruby gems to install when installing ruby. |
-| <code><a href="#mise-projen.SettingsRuby.property.githubAttestations">githubAttestations</a></code> | <code>boolean</code> | Enable GitHub Artifact Attestations verification for precompiled Ruby binaries. |
-| <code><a href="#mise-projen.SettingsRuby.property.precompiledArch">precompiledArch</a></code> | <code>string</code> | Override architecture identifier for precompiled Ruby binaries. |
-| <code><a href="#mise-projen.SettingsRuby.property.precompiledOs">precompiledOs</a></code> | <code>string</code> | Override OS identifier for precompiled Ruby binaries. |
-| <code><a href="#mise-projen.SettingsRuby.property.precompiledUrl">precompiledUrl</a></code> | <code>string</code> | URL template or GitHub repo for precompiled Ruby binaries. |
-| <code><a href="#mise-projen.SettingsRuby.property.rubyBuildCliOpts">rubyBuildCliOpts</a></code> | <code>string</code> | CLI options passed directly to ruby-build before the version and install prefix. |
-| <code><a href="#mise-projen.SettingsRuby.property.rubyBuildOpts">rubyBuildOpts</a></code> | <code>string</code> | Configure arguments passed through ruby-build after `--`. |
-| <code><a href="#mise-projen.SettingsRuby.property.rubyBuildRepo">rubyBuildRepo</a></code> | <code>string</code> | The URL used to fetch ruby-build. |
-| <code><a href="#mise-projen.SettingsRuby.property.rubyInstall">rubyInstall</a></code> | <code>boolean</code> | Use ruby-install instead of ruby-build. |
-| <code><a href="#mise-projen.SettingsRuby.property.rubyInstallOpts">rubyInstallOpts</a></code> | <code>string</code> | Options to pass to ruby-install. |
-| <code><a href="#mise-projen.SettingsRuby.property.rubyInstallRepo">rubyInstallRepo</a></code> | <code>string</code> | The URL used to fetch ruby-install. |
-| <code><a href="#mise-projen.SettingsRuby.property.verboseInstall">verboseInstall</a></code> | <code>boolean</code> | Set to true to enable verbose output during ruby installation. |
+| <code><a href="#mise-projen.SettingsRuby.property.applyPatches">applyPatches</a></code> | <code>string</code> | Patch files or URLs to apply to the Ruby source before compiling it, one per line. |
+| <code><a href="#mise-projen.SettingsRuby.property.compile">compile</a></code> | <code>boolean</code> | Compile Ruby from source instead of using a precompiled build. |
+| <code><a href="#mise-projen.SettingsRuby.property.defaultPackagesFile">defaultPackagesFile</a></code> | <code>string</code> | [deprecated] File listing gems to install into each new Ruby version. |
+| <code><a href="#mise-projen.SettingsRuby.property.githubAttestations">githubAttestations</a></code> | <code>boolean</code> | Verify GitHub artifact attestations of precompiled Ruby builds. |
+| <code><a href="#mise-projen.SettingsRuby.property.precompiledArch">precompiledArch</a></code> | <code>string</code> | Architecture name of precompiled Ruby builds, such as `x86_64` or `arm64`, used with `ruby.precompiled_os`. |
+| <code><a href="#mise-projen.SettingsRuby.property.precompiledOs">precompiledOs</a></code> | <code>string</code> | OS name of precompiled Ruby builds, such as `linux`, used with `ruby.precompiled_arch`. |
+| <code><a href="#mise-projen.SettingsRuby.property.precompiledUrl">precompiledUrl</a></code> | <code>string</code> | GitHub repository, as `owner/repo`, or URL template that mise downloads precompiled Ruby builds from. |
+| <code><a href="#mise-projen.SettingsRuby.property.rubyBuildCliOpts">rubyBuildCliOpts</a></code> | <code>string</code> | Options for ruby-build itself, such as `--keep`, passed before the version and install directory. |
+| <code><a href="#mise-projen.SettingsRuby.property.rubyBuildOpts">rubyBuildOpts</a></code> | <code>string</code> | Arguments for Ruby's `configure`, such as `--enable-yjit`, passed through ruby-build. |
+| <code><a href="#mise-projen.SettingsRuby.property.rubyBuildRepo">rubyBuildRepo</a></code> | <code>string</code> | Git repository or ZIP archive URL that mise gets ruby-build from. |
+| <code><a href="#mise-projen.SettingsRuby.property.rubyInstall">rubyInstall</a></code> | <code>boolean</code> | Compile Ruby with ruby-install instead of ruby-build. |
+| <code><a href="#mise-projen.SettingsRuby.property.rubyInstallOpts">rubyInstallOpts</a></code> | <code>string</code> | Arguments for Ruby's `configure`, passed through ruby-install. |
+| <code><a href="#mise-projen.SettingsRuby.property.rubyInstallRepo">rubyInstallRepo</a></code> | <code>string</code> | Git repository or ZIP archive URL that mise gets ruby-install from. |
+| <code><a href="#mise-projen.SettingsRuby.property.verboseInstall">verboseInstall</a></code> | <code>boolean</code> | Show ruby-build's full output while compiling Ruby. |
 
 ---
 
@@ -10046,7 +10060,7 @@ public readonly applyPatches: string;
 
 - *Type:* string
 
-A list of patch files or URLs to apply to ruby source.
+Patch files or URLs to apply to the Ruby source before compiling it, one per line.
 
 ---
 
@@ -10058,9 +10072,7 @@ public readonly compile: boolean;
 
 - *Type:* boolean
 
-If true, compile ruby from source.
-
-If false, require precompiled binaries. If not set, use precompiled binaries if available.
+Compile Ruby from source instead of using a precompiled build.
 
 ---
 
@@ -10072,7 +10084,7 @@ public readonly defaultPackagesFile: string;
 
 - *Type:* string
 
-Path to a file containing default ruby gems to install when installing ruby.
+[deprecated] File listing gems to install into each new Ruby version.
 
 ---
 
@@ -10084,7 +10096,7 @@ public readonly githubAttestations: boolean;
 
 - *Type:* boolean
 
-Enable GitHub Artifact Attestations verification for precompiled Ruby binaries.
+Verify GitHub artifact attestations of precompiled Ruby builds.
 
 ---
 
@@ -10096,7 +10108,7 @@ public readonly precompiledArch: string;
 
 - *Type:* string
 
-Override architecture identifier for precompiled Ruby binaries.
+Architecture name of precompiled Ruby builds, such as `x86_64` or `arm64`, used with `ruby.precompiled_os`.
 
 ---
 
@@ -10108,7 +10120,7 @@ public readonly precompiledOs: string;
 
 - *Type:* string
 
-Override OS identifier for precompiled Ruby binaries.
+OS name of precompiled Ruby builds, such as `linux`, used with `ruby.precompiled_arch`.
 
 ---
 
@@ -10120,7 +10132,7 @@ public readonly precompiledUrl: string;
 
 - *Type:* string
 
-URL template or GitHub repo for precompiled Ruby binaries.
+GitHub repository, as `owner/repo`, or URL template that mise downloads precompiled Ruby builds from.
 
 ---
 
@@ -10132,7 +10144,7 @@ public readonly rubyBuildCliOpts: string;
 
 - *Type:* string
 
-CLI options passed directly to ruby-build before the version and install prefix.
+Options for ruby-build itself, such as `--keep`, passed before the version and install directory.
 
 ---
 
@@ -10144,7 +10156,7 @@ public readonly rubyBuildOpts: string;
 
 - *Type:* string
 
-Configure arguments passed through ruby-build after `--`.
+Arguments for Ruby's `configure`, such as `--enable-yjit`, passed through ruby-build.
 
 ---
 
@@ -10156,9 +10168,7 @@ public readonly rubyBuildRepo: string;
 
 - *Type:* string
 
-The URL used to fetch ruby-build.
-
-This accepts either a Git repository or a ZIP archive.
+Git repository or ZIP archive URL that mise gets ruby-build from.
 
 ---
 
@@ -10170,7 +10180,7 @@ public readonly rubyInstall: boolean;
 
 - *Type:* boolean
 
-Use ruby-install instead of ruby-build.
+Compile Ruby with ruby-install instead of ruby-build.
 
 ---
 
@@ -10182,7 +10192,7 @@ public readonly rubyInstallOpts: string;
 
 - *Type:* string
 
-Options to pass to ruby-install.
+Arguments for Ruby's `configure`, passed through ruby-install.
 
 ---
 
@@ -10194,9 +10204,7 @@ public readonly rubyInstallRepo: string;
 
 - *Type:* string
 
-The URL used to fetch ruby-install.
-
-This accepts either a Git repository or a ZIP archive.
+Git repository or ZIP archive URL that mise gets ruby-install from.
 
 ---
 
@@ -10208,7 +10216,7 @@ public readonly verboseInstall: boolean;
 
 - *Type:* boolean
 
-Set to true to enable verbose output during ruby installation.
+Show ruby-build's full output while compiling Ruby.
 
 ---
 
@@ -10226,9 +10234,9 @@ const settingsRust: SettingsRust = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#mise-projen.SettingsRust.property.cargoHome">cargoHome</a></code> | <code>string</code> | Path to the cargo home directory. |
-| <code><a href="#mise-projen.SettingsRust.property.defaultHost">defaultHost</a></code> | <code>string</code> | Default host triple to pass to `rustup init` via `--default-host`. |
-| <code><a href="#mise-projen.SettingsRust.property.rustupHome">rustupHome</a></code> | <code>string</code> | Path to the rustup home directory. |
+| <code><a href="#mise-projen.SettingsRust.property.cargoHome">cargoHome</a></code> | <code>string</code> | Directory used as `CARGO_HOME` for the Rust toolchains that mise manages. |
+| <code><a href="#mise-projen.SettingsRust.property.defaultHost">defaultHost</a></code> | <code>string</code> | Host triple that mise passes to `rustup init` as `--default-host`. |
+| <code><a href="#mise-projen.SettingsRust.property.rustupHome">rustupHome</a></code> | <code>string</code> | Directory used as `RUSTUP_HOME` for the Rust toolchains that mise manages. |
 
 ---
 
@@ -10239,11 +10247,8 @@ public readonly cargoHome: string;
 ```
 
 - *Type:* string
-- *Default:* cargo` or `%USERPROFILE%\.cargo`
 
-Path to the cargo home directory.
-
-Defaults to `~/.cargo` or `%USERPROFILE%\.cargo`
+Directory used as `CARGO_HOME` for the Rust toolchains that mise manages.
 
 ---
 
@@ -10255,7 +10260,7 @@ public readonly defaultHost: string;
 
 - *Type:* string
 
-Default host triple to pass to `rustup init` via `--default-host`.
+Host triple that mise passes to `rustup init` as `--default-host`.
 
 ---
 
@@ -10266,11 +10271,8 @@ public readonly rustupHome: string;
 ```
 
 - *Type:* string
-- *Default:* rustup` or `%USERPROFILE%\.rustup`
 
-Path to the rustup home directory.
-
-Defaults to `~/.rustup` or `%USERPROFILE%\.rustup`
+Directory used as `RUSTUP_HOME` for the Rust toolchains that mise manages.
 
 ---
 
@@ -10288,7 +10290,7 @@ const settingsSandbox: SettingsSandbox = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#mise-projen.SettingsSandbox.property.denyAll">denyAll</a></code> | <code>boolean</code> | Deny filesystem reads and writes, network access, and environment variable inheritance by default for `mise run` and `mise exec`. |
+| <code><a href="#mise-projen.SettingsSandbox.property.denyAll">denyAll</a></code> | <code>boolean</code> | Deny filesystem access, network access and inherited environment variables by default for `mise run` and `mise exec`. |
 | <code><a href="#mise-projen.SettingsSandbox.property.denyEnv">denyEnv</a></code> | <code>boolean</code> | Deny environment variable inheritance by default for `mise run` and `mise exec`. |
 | <code><a href="#mise-projen.SettingsSandbox.property.denyNet">denyNet</a></code> | <code>boolean</code> | Deny network access by default for `mise run` and `mise exec`. |
 | <code><a href="#mise-projen.SettingsSandbox.property.denyRead">denyRead</a></code> | <code>boolean</code> | Deny filesystem reads by default for `mise run` and `mise exec`. |
@@ -10304,7 +10306,7 @@ public readonly denyAll: boolean;
 
 - *Type:* boolean
 
-Deny filesystem reads and writes, network access, and environment variable inheritance by default for `mise run` and `mise exec`.
+Deny filesystem access, network access and inherited environment variables by default for `mise run` and `mise exec`.
 
 ---
 
@@ -10370,11 +10372,11 @@ const settingsSelfUpdate: SettingsSelfUpdate = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#mise-projen.SettingsSelfUpdate.property.apiUrl">apiUrl</a></code> | <code>string</code> | GitHub API base URL used by `mise self-update`. |
-| <code><a href="#mise-projen.SettingsSelfUpdate.property.auto">auto</a></code> | <code>boolean</code> | Automatically update mise before running eligible commands. |
-| <code><a href="#mise-projen.SettingsSelfUpdate.property.checkDuration">checkDuration</a></code> | <code>string</code> | How often to check for a new mise release when `self_update.auto` is enabled. |
-| <code><a href="#mise-projen.SettingsSelfUpdate.property.minimumReleaseAge">minimumReleaseAge</a></code> | <code>string</code> | Minimum release age for mise itself; |
-| <code><a href="#mise-projen.SettingsSelfUpdate.property.repository">repository</a></code> | <code>string</code> | GitHub repository used by `mise self-update`. |
+| <code><a href="#mise-projen.SettingsSelfUpdate.property.apiUrl">apiUrl</a></code> | <code>string</code> | GitHub API base URL that `mise self-update` gets mise releases from. |
+| <code><a href="#mise-projen.SettingsSelfUpdate.property.auto">auto</a></code> | <code>boolean</code> | Update mise automatically before running eligible commands. |
+| <code><a href="#mise-projen.SettingsSelfUpdate.property.checkDuration">checkDuration</a></code> | <code>string</code> | How often automatic updates check for a new mise release when `self_update.auto` is on. |
+| <code><a href="#mise-projen.SettingsSelfUpdate.property.minimumReleaseAge">minimumReleaseAge</a></code> | <code>string</code> | Skip mise releases published more recently than this, for `mise self-update` and automatic updates. |
+| <code><a href="#mise-projen.SettingsSelfUpdate.property.repository">repository</a></code> | <code>string</code> | GitHub repository, as `owner/repo`, that mise gets its own releases from. |
 
 ---
 
@@ -10386,7 +10388,7 @@ public readonly apiUrl: string;
 
 - *Type:* string
 
-GitHub API base URL used by `mise self-update`.
+GitHub API base URL that `mise self-update` gets mise releases from.
 
 ---
 
@@ -10398,7 +10400,7 @@ public readonly auto: boolean;
 
 - *Type:* boolean
 
-Automatically update mise before running eligible commands.
+Update mise automatically before running eligible commands.
 
 ---
 
@@ -10410,7 +10412,7 @@ public readonly checkDuration: string;
 
 - *Type:* string
 
-How often to check for a new mise release when `self_update.auto` is enabled.
+How often automatic updates check for a new mise release when `self_update.auto` is on.
 
 ---
 
@@ -10422,9 +10424,7 @@ public readonly minimumReleaseAge: string;
 
 - *Type:* string
 
-Minimum release age for mise itself;
-
-inherits minimum_release_age (24h by default).
+Skip mise releases published more recently than this, for `mise self-update` and automatic updates.
 
 ---
 
@@ -10436,7 +10436,7 @@ public readonly repository: string;
 
 - *Type:* string
 
-GitHub repository used by `mise self-update`.
+GitHub repository, as `owner/repo`, that mise gets its own releases from.
 
 ---
 
@@ -10454,7 +10454,7 @@ const settingsShims: SettingsShims = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#mise-projen.SettingsShims.property.exclude">exclude</a></code> | <code>string[]</code> | Command names mise should never create shims for, leaving them to the system. |
+| <code><a href="#mise-projen.SettingsShims.property.exclude">exclude</a></code> | <code>string[]</code> | Command names that mise never creates shims for, so they resolve to whatever else is on `PATH`. |
 
 ---
 
@@ -10466,7 +10466,7 @@ public readonly exclude: string[];
 
 - *Type:* string[]
 
-Command names mise should never create shims for, leaving them to the system.
+Command names that mise never creates shims for, so they resolve to whatever else is on `PATH`.
 
 ---
 
@@ -10487,7 +10487,7 @@ const settingsSkills: SettingsSkills = { ... }
 | <code><a href="#mise-projen.SettingsSkills.property.autoSync">autoSync</a></code> | <code>boolean</code> | Link the active tools' agent skills into the project after `mise install` and `mise use`. |
 | <code><a href="#mise-projen.SettingsSkills.property.dir">dir</a></code> | <code>string</code> | Where `mise skills sync` links skills: a path under the project root, or under the home directory with `--global`. |
 | <code><a href="#mise-projen.SettingsSkills.property.fetch">fetch</a></code> | <code>boolean</code> | Fetch the agent skills a tool's packslip declares when installing it. |
-| <code><a href="#mise-projen.SettingsSkills.property.prune">prune</a></code> | <code>boolean</code> | Remove links mise made for skills that are no longer active when syncing. |
+| <code><a href="#mise-projen.SettingsSkills.property.prune">prune</a></code> | <code>boolean</code> | Remove links mise made for skills that are no longer active, on every `mise skills sync`. |
 
 ---
 
@@ -10535,7 +10535,7 @@ public readonly prune: boolean;
 
 - *Type:* boolean
 
-Remove links mise made for skills that are no longer active when syncing.
+Remove links mise made for skills that are no longer active, on every `mise skills sync`.
 
 ---
 
@@ -10553,11 +10553,11 @@ const settingsSops: SettingsSops = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#mise-projen.SettingsSops.property.ageKey">ageKey</a></code> | <code>string</code> | The age private key to use for sops secret decryption. |
-| <code><a href="#mise-projen.SettingsSops.property.ageKeyFile">ageKeyFile</a></code> | <code>string</code> | Path to the age private key file for sops secret decryption. |
-| <code><a href="#mise-projen.SettingsSops.property.ageRecipients">ageRecipients</a></code> | <code>string</code> | The age public keys to use for sops secret encryption. |
-| <code><a href="#mise-projen.SettingsSops.property.rops">rops</a></code> | <code>boolean</code> | Use rops to decrypt sops files. |
-| <code><a href="#mise-projen.SettingsSops.property.strict">strict</a></code> | <code>boolean</code> | If true, fail when sops decryption fails (including when sops is not available, the key is missing, or the key is invalid). |
+| <code><a href="#mise-projen.SettingsSops.property.ageKey">ageKey</a></code> | <code>string</code> | Private age key for decrypting SOPS files, used before any other key source. |
+| <code><a href="#mise-projen.SettingsSops.property.ageKeyFile">ageKeyFile</a></code> | <code>string</code> | Path of an age key file for decrypting SOPS files, used after `sops.age_key` and before `SOPS_AGE_KEY_FILE`. |
+| <code><a href="#mise-projen.SettingsSops.property.ageRecipients">ageRecipients</a></code> | <code>string</code> | [deprecated] Has no effect; |
+| <code><a href="#mise-projen.SettingsSops.property.rops">rops</a></code> | <code>boolean</code> | Decrypt SOPS files with mise's built-in rops library instead of the `sops` CLI. |
+| <code><a href="#mise-projen.SettingsSops.property.strict">strict</a></code> | <code>boolean</code> | Fail when a SOPS file cannot be decrypted, instead of skipping it. |
 
 ---
 
@@ -10569,9 +10569,7 @@ public readonly ageKey: string;
 
 - *Type:* string
 
-The age private key to use for sops secret decryption.
-
-Takes precedence over standard SOPS_AGE_KEY environment variable.
+Private age key for decrypting SOPS files, used before any other key source.
 
 ---
 
@@ -10583,9 +10581,7 @@ public readonly ageKeyFile: string;
 
 - *Type:* string
 
-Path to the age private key file for sops secret decryption.
-
-Takes precedence over standard SOPS_AGE_KEY_FILE environment variable.
+Path of an age key file for decrypting SOPS files, used after `sops.age_key` and before `SOPS_AGE_KEY_FILE`.
 
 ---
 
@@ -10597,7 +10593,9 @@ public readonly ageRecipients: string;
 
 - *Type:* string
 
-The age public keys to use for sops secret encryption.
+[deprecated] Has no effect;
+
+mise does not encrypt sops files.
 
 ---
 
@@ -10609,9 +10607,7 @@ public readonly rops: boolean;
 
 - *Type:* boolean
 
-Use rops to decrypt sops files.
-
-Disable to shell out to `sops` which will slow down mise but sops may offer features not available in rops. Required for TOML SOPS files because the sops CLI does not support TOML.
+Decrypt SOPS files with mise's built-in rops library instead of the `sops` CLI.
 
 ---
 
@@ -10623,9 +10619,7 @@ public readonly strict: boolean;
 
 - *Type:* boolean
 
-If true, fail when sops decryption fails (including when sops is not available, the key is missing, or the key is invalid).
-
-If false, skip decryption and continue in these cases.
+Fail when a SOPS file cannot be decrypted, instead of skipping it.
 
 ---
 
@@ -10643,7 +10637,7 @@ const settingsSpm: SettingsSpm = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#mise-projen.SettingsSpm.property.artifactbundleOnly">artifactbundleOnly</a></code> | <code>boolean</code> | Only use SwiftPM artifact bundles for installation, fail if no matching bundle is available. |
+| <code><a href="#mise-projen.SettingsSpm.property.artifactbundleOnly">artifactbundleOnly</a></code> | <code>boolean</code> | Install `spm:` tools only from prebuilt artifact bundles, and fail instead of building from source. |
 
 ---
 
@@ -10655,7 +10649,7 @@ public readonly artifactbundleOnly: boolean;
 
 - *Type:* boolean
 
-Only use SwiftPM artifact bundles for installation, fail if no matching bundle is available.
+Install `spm:` tools only from prebuilt artifact bundles, and fail instead of building from source.
 
 ---
 
@@ -10673,23 +10667,23 @@ const settingsStatus: SettingsStatus = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#mise-projen.SettingsStatus.property.missingTools">missingTools</a></code> | <code>string</code> | Show a warning if tools are not installed when entering a directory with a mise.toml file. |
-| <code><a href="#mise-projen.SettingsStatus.property.showDepsStale">showDepsStale</a></code> | <code>boolean</code> | Show warning when deps providers have stale dependencies. |
-| <code><a href="#mise-projen.SettingsStatus.property.showEnv">showEnv</a></code> | <code>boolean</code> | Show configured env vars when entering a directory with a mise.toml file. |
-| <code><a href="#mise-projen.SettingsStatus.property.showTools">showTools</a></code> | <code>boolean</code> | Show configured tools when entering a directory with a mise.toml file. |
-| <code><a href="#mise-projen.SettingsStatus.property.truncate">truncate</a></code> | <code>boolean</code> | Truncate status messages. |
+| <code><a href="#mise-projen.SettingsStatus.property.missingTools">missingTools</a></code> | <code><a href="#mise-projen.SettingsStatusMissingTools">SettingsStatusMissingTools</a></code> | When to warn that tools requested by config are not installed. |
+| <code><a href="#mise-projen.SettingsStatus.property.showDepsStale">showDepsStale</a></code> | <code>boolean</code> | Warn in an activated shell when a `[deps]` provider with `auto = true` is out of date. |
+| <code><a href="#mise-projen.SettingsStatus.property.showEnv">showEnv</a></code> | <code>boolean</code> | When you change directories in an activated shell, list the environment variables that mise adds, changes or removes. |
+| <code><a href="#mise-projen.SettingsStatus.property.showTools">showTools</a></code> | <code>boolean</code> | When you change directories in an activated shell, list the tool versions that become active or inactive. |
+| <code><a href="#mise-projen.SettingsStatus.property.truncate">truncate</a></code> | <code>boolean</code> | Cut the lines from `status.show_env` and `status.show_tools` to the terminal width. |
 
 ---
 
 ##### `missingTools`<sup>Optional</sup> <a name="missingTools" id="mise-projen.SettingsStatus.property.missingTools"></a>
 
 ```typescript
-public readonly missingTools: string;
+public readonly missingTools: SettingsStatusMissingTools;
 ```
 
-- *Type:* string
+- *Type:* <a href="#mise-projen.SettingsStatusMissingTools">SettingsStatusMissingTools</a>
 
-Show a warning if tools are not installed when entering a directory with a mise.toml file.
+When to warn that tools requested by config are not installed.
 
 ---
 
@@ -10701,7 +10695,7 @@ public readonly showDepsStale: boolean;
 
 - *Type:* boolean
 
-Show warning when deps providers have stale dependencies.
+Warn in an activated shell when a `[deps]` provider with `auto = true` is out of date.
 
 ---
 
@@ -10713,7 +10707,7 @@ public readonly showEnv: boolean;
 
 - *Type:* boolean
 
-Show configured env vars when entering a directory with a mise.toml file.
+When you change directories in an activated shell, list the environment variables that mise adds, changes or removes.
 
 ---
 
@@ -10725,7 +10719,7 @@ public readonly showTools: boolean;
 
 - *Type:* boolean
 
-Show configured tools when entering a directory with a mise.toml file.
+When you change directories in an activated shell, list the tool versions that become active or inactive.
 
 ---
 
@@ -10737,7 +10731,7 @@ public readonly truncate: boolean;
 
 - *Type:* boolean
 
-Truncate status messages.
+Cut the lines from `status.show_env` and `status.show_tools` to the terminal width.
 
 ---
 
@@ -10755,8 +10749,8 @@ const settingsSwift: SettingsSwift = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#mise-projen.SettingsSwift.property.gpgVerify">gpgVerify</a></code> | <code>boolean</code> | Verify OpenPGP signatures for swift (built-in, no external gpg required). |
-| <code><a href="#mise-projen.SettingsSwift.property.platform">platform</a></code> | <code>string</code> | Override the distro build to use for precompiled binaries. |
+| <code><a href="#mise-projen.SettingsSwift.property.gpgVerify">gpgVerify</a></code> | <code>boolean</code> | Verify the OpenPGP signature of Swift downloads on Linux. |
+| <code><a href="#mise-projen.SettingsSwift.property.platform">platform</a></code> | <code>string</code> | Linux distribution build of Swift to download, such as `ubuntu24.04` or `fedora41`. |
 
 ---
 
@@ -10768,9 +10762,7 @@ public readonly gpgVerify: boolean;
 
 - *Type:* boolean
 
-Verify OpenPGP signatures for swift (built-in, no external gpg required).
-
-Set to false to disable.
+Verify the OpenPGP signature of Swift downloads on Linux.
 
 ---
 
@@ -10782,9 +10774,7 @@ public readonly platform: string;
 
 - *Type:* string
 
-Override the distro build to use for precompiled binaries.
-
-By default the distro is detected and matched against what the Swift release actually publishes, which changes from release to release. Set this to force a specific build, or to install without reaching swift.org's release index.
+Linux distribution build of Swift to download, such as `ubuntu24.04` or `fedora41`.
 
 ---
 
@@ -10802,8 +10792,8 @@ const settingsSystemPackages: SettingsSystemPackages = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#mise-projen.SettingsSystemPackages.property.managers">managers</a></code> | <code>string[]</code> | Restrict which system package managers mise will use. |
-| <code><a href="#mise-projen.SettingsSystemPackages.property.sudo">sudo</a></code> | <code>boolean</code> | Allow `mise bootstrap` and `mise install --system` to elevate with sudo when not running as root. |
+| <code><a href="#mise-projen.SettingsSystemPackages.property.managers">managers</a></code> | <code>string[]</code> | Package managers that mise may use for `[bootstrap.packages]` and missing plugin dependencies. |
+| <code><a href="#mise-projen.SettingsSystemPackages.property.sudo">sudo</a></code> | <code>boolean</code> | Let mise run `sudo` for steps that need root, such as system packages and `mise install --system`. |
 
 ---
 
@@ -10815,7 +10805,7 @@ public readonly managers: string[];
 
 - *Type:* string[]
 
-Restrict which system package managers mise will use.
+Package managers that mise may use for `[bootstrap.packages]` and missing plugin dependencies.
 
 ---
 
@@ -10827,7 +10817,7 @@ public readonly sudo: boolean;
 
 - *Type:* boolean
 
-Allow `mise bootstrap` and `mise install --system` to elevate with sudo when not running as root.
+Let mise run `sudo` for steps that need root, such as system packages and `mise install --system`.
 
 ---
 
@@ -10845,33 +10835,33 @@ const settingsTask: SettingsTask = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#mise-projen.SettingsTask.property.autoInfer">autoInfer</a></code> | <code>string[]</code> | [experimental] Workspace providers from which to automatically infer tasks. |
+| <code><a href="#mise-projen.SettingsTask.property.autoInfer">autoInfer</a></code> | <code>string[]</code> | [experimental] Workspace providers whose package scripts mise imports as tasks, such as `node`. |
 | <code><a href="#mise-projen.SettingsTask.property.cache">cache</a></code> | <code><a href="#mise-projen.SettingsTaskCache">SettingsTaskCache</a></code> | *No description.* |
-| <code><a href="#mise-projen.SettingsTask.property.cacheDir">cacheDir</a></code> | <code>string</code> | [experimental] Directory for task output cache artifacts. |
-| <code><a href="#mise-projen.SettingsTask.property.cacheMaxAge">cacheMaxAge</a></code> | <code>string</code> | [experimental] Maximum age of task output cache entries since their last access. |
-| <code><a href="#mise-projen.SettingsTask.property.cacheMaxSize">cacheMaxSize</a></code> | <code>string</code> | [experimental] Maximum total size of task output cache entries. |
-| <code><a href="#mise-projen.SettingsTask.property.cacheRemoteMode">cacheRemoteMode</a></code> | <code><a href="#mise-projen.SettingsTaskCacheRemoteMode">SettingsTaskCacheRemoteMode</a></code> | Compatibility alias for task.cache.remote_mode. |
-| <code><a href="#mise-projen.SettingsTask.property.cacheRemoteNamespace">cacheRemoteNamespace</a></code> | <code>string</code> | Compatibility alias for task.cache.remote_namespace. |
-| <code><a href="#mise-projen.SettingsTask.property.cacheRemoteOidcAudience">cacheRemoteOidcAudience</a></code> | <code>string</code> | Compatibility alias for task.cache.remote_oidc_audience. |
-| <code><a href="#mise-projen.SettingsTask.property.cacheRemoteToken">cacheRemoteToken</a></code> | <code>string</code> | Compatibility alias for task.cache.remote_token. |
-| <code><a href="#mise-projen.SettingsTask.property.cacheRemoteTokenFile">cacheRemoteTokenFile</a></code> | <code>string</code> | Compatibility alias for task.cache.remote_token_file. |
-| <code><a href="#mise-projen.SettingsTask.property.cacheRemoteUrl">cacheRemoteUrl</a></code> | <code>string</code> | Compatibility alias for task.cache.remote_url. |
-| <code><a href="#mise-projen.SettingsTask.property.disablePaths">disablePaths</a></code> | <code>string[]</code> | Paths that mise will not look for tasks in. |
-| <code><a href="#mise-projen.SettingsTask.property.disableSpecFromRunScripts">disableSpecFromRunScripts</a></code> | <code>boolean</code> | Opt out of parsing task run scripts to infer the usage spec (arguments and flags). |
-| <code><a href="#mise-projen.SettingsTask.property.monorepoDepth">monorepoDepth</a></code> | <code>number</code> | Maximum depth to search for task files in monorepo subdirectories. |
-| <code><a href="#mise-projen.SettingsTask.property.monorepoExcludeDirs">monorepoExcludeDirs</a></code> | <code>string[]</code> | Directory patterns to exclude when discovering monorepo subdirectories. |
-| <code><a href="#mise-projen.SettingsTask.property.monorepoRespectGitignore">monorepoRespectGitignore</a></code> | <code>boolean</code> | Whether to respect .gitignore files when discovering monorepo subdirectories. |
-| <code><a href="#mise-projen.SettingsTask.property.output">output</a></code> | <code><a href="#mise-projen.SettingsTaskOutput">SettingsTaskOutput</a></code> | Change output style when executing tasks. |
-| <code><a href="#mise-projen.SettingsTask.property.quiet">quiet</a></code> | <code>boolean</code> | Suppress mise's own output while executing tasks. |
-| <code><a href="#mise-projen.SettingsTask.property.remoteNoCache">remoteNoCache</a></code> | <code>boolean</code> | Mise will always fetch the latest tasks from the remote, by default the cache is used. |
-| <code><a href="#mise-projen.SettingsTask.property.runAutoInstall">runAutoInstall</a></code> | <code>boolean</code> | Automatically install missing tools when executing tasks. |
-| <code><a href="#mise-projen.SettingsTask.property.showFullCmd">showFullCmd</a></code> | <code>boolean</code> | Disable truncation of command lines in task execution output. |
-| <code><a href="#mise-projen.SettingsTask.property.skip">skip</a></code> | <code>string[]</code> | Tasks to skip when running `mise run`. |
-| <code><a href="#mise-projen.SettingsTask.property.skipDepends">skipDepends</a></code> | <code>boolean</code> | Run only specified tasks skipping all dependencies. |
-| <code><a href="#mise-projen.SettingsTask.property.sourceFreshnessEqualMtimeIsFresh">sourceFreshnessEqualMtimeIsFresh</a></code> | <code>boolean</code> | When source mtime equals output mtime, consider sources fresh (use <=). |
-| <code><a href="#mise-projen.SettingsTask.property.sourceFreshnessHashContents">sourceFreshnessHashContents</a></code> | <code>boolean</code> | Use content hashing (blake3) instead of metadata for source freshness. |
-| <code><a href="#mise-projen.SettingsTask.property.timeout">timeout</a></code> | <code>string</code> | Default timeout for tasks. |
-| <code><a href="#mise-projen.SettingsTask.property.timings">timings</a></code> | <code>boolean</code> | Show completion message with elapsed time for each task on `mise run`. |
+| <code><a href="#mise-projen.SettingsTask.property.cacheDir">cacheDir</a></code> | <code>string</code> | [experimental] Directory for the task artifact cache. |
+| <code><a href="#mise-projen.SettingsTask.property.cacheMaxAge">cacheMaxAge</a></code> | <code>string</code> | [experimental] Remove task artifact cache entries that have not been used for this long. |
+| <code><a href="#mise-projen.SettingsTask.property.cacheMaxSize">cacheMaxSize</a></code> | <code>string</code> | [experimental] Maximum total size of the task artifact cache, such as `500MB` or `2GiB`. |
+| <code><a href="#mise-projen.SettingsTask.property.cacheRemoteMode">cacheRemoteMode</a></code> | <code><a href="#mise-projen.SettingsTaskCacheRemoteMode">SettingsTaskCacheRemoteMode</a></code> | Deprecated alias for `task.cache.remote_mode`. |
+| <code><a href="#mise-projen.SettingsTask.property.cacheRemoteNamespace">cacheRemoteNamespace</a></code> | <code>string</code> | Deprecated alias for `task.cache.remote_namespace`. |
+| <code><a href="#mise-projen.SettingsTask.property.cacheRemoteOidcAudience">cacheRemoteOidcAudience</a></code> | <code>string</code> | Deprecated alias for `task.cache.remote_oidc_audience`. |
+| <code><a href="#mise-projen.SettingsTask.property.cacheRemoteToken">cacheRemoteToken</a></code> | <code>string</code> | Deprecated alias for `task.cache.remote_token`. |
+| <code><a href="#mise-projen.SettingsTask.property.cacheRemoteTokenFile">cacheRemoteTokenFile</a></code> | <code>string</code> | Deprecated alias for `task.cache.remote_token_file`. |
+| <code><a href="#mise-projen.SettingsTask.property.cacheRemoteUrl">cacheRemoteUrl</a></code> | <code>string</code> | Deprecated alias for `task.cache.remote_url`. |
+| <code><a href="#mise-projen.SettingsTask.property.disablePaths">disablePaths</a></code> | <code>string[]</code> | Paths that mise does not look for tasks in. |
+| <code><a href="#mise-projen.SettingsTask.property.disableSpecFromRunScripts">disableSpecFromRunScripts</a></code> | <code>boolean</code> | Build task usage specs only from the `usage` field, ignoring deprecated `arg()`, `option()` and `flag()` in run scripts. |
+| <code><a href="#mise-projen.SettingsTask.property.monorepoDepth">monorepoDepth</a></code> | <code>number</code> | Maximum directory depth for automatic monorepo discovery, which is deprecated. |
+| <code><a href="#mise-projen.SettingsTask.property.monorepoExcludeDirs">monorepoExcludeDirs</a></code> | <code>string[]</code> | Directory names that automatic monorepo discovery skips. |
+| <code><a href="#mise-projen.SettingsTask.property.monorepoRespectGitignore">monorepoRespectGitignore</a></code> | <code>boolean</code> | Skip directories that `.gitignore` files ignore during automatic monorepo discovery. |
+| <code><a href="#mise-projen.SettingsTask.property.output">output</a></code> | <code><a href="#mise-projen.SettingsTaskOutput">SettingsTaskOutput</a></code> | Default output style for `mise run`. |
+| <code><a href="#mise-projen.SettingsTask.property.quiet">quiet</a></code> | <code>boolean</code> | Hide mise's own messages while tasks run, without changing other mise commands. |
+| <code><a href="#mise-projen.SettingsTask.property.remoteNoCache">remoteNoCache</a></code> | <code>boolean</code> | Download remote task files and task includes on every run instead of using the cached copy. |
+| <code><a href="#mise-projen.SettingsTask.property.runAutoInstall">runAutoInstall</a></code> | <code>boolean</code> | Install missing tools automatically before tasks run. |
+| <code><a href="#mise-projen.SettingsTask.property.showFullCmd">showFullCmd</a></code> | <code>boolean</code> | Print each task's full command line instead of truncating it to the terminal width. |
+| <code><a href="#mise-projen.SettingsTask.property.skip">skip</a></code> | <code>string[]</code> | Names of tasks that `mise run` skips. |
+| <code><a href="#mise-projen.SettingsTask.property.skipDepends">skipDepends</a></code> | <code>boolean</code> | Run only the tasks named on the command line, skipping their dependencies; |
+| <code><a href="#mise-projen.SettingsTask.property.sourceFreshnessEqualMtimeIsFresh">sourceFreshnessEqualMtimeIsFresh</a></code> | <code>boolean</code> | Treat a task as up to date when its newest source and its outputs have the same modification time. |
+| <code><a href="#mise-projen.SettingsTask.property.sourceFreshnessHashContents">sourceFreshnessHashContents</a></code> | <code>boolean</code> | Decide whether a task's sources changed by hashing their contents instead of comparing modification times. |
+| <code><a href="#mise-projen.SettingsTask.property.timeout">timeout</a></code> | <code>string</code> | Time limit for a whole `mise run` invocation, across every task it runs. |
+| <code><a href="#mise-projen.SettingsTask.property.timings">timings</a></code> | <code>boolean</code> | Print each task's elapsed time when it finishes. |
 
 ---
 
@@ -10883,7 +10873,7 @@ public readonly autoInfer: string[];
 
 - *Type:* string[]
 
-[experimental] Workspace providers from which to automatically infer tasks.
+[experimental] Workspace providers whose package scripts mise imports as tasks, such as `node`.
 
 ---
 
@@ -10905,7 +10895,7 @@ public readonly cacheDir: string;
 
 - *Type:* string
 
-[experimental] Directory for task output cache artifacts.
+[experimental] Directory for the task artifact cache.
 
 ---
 
@@ -10917,7 +10907,7 @@ public readonly cacheMaxAge: string;
 
 - *Type:* string
 
-[experimental] Maximum age of task output cache entries since their last access.
+[experimental] Remove task artifact cache entries that have not been used for this long.
 
 ---
 
@@ -10929,7 +10919,7 @@ public readonly cacheMaxSize: string;
 
 - *Type:* string
 
-[experimental] Maximum total size of task output cache entries.
+[experimental] Maximum total size of the task artifact cache, such as `500MB` or `2GiB`.
 
 ---
 
@@ -10941,7 +10931,7 @@ public readonly cacheRemoteMode: SettingsTaskCacheRemoteMode;
 
 - *Type:* <a href="#mise-projen.SettingsTaskCacheRemoteMode">SettingsTaskCacheRemoteMode</a>
 
-Compatibility alias for task.cache.remote_mode.
+Deprecated alias for `task.cache.remote_mode`.
 
 ---
 
@@ -10953,7 +10943,7 @@ public readonly cacheRemoteNamespace: string;
 
 - *Type:* string
 
-Compatibility alias for task.cache.remote_namespace.
+Deprecated alias for `task.cache.remote_namespace`.
 
 ---
 
@@ -10965,7 +10955,7 @@ public readonly cacheRemoteOidcAudience: string;
 
 - *Type:* string
 
-Compatibility alias for task.cache.remote_oidc_audience.
+Deprecated alias for `task.cache.remote_oidc_audience`.
 
 ---
 
@@ -10977,7 +10967,7 @@ public readonly cacheRemoteToken: string;
 
 - *Type:* string
 
-Compatibility alias for task.cache.remote_token.
+Deprecated alias for `task.cache.remote_token`.
 
 ---
 
@@ -10989,7 +10979,7 @@ public readonly cacheRemoteTokenFile: string;
 
 - *Type:* string
 
-Compatibility alias for task.cache.remote_token_file.
+Deprecated alias for `task.cache.remote_token_file`.
 
 ---
 
@@ -11001,7 +10991,7 @@ public readonly cacheRemoteUrl: string;
 
 - *Type:* string
 
-Compatibility alias for task.cache.remote_url.
+Deprecated alias for `task.cache.remote_url`.
 
 ---
 
@@ -11013,7 +11003,7 @@ public readonly disablePaths: string[];
 
 - *Type:* string[]
 
-Paths that mise will not look for tasks in.
+Paths that mise does not look for tasks in.
 
 ---
 
@@ -11025,9 +11015,7 @@ public readonly disableSpecFromRunScripts: boolean;
 
 - *Type:* boolean
 
-Opt out of parsing task run scripts to infer the usage spec (arguments and flags).
-
-When enabled, mise will derive the usage spec only from the `usage` field, ignoring any `arg()`, `option()`, or `flag()` templates used in run scripts. This can restore previous behavior and avoid the extra template pass over run scripts when collecting specs.
+Build task usage specs only from the `usage` field, ignoring deprecated `arg()`, `option()` and `flag()` in run scripts.
 
 ---
 
@@ -11039,7 +11027,7 @@ public readonly monorepoDepth: number;
 
 - *Type:* number
 
-Maximum depth to search for task files in monorepo subdirectories.
+Maximum directory depth for automatic monorepo discovery, which is deprecated.
 
 ---
 
@@ -11051,7 +11039,7 @@ public readonly monorepoExcludeDirs: string[];
 
 - *Type:* string[]
 
-Directory patterns to exclude when discovering monorepo subdirectories.
+Directory names that automatic monorepo discovery skips.
 
 ---
 
@@ -11063,7 +11051,7 @@ public readonly monorepoRespectGitignore: boolean;
 
 - *Type:* boolean
 
-Whether to respect .gitignore files when discovering monorepo subdirectories.
+Skip directories that `.gitignore` files ignore during automatic monorepo discovery.
 
 ---
 
@@ -11075,7 +11063,7 @@ public readonly output: SettingsTaskOutput;
 
 - *Type:* <a href="#mise-projen.SettingsTaskOutput">SettingsTaskOutput</a>
 
-Change output style when executing tasks.
+Default output style for `mise run`.
 
 ---
 
@@ -11087,7 +11075,7 @@ public readonly quiet: boolean;
 
 - *Type:* boolean
 
-Suppress mise's own output while executing tasks.
+Hide mise's own messages while tasks run, without changing other mise commands.
 
 ---
 
@@ -11099,7 +11087,7 @@ public readonly remoteNoCache: boolean;
 
 - *Type:* boolean
 
-Mise will always fetch the latest tasks from the remote, by default the cache is used.
+Download remote task files and task includes on every run instead of using the cached copy.
 
 ---
 
@@ -11111,7 +11099,7 @@ public readonly runAutoInstall: boolean;
 
 - *Type:* boolean
 
-Automatically install missing tools when executing tasks.
+Install missing tools automatically before tasks run.
 
 ---
 
@@ -11123,9 +11111,7 @@ public readonly showFullCmd: boolean;
 
 - *Type:* boolean
 
-Disable truncation of command lines in task execution output.
-
-When true, the full command line will be shown.
+Print each task's full command line instead of truncating it to the terminal width.
 
 ---
 
@@ -11137,7 +11123,7 @@ public readonly skip: string[];
 
 - *Type:* string[]
 
-Tasks to skip when running `mise run`.
+Names of tasks that `mise run` skips.
 
 ---
 
@@ -11149,7 +11135,9 @@ public readonly skipDepends: boolean;
 
 - *Type:* boolean
 
-Run only specified tasks skipping all dependencies.
+Run only the tasks named on the command line, skipping their dependencies;
+
+same as `mise run --skip-deps`.
 
 ---
 
@@ -11161,9 +11149,7 @@ public readonly sourceFreshnessEqualMtimeIsFresh: boolean;
 
 - *Type:* boolean
 
-When source mtime equals output mtime, consider sources fresh (use <=).
-
-Default false uses strict < comparison.
+Treat a task as up to date when its newest source and its outputs have the same modification time.
 
 ---
 
@@ -11175,9 +11161,7 @@ public readonly sourceFreshnessHashContents: boolean;
 
 - *Type:* boolean
 
-Use content hashing (blake3) instead of metadata for source freshness.
-
-More accurate but slower.
+Decide whether a task's sources changed by hashing their contents instead of comparing modification times.
 
 ---
 
@@ -11189,7 +11173,7 @@ public readonly timeout: string;
 
 - *Type:* string
 
-Default timeout for tasks.
+Time limit for a whole `mise run` invocation, across every task it runs.
 
 ---
 
@@ -11201,9 +11185,7 @@ public readonly timings: boolean;
 
 - *Type:* boolean
 
-Show completion message with elapsed time for each task on `mise run`.
-
-Default shows when output type is `prefix`.
+Print each task's elapsed time when it finishes.
 
 ---
 
@@ -11221,14 +11203,14 @@ const settingsTaskCache: SettingsTaskCache = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#mise-projen.SettingsTaskCache.property.auditReport">auditReport</a></code> | <code>string</code> | [experimental] File to write the complete task cache audit report to. |
-| <code><a href="#mise-projen.SettingsTaskCache.property.remoteMode">remoteMode</a></code> | <code><a href="#mise-projen.SettingsTaskCacheRemoteMode">SettingsTaskCacheRemoteMode</a></code> | [experimental] Remote task and action cache access mode. |
-| <code><a href="#mise-projen.SettingsTaskCache.property.remoteNamespace">remoteNamespace</a></code> | <code>string</code> | [experimental] Namespace sent to the remote build cache. |
-| <code><a href="#mise-projen.SettingsTaskCache.property.remoteOidcAudience">remoteOidcAudience</a></code> | <code>string</code> | [experimental] Audience for an automatically acquired remote cache OIDC token. |
-| <code><a href="#mise-projen.SettingsTaskCache.property.remoteToken">remoteToken</a></code> | <code>string</code> | [experimental] Bearer token for remote build-cache authentication. |
-| <code><a href="#mise-projen.SettingsTaskCache.property.remoteTokenFile">remoteTokenFile</a></code> | <code>string</code> | [experimental] File containing a remote build-cache bearer token. |
-| <code><a href="#mise-projen.SettingsTaskCache.property.remoteUrl">remoteUrl</a></code> | <code>string</code> | [experimental] Base URL for the remote build-cache service. |
-| <code><a href="#mise-projen.SettingsTaskCache.property.statsReport">statsReport</a></code> | <code>string</code> | [experimental] File to write action-cache session statistics to. |
+| <code><a href="#mise-projen.SettingsTaskCache.property.auditReport">auditReport</a></code> | <code>string</code> | [experimental] File that receives every undeclared path found by the `cache.audit` task option. |
+| <code><a href="#mise-projen.SettingsTaskCache.property.remoteMode">remoteMode</a></code> | <code><a href="#mise-projen.SettingsTaskCacheRemoteMode">SettingsTaskCacheRemoteMode</a></code> | [experimental] How mise uses the remote task cache server. |
+| <code><a href="#mise-projen.SettingsTaskCache.property.remoteNamespace">remoteNamespace</a></code> | <code>string</code> | [experimental] Namespace that keeps this project's entries apart on the remote task cache server. |
+| <code><a href="#mise-projen.SettingsTaskCache.property.remoteOidcAudience">remoteOidcAudience</a></code> | <code>string</code> | [experimental] Audience of the GitHub Actions OIDC token that mise requests for the remote task cache. |
+| <code><a href="#mise-projen.SettingsTaskCache.property.remoteToken">remoteToken</a></code> | <code>string</code> | [experimental] Bearer token that mise sends to the remote task cache server. |
+| <code><a href="#mise-projen.SettingsTaskCache.property.remoteTokenFile">remoteTokenFile</a></code> | <code>string</code> | [experimental] File that mise reads the remote task cache token from before each request. |
+| <code><a href="#mise-projen.SettingsTaskCache.property.remoteUrl">remoteUrl</a></code> | <code>string</code> | [experimental] Base URL of the remote task cache server. |
+| <code><a href="#mise-projen.SettingsTaskCache.property.statsReport">statsReport</a></code> | <code>string</code> | [deprecated] Has no effect since the built-in action cache was removed. |
 
 ---
 
@@ -11240,7 +11222,7 @@ public readonly auditReport: string;
 
 - *Type:* string
 
-[experimental] File to write the complete task cache audit report to.
+[experimental] File that receives every undeclared path found by the `cache.audit` task option.
 
 ---
 
@@ -11252,7 +11234,7 @@ public readonly remoteMode: SettingsTaskCacheRemoteMode;
 
 - *Type:* <a href="#mise-projen.SettingsTaskCacheRemoteMode">SettingsTaskCacheRemoteMode</a>
 
-[experimental] Remote task and action cache access mode.
+[experimental] How mise uses the remote task cache server.
 
 ---
 
@@ -11264,7 +11246,7 @@ public readonly remoteNamespace: string;
 
 - *Type:* string
 
-[experimental] Namespace sent to the remote build cache.
+[experimental] Namespace that keeps this project's entries apart on the remote task cache server.
 
 ---
 
@@ -11276,7 +11258,7 @@ public readonly remoteOidcAudience: string;
 
 - *Type:* string
 
-[experimental] Audience for an automatically acquired remote cache OIDC token.
+[experimental] Audience of the GitHub Actions OIDC token that mise requests for the remote task cache.
 
 ---
 
@@ -11288,7 +11270,7 @@ public readonly remoteToken: string;
 
 - *Type:* string
 
-[experimental] Bearer token for remote build-cache authentication.
+[experimental] Bearer token that mise sends to the remote task cache server.
 
 ---
 
@@ -11300,7 +11282,7 @@ public readonly remoteTokenFile: string;
 
 - *Type:* string
 
-[experimental] File containing a remote build-cache bearer token.
+[experimental] File that mise reads the remote task cache token from before each request.
 
 ---
 
@@ -11312,7 +11294,7 @@ public readonly remoteUrl: string;
 
 - *Type:* string
 
-[experimental] Base URL for the remote build-cache service.
+[experimental] Base URL of the remote task cache server.
 
 ---
 
@@ -11324,7 +11306,7 @@ public readonly statsReport: string;
 
 - *Type:* string
 
-[experimental] File to write action-cache session statistics to.
+[deprecated] Has no effect since the built-in action cache was removed.
 
 ---
 
@@ -11342,7 +11324,7 @@ const settingsToolUpdate: SettingsToolUpdate = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#mise-projen.SettingsToolUpdate.property.checkDuration">checkDuration</a></code> | <code>string</code> | How often to check for updates to a global tool with `auto_update = true`. |
+| <code><a href="#mise-projen.SettingsToolUpdate.property.checkDuration">checkDuration</a></code> | <code>string</code> | How often mise checks for a newer version of a global tool that sets `auto_update = true`. |
 
 ---
 
@@ -11354,7 +11336,7 @@ public readonly checkDuration: string;
 
 - *Type:* string
 
-How often to check for updates to a global tool with `auto_update = true`.
+How often mise checks for a newer version of a global tool that sets `auto_update = true`.
 
 ---
 
@@ -11372,8 +11354,8 @@ const settingsUpgrade: SettingsUpgrade = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#mise-projen.SettingsUpgrade.property.autoPrune">autoPrune</a></code> | <code>boolean</code> | Schedule the version `mise upgrade` replaced for pruning once the new one has installed. |
-| <code><a href="#mise-projen.SettingsUpgrade.property.pruneAfter">pruneAfter</a></code> | <code>string</code> | Grace period before versions replaced by `mise upgrade` are automatically pruned. |
+| <code><a href="#mise-projen.SettingsUpgrade.property.autoPrune">autoPrune</a></code> | <code>boolean</code> | Remove the version that `mise upgrade` replaced once `upgrade.prune_after` has passed. |
+| <code><a href="#mise-projen.SettingsUpgrade.property.pruneAfter">pruneAfter</a></code> | <code>string</code> | Grace period before mise removes a version that `mise upgrade` replaced. |
 
 ---
 
@@ -11385,7 +11367,7 @@ public readonly autoPrune: boolean;
 
 - *Type:* boolean
 
-Schedule the version `mise upgrade` replaced for pruning once the new one has installed.
+Remove the version that `mise upgrade` replaced once `upgrade.prune_after` has passed.
 
 ---
 
@@ -11397,7 +11379,7 @@ public readonly pruneAfter: string;
 
 - *Type:* string
 
-Grace period before versions replaced by `mise upgrade` are automatically pruned.
+Grace period before mise removes a version that `mise upgrade` replaced.
 
 ---
 
@@ -11415,9 +11397,9 @@ const settingsWriteTargets: SettingsWriteTargets = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#mise-projen.SettingsWriteTargets.property.dotfiles">dotfiles</a></code> | <code>string</code> | Global config file to create new [dotfiles] entries in. |
-| <code><a href="#mise-projen.SettingsWriteTargets.property.packages">packages</a></code> | <code>string</code> | Global config file to create new [bootstrap.packages] entries in. Existing entries stay in the config file that already declares them. |
-| <code><a href="#mise-projen.SettingsWriteTargets.property.tools">tools</a></code> | <code>string</code> | Global config file to create new [tools] entries in. |
+| <code><a href="#mise-projen.SettingsWriteTargets.property.dotfiles">dotfiles</a></code> | <code>string</code> | Global config file where `mise dot add` creates new `[dotfiles]` entries. |
+| <code><a href="#mise-projen.SettingsWriteTargets.property.packages">packages</a></code> | <code>string</code> | Global config file where `--global` package commands create new `[bootstrap.packages]` entries. |
+| <code><a href="#mise-projen.SettingsWriteTargets.property.tools">tools</a></code> | <code>string</code> | Global config file where `mise use --global` creates new `[tools]` entries. |
 
 ---
 
@@ -11429,9 +11411,7 @@ public readonly dotfiles: string;
 
 - *Type:* string
 
-Global config file to create new [dotfiles] entries in.
-
-Existing entries stay in the config file that already declares them.
+Global config file where `mise dot add` creates new `[dotfiles]` entries.
 
 ---
 
@@ -11443,7 +11423,7 @@ public readonly packages: string;
 
 - *Type:* string
 
-Global config file to create new [bootstrap.packages] entries in. Existing entries stay in the config file that already declares them.
+Global config file where `--global` package commands create new `[bootstrap.packages]` entries.
 
 ---
 
@@ -11455,9 +11435,7 @@ public readonly tools: string;
 
 - *Type:* string
 
-Global config file to create new [tools] entries in.
-
-Existing entries stay in the config file that already declares them.
+Global config file where `mise use --global` creates new `[tools]` entries.
 
 ---
 
@@ -11475,7 +11453,7 @@ const settingsZig: SettingsZig = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#mise-projen.SettingsZig.property.useCommunityMirrors">useCommunityMirrors</a></code> | <code>boolean</code> | Download Zig from community-maintained mirrors. |
+| <code><a href="#mise-projen.SettingsZig.property.useCommunityMirrors">useCommunityMirrors</a></code> | <code>boolean</code> | Download Zig from the community mirrors that ziglang.org recommends before trying ziglang.org itself. |
 
 ---
 
@@ -11487,7 +11465,7 @@ public readonly useCommunityMirrors: boolean;
 
 - *Type:* boolean
 
-Download Zig from community-maintained mirrors.
+Download Zig from the community mirrors that ziglang.org recommends before trying ziglang.org itself.
 
 ---
 
@@ -12111,7 +12089,7 @@ public readonly value: string | number | boolean;
 
 ### SettingsPythonUvVenvAuto <a name="SettingsPythonUvVenvAuto" id="mise-projen.SettingsPythonUvVenvAuto"></a>
 
-Integrate with uv to manage project venvs when uv.lock is present.
+Activate, and optionally create, the virtualenv of the uv project around the current directory.
 
 
 #### Static Functions <a name="Static Functions" id="Static Functions"></a>
@@ -12691,6 +12669,35 @@ absent.
 ---
 
 
+### MiseTomlSchemaBootstrapLinuxSystemdUnitsState <a name="MiseTomlSchemaBootstrapLinuxSystemdUnitsState" id="mise-projen.MiseTomlSchemaBootstrapLinuxSystemdUnitsState"></a>
+
+present writes and manages the unit;
+
+absent stops, disables, and removes both dev.mise.<name>.service and dev.mise.<name>.timer
+
+#### Members <a name="Members" id="Members"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapLinuxSystemdUnitsState.PRESENT">PRESENT</a></code> | present. |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapLinuxSystemdUnitsState.ABSENT">ABSENT</a></code> | absent. |
+
+---
+
+##### `PRESENT` <a name="PRESENT" id="mise-projen.MiseTomlSchemaBootstrapLinuxSystemdUnitsState.PRESENT"></a>
+
+present.
+
+---
+
+
+##### `ABSENT` <a name="ABSENT" id="mise-projen.MiseTomlSchemaBootstrapLinuxSystemdUnitsState.ABSENT"></a>
+
+absent.
+
+---
+
+
 ### MiseTomlSchemaBootstrapLinuxSystemdUnitsType <a name="MiseTomlSchemaBootstrapLinuxSystemdUnitsType" id="mise-projen.MiseTomlSchemaBootstrapLinuxSystemdUnitsType"></a>
 
 write Type in the [Service] section.
@@ -13166,7 +13173,7 @@ symlink.
 
 ### SettingsColorTheme <a name="SettingsColorTheme" id="mise-projen.SettingsColorTheme"></a>
 
-Theme for interactive prompts (auto/default, charm, base16, catppuccin, dracula).
+Color theme for interactive prompts, such as the task picker in `mise run`.
 
 #### Members <a name="Members" id="Members"></a>
 
@@ -13223,11 +13230,122 @@ dracula.
 ---
 
 
+### SettingsDotfilesDefaultMode <a name="SettingsDotfilesDefaultMode" id="mise-projen.SettingsDotfilesDefaultMode"></a>
+
+Mode for `[dotfiles]` entries that do not set `mode`.
+
+#### Members <a name="Members" id="Members"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#mise-projen.SettingsDotfilesDefaultMode.SYMLINK">SYMLINK</a></code> | symlink. |
+| <code><a href="#mise-projen.SettingsDotfilesDefaultMode.SYMLINK_HYPHEN_EACH">SYMLINK_HYPHEN_EACH</a></code> | symlink-each. |
+| <code><a href="#mise-projen.SettingsDotfilesDefaultMode.COPY">COPY</a></code> | copy. |
+| <code><a href="#mise-projen.SettingsDotfilesDefaultMode.TEMPLATE">TEMPLATE</a></code> | template. |
+
+---
+
+##### `SYMLINK` <a name="SYMLINK" id="mise-projen.SettingsDotfilesDefaultMode.SYMLINK"></a>
+
+symlink.
+
+---
+
+
+##### `SYMLINK_HYPHEN_EACH` <a name="SYMLINK_HYPHEN_EACH" id="mise-projen.SettingsDotfilesDefaultMode.SYMLINK_HYPHEN_EACH"></a>
+
+symlink-each.
+
+---
+
+
+##### `COPY` <a name="COPY" id="mise-projen.SettingsDotfilesDefaultMode.COPY"></a>
+
+copy.
+
+---
+
+
+##### `TEMPLATE` <a name="TEMPLATE" id="mise-projen.SettingsDotfilesDefaultMode.TEMPLATE"></a>
+
+template.
+
+---
+
+
+### SettingsErlangPrecompiledOs <a name="SettingsErlangPrecompiledOs" id="mise-projen.SettingsErlangPrecompiledOs"></a>
+
+Ubuntu release whose precompiled Erlang build from builds.hex.pm mise installs on Linux.
+
+#### Members <a name="Members" id="Members"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#mise-projen.SettingsErlangPrecompiledOs.UBUNTU_HYPHEN_20_04">UBUNTU_HYPHEN_20_04</a></code> | ubuntu-20.04. |
+| <code><a href="#mise-projen.SettingsErlangPrecompiledOs.UBUNTU_HYPHEN_22_04">UBUNTU_HYPHEN_22_04</a></code> | ubuntu-22.04. |
+| <code><a href="#mise-projen.SettingsErlangPrecompiledOs.UBUNTU_HYPHEN_24_04">UBUNTU_HYPHEN_24_04</a></code> | ubuntu-24.04. |
+| <code><a href="#mise-projen.SettingsErlangPrecompiledOs.UBUNTU_HYPHEN_26_04">UBUNTU_HYPHEN_26_04</a></code> | ubuntu-26.04. |
+
+---
+
+##### `UBUNTU_HYPHEN_20_04` <a name="UBUNTU_HYPHEN_20_04" id="mise-projen.SettingsErlangPrecompiledOs.UBUNTU_HYPHEN_20_04"></a>
+
+ubuntu-20.04.
+
+---
+
+
+##### `UBUNTU_HYPHEN_22_04` <a name="UBUNTU_HYPHEN_22_04" id="mise-projen.SettingsErlangPrecompiledOs.UBUNTU_HYPHEN_22_04"></a>
+
+ubuntu-22.04.
+
+---
+
+
+##### `UBUNTU_HYPHEN_24_04` <a name="UBUNTU_HYPHEN_24_04" id="mise-projen.SettingsErlangPrecompiledOs.UBUNTU_HYPHEN_24_04"></a>
+
+ubuntu-24.04.
+
+---
+
+
+##### `UBUNTU_HYPHEN_26_04` <a name="UBUNTU_HYPHEN_26_04" id="mise-projen.SettingsErlangPrecompiledOs.UBUNTU_HYPHEN_26_04"></a>
+
+ubuntu-26.04.
+
+---
+
+
+### SettingsGithubRelayLogFormat <a name="SettingsGithubRelayLogFormat" id="mise-projen.SettingsGithubRelayLogFormat"></a>
+
+Format of GitHub relay request logs and the end-of-session summary.
+
+#### Members <a name="Members" id="Members"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#mise-projen.SettingsGithubRelayLogFormat.TEXT">TEXT</a></code> | text. |
+| <code><a href="#mise-projen.SettingsGithubRelayLogFormat.JSONL">JSONL</a></code> | jsonl. |
+
+---
+
+##### `TEXT` <a name="TEXT" id="mise-projen.SettingsGithubRelayLogFormat.TEXT"></a>
+
+text.
+
+---
+
+
+##### `JSONL` <a name="JSONL" id="mise-projen.SettingsGithubRelayLogFormat.JSONL"></a>
+
+jsonl.
+
+---
+
+
 ### SettingsHistorySync <a name="SettingsHistorySync" id="mise-projen.SettingsHistorySync"></a>
 
-What the history watcher does with a connected setup repository on its own: `sync` publishes after saves, fetches periodically, and applies incoming changes.
-
-Any conflict pauses publication and incoming application for the entire setup; local commits and fetching continue. `fetch-only` only fetches; `manual` does nothing automatically. `mise bootstrap dotfiles sync` and `pull` work on request in every mode.
+What the history watcher shares with a connected setup repository on its own.
 
 #### Members <a name="Members" id="Members"></a>
 
@@ -13289,7 +13407,7 @@ identity.
 
 ### SettingsLibc <a name="SettingsLibc" id="mise-projen.SettingsLibc"></a>
 
-Libc implementation to use for precompiled Linux binaries.
+Libc build to install on Linux when a tool publishes both glibc and musl builds.
 
 #### Members <a name="Members" id="Members"></a>
 
@@ -13357,7 +13475,7 @@ system.
 
 ### SettingsLockfileMode <a name="SettingsLockfileMode" id="mise-projen.SettingsLockfileMode"></a>
 
-Choose incremental merging or complete lockfile generation.
+How lockfiles are written: entry by entry, or rebuilt from the current requests.
 
 #### Members <a name="Members" id="Members"></a>
 
@@ -13384,7 +13502,7 @@ generate.
 
 ### SettingsLogLevel <a name="SettingsLogLevel" id="mise-projen.SettingsLogLevel"></a>
 
-Show more/less output.
+Log level for mise's own output.
 
 #### Members <a name="Members" id="Members"></a>
 
@@ -13435,7 +13553,7 @@ error.
 
 ### SettingsNpmPackageManager <a name="SettingsNpmPackageManager" id="mise-projen.SettingsNpmPackageManager"></a>
 
-Package manager to use for installing npm packages.
+Package manager that installs `npm:` tools.
 
 #### Members <a name="Members" id="Members"></a>
 
@@ -13492,9 +13610,44 @@ pnpm.
 ---
 
 
+### SettingsStatusMissingTools <a name="SettingsStatusMissingTools" id="mise-projen.SettingsStatusMissingTools"></a>
+
+When to warn that tools requested by config are not installed.
+
+#### Members <a name="Members" id="Members"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#mise-projen.SettingsStatusMissingTools.NEVER">NEVER</a></code> | never. |
+| <code><a href="#mise-projen.SettingsStatusMissingTools.IF_UNDERSCORE_OTHER_UNDERSCORE_VERSIONS_UNDERSCORE_INSTALLED">IF_UNDERSCORE_OTHER_UNDERSCORE_VERSIONS_UNDERSCORE_INSTALLED</a></code> | if_other_versions_installed. |
+| <code><a href="#mise-projen.SettingsStatusMissingTools.ALWAYS">ALWAYS</a></code> | always. |
+
+---
+
+##### `NEVER` <a name="NEVER" id="mise-projen.SettingsStatusMissingTools.NEVER"></a>
+
+never.
+
+---
+
+
+##### `IF_UNDERSCORE_OTHER_UNDERSCORE_VERSIONS_UNDERSCORE_INSTALLED` <a name="IF_UNDERSCORE_OTHER_UNDERSCORE_VERSIONS_UNDERSCORE_INSTALLED" id="mise-projen.SettingsStatusMissingTools.IF_UNDERSCORE_OTHER_UNDERSCORE_VERSIONS_UNDERSCORE_INSTALLED"></a>
+
+if_other_versions_installed.
+
+---
+
+
+##### `ALWAYS` <a name="ALWAYS" id="mise-projen.SettingsStatusMissingTools.ALWAYS"></a>
+
+always.
+
+---
+
+
 ### SettingsSystemDeps <a name="SettingsSystemDeps" id="mise-projen.SettingsSystemDeps"></a>
 
-How to handle a plugin's declared system dependencies before installing a tool.
+What mise does when a plugin's declared system dependencies are missing before it installs a tool.
 
 #### Members <a name="Members" id="Members"></a>
 
@@ -13537,7 +13690,7 @@ ignore.
 
 ### SettingsTaskCacheRemoteMode <a name="SettingsTaskCacheRemoteMode" id="mise-projen.SettingsTaskCacheRemoteMode"></a>
 
-[experimental] Remote task and action cache access mode.
+[experimental] How mise uses the remote task cache server.
 
 #### Members <a name="Members" id="Members"></a>
 
@@ -13572,7 +13725,7 @@ write-only.
 
 ### SettingsTaskOutput <a name="SettingsTaskOutput" id="mise-projen.SettingsTaskOutput"></a>
 
-Change output style when executing tasks.
+Default output style for `mise run`.
 
 #### Members <a name="Members" id="Members"></a>
 
@@ -13633,6 +13786,49 @@ quiet.
 ##### `SILENT` <a name="SILENT" id="mise-projen.SettingsTaskOutput.SILENT"></a>
 
 silent.
+
+---
+
+
+### SettingsWindowsShimMode <a name="SettingsWindowsShimMode" id="mise-projen.SettingsWindowsShimMode"></a>
+
+How mise creates shims on Windows.
+
+#### Members <a name="Members" id="Members"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#mise-projen.SettingsWindowsShimMode.EXE">EXE</a></code> | exe. |
+| <code><a href="#mise-projen.SettingsWindowsShimMode.FILE">FILE</a></code> | file. |
+| <code><a href="#mise-projen.SettingsWindowsShimMode.HARDLINK">HARDLINK</a></code> | hardlink. |
+| <code><a href="#mise-projen.SettingsWindowsShimMode.SYMLINK">SYMLINK</a></code> | symlink. |
+
+---
+
+##### `EXE` <a name="EXE" id="mise-projen.SettingsWindowsShimMode.EXE"></a>
+
+exe.
+
+---
+
+
+##### `FILE` <a name="FILE" id="mise-projen.SettingsWindowsShimMode.FILE"></a>
+
+file.
+
+---
+
+
+##### `HARDLINK` <a name="HARDLINK" id="mise-projen.SettingsWindowsShimMode.HARDLINK"></a>
+
+hardlink.
+
+---
+
+
+##### `SYMLINK` <a name="SYMLINK" id="mise-projen.SettingsWindowsShimMode.SYMLINK"></a>
+
+symlink.
 
 ---
 
