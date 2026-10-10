@@ -41,7 +41,7 @@ export interface MiseTomlSchema {
   readonly env?: Env[];
 
   /**
-   * remote config files merged into this one, ranking just below it: git::<url>//<path>.toml?ref=<ref> or oci::<registry>/<repo>[:tag|@sha256:<digest>] (the artifact holds a mise.toml). Paranoid mode requires a commit sha or digest; otherwise a branch or tag is refreshed after fetch_remote_versions_cache
+   * config files merged into this one, ranking just below it: a local path (relative to this file), git::<url>//<path>.toml?ref=<ref> or oci::<registry>/<repo>[:tag|@sha256:<digest>] (the artifact holds a mise.toml). Paranoid mode requires a commit sha or digest for remote includes and rejects local ones; otherwise a branch or tag is refreshed after fetch_remote_versions_cache
    *
    * @schema MiseTomlSchema#include
    */
@@ -356,14 +356,14 @@ export interface Monorepo {
   readonly lockfile?: boolean;
 
   /**
-   * Experimental task defaults applied by task name across inferred and explicit workspace projects
+   * Task defaults applied by task name across inferred and explicit workspace projects
    *
    * @schema monorepo#task_defaults
    */
   readonly taskDefaults?: { [key: string]: any };
 
   /**
-   * Experimental explicit additions, removals, and overrides applied to provider-inferred workspace projects
+   * Explicit additions, removals, and overrides applied to provider-inferred workspace projects
    *
    * @schema monorepo#projects
    */
@@ -686,7 +686,7 @@ export interface Settings {
   readonly allCompile?: boolean;
 
   /**
-   * Keep downloaded archives and sources after installing, for debugging.
+   * [deprecated] Keep downloaded archives and sources after installing, for debugging.
    *
    * @schema settings#always_keep_download
    */
@@ -870,6 +870,20 @@ export interface Settings {
    * @schema settings#dotnet
    */
   readonly dotnet?: SettingsDotnet;
+
+  /**
+   * Reuse finished downloads instead of fetching them again.
+   *
+   * @schema settings#download_cache
+   */
+  readonly downloadCache?: boolean;
+
+  /**
+   * Maximum total size of the download cache, such as `500MB` or `10GiB`.
+   *
+   * @schema settings#download_cache_max_size
+   */
+  readonly downloadCacheMaxSize?: string;
 
   /**
    * Allowlist of configured tools mise uses; other tools are ignored.
@@ -1838,6 +1852,8 @@ export function toJson_Settings(obj: Settings | undefined): Record<string, any> 
     'disable_update_warning': obj.disableUpdateWarning,
     'dotfiles': toJson_SettingsDotfiles(obj.dotfiles),
     'dotnet': toJson_SettingsDotnet(obj.dotnet),
+    'download_cache': obj.downloadCache,
+    'download_cache_max_size': obj.downloadCacheMaxSize,
     'enable_tools': obj.enableTools?.map(y => y),
     'env': obj.env?.map(y => y),
     'env_cache': obj.envCache,
@@ -4548,10 +4564,10 @@ export interface SettingsSelfUpdate {
    *
    * @schema SettingsSelfUpdate#auto
    */
-  readonly auto?: boolean;
+  readonly auto?: SettingsSelfUpdateAuto;
 
   /**
-   * How often automatic updates check for a new mise release when `self_update.auto` is on.
+   * How often automatic updates check for a new mise release when `self_update.auto = true`.
    *
    * @schema SettingsSelfUpdate#check_duration
    */
@@ -4581,7 +4597,7 @@ export function toJson_SettingsSelfUpdate(obj: SettingsSelfUpdate | undefined): 
   if (obj === undefined) { return undefined; }
   const result = {
     'api_url': obj.apiUrl,
-    'auto': obj.auto,
+    'auto': obj.auto?.value,
     'check_duration': obj.checkDuration,
     'minimum_release_age': obj.minimumReleaseAge,
     'repository': obj.repository,
@@ -4905,7 +4921,7 @@ export function toJson_SettingsSystemPackages(obj: SettingsSystemPackages | unde
  */
 export interface SettingsTask {
   /**
-   * [experimental] Workspace providers whose package scripts mise imports as tasks, such as `node`.
+   * Workspace providers whose package scripts mise imports as tasks, such as `node`.
    *
    * @schema SettingsTask#auto_infer
    */
@@ -5138,11 +5154,18 @@ export function toJson_SettingsTask(obj: SettingsTask | undefined): Record<strin
  */
 export interface SettingsToolUpdate {
   /**
-   * How often mise checks for a newer version of a global tool that sets `auto_update = true`.
+   * How often mise checks for a newer version of a global tool that sets `auto_update = true`, or of every global tool with `tool_update.global_auto = true`.
    *
    * @schema SettingsToolUpdate#check_duration
    */
   readonly checkDuration?: string;
+
+  /**
+   * Update every tool in global config automatically, as if each set `auto_update` to this value.
+   *
+   * @schema SettingsToolUpdate#global_auto
+   */
+  readonly globalAuto?: SettingsToolUpdateGlobalAuto;
 }
 
 /**
@@ -5154,6 +5177,7 @@ export function toJson_SettingsToolUpdate(obj: SettingsToolUpdate | undefined): 
   if (obj === undefined) { return undefined; }
   const result = {
     'check_duration': obj.checkDuration,
+    'global_auto': obj.globalAuto?.value,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -6561,6 +6585,22 @@ export class SettingsPythonUvVenvAuto {
 }
 
 /**
+ * Update mise automatically before running eligible commands.
+ *
+ * @schema SettingsSelfUpdateAuto
+ */
+export class SettingsSelfUpdateAuto {
+  public static fromBoolean(value: boolean): SettingsSelfUpdateAuto {
+    return new SettingsSelfUpdateAuto(value);
+  }
+  public static fromString(value: string): SettingsSelfUpdateAuto {
+    return new SettingsSelfUpdateAuto(value);
+  }
+  private constructor(public readonly value: boolean | string) {
+  }
+}
+
+/**
  * When to warn that tools requested by config are not installed.
  *
  * @schema SettingsStatusMissingTools
@@ -6691,6 +6731,22 @@ export enum SettingsTaskOutput {
   QUIET = "quiet",
   /** silent */
   SILENT = "silent",
+}
+
+/**
+ * Update every tool in global config automatically, as if each set `auto_update` to this value.
+ *
+ * @schema SettingsToolUpdateGlobalAuto
+ */
+export class SettingsToolUpdateGlobalAuto {
+  public static fromBoolean(value: boolean): SettingsToolUpdateGlobalAuto {
+    return new SettingsToolUpdateGlobalAuto(value);
+  }
+  public static fromString(value: string): SettingsToolUpdateGlobalAuto {
+    return new SettingsToolUpdateGlobalAuto(value);
+  }
+  private constructor(public readonly value: boolean | string) {
+  }
 }
 
 /**

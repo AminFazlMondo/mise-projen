@@ -922,7 +922,7 @@ const miseTomlSchema: MiseTomlSchema = { ... }
 | <code><a href="#mise-projen.MiseTomlSchema.property.experimentalMonorepoRoot">experimentalMonorepoRoot</a></code> | <code>boolean</code> | deprecated alias of monorepo_root. |
 | <code><a href="#mise-projen.MiseTomlSchema.property.history">history</a></code> | <code><a href="#mise-projen.MiseTomlSchemaHistory">MiseTomlSchemaHistory</a></code> | dotfiles history: what is never captured, reload commands, and the setup repository (https://mise.jdx.dev/history.html). |
 | <code><a href="#mise-projen.MiseTomlSchema.property.hooks">hooks</a></code> | <code><a href="#mise-projen.Hooks">Hooks</a></code> | hooks to run on events like cd, enter, leave. |
-| <code><a href="#mise-projen.MiseTomlSchema.property.include">include</a></code> | <code>any</code> | remote config files merged into this one, ranking just below it: git::<url>//<path>.toml?ref=<ref> or oci::<registry>/<repo>[:tag\|@sha256:<digest>] (the artifact holds a mise.toml). Paranoid mode requires a commit sha or digest; otherwise a branch or tag is refreshed after fetch_remote_versions_cache. |
+| <code><a href="#mise-projen.MiseTomlSchema.property.include">include</a></code> | <code>any</code> | config files merged into this one, ranking just below it: a local path (relative to this file), git::<url>//<path>.toml?ref=<ref> or oci::<registry>/<repo>[:tag\|@sha256:<digest>] (the artifact holds a mise.toml). Paranoid mode requires a commit sha or digest for remote includes and rejects local ones; otherwise a branch or tag is refreshed after fetch_remote_versions_cache. |
 | <code><a href="#mise-projen.MiseTomlSchema.property.minVersion">minVersion</a></code> | <code>any</code> | minimum version of mise required to use this config. |
 | <code><a href="#mise-projen.MiseTomlSchema.property.monorepo">monorepo</a></code> | <code><a href="#mise-projen.Monorepo">Monorepo</a></code> | configuration for monorepo task discovery. |
 | <code><a href="#mise-projen.MiseTomlSchema.property.monorepoRoot">monorepoRoot</a></code> | <code>boolean</code> | marks this config as a monorepo root for task path syntax. |
@@ -1166,7 +1166,7 @@ public readonly include: any;
 
 - *Type:* any
 
-remote config files merged into this one, ranking just below it: git::<url>//<path>.toml?ref=<ref> or oci::<registry>/<repo>[:tag|@sha256:<digest>] (the artifact holds a mise.toml). Paranoid mode requires a commit sha or digest; otherwise a branch or tag is refreshed after fetch_remote_versions_cache.
+config files merged into this one, ranking just below it: a local path (relative to this file), git::<url>//<path>.toml?ref=<ref> or oci::<registry>/<repo>[:tag|@sha256:<digest>] (the artifact holds a mise.toml). Paranoid mode requires a commit sha or digest for remote includes and rejects local ones; otherwise a branch or tag is refreshed after fetch_remote_versions_cache.
 
 ---
 
@@ -5670,8 +5670,8 @@ const monorepo: Monorepo = { ... }
 | <code><a href="#mise-projen.Monorepo.property.configRoots">configRoots</a></code> | <code>string[]</code> | Explicit list of config root paths for monorepo task discovery. |
 | <code><a href="#mise-projen.Monorepo.property.lockfile">lockfile</a></code> | <code>boolean</code> | Use a single lockfile at the monorepo root for descendant config roots. |
 | <code><a href="#mise-projen.Monorepo.property.pathAliases">pathAliases</a></code> | <code>{[ key: string ]: string}</code> | Short names for configured monorepo task roots. |
-| <code><a href="#mise-projen.Monorepo.property.projects">projects</a></code> | <code>{[ key: string ]: <a href="#mise-projen.MonorepoProjects">MonorepoProjects</a>}</code> | Experimental explicit additions, removals, and overrides applied to provider-inferred workspace projects. |
-| <code><a href="#mise-projen.Monorepo.property.taskDefaults">taskDefaults</a></code> | <code>{[ key: string ]: any}</code> | Experimental task defaults applied by task name across inferred and explicit workspace projects. |
+| <code><a href="#mise-projen.Monorepo.property.projects">projects</a></code> | <code>{[ key: string ]: <a href="#mise-projen.MonorepoProjects">MonorepoProjects</a>}</code> | Explicit additions, removals, and overrides applied to provider-inferred workspace projects. |
+| <code><a href="#mise-projen.Monorepo.property.taskDefaults">taskDefaults</a></code> | <code>{[ key: string ]: any}</code> | Task defaults applied by task name across inferred and explicit workspace projects. |
 
 ---
 
@@ -5725,7 +5725,7 @@ public readonly projects: {[ key: string ]: MonorepoProjects};
 
 - *Type:* {[ key: string ]: <a href="#mise-projen.MonorepoProjects">MonorepoProjects</a>}
 
-Experimental explicit additions, removals, and overrides applied to provider-inferred workspace projects.
+Explicit additions, removals, and overrides applied to provider-inferred workspace projects.
 
 ---
 
@@ -5737,7 +5737,7 @@ public readonly taskDefaults: {[ key: string ]: any};
 
 - *Type:* {[ key: string ]: any}
 
-Experimental task defaults applied by task name across inferred and explicit workspace projects.
+Task defaults applied by task name across inferred and explicit workspace projects.
 
 ---
 
@@ -5854,7 +5854,7 @@ const settings: Settings = { ... }
 | <code><a href="#mise-projen.Settings.property.activateShims">activateShims</a></code> | <code>boolean</code> | Let `mise activate` add the shims directories to `PATH` for auto-install and lazy tools. |
 | <code><a href="#mise-projen.Settings.property.age">age</a></code> | <code><a href="#mise-projen.SettingsAge">SettingsAge</a></code> | *No description.* |
 | <code><a href="#mise-projen.Settings.property.allCompile">allCompile</a></code> | <code>boolean</code> | Compile Node.js, Python, Ruby and Erlang from source instead of using precompiled builds. |
-| <code><a href="#mise-projen.Settings.property.alwaysKeepDownload">alwaysKeepDownload</a></code> | <code>boolean</code> | Keep downloaded archives and sources after installing, for debugging. |
+| <code><a href="#mise-projen.Settings.property.alwaysKeepDownload">alwaysKeepDownload</a></code> | <code>boolean</code> | [deprecated] Keep downloaded archives and sources after installing, for debugging. |
 | <code><a href="#mise-projen.Settings.property.alwaysKeepInstall">alwaysKeepInstall</a></code> | <code>boolean</code> | Keep a failed installation's partial install directory and downloads, for debugging. |
 | <code><a href="#mise-projen.Settings.property.aqua">aqua</a></code> | <code><a href="#mise-projen.SettingsAqua">SettingsAqua</a></code> | *No description.* |
 | <code><a href="#mise-projen.Settings.property.arch">arch</a></code> | <code>string</code> | Architecture of the precompiled binaries mise downloads. |
@@ -5882,6 +5882,8 @@ const settings: Settings = { ... }
 | <code><a href="#mise-projen.Settings.property.disableUpdateWarning">disableUpdateWarning</a></code> | <code>boolean</code> | Suppress warnings when a newer mise version is available. |
 | <code><a href="#mise-projen.Settings.property.dotfiles">dotfiles</a></code> | <code><a href="#mise-projen.SettingsDotfiles">SettingsDotfiles</a></code> | *No description.* |
 | <code><a href="#mise-projen.Settings.property.dotnet">dotnet</a></code> | <code><a href="#mise-projen.SettingsDotnet">SettingsDotnet</a></code> | *No description.* |
+| <code><a href="#mise-projen.Settings.property.downloadCache">downloadCache</a></code> | <code>boolean</code> | Reuse finished downloads instead of fetching them again. |
+| <code><a href="#mise-projen.Settings.property.downloadCacheMaxSize">downloadCacheMaxSize</a></code> | <code>string</code> | Maximum total size of the download cache, such as `500MB` or `10GiB`. |
 | <code><a href="#mise-projen.Settings.property.enableTools">enableTools</a></code> | <code>string[]</code> | Allowlist of configured tools mise uses; |
 | <code><a href="#mise-projen.Settings.property.env">env</a></code> | <code>string[]</code> | Config environments to load, such as `development` for `mise.development.toml`. |
 | <code><a href="#mise-projen.Settings.property.envCache">envCache</a></code> | <code>boolean</code> | [experimental] Cache computed environments on disk for nested mise commands. |
@@ -6081,7 +6083,7 @@ public readonly alwaysKeepDownload: boolean;
 
 - *Type:* boolean
 
-Keep downloaded archives and sources after installing, for debugging.
+[deprecated] Keep downloaded archives and sources after installing, for debugging.
 
 ---
 
@@ -6400,6 +6402,30 @@ public readonly dotnet: SettingsDotnet;
 ```
 
 - *Type:* <a href="#mise-projen.SettingsDotnet">SettingsDotnet</a>
+
+---
+
+##### `downloadCache`<sup>Optional</sup> <a name="downloadCache" id="mise-projen.Settings.property.downloadCache"></a>
+
+```typescript
+public readonly downloadCache: boolean;
+```
+
+- *Type:* boolean
+
+Reuse finished downloads instead of fetching them again.
+
+---
+
+##### `downloadCacheMaxSize`<sup>Optional</sup> <a name="downloadCacheMaxSize" id="mise-projen.Settings.property.downloadCacheMaxSize"></a>
+
+```typescript
+public readonly downloadCacheMaxSize: string;
+```
+
+- *Type:* string
+
+Maximum total size of the download cache, such as `500MB` or `10GiB`.
 
 ---
 
@@ -10373,8 +10399,8 @@ const settingsSelfUpdate: SettingsSelfUpdate = { ... }
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#mise-projen.SettingsSelfUpdate.property.apiUrl">apiUrl</a></code> | <code>string</code> | GitHub API base URL that `mise self-update` gets mise releases from. |
-| <code><a href="#mise-projen.SettingsSelfUpdate.property.auto">auto</a></code> | <code>boolean</code> | Update mise automatically before running eligible commands. |
-| <code><a href="#mise-projen.SettingsSelfUpdate.property.checkDuration">checkDuration</a></code> | <code>string</code> | How often automatic updates check for a new mise release when `self_update.auto` is on. |
+| <code><a href="#mise-projen.SettingsSelfUpdate.property.auto">auto</a></code> | <code><a href="#mise-projen.SettingsSelfUpdateAuto">SettingsSelfUpdateAuto</a></code> | Update mise automatically before running eligible commands. |
+| <code><a href="#mise-projen.SettingsSelfUpdate.property.checkDuration">checkDuration</a></code> | <code>string</code> | How often automatic updates check for a new mise release when `self_update.auto = true`. |
 | <code><a href="#mise-projen.SettingsSelfUpdate.property.minimumReleaseAge">minimumReleaseAge</a></code> | <code>string</code> | Skip mise releases published more recently than this, for `mise self-update` and automatic updates. |
 | <code><a href="#mise-projen.SettingsSelfUpdate.property.repository">repository</a></code> | <code>string</code> | GitHub repository, as `owner/repo`, that mise gets its own releases from. |
 
@@ -10395,10 +10421,10 @@ GitHub API base URL that `mise self-update` gets mise releases from.
 ##### `auto`<sup>Optional</sup> <a name="auto" id="mise-projen.SettingsSelfUpdate.property.auto"></a>
 
 ```typescript
-public readonly auto: boolean;
+public readonly auto: SettingsSelfUpdateAuto;
 ```
 
-- *Type:* boolean
+- *Type:* <a href="#mise-projen.SettingsSelfUpdateAuto">SettingsSelfUpdateAuto</a>
 
 Update mise automatically before running eligible commands.
 
@@ -10412,7 +10438,7 @@ public readonly checkDuration: string;
 
 - *Type:* string
 
-How often automatic updates check for a new mise release when `self_update.auto` is on.
+How often automatic updates check for a new mise release when `self_update.auto = true`.
 
 ---
 
@@ -10835,7 +10861,7 @@ const settingsTask: SettingsTask = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#mise-projen.SettingsTask.property.autoInfer">autoInfer</a></code> | <code>string[]</code> | [experimental] Workspace providers whose package scripts mise imports as tasks, such as `node`. |
+| <code><a href="#mise-projen.SettingsTask.property.autoInfer">autoInfer</a></code> | <code>string[]</code> | Workspace providers whose package scripts mise imports as tasks, such as `node`. |
 | <code><a href="#mise-projen.SettingsTask.property.cache">cache</a></code> | <code><a href="#mise-projen.SettingsTaskCache">SettingsTaskCache</a></code> | *No description.* |
 | <code><a href="#mise-projen.SettingsTask.property.cacheDir">cacheDir</a></code> | <code>string</code> | [experimental] Directory for the task artifact cache. |
 | <code><a href="#mise-projen.SettingsTask.property.cacheMaxAge">cacheMaxAge</a></code> | <code>string</code> | [experimental] Remove task artifact cache entries that have not been used for this long. |
@@ -10873,7 +10899,7 @@ public readonly autoInfer: string[];
 
 - *Type:* string[]
 
-[experimental] Workspace providers whose package scripts mise imports as tasks, such as `node`.
+Workspace providers whose package scripts mise imports as tasks, such as `node`.
 
 ---
 
@@ -11324,7 +11350,8 @@ const settingsToolUpdate: SettingsToolUpdate = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#mise-projen.SettingsToolUpdate.property.checkDuration">checkDuration</a></code> | <code>string</code> | How often mise checks for a newer version of a global tool that sets `auto_update = true`. |
+| <code><a href="#mise-projen.SettingsToolUpdate.property.checkDuration">checkDuration</a></code> | <code>string</code> | How often mise checks for a newer version of a global tool that sets `auto_update = true`, or of every global tool with `tool_update.global_auto = true`. |
+| <code><a href="#mise-projen.SettingsToolUpdate.property.globalAuto">globalAuto</a></code> | <code><a href="#mise-projen.SettingsToolUpdateGlobalAuto">SettingsToolUpdateGlobalAuto</a></code> | Update every tool in global config automatically, as if each set `auto_update` to this value. |
 
 ---
 
@@ -11336,7 +11363,19 @@ public readonly checkDuration: string;
 
 - *Type:* string
 
-How often mise checks for a newer version of a global tool that sets `auto_update = true`.
+How often mise checks for a newer version of a global tool that sets `auto_update = true`, or of every global tool with `tool_update.global_auto = true`.
+
+---
+
+##### `globalAuto`<sup>Optional</sup> <a name="globalAuto" id="mise-projen.SettingsToolUpdate.property.globalAuto"></a>
+
+```typescript
+public readonly globalAuto: SettingsToolUpdateGlobalAuto;
+```
+
+- *Type:* <a href="#mise-projen.SettingsToolUpdateGlobalAuto">SettingsToolUpdateGlobalAuto</a>
+
+Update every tool in global config automatically, as if each set `auto_update` to this value.
 
 ---
 
@@ -12138,6 +12177,128 @@ SettingsPythonUvVenvAuto.fromString(value: string)
 ---
 
 ##### `value`<sup>Required</sup> <a name="value" id="mise-projen.SettingsPythonUvVenvAuto.property.value"></a>
+
+```typescript
+public readonly value: string | boolean;
+```
+
+- *Type:* string | boolean
+
+---
+
+
+### SettingsSelfUpdateAuto <a name="SettingsSelfUpdateAuto" id="mise-projen.SettingsSelfUpdateAuto"></a>
+
+Update mise automatically before running eligible commands.
+
+
+#### Static Functions <a name="Static Functions" id="Static Functions"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#mise-projen.SettingsSelfUpdateAuto.fromBoolean">fromBoolean</a></code> | *No description.* |
+| <code><a href="#mise-projen.SettingsSelfUpdateAuto.fromString">fromString</a></code> | *No description.* |
+
+---
+
+##### `fromBoolean` <a name="fromBoolean" id="mise-projen.SettingsSelfUpdateAuto.fromBoolean"></a>
+
+```typescript
+import { SettingsSelfUpdateAuto } from 'mise-projen'
+
+SettingsSelfUpdateAuto.fromBoolean(value: boolean)
+```
+
+###### `value`<sup>Required</sup> <a name="value" id="mise-projen.SettingsSelfUpdateAuto.fromBoolean.parameter.value"></a>
+
+- *Type:* boolean
+
+---
+
+##### `fromString` <a name="fromString" id="mise-projen.SettingsSelfUpdateAuto.fromString"></a>
+
+```typescript
+import { SettingsSelfUpdateAuto } from 'mise-projen'
+
+SettingsSelfUpdateAuto.fromString(value: string)
+```
+
+###### `value`<sup>Required</sup> <a name="value" id="mise-projen.SettingsSelfUpdateAuto.fromString.parameter.value"></a>
+
+- *Type:* string
+
+---
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#mise-projen.SettingsSelfUpdateAuto.property.value">value</a></code> | <code>string \| boolean</code> | *No description.* |
+
+---
+
+##### `value`<sup>Required</sup> <a name="value" id="mise-projen.SettingsSelfUpdateAuto.property.value"></a>
+
+```typescript
+public readonly value: string | boolean;
+```
+
+- *Type:* string | boolean
+
+---
+
+
+### SettingsToolUpdateGlobalAuto <a name="SettingsToolUpdateGlobalAuto" id="mise-projen.SettingsToolUpdateGlobalAuto"></a>
+
+Update every tool in global config automatically, as if each set `auto_update` to this value.
+
+
+#### Static Functions <a name="Static Functions" id="Static Functions"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#mise-projen.SettingsToolUpdateGlobalAuto.fromBoolean">fromBoolean</a></code> | *No description.* |
+| <code><a href="#mise-projen.SettingsToolUpdateGlobalAuto.fromString">fromString</a></code> | *No description.* |
+
+---
+
+##### `fromBoolean` <a name="fromBoolean" id="mise-projen.SettingsToolUpdateGlobalAuto.fromBoolean"></a>
+
+```typescript
+import { SettingsToolUpdateGlobalAuto } from 'mise-projen'
+
+SettingsToolUpdateGlobalAuto.fromBoolean(value: boolean)
+```
+
+###### `value`<sup>Required</sup> <a name="value" id="mise-projen.SettingsToolUpdateGlobalAuto.fromBoolean.parameter.value"></a>
+
+- *Type:* boolean
+
+---
+
+##### `fromString` <a name="fromString" id="mise-projen.SettingsToolUpdateGlobalAuto.fromString"></a>
+
+```typescript
+import { SettingsToolUpdateGlobalAuto } from 'mise-projen'
+
+SettingsToolUpdateGlobalAuto.fromString(value: string)
+```
+
+###### `value`<sup>Required</sup> <a name="value" id="mise-projen.SettingsToolUpdateGlobalAuto.fromString.parameter.value"></a>
+
+- *Type:* string
+
+---
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#mise-projen.SettingsToolUpdateGlobalAuto.property.value">value</a></code> | <code>string \| boolean</code> | *No description.* |
+
+---
+
+##### `value`<sup>Required</sup> <a name="value" id="mise-projen.SettingsToolUpdateGlobalAuto.property.value"></a>
 
 ```typescript
 public readonly value: string | boolean;
