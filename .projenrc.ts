@@ -47,8 +47,8 @@ const project = new cdk.JsiiProject({
     'json2jsii',
   ],
   peerDeps: [
-    'constructs@^10.5.0',
-    'projen@^0.103.27',
+    'constructs@>=10.5.0',
+    'projen@>=0.104.4',
   ],
   bundledDeps: [
     'semver',
