@@ -3328,6 +3328,13 @@ export interface SettingsGithub {
   readonly oauthClientId?: string;
 
   /**
+   * Copy the one-time device code to the clipboard during the native GitHub OAuth device flow.
+   *
+   * @schema SettingsGithub#oauth_copy_code
+   */
+  readonly oauthCopyCode?: boolean;
+
+  /**
    * Environment variable that mise exports the native GitHub OAuth token under; empty turns the export off.
    *
    * @schema SettingsGithub#oauth_export_env
@@ -3377,6 +3384,7 @@ export function toJson_SettingsGithub(obj: SettingsGithub | undefined): Record<s
     'oauth_api_url': obj.oauthApiUrl,
     'oauth_auth_url': obj.oauthAuthUrl,
     'oauth_client_id': obj.oauthClientId,
+    'oauth_copy_code': obj.oauthCopyCode,
     'oauth_export_env': obj.oauthExportEnv,
     'oauth_open_browser': obj.oauthOpenBrowser,
     'oauth_scopes': obj.oauthScopes,
