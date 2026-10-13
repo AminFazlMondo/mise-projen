@@ -8654,6 +8654,7 @@ const settingsGithub: SettingsGithub = { ... }
 | <code><a href="#mise-projen.SettingsGithub.property.oauthApiUrl">oauthApiUrl</a></code> | <code>string</code> | GitHub API base URL mise uses to validate native OAuth tokens. |
 | <code><a href="#mise-projen.SettingsGithub.property.oauthAuthUrl">oauthAuthUrl</a></code> | <code>string</code> | GitHub OAuth endpoint base URL for the native device flow. |
 | <code><a href="#mise-projen.SettingsGithub.property.oauthClientId">oauthClientId</a></code> | <code>string</code> | GitHub App client ID that turns on native OAuth device-flow tokens. |
+| <code><a href="#mise-projen.SettingsGithub.property.oauthCopyCode">oauthCopyCode</a></code> | <code>boolean</code> | Copy the one-time device code to the clipboard during the native GitHub OAuth device flow. |
 | <code><a href="#mise-projen.SettingsGithub.property.oauthExportEnv">oauthExportEnv</a></code> | <code>string</code> | Environment variable that mise exports the native GitHub OAuth token under; |
 | <code><a href="#mise-projen.SettingsGithub.property.oauthOpenBrowser">oauthOpenBrowser</a></code> | <code>boolean</code> | Open the verification page in your browser during the native GitHub OAuth device flow. |
 | <code><a href="#mise-projen.SettingsGithub.property.oauthScopes">oauthScopes</a></code> | <code>string</code> | OAuth scopes requested for native GitHub device-flow tokens. |
@@ -8731,6 +8732,18 @@ public readonly oauthClientId: string;
 - *Type:* string
 
 GitHub App client ID that turns on native OAuth device-flow tokens.
+
+---
+
+##### `oauthCopyCode`<sup>Optional</sup> <a name="oauthCopyCode" id="mise-projen.SettingsGithub.property.oauthCopyCode"></a>
+
+```typescript
+public readonly oauthCopyCode: boolean;
+```
+
+- *Type:* boolean
+
+Copy the one-time device code to the clipboard during the native GitHub OAuth device flow.
 
 ---
 
