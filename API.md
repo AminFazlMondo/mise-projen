@@ -1404,12 +1404,14 @@ const miseTomlSchemaBootstrap: MiseTomlSchemaBootstrap = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrap.property.apt">apt</a></code> | <code><a href="#mise-projen.MiseTomlSchemaBootstrapApt">MiseTomlSchemaBootstrapApt</a></code> | apt-specific bootstrap package config. |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrap.property.brew">brew</a></code> | <code><a href="#mise-projen.MiseTomlSchemaBootstrapBrew">MiseTomlSchemaBootstrapBrew</a></code> | Homebrew-specific bootstrap package config. |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrap.property.compose">compose</a></code> | <code>{[ key: string ]: <a href="#mise-projen.MiseTomlSchemaBootstrapCompose">MiseTomlSchemaBootstrapCompose</a>}</code> | Docker Compose projects managed with `mise bootstrap compose`, keyed by project name. |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrap.property.configRoots">configRoots</a></code> | <code>string[]</code> | deprecated and will be removed in mise 2027.3.3; move each selected root into a conf.d folder instead (https://mise.jdx.dev/configuration.html#conf-d-folders). |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrap.property.directories">directories</a></code> | <code>{[ key: string ]: <a href="#mise-projen.MiseTomlSchemaBootstrapDirectories">MiseTomlSchemaBootstrapDirectories</a>}</code> | Managed system directories keyed by absolute target path. |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrap.property.dotfileGroups">dotfileGroups</a></code> | <code>string[]</code> | the dotfile groups this machine applies; |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrap.property.files">files</a></code> | <code>{[ key: string ]: <a href="#mise-projen.MiseTomlSchemaBootstrapFiles">MiseTomlSchemaBootstrapFiles</a>}</code> | Managed system files keyed by absolute target path. |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrap.property.groups">groups</a></code> | <code>{[ key: string ]: <a href="#mise-projen.MiseTomlSchemaBootstrapGroups">MiseTomlSchemaBootstrapGroups</a>}</code> | [experimental] Linux groups that bootstrap creates or removes, keyed by group name. |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrap.property.hooks">hooks</a></code> | <code><a href="#mise-projen.MiseTomlSchemaBootstrapHooks">MiseTomlSchemaBootstrapHooks</a></code> | commands to run before and after bootstrap phases. |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrap.property.linux">linux</a></code> | <code><a href="#mise-projen.MiseTomlSchemaBootstrapLinux">MiseTomlSchemaBootstrapLinux</a></code> | Linux-specific bootstrap config. |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrap.property.macos">macos</a></code> | <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacos">MiseTomlSchemaBootstrapMacos</a></code> | macOS-specific bootstrap config. |
@@ -1418,8 +1420,22 @@ const miseTomlSchemaBootstrap: MiseTomlSchemaBootstrap = { ... }
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrap.property.plugins">plugins</a></code> | <code>{[ key: string ]: string}</code> | package manager plugins to install with `mise bootstrap plugins apply`, keyed by manager name. |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrap.property.remote">remote</a></code> | <code><a href="#mise-projen.MiseTomlSchemaBootstrapRemote">MiseTomlSchemaBootstrapRemote</a></code> | OpenSSH targets used by `mise bootstrap remote`. |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrap.property.repos">repos</a></code> | <code>{[ key: string ]: <a href="#mise-projen.MiseTomlSchemaBootstrapRepos">MiseTomlSchemaBootstrapRepos</a>}</code> | git repositories to clone or update with `mise bootstrap repos apply`, keyed by target path. |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrap.property.secrets">secrets</a></code> | <code>{[ key: string ]: any}</code> | sensitive bootstrap inputs read from environment variables, keyed by secret name. |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrap.property.services">services</a></code> | <code>{[ key: string ]: <a href="#mise-projen.MiseTomlSchemaBootstrapServices">MiseTomlSchemaBootstrapServices</a>}</code> | System services and portable user services managed by mise bootstrap, keyed by service name. |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrap.property.user">user</a></code> | <code><a href="#mise-projen.MiseTomlSchemaBootstrapUser">MiseTomlSchemaBootstrapUser</a></code> | current-user bootstrap settings. |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrap.property.users">users</a></code> | <code>{[ key: string ]: <a href="#mise-projen.MiseTomlSchemaBootstrapUsers">MiseTomlSchemaBootstrapUsers</a>}</code> | [experimental] Linux users that bootstrap creates or removes, keyed by user name. |
+
+---
+
+##### `apt`<sup>Optional</sup> <a name="apt" id="mise-projen.MiseTomlSchemaBootstrap.property.apt"></a>
+
+```typescript
+public readonly apt: MiseTomlSchemaBootstrapApt;
+```
+
+- *Type:* <a href="#mise-projen.MiseTomlSchemaBootstrapApt">MiseTomlSchemaBootstrapApt</a>
+
+apt-specific bootstrap package config.
 
 ---
 
@@ -1496,6 +1512,18 @@ public readonly files: {[ key: string ]: MiseTomlSchemaBootstrapFiles};
 - *Type:* {[ key: string ]: <a href="#mise-projen.MiseTomlSchemaBootstrapFiles">MiseTomlSchemaBootstrapFiles</a>}
 
 Managed system files keyed by absolute target path.
+
+---
+
+##### `groups`<sup>Optional</sup> <a name="groups" id="mise-projen.MiseTomlSchemaBootstrap.property.groups"></a>
+
+```typescript
+public readonly groups: {[ key: string ]: MiseTomlSchemaBootstrapGroups};
+```
+
+- *Type:* {[ key: string ]: <a href="#mise-projen.MiseTomlSchemaBootstrapGroups">MiseTomlSchemaBootstrapGroups</a>}
+
+[experimental] Linux groups that bootstrap creates or removes, keyed by group name.
 
 ---
 
@@ -1595,6 +1623,18 @@ git repositories to clone or update with `mise bootstrap repos apply`, keyed by 
 
 ---
 
+##### `secrets`<sup>Optional</sup> <a name="secrets" id="mise-projen.MiseTomlSchemaBootstrap.property.secrets"></a>
+
+```typescript
+public readonly secrets: {[ key: string ]: any};
+```
+
+- *Type:* {[ key: string ]: any}
+
+sensitive bootstrap inputs read from environment variables, keyed by secret name.
+
+---
+
 ##### `services`<sup>Optional</sup> <a name="services" id="mise-projen.MiseTomlSchemaBootstrap.property.services"></a>
 
 ```typescript
@@ -1616,6 +1656,166 @@ public readonly user: MiseTomlSchemaBootstrapUser;
 - *Type:* <a href="#mise-projen.MiseTomlSchemaBootstrapUser">MiseTomlSchemaBootstrapUser</a>
 
 current-user bootstrap settings.
+
+---
+
+##### `users`<sup>Optional</sup> <a name="users" id="mise-projen.MiseTomlSchemaBootstrap.property.users"></a>
+
+```typescript
+public readonly users: {[ key: string ]: MiseTomlSchemaBootstrapUsers};
+```
+
+- *Type:* {[ key: string ]: <a href="#mise-projen.MiseTomlSchemaBootstrapUsers">MiseTomlSchemaBootstrapUsers</a>}
+
+[experimental] Linux users that bootstrap creates or removes, keyed by user name.
+
+---
+
+### MiseTomlSchemaBootstrapApt <a name="MiseTomlSchemaBootstrapApt" id="mise-projen.MiseTomlSchemaBootstrapApt"></a>
+
+apt-specific bootstrap package config.
+
+#### Initializer <a name="Initializer" id="mise-projen.MiseTomlSchemaBootstrapApt.Initializer"></a>
+
+```typescript
+import { MiseTomlSchemaBootstrapApt } from 'mise-projen'
+
+const miseTomlSchemaBootstrapApt: MiseTomlSchemaBootstrapApt = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapApt.property.sources">sources</a></code> | <code>{[ key: string ]: <a href="#mise-projen.MiseTomlSchemaBootstrapAptSources">MiseTomlSchemaBootstrapAptSources</a>}</code> | apt repositories added before apt packages are installed, keyed by a name used in the files mise writes. |
+
+---
+
+##### `sources`<sup>Optional</sup> <a name="sources" id="mise-projen.MiseTomlSchemaBootstrapApt.property.sources"></a>
+
+```typescript
+public readonly sources: {[ key: string ]: MiseTomlSchemaBootstrapAptSources};
+```
+
+- *Type:* {[ key: string ]: <a href="#mise-projen.MiseTomlSchemaBootstrapAptSources">MiseTomlSchemaBootstrapAptSources</a>}
+
+apt repositories added before apt packages are installed, keyed by a name used in the files mise writes.
+
+---
+
+### MiseTomlSchemaBootstrapAptSources <a name="MiseTomlSchemaBootstrapAptSources" id="mise-projen.MiseTomlSchemaBootstrapAptSources"></a>
+
+#### Initializer <a name="Initializer" id="mise-projen.MiseTomlSchemaBootstrapAptSources.Initializer"></a>
+
+```typescript
+import { MiseTomlSchemaBootstrapAptSources } from 'mise-projen'
+
+const miseTomlSchemaBootstrapAptSources: MiseTomlSchemaBootstrapAptSources = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapAptSources.property.architectures">architectures</a></code> | <code>string</code> | architecture(s) to fetch, space-separated. |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapAptSources.property.components">components</a></code> | <code>string</code> | component(s), space-separated; |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapAptSources.property.fingerprint">fingerprint</a></code> | <code>string[]</code> | full primary key fingerprint(s) the signing key must have; |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapAptSources.property.key">key</a></code> | <code>string</code> | http(s) URL of the repository's signing key, armored or binary. |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapAptSources.property.ppa">ppa</a></code> | <code>string</code> | Launchpad PPA as owner/archive, such as git-core/ppa; |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapAptSources.property.suites">suites</a></code> | <code>string</code> | suite(s), space-separated; |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapAptSources.property.uris">uris</a></code> | <code>string</code> | repository URL(s), space-separated. |
+
+---
+
+##### `architectures`<sup>Optional</sup> <a name="architectures" id="mise-projen.MiseTomlSchemaBootstrapAptSources.property.architectures"></a>
+
+```typescript
+public readonly architectures: string;
+```
+
+- *Type:* string
+
+architecture(s) to fetch, space-separated.
+
+---
+
+##### `components`<sup>Optional</sup> <a name="components" id="mise-projen.MiseTomlSchemaBootstrapAptSources.property.components"></a>
+
+```typescript
+public readonly components: string;
+```
+
+- *Type:* string
+
+component(s), space-separated;
+
+defaults to main, or none when suites is a path ending in /
+
+---
+
+##### `fingerprint`<sup>Optional</sup> <a name="fingerprint" id="mise-projen.MiseTomlSchemaBootstrapAptSources.property.fingerprint"></a>
+
+```typescript
+public readonly fingerprint: string[];
+```
+
+- *Type:* string[]
+
+full primary key fingerprint(s) the signing key must have;
+
+required with key
+
+---
+
+##### `key`<sup>Optional</sup> <a name="key" id="mise-projen.MiseTomlSchemaBootstrapAptSources.property.key"></a>
+
+```typescript
+public readonly key: string;
+```
+
+- *Type:* string
+
+http(s) URL of the repository's signing key, armored or binary.
+
+---
+
+##### `ppa`<sup>Optional</sup> <a name="ppa" id="mise-projen.MiseTomlSchemaBootstrapAptSources.property.ppa"></a>
+
+```typescript
+public readonly ppa: string;
+```
+
+- *Type:* string
+
+Launchpad PPA as owner/archive, such as git-core/ppa;
+
+added on Ubuntu and Ubuntu-based releases only
+
+---
+
+##### `suites`<sup>Optional</sup> <a name="suites" id="mise-projen.MiseTomlSchemaBootstrapAptSources.property.suites"></a>
+
+```typescript
+public readonly suites: string;
+```
+
+- *Type:* string
+
+suite(s), space-separated;
+
+defaults to the release codename
+
+---
+
+##### `uris`<sup>Optional</sup> <a name="uris" id="mise-projen.MiseTomlSchemaBootstrapAptSources.property.uris"></a>
+
+```typescript
+public readonly uris: string;
+```
+
+- *Type:* string
+
+repository URL(s), space-separated.
 
 ---
 
@@ -2215,6 +2415,62 @@ public readonly template: boolean;
 ```
 
 - *Type:* boolean
+
+---
+
+### MiseTomlSchemaBootstrapGroups <a name="MiseTomlSchemaBootstrapGroups" id="mise-projen.MiseTomlSchemaBootstrapGroups"></a>
+
+#### Initializer <a name="Initializer" id="mise-projen.MiseTomlSchemaBootstrapGroups.Initializer"></a>
+
+```typescript
+import { MiseTomlSchemaBootstrapGroups } from 'mise-projen'
+
+const miseTomlSchemaBootstrapGroups: MiseTomlSchemaBootstrapGroups = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapGroups.property.gid">gid</a></code> | <code>number</code> | numeric group ID. |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapGroups.property.state">state</a></code> | <code><a href="#mise-projen.MiseTomlSchemaBootstrapGroupsState">MiseTomlSchemaBootstrapGroupsState</a></code> | whether the group should exist. |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapGroups.property.system">system</a></code> | <code>boolean</code> | create a system group. |
+
+---
+
+##### `gid`<sup>Optional</sup> <a name="gid" id="mise-projen.MiseTomlSchemaBootstrapGroups.property.gid"></a>
+
+```typescript
+public readonly gid: number;
+```
+
+- *Type:* number
+
+numeric group ID.
+
+---
+
+##### `state`<sup>Optional</sup> <a name="state" id="mise-projen.MiseTomlSchemaBootstrapGroups.property.state"></a>
+
+```typescript
+public readonly state: MiseTomlSchemaBootstrapGroupsState;
+```
+
+- *Type:* <a href="#mise-projen.MiseTomlSchemaBootstrapGroupsState">MiseTomlSchemaBootstrapGroupsState</a>
+
+whether the group should exist.
+
+---
+
+##### `system`<sup>Optional</sup> <a name="system" id="mise-projen.MiseTomlSchemaBootstrapGroups.property.system"></a>
+
+```typescript
+public readonly system: boolean;
+```
+
+- *Type:* boolean
+
+create a system group.
 
 ---
 
@@ -3249,6 +3505,7 @@ const miseTomlSchemaBootstrapMacos: MiseTomlSchemaBootstrapMacos = { ... }
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacos.property.finder">finder</a></code> | <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosFinder">MiseTomlSchemaBootstrapMacosFinder</a></code> | curated Finder preferences that compile into macOS defaults. |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacos.property.keyboard">keyboard</a></code> | <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosKeyboard">MiseTomlSchemaBootstrapMacosKeyboard</a></code> | curated keyboard preferences that compile into macOS defaults. |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacos.property.launchd">launchd</a></code> | <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosLaunchd">MiseTomlSchemaBootstrapMacosLaunchd</a></code> | macOS launchd bootstrap config. |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacos.property.loginItems">loginItems</a></code> | <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosLoginItems">MiseTomlSchemaBootstrapMacosLoginItems</a></code> | applications to open at login (System Settings > General > Login Items & Extensions). |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacos.property.trackpad">trackpad</a></code> | <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosTrackpad">MiseTomlSchemaBootstrapMacosTrackpad</a></code> | curated trackpad preferences that compile into macOS defaults. |
 
 ---
@@ -3322,6 +3579,18 @@ public readonly launchd: MiseTomlSchemaBootstrapMacosLaunchd;
 - *Type:* <a href="#mise-projen.MiseTomlSchemaBootstrapMacosLaunchd">MiseTomlSchemaBootstrapMacosLaunchd</a>
 
 macOS launchd bootstrap config.
+
+---
+
+##### `loginItems`<sup>Optional</sup> <a name="loginItems" id="mise-projen.MiseTomlSchemaBootstrapMacos.property.loginItems"></a>
+
+```typescript
+public readonly loginItems: MiseTomlSchemaBootstrapMacosLoginItems;
+```
+
+- *Type:* <a href="#mise-projen.MiseTomlSchemaBootstrapMacosLoginItems">MiseTomlSchemaBootstrapMacosLoginItems</a>
+
+applications to open at login (System Settings > General > Login Items & Extensions).
 
 ---
 
@@ -4003,6 +4272,51 @@ public readonly workingDirectory: string;
 - *Type:* string
 
 write WorkingDirectory.
+
+---
+
+### MiseTomlSchemaBootstrapMacosLoginItems <a name="MiseTomlSchemaBootstrapMacosLoginItems" id="mise-projen.MiseTomlSchemaBootstrapMacosLoginItems"></a>
+
+applications to open at login (System Settings > General > Login Items & Extensions).
+
+#### Initializer <a name="Initializer" id="mise-projen.MiseTomlSchemaBootstrapMacosLoginItems.Initializer"></a>
+
+```typescript
+import { MiseTomlSchemaBootstrapMacosLoginItems } from 'mise-projen'
+
+const miseTomlSchemaBootstrapMacosLoginItems: MiseTomlSchemaBootstrapMacosLoginItems = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosLoginItems.property.apps">apps</a></code> | <code>string[]</code> | application bundles to open at login: absolute or `~/` paths ending in `.app`. |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosLoginItems.property.exclusive">exclusive</a></code> | <code>boolean</code> | also remove login items that are not declared (default: false, so apps that register themselves are left alone). |
+
+---
+
+##### `apps`<sup>Optional</sup> <a name="apps" id="mise-projen.MiseTomlSchemaBootstrapMacosLoginItems.property.apps"></a>
+
+```typescript
+public readonly apps: string[];
+```
+
+- *Type:* string[]
+
+application bundles to open at login: absolute or `~/` paths ending in `.app`.
+
+---
+
+##### `exclusive`<sup>Optional</sup> <a name="exclusive" id="mise-projen.MiseTomlSchemaBootstrapMacosLoginItems.property.exclusive"></a>
+
+```typescript
+public readonly exclusive: boolean;
+```
+
+- *Type:* boolean
+
+also remove login items that are not declared (default: false, so apps that register themselves are left alone).
 
 ---
 
@@ -4718,6 +5032,185 @@ public readonly loginShell: string;
 current user's desired login shell, applied with `chsh -s`;
 
 must be an absolute path
+
+---
+
+### MiseTomlSchemaBootstrapUsers <a name="MiseTomlSchemaBootstrapUsers" id="mise-projen.MiseTomlSchemaBootstrapUsers"></a>
+
+#### Initializer <a name="Initializer" id="mise-projen.MiseTomlSchemaBootstrapUsers.Initializer"></a>
+
+```typescript
+import { MiseTomlSchemaBootstrapUsers } from 'mise-projen'
+
+const miseTomlSchemaBootstrapUsers: MiseTomlSchemaBootstrapUsers = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapUsers.property.comment">comment</a></code> | <code>string</code> | comment (GECOS) field, without ':', CR or LF. |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapUsers.property.createHome">createHome</a></code> | <code>boolean</code> | create the home directory. |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapUsers.property.exclusiveGroups">exclusiveGroups</a></code> | <code>boolean</code> | remove the user from supplementary groups not listed in groups. |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapUsers.property.group">group</a></code> | <code>string</code> | primary group; |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapUsers.property.groups">groups</a></code> | <code>string[]</code> | supplementary groups. |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapUsers.property.home">home</a></code> | <code>string</code> | home directory; |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapUsers.property.moveHome">moveHome</a></code> | <code>boolean</code> | move the existing home directory to home. |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapUsers.property.removeHome">removeHome</a></code> | <code>boolean</code> | remove the home directory when removing the user. |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapUsers.property.shell">shell</a></code> | <code>string</code> | login shell; |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapUsers.property.state">state</a></code> | <code><a href="#mise-projen.MiseTomlSchemaBootstrapUsersState">MiseTomlSchemaBootstrapUsersState</a></code> | whether the user should exist. |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapUsers.property.system">system</a></code> | <code>boolean</code> | create a system user. |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapUsers.property.uid">uid</a></code> | <code>number</code> | numeric user ID. |
+
+---
+
+##### `comment`<sup>Optional</sup> <a name="comment" id="mise-projen.MiseTomlSchemaBootstrapUsers.property.comment"></a>
+
+```typescript
+public readonly comment: string;
+```
+
+- *Type:* string
+
+comment (GECOS) field, without ':', CR or LF.
+
+---
+
+##### `createHome`<sup>Optional</sup> <a name="createHome" id="mise-projen.MiseTomlSchemaBootstrapUsers.property.createHome"></a>
+
+```typescript
+public readonly createHome: boolean;
+```
+
+- *Type:* boolean
+
+create the home directory.
+
+---
+
+##### `exclusiveGroups`<sup>Optional</sup> <a name="exclusiveGroups" id="mise-projen.MiseTomlSchemaBootstrapUsers.property.exclusiveGroups"></a>
+
+```typescript
+public readonly exclusiveGroups: boolean;
+```
+
+- *Type:* boolean
+
+remove the user from supplementary groups not listed in groups.
+
+---
+
+##### `group`<sup>Optional</sup> <a name="group" id="mise-projen.MiseTomlSchemaBootstrapUsers.property.group"></a>
+
+```typescript
+public readonly group: string;
+```
+
+- *Type:* string
+
+primary group;
+
+required for a present user
+
+---
+
+##### `groups`<sup>Optional</sup> <a name="groups" id="mise-projen.MiseTomlSchemaBootstrapUsers.property.groups"></a>
+
+```typescript
+public readonly groups: string[];
+```
+
+- *Type:* string[]
+
+supplementary groups.
+
+---
+
+##### `home`<sup>Optional</sup> <a name="home" id="mise-projen.MiseTomlSchemaBootstrapUsers.property.home"></a>
+
+```typescript
+public readonly home: string;
+```
+
+- *Type:* string
+
+home directory;
+
+an absolute path without ':', CR or LF
+
+---
+
+##### `moveHome`<sup>Optional</sup> <a name="moveHome" id="mise-projen.MiseTomlSchemaBootstrapUsers.property.moveHome"></a>
+
+```typescript
+public readonly moveHome: boolean;
+```
+
+- *Type:* boolean
+
+move the existing home directory to home.
+
+---
+
+##### `removeHome`<sup>Optional</sup> <a name="removeHome" id="mise-projen.MiseTomlSchemaBootstrapUsers.property.removeHome"></a>
+
+```typescript
+public readonly removeHome: boolean;
+```
+
+- *Type:* boolean
+
+remove the home directory when removing the user.
+
+---
+
+##### `shell`<sup>Optional</sup> <a name="shell" id="mise-projen.MiseTomlSchemaBootstrapUsers.property.shell"></a>
+
+```typescript
+public readonly shell: string;
+```
+
+- *Type:* string
+
+login shell;
+
+an absolute path without ':', CR or LF
+
+---
+
+##### `state`<sup>Optional</sup> <a name="state" id="mise-projen.MiseTomlSchemaBootstrapUsers.property.state"></a>
+
+```typescript
+public readonly state: MiseTomlSchemaBootstrapUsersState;
+```
+
+- *Type:* <a href="#mise-projen.MiseTomlSchemaBootstrapUsersState">MiseTomlSchemaBootstrapUsersState</a>
+
+whether the user should exist.
+
+---
+
+##### `system`<sup>Optional</sup> <a name="system" id="mise-projen.MiseTomlSchemaBootstrapUsers.property.system"></a>
+
+```typescript
+public readonly system: boolean;
+```
+
+- *Type:* boolean
+
+create a system user.
+
+---
+
+##### `uid`<sup>Optional</sup> <a name="uid" id="mise-projen.MiseTomlSchemaBootstrapUsers.property.uid"></a>
+
+```typescript
+public readonly uid: number;
+```
+
+- *Type:* number
+
+numeric user ID.
 
 ---
 
@@ -8653,6 +9146,8 @@ const settingsGithub: SettingsGithub = { ... }
 | <code><a href="#mise-projen.SettingsGithub.property.githubAttestations">githubAttestations</a></code> | <code>boolean</code> | Verify GitHub artifact attestations for github backend tools. |
 | <code><a href="#mise-projen.SettingsGithub.property.oauthApiUrl">oauthApiUrl</a></code> | <code>string</code> | GitHub API base URL mise uses to validate native OAuth tokens. |
 | <code><a href="#mise-projen.SettingsGithub.property.oauthAuthUrl">oauthAuthUrl</a></code> | <code>string</code> | GitHub OAuth endpoint base URL for the native device flow. |
+| <code><a href="#mise-projen.SettingsGithub.property.oauthCacheGet">oauthCacheGet</a></code> | <code>string</code> | Command that prints the native GitHub OAuth refresh tokens stored by github.oauth_cache_set. |
+| <code><a href="#mise-projen.SettingsGithub.property.oauthCacheSet">oauthCacheSet</a></code> | <code>string</code> | Command that stores the native GitHub OAuth refresh tokens, read from its stdin. |
 | <code><a href="#mise-projen.SettingsGithub.property.oauthClientId">oauthClientId</a></code> | <code>string</code> | GitHub App client ID that turns on native OAuth device-flow tokens. |
 | <code><a href="#mise-projen.SettingsGithub.property.oauthCopyCode">oauthCopyCode</a></code> | <code>boolean</code> | Copy the one-time device code to the clipboard during the native GitHub OAuth device flow. |
 | <code><a href="#mise-projen.SettingsGithub.property.oauthExportEnv">oauthExportEnv</a></code> | <code>string</code> | Environment variable that mise exports the native GitHub OAuth token under; |
@@ -8720,6 +9215,30 @@ public readonly oauthAuthUrl: string;
 - *Type:* string
 
 GitHub OAuth endpoint base URL for the native device flow.
+
+---
+
+##### `oauthCacheGet`<sup>Optional</sup> <a name="oauthCacheGet" id="mise-projen.SettingsGithub.property.oauthCacheGet"></a>
+
+```typescript
+public readonly oauthCacheGet: string;
+```
+
+- *Type:* string
+
+Command that prints the native GitHub OAuth refresh tokens stored by github.oauth_cache_set.
+
+---
+
+##### `oauthCacheSet`<sup>Optional</sup> <a name="oauthCacheSet" id="mise-projen.SettingsGithub.property.oauthCacheSet"></a>
+
+```typescript
+public readonly oauthCacheSet: string;
+```
+
+- *Type:* string
+
+Command that stores the native GitHub OAuth refresh tokens, read from its stdin.
 
 ---
 
@@ -10523,7 +11042,7 @@ const settingsSkills: SettingsSkills = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#mise-projen.SettingsSkills.property.autoSync">autoSync</a></code> | <code>boolean</code> | Link the active tools' agent skills into the project after `mise install` and `mise use`. |
+| <code><a href="#mise-projen.SettingsSkills.property.autoSync">autoSync</a></code> | <code>boolean</code> | Link the active tools' agent skills into the project after `mise install`, `mise use`, and `mise upgrade`. |
 | <code><a href="#mise-projen.SettingsSkills.property.dir">dir</a></code> | <code>string</code> | Where `mise skills sync` links skills: a path under the project root, or under the home directory with `--global`. |
 | <code><a href="#mise-projen.SettingsSkills.property.fetch">fetch</a></code> | <code>boolean</code> | Fetch the agent skills a tool's packslip declares when installing it. |
 | <code><a href="#mise-projen.SettingsSkills.property.prune">prune</a></code> | <code>boolean</code> | Remove links mise made for skills that are no longer active, on every `mise skills sync`. |
@@ -10538,7 +11057,7 @@ public readonly autoSync: boolean;
 
 - *Type:* boolean
 
-Link the active tools' agent skills into the project after `mise install` and `mise use`.
+Link the active tools' agent skills into the project after `mise install`, `mise use`, and `mise upgrade`.
 
 ---
 
@@ -10831,8 +11350,22 @@ const settingsSystemPackages: SettingsSystemPackages = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
+| <code><a href="#mise-projen.SettingsSystemPackages.property.elevateWith">elevateWith</a></code> | <code>string</code> | Command mise uses to get root instead of `sudo`, such as `run0` or `doas`. |
 | <code><a href="#mise-projen.SettingsSystemPackages.property.managers">managers</a></code> | <code>string[]</code> | Package managers that mise may use for `[bootstrap.packages]` and missing plugin dependencies. |
+| <code><a href="#mise-projen.SettingsSystemPackages.property.ostree">ostree</a></code> | <code><a href="#mise-projen.SettingsSystemPackagesOstree">SettingsSystemPackagesOstree</a></code> | What mise does with `dnf:` packages on an image-based Fedora host such as Silverblue or Bazzite. |
 | <code><a href="#mise-projen.SettingsSystemPackages.property.sudo">sudo</a></code> | <code>boolean</code> | Let mise run `sudo` for steps that need root, such as system packages and `mise install --system`. |
+
+---
+
+##### `elevateWith`<sup>Optional</sup> <a name="elevateWith" id="mise-projen.SettingsSystemPackages.property.elevateWith"></a>
+
+```typescript
+public readonly elevateWith: string;
+```
+
+- *Type:* string
+
+Command mise uses to get root instead of `sudo`, such as `run0` or `doas`.
 
 ---
 
@@ -10845,6 +11378,18 @@ public readonly managers: string[];
 - *Type:* string[]
 
 Package managers that mise may use for `[bootstrap.packages]` and missing plugin dependencies.
+
+---
+
+##### `ostree`<sup>Optional</sup> <a name="ostree" id="mise-projen.SettingsSystemPackages.property.ostree"></a>
+
+```typescript
+public readonly ostree: SettingsSystemPackagesOstree;
+```
+
+- *Type:* <a href="#mise-projen.SettingsSystemPackagesOstree">SettingsSystemPackagesOstree</a>
+
+What mise does with `dnf:` packages on an image-based Fedora host such as Silverblue or Bazzite.
 
 ---
 
@@ -12561,6 +13106,33 @@ absent.
 ---
 
 
+### MiseTomlSchemaBootstrapGroupsState <a name="MiseTomlSchemaBootstrapGroupsState" id="mise-projen.MiseTomlSchemaBootstrapGroupsState"></a>
+
+whether the group should exist.
+
+#### Members <a name="Members" id="Members"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapGroupsState.PRESENT">PRESENT</a></code> | present. |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapGroupsState.ABSENT">ABSENT</a></code> | absent. |
+
+---
+
+##### `PRESENT` <a name="PRESENT" id="mise-projen.MiseTomlSchemaBootstrapGroupsState.PRESENT"></a>
+
+present.
+
+---
+
+
+##### `ABSENT` <a name="ABSENT" id="mise-projen.MiseTomlSchemaBootstrapGroupsState.ABSENT"></a>
+
+absent.
+
+---
+
+
 ### MiseTomlSchemaBootstrapLinuxFirewallBackend <a name="MiseTomlSchemaBootstrapLinuxFirewallBackend" id="mise-projen.MiseTomlSchemaBootstrapLinuxFirewallBackend"></a>
 
 firewall backend;
@@ -13258,6 +13830,33 @@ absent.
 ---
 
 
+### MiseTomlSchemaBootstrapUsersState <a name="MiseTomlSchemaBootstrapUsersState" id="mise-projen.MiseTomlSchemaBootstrapUsersState"></a>
+
+whether the user should exist.
+
+#### Members <a name="Members" id="Members"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapUsersState.PRESENT">PRESENT</a></code> | present. |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapUsersState.ABSENT">ABSENT</a></code> | absent. |
+
+---
+
+##### `PRESENT` <a name="PRESENT" id="mise-projen.MiseTomlSchemaBootstrapUsersState.PRESENT"></a>
+
+present.
+
+---
+
+
+##### `ABSENT` <a name="ABSENT" id="mise-projen.MiseTomlSchemaBootstrapUsersState.ABSENT"></a>
+
+absent.
+
+---
+
+
 ### MiseTomlSchemaDaemonProvidersPreset <a name="MiseTomlSchemaDaemonProvidersPreset" id="mise-projen.MiseTomlSchemaDaemonProvidersPreset"></a>
 
 #### Members <a name="Members" id="Members"></a>
@@ -13858,6 +14457,33 @@ warn.
 ##### `IGNORE` <a name="IGNORE" id="mise-projen.SettingsSystemDeps.IGNORE"></a>
 
 ignore.
+
+---
+
+
+### SettingsSystemPackagesOstree <a name="SettingsSystemPackagesOstree" id="mise-projen.SettingsSystemPackagesOstree"></a>
+
+What mise does with `dnf:` packages on an image-based Fedora host such as Silverblue or Bazzite.
+
+#### Members <a name="Members" id="Members"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#mise-projen.SettingsSystemPackagesOstree.ERROR">ERROR</a></code> | error. |
+| <code><a href="#mise-projen.SettingsSystemPackagesOstree.LAYER">LAYER</a></code> | layer. |
+
+---
+
+##### `ERROR` <a name="ERROR" id="mise-projen.SettingsSystemPackagesOstree.ERROR"></a>
+
+error.
+
+---
+
+
+##### `LAYER` <a name="LAYER" id="mise-projen.SettingsSystemPackagesOstree.LAYER"></a>
+
+layer.
 
 ---
 
