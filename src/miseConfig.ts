@@ -2183,6 +2183,13 @@ export interface MiseTomlSchemaBootstrap {
   readonly user?: MiseTomlSchemaBootstrapUser;
 
   /**
+   * apt-specific bootstrap package config
+   *
+   * @schema MiseTomlSchemaBootstrap#apt
+   */
+  readonly apt?: MiseTomlSchemaBootstrapApt;
+
+  /**
    * Homebrew-specific bootstrap package config
    *
    * @schema MiseTomlSchemaBootstrap#brew
@@ -2202,6 +2209,27 @@ export interface MiseTomlSchemaBootstrap {
    * @schema MiseTomlSchemaBootstrap#mise_shell_activate
    */
   readonly miseShellActivate?: MiseTomlSchemaBootstrapMiseShellActivate;
+
+  /**
+   * sensitive bootstrap inputs read from environment variables, keyed by secret name
+   *
+   * @schema MiseTomlSchemaBootstrap#secrets
+   */
+  readonly secrets?: { [key: string]: any };
+
+  /**
+   * [experimental] Linux groups that bootstrap creates or removes, keyed by group name
+   *
+   * @schema MiseTomlSchemaBootstrap#groups
+   */
+  readonly groups?: { [key: string]: MiseTomlSchemaBootstrapGroups };
+
+  /**
+   * [experimental] Linux users that bootstrap creates or removes, keyed by user name
+   *
+   * @schema MiseTomlSchemaBootstrap#users
+   */
+  readonly users?: { [key: string]: MiseTomlSchemaBootstrapUsers };
 }
 
 /**
@@ -2225,9 +2253,13 @@ export function toJson_MiseTomlSchemaBootstrap(obj: MiseTomlSchemaBootstrap | un
     'macos': toJson_MiseTomlSchemaBootstrapMacos(obj.macos),
     'linux': toJson_MiseTomlSchemaBootstrapLinux(obj.linux),
     'user': toJson_MiseTomlSchemaBootstrapUser(obj.user),
+    'apt': toJson_MiseTomlSchemaBootstrapApt(obj.apt),
     'brew': toJson_MiseTomlSchemaBootstrapBrew(obj.brew),
     'hooks': toJson_MiseTomlSchemaBootstrapHooks(obj.hooks),
     'mise_shell_activate': toJson_MiseTomlSchemaBootstrapMiseShellActivate(obj.miseShellActivate),
+    'secrets': ((obj.secrets) === undefined) ? undefined : (Object.entries(obj.secrets).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    'groups': ((obj.groups) === undefined) ? undefined : (Object.entries(obj.groups).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: toJson_MiseTomlSchemaBootstrapGroups(i[1]) }), {})),
+    'users': ((obj.users) === undefined) ? undefined : (Object.entries(obj.users).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: toJson_MiseTomlSchemaBootstrapUsers(i[1]) }), {})),
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -3321,6 +3353,20 @@ export interface SettingsGithub {
   readonly oauthAuthUrl?: string;
 
   /**
+   * Command that prints the native GitHub OAuth refresh tokens stored by github.oauth_cache_set.
+   *
+   * @schema SettingsGithub#oauth_cache_get
+   */
+  readonly oauthCacheGet?: string;
+
+  /**
+   * Command that stores the native GitHub OAuth refresh tokens, read from its stdin.
+   *
+   * @schema SettingsGithub#oauth_cache_set
+   */
+  readonly oauthCacheSet?: string;
+
+  /**
    * GitHub App client ID that turns on native OAuth device-flow tokens.
    *
    * @schema SettingsGithub#oauth_client_id
@@ -3383,6 +3429,8 @@ export function toJson_SettingsGithub(obj: SettingsGithub | undefined): Record<s
     'github_attestations': obj.githubAttestations,
     'oauth_api_url': obj.oauthApiUrl,
     'oauth_auth_url': obj.oauthAuthUrl,
+    'oauth_cache_get': obj.oauthCacheGet,
+    'oauth_cache_set': obj.oauthCacheSet,
     'oauth_client_id': obj.oauthClientId,
     'oauth_copy_code': obj.oauthCopyCode,
     'oauth_export_env': obj.oauthExportEnv,
@@ -4647,7 +4695,7 @@ export function toJson_SettingsShims(obj: SettingsShims | undefined): Record<str
  */
 export interface SettingsSkills {
   /**
-   * Link the active tools' agent skills into the project after `mise install` and `mise use`.
+   * Link the active tools' agent skills into the project after `mise install`, `mise use`, and `mise upgrade`.
    *
    * @schema SettingsSkills#auto_sync
    */
@@ -4894,11 +4942,25 @@ export enum SettingsSystemDeps {
  */
 export interface SettingsSystemPackages {
   /**
+   * Command mise uses to get root instead of `sudo`, such as `run0` or `doas`.
+   *
+   * @schema SettingsSystemPackages#elevate_with
+   */
+  readonly elevateWith?: string;
+
+  /**
    * Package managers that mise may use for `[bootstrap.packages]` and missing plugin dependencies.
    *
    * @schema SettingsSystemPackages#managers
    */
   readonly managers?: string[];
+
+  /**
+   * What mise does with `dnf:` packages on an image-based Fedora host such as Silverblue or Bazzite.
+   *
+   * @schema SettingsSystemPackages#ostree
+   */
+  readonly ostree?: SettingsSystemPackagesOstree;
 
   /**
    * Let mise run `sudo` for steps that need root, such as system packages and `mise install --system`.
@@ -4916,7 +4978,9 @@ export interface SettingsSystemPackages {
 export function toJson_SettingsSystemPackages(obj: SettingsSystemPackages | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'elevate_with': obj.elevateWith,
     'managers': obj.managers?.map(y => y),
+    'ostree': obj.ostree,
     'sudo': obj.sudo,
   };
   // filter undefined values
@@ -5939,6 +6003,13 @@ export interface MiseTomlSchemaBootstrapMacos {
   readonly defaultsEntries?: MiseTomlSchemaBootstrapMacosDefaultsEntries[];
 
   /**
+   * applications to open at login (System Settings > General > Login Items & Extensions)
+   *
+   * @schema MiseTomlSchemaBootstrapMacos#login_items
+   */
+  readonly loginItems?: MiseTomlSchemaBootstrapMacosLoginItems;
+
+  /**
    * macOS launchd bootstrap config
    *
    * @schema MiseTomlSchemaBootstrapMacos#launchd
@@ -5960,6 +6031,7 @@ export function toJson_MiseTomlSchemaBootstrapMacos(obj: MiseTomlSchemaBootstrap
     'trackpad': toJson_MiseTomlSchemaBootstrapMacosTrackpad(obj.trackpad),
     'defaults': ((obj.defaults) === undefined) ? undefined : (Object.entries(obj.defaults).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: ((i[1]) === undefined) ? undefined : (Object.entries(i[1]).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1]?.value }), {})) }), {})),
     'defaults_entries': obj.defaultsEntries?.map(y => toJson_MiseTomlSchemaBootstrapMacosDefaultsEntries(y)),
+    'login_items': toJson_MiseTomlSchemaBootstrapMacosLoginItems(obj.loginItems),
     'launchd': toJson_MiseTomlSchemaBootstrapMacosLaunchd(obj.launchd),
   };
   // filter undefined values
@@ -6027,6 +6099,35 @@ export function toJson_MiseTomlSchemaBootstrapUser(obj: MiseTomlSchemaBootstrapU
   if (obj === undefined) { return undefined; }
   const result = {
     'login_shell': obj.loginShell,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * apt-specific bootstrap package config
+ *
+ * @schema MiseTomlSchemaBootstrapApt
+ */
+export interface MiseTomlSchemaBootstrapApt {
+  /**
+   * apt repositories added before apt packages are installed, keyed by a name used in the files mise writes
+   *
+   * @schema MiseTomlSchemaBootstrapApt#sources
+   */
+  readonly sources?: { [key: string]: MiseTomlSchemaBootstrapAptSources };
+}
+
+/**
+ * Converts an object of type 'MiseTomlSchemaBootstrapApt' to JSON representation.
+ * @internal
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_MiseTomlSchemaBootstrapApt(obj: MiseTomlSchemaBootstrapApt | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'sources': ((obj.sources) === undefined) ? undefined : (Object.entries(obj.sources).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: toJson_MiseTomlSchemaBootstrapAptSources(i[1]) }), {})),
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -6244,6 +6345,164 @@ export function toJson_MiseTomlSchemaBootstrapMiseShellActivate(obj: MiseTomlSch
     'zshenv': obj.zshenv,
     'zprofile': obj.zprofile,
     'zshrc': obj.zshrc,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * @schema MiseTomlSchemaBootstrapGroups
+ */
+export interface MiseTomlSchemaBootstrapGroups {
+  /**
+   * whether the group should exist
+   *
+   * @schema MiseTomlSchemaBootstrapGroups#state
+   */
+  readonly state?: MiseTomlSchemaBootstrapGroupsState;
+
+  /**
+   * numeric group ID
+   *
+   * @schema MiseTomlSchemaBootstrapGroups#gid
+   */
+  readonly gid?: number;
+
+  /**
+   * create a system group
+   *
+   * @schema MiseTomlSchemaBootstrapGroups#system
+   */
+  readonly system?: boolean;
+}
+
+/**
+ * Converts an object of type 'MiseTomlSchemaBootstrapGroups' to JSON representation.
+ * @internal
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_MiseTomlSchemaBootstrapGroups(obj: MiseTomlSchemaBootstrapGroups | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'state': obj.state,
+    'gid': obj.gid,
+    'system': obj.system,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * @schema MiseTomlSchemaBootstrapUsers
+ */
+export interface MiseTomlSchemaBootstrapUsers {
+  /**
+   * whether the user should exist
+   *
+   * @schema MiseTomlSchemaBootstrapUsers#state
+   */
+  readonly state?: MiseTomlSchemaBootstrapUsersState;
+
+  /**
+   * numeric user ID
+   *
+   * @schema MiseTomlSchemaBootstrapUsers#uid
+   */
+  readonly uid?: number;
+
+  /**
+   * primary group; required for a present user
+   *
+   * @schema MiseTomlSchemaBootstrapUsers#group
+   */
+  readonly group?: string;
+
+  /**
+   * supplementary groups
+   *
+   * @schema MiseTomlSchemaBootstrapUsers#groups
+   */
+  readonly groups?: string[];
+
+  /**
+   * remove the user from supplementary groups not listed in groups
+   *
+   * @schema MiseTomlSchemaBootstrapUsers#exclusive_groups
+   */
+  readonly exclusiveGroups?: boolean;
+
+  /**
+   * home directory; an absolute path without ':', CR or LF
+   *
+   * @schema MiseTomlSchemaBootstrapUsers#home
+   */
+  readonly home?: string;
+
+  /**
+   * login shell; an absolute path without ':', CR or LF
+   *
+   * @schema MiseTomlSchemaBootstrapUsers#shell
+   */
+  readonly shell?: string;
+
+  /**
+   * comment (GECOS) field, without ':', CR or LF
+   *
+   * @schema MiseTomlSchemaBootstrapUsers#comment
+   */
+  readonly comment?: string;
+
+  /**
+   * create a system user
+   *
+   * @schema MiseTomlSchemaBootstrapUsers#system
+   */
+  readonly system?: boolean;
+
+  /**
+   * create the home directory
+   *
+   * @schema MiseTomlSchemaBootstrapUsers#create_home
+   */
+  readonly createHome?: boolean;
+
+  /**
+   * move the existing home directory to home
+   *
+   * @schema MiseTomlSchemaBootstrapUsers#move_home
+   */
+  readonly moveHome?: boolean;
+
+  /**
+   * remove the home directory when removing the user
+   *
+   * @schema MiseTomlSchemaBootstrapUsers#remove_home
+   */
+  readonly removeHome?: boolean;
+}
+
+/**
+ * Converts an object of type 'MiseTomlSchemaBootstrapUsers' to JSON representation.
+ * @internal
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_MiseTomlSchemaBootstrapUsers(obj: MiseTomlSchemaBootstrapUsers | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'state': obj.state,
+    'uid': obj.uid,
+    'group': obj.group,
+    'groups': obj.groups?.map(y => y),
+    'exclusive_groups': obj.exclusiveGroups,
+    'home': obj.home,
+    'shell': obj.shell,
+    'comment': obj.comment,
+    'system': obj.system,
+    'create_home': obj.createHome,
+    'move_home': obj.moveHome,
+    'remove_home': obj.removeHome,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -6620,6 +6879,18 @@ export enum SettingsStatusMissingTools {
   IF_UNDERSCORE_OTHER_UNDERSCORE_VERSIONS_UNDERSCORE_INSTALLED = "if_other_versions_installed",
   /** always */
   ALWAYS = "always",
+}
+
+/**
+ * What mise does with `dnf:` packages on an image-based Fedora host such as Silverblue or Bazzite.
+ *
+ * @schema SettingsSystemPackagesOstree
+ */
+export enum SettingsSystemPackagesOstree {
+  /** error */
+  ERROR = "error",
+  /** layer */
+  LAYER = "layer",
 }
 
 /**
@@ -7420,6 +7691,43 @@ export function toJson_MiseTomlSchemaBootstrapMacosDefaultsEntries(obj: MiseToml
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * applications to open at login (System Settings > General > Login Items & Extensions)
+ *
+ * @schema MiseTomlSchemaBootstrapMacosLoginItems
+ */
+export interface MiseTomlSchemaBootstrapMacosLoginItems {
+  /**
+   * application bundles to open at login: absolute or `~/` paths ending in `.app`
+   *
+   * @schema MiseTomlSchemaBootstrapMacosLoginItems#apps
+   */
+  readonly apps?: string[];
+
+  /**
+   * also remove login items that are not declared (default: false, so apps that register themselves are left alone)
+   *
+   * @schema MiseTomlSchemaBootstrapMacosLoginItems#exclusive
+   */
+  readonly exclusive?: boolean;
+}
+
+/**
+ * Converts an object of type 'MiseTomlSchemaBootstrapMacosLoginItems' to JSON representation.
+ * @internal
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_MiseTomlSchemaBootstrapMacosLoginItems(obj: MiseTomlSchemaBootstrapMacosLoginItems | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'apps': obj.apps?.map(y => y),
+    'exclusive': obj.exclusive,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
  * macOS launchd bootstrap config
  *
  * @schema MiseTomlSchemaBootstrapMacosLaunchd
@@ -7553,6 +7861,105 @@ export function toJson_MiseTomlSchemaBootstrapLinuxSystemd(obj: MiseTomlSchemaBo
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * @schema MiseTomlSchemaBootstrapAptSources
+ */
+export interface MiseTomlSchemaBootstrapAptSources {
+  /**
+   * Launchpad PPA as owner/archive, such as git-core/ppa; added on Ubuntu and Ubuntu-based releases only
+   *
+   * @schema MiseTomlSchemaBootstrapAptSources#ppa
+   */
+  readonly ppa?: string;
+
+  /**
+   * repository URL(s), space-separated
+   *
+   * @schema MiseTomlSchemaBootstrapAptSources#uris
+   */
+  readonly uris?: string;
+
+  /**
+   * suite(s), space-separated; defaults to the release codename
+   *
+   * @schema MiseTomlSchemaBootstrapAptSources#suites
+   */
+  readonly suites?: string;
+
+  /**
+   * component(s), space-separated; defaults to main, or none when suites is a path ending in /
+   *
+   * @schema MiseTomlSchemaBootstrapAptSources#components
+   */
+  readonly components?: string;
+
+  /**
+   * architecture(s) to fetch, space-separated
+   *
+   * @schema MiseTomlSchemaBootstrapAptSources#architectures
+   */
+  readonly architectures?: string;
+
+  /**
+   * http(s) URL of the repository's signing key, armored or binary
+   *
+   * @schema MiseTomlSchemaBootstrapAptSources#key
+   */
+  readonly key?: string;
+
+  /**
+   * full primary key fingerprint(s) the signing key must have; required with key
+   *
+   * @schema MiseTomlSchemaBootstrapAptSources#fingerprint
+   */
+  readonly fingerprint?: string[];
+}
+
+/**
+ * Converts an object of type 'MiseTomlSchemaBootstrapAptSources' to JSON representation.
+ * @internal
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_MiseTomlSchemaBootstrapAptSources(obj: MiseTomlSchemaBootstrapAptSources | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'ppa': obj.ppa,
+    'uris': obj.uris,
+    'suites': obj.suites,
+    'components': obj.components,
+    'architectures': obj.architectures,
+    'key': obj.key,
+    'fingerprint': obj.fingerprint?.map(y => y),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * whether the group should exist
+ *
+ * @schema MiseTomlSchemaBootstrapGroupsState
+ */
+export enum MiseTomlSchemaBootstrapGroupsState {
+  /** present */
+  PRESENT = "present",
+  /** absent */
+  ABSENT = "absent",
+}
+
+/**
+ * whether the user should exist
+ *
+ * @schema MiseTomlSchemaBootstrapUsersState
+ */
+export enum MiseTomlSchemaBootstrapUsersState {
+  /** present */
+  PRESENT = "present",
+  /** absent */
+  ABSENT = "absent",
+}
 
 /**
  * Dock screen edge
