@@ -2190,6 +2190,13 @@ export interface MiseTomlSchemaBootstrap {
   readonly apt?: MiseTomlSchemaBootstrapApt;
 
   /**
+   * dnf-specific bootstrap package config
+   *
+   * @schema MiseTomlSchemaBootstrap#dnf
+   */
+  readonly dnf?: MiseTomlSchemaBootstrapDnf;
+
+  /**
    * Homebrew-specific bootstrap package config
    *
    * @schema MiseTomlSchemaBootstrap#brew
@@ -2254,6 +2261,7 @@ export function toJson_MiseTomlSchemaBootstrap(obj: MiseTomlSchemaBootstrap | un
     'linux': toJson_MiseTomlSchemaBootstrapLinux(obj.linux),
     'user': toJson_MiseTomlSchemaBootstrapUser(obj.user),
     'apt': toJson_MiseTomlSchemaBootstrapApt(obj.apt),
+    'dnf': toJson_MiseTomlSchemaBootstrapDnf(obj.dnf),
     'brew': toJson_MiseTomlSchemaBootstrapBrew(obj.brew),
     'hooks': toJson_MiseTomlSchemaBootstrapHooks(obj.hooks),
     'mise_shell_activate': toJson_MiseTomlSchemaBootstrapMiseShellActivate(obj.miseShellActivate),
@@ -3360,6 +3368,13 @@ export interface SettingsGithub {
   readonly oauthCacheGet?: string;
 
   /**
+   * Keep the native GitHub OAuth refresh token behind Touch ID in the macOS Secure Enclave.
+   *
+   * @schema SettingsGithub#oauth_cache_secure_enclave
+   */
+  readonly oauthCacheSecureEnclave?: boolean;
+
+  /**
    * Command that stores the native GitHub OAuth refresh tokens, read from its stdin.
    *
    * @schema SettingsGithub#oauth_cache_set
@@ -3430,6 +3445,7 @@ export function toJson_SettingsGithub(obj: SettingsGithub | undefined): Record<s
     'oauth_api_url': obj.oauthApiUrl,
     'oauth_auth_url': obj.oauthAuthUrl,
     'oauth_cache_get': obj.oauthCacheGet,
+    'oauth_cache_secure_enclave': obj.oauthCacheSecureEnclave,
     'oauth_cache_set': obj.oauthCacheSet,
     'oauth_client_id': obj.oauthClientId,
     'oauth_copy_code': obj.oauthCopyCode,
@@ -6135,6 +6151,35 @@ export function toJson_MiseTomlSchemaBootstrapApt(obj: MiseTomlSchemaBootstrapAp
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * dnf-specific bootstrap package config
+ *
+ * @schema MiseTomlSchemaBootstrapDnf
+ */
+export interface MiseTomlSchemaBootstrapDnf {
+  /**
+   * dnf repositories enabled before dnf packages are installed, keyed by a name for the entry
+   *
+   * @schema MiseTomlSchemaBootstrapDnf#repos
+   */
+  readonly repos?: { [key: string]: MiseTomlSchemaBootstrapDnfRepos };
+}
+
+/**
+ * Converts an object of type 'MiseTomlSchemaBootstrapDnf' to JSON representation.
+ * @internal
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_MiseTomlSchemaBootstrapDnf(obj: MiseTomlSchemaBootstrapDnf | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'repos': ((obj.repos) === undefined) ? undefined : (Object.entries(obj.repos).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: toJson_MiseTomlSchemaBootstrapDnfRepos(i[1]) }), {})),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
  * Homebrew-specific bootstrap package config
  *
  * @schema MiseTomlSchemaBootstrapBrew
@@ -7931,6 +7976,33 @@ export function toJson_MiseTomlSchemaBootstrapAptSources(obj: MiseTomlSchemaBoot
     'architectures': obj.architectures,
     'key': obj.key,
     'fingerprint': obj.fingerprint?.map(y => y),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * @schema MiseTomlSchemaBootstrapDnfRepos
+ */
+export interface MiseTomlSchemaBootstrapDnfRepos {
+  /**
+   * COPR project as owner/project or @group/project, such as scottames/ghostty; enabled as dnf copr enable would
+   *
+   * @schema MiseTomlSchemaBootstrapDnfRepos#copr
+   */
+  readonly copr: string;
+}
+
+/**
+ * Converts an object of type 'MiseTomlSchemaBootstrapDnfRepos' to JSON representation.
+ * @internal
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_MiseTomlSchemaBootstrapDnfRepos(obj: MiseTomlSchemaBootstrapDnfRepos | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'copr': obj.copr,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
