@@ -1409,6 +1409,7 @@ const miseTomlSchemaBootstrap: MiseTomlSchemaBootstrap = { ... }
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrap.property.compose">compose</a></code> | <code>{[ key: string ]: <a href="#mise-projen.MiseTomlSchemaBootstrapCompose">MiseTomlSchemaBootstrapCompose</a>}</code> | Docker Compose projects managed with `mise bootstrap compose`, keyed by project name. |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrap.property.configRoots">configRoots</a></code> | <code>string[]</code> | deprecated and will be removed in mise 2027.3.3; move each selected root into a conf.d folder instead (https://mise.jdx.dev/configuration.html#conf-d-folders). |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrap.property.directories">directories</a></code> | <code>{[ key: string ]: <a href="#mise-projen.MiseTomlSchemaBootstrapDirectories">MiseTomlSchemaBootstrapDirectories</a>}</code> | Managed system directories keyed by absolute target path. |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrap.property.dnf">dnf</a></code> | <code><a href="#mise-projen.MiseTomlSchemaBootstrapDnf">MiseTomlSchemaBootstrapDnf</a></code> | dnf-specific bootstrap package config. |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrap.property.dotfileGroups">dotfileGroups</a></code> | <code>string[]</code> | the dotfile groups this machine applies; |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrap.property.files">files</a></code> | <code>{[ key: string ]: <a href="#mise-projen.MiseTomlSchemaBootstrapFiles">MiseTomlSchemaBootstrapFiles</a>}</code> | Managed system files keyed by absolute target path. |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrap.property.groups">groups</a></code> | <code>{[ key: string ]: <a href="#mise-projen.MiseTomlSchemaBootstrapGroups">MiseTomlSchemaBootstrapGroups</a>}</code> | [experimental] Linux groups that bootstrap creates or removes, keyed by group name. |
@@ -1486,6 +1487,18 @@ public readonly directories: {[ key: string ]: MiseTomlSchemaBootstrapDirectorie
 - *Type:* {[ key: string ]: <a href="#mise-projen.MiseTomlSchemaBootstrapDirectories">MiseTomlSchemaBootstrapDirectories</a>}
 
 Managed system directories keyed by absolute target path.
+
+---
+
+##### `dnf`<sup>Optional</sup> <a name="dnf" id="mise-projen.MiseTomlSchemaBootstrap.property.dnf"></a>
+
+```typescript
+public readonly dnf: MiseTomlSchemaBootstrapDnf;
+```
+
+- *Type:* <a href="#mise-projen.MiseTomlSchemaBootstrapDnf">MiseTomlSchemaBootstrapDnf</a>
+
+dnf-specific bootstrap package config.
 
 ---
 
@@ -2258,6 +2271,68 @@ public readonly state: MiseTomlSchemaBootstrapDirectoriesState;
 ```
 
 - *Type:* <a href="#mise-projen.MiseTomlSchemaBootstrapDirectoriesState">MiseTomlSchemaBootstrapDirectoriesState</a>
+
+---
+
+### MiseTomlSchemaBootstrapDnf <a name="MiseTomlSchemaBootstrapDnf" id="mise-projen.MiseTomlSchemaBootstrapDnf"></a>
+
+dnf-specific bootstrap package config.
+
+#### Initializer <a name="Initializer" id="mise-projen.MiseTomlSchemaBootstrapDnf.Initializer"></a>
+
+```typescript
+import { MiseTomlSchemaBootstrapDnf } from 'mise-projen'
+
+const miseTomlSchemaBootstrapDnf: MiseTomlSchemaBootstrapDnf = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapDnf.property.repos">repos</a></code> | <code>{[ key: string ]: <a href="#mise-projen.MiseTomlSchemaBootstrapDnfRepos">MiseTomlSchemaBootstrapDnfRepos</a>}</code> | dnf repositories enabled before dnf packages are installed, keyed by a name for the entry. |
+
+---
+
+##### `repos`<sup>Optional</sup> <a name="repos" id="mise-projen.MiseTomlSchemaBootstrapDnf.property.repos"></a>
+
+```typescript
+public readonly repos: {[ key: string ]: MiseTomlSchemaBootstrapDnfRepos};
+```
+
+- *Type:* {[ key: string ]: <a href="#mise-projen.MiseTomlSchemaBootstrapDnfRepos">MiseTomlSchemaBootstrapDnfRepos</a>}
+
+dnf repositories enabled before dnf packages are installed, keyed by a name for the entry.
+
+---
+
+### MiseTomlSchemaBootstrapDnfRepos <a name="MiseTomlSchemaBootstrapDnfRepos" id="mise-projen.MiseTomlSchemaBootstrapDnfRepos"></a>
+
+#### Initializer <a name="Initializer" id="mise-projen.MiseTomlSchemaBootstrapDnfRepos.Initializer"></a>
+
+```typescript
+import { MiseTomlSchemaBootstrapDnfRepos } from 'mise-projen'
+
+const miseTomlSchemaBootstrapDnfRepos: MiseTomlSchemaBootstrapDnfRepos = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapDnfRepos.property.copr">copr</a></code> | <code>string</code> | COPR project as owner/project or. |
+
+---
+
+##### `copr`<sup>Required</sup> <a name="copr" id="mise-projen.MiseTomlSchemaBootstrapDnfRepos.property.copr"></a>
+
+```typescript
+public readonly copr: string;
+```
+
+- *Type:* string
+
+COPR project as owner/project or.
 
 ---
 
@@ -9147,6 +9222,7 @@ const settingsGithub: SettingsGithub = { ... }
 | <code><a href="#mise-projen.SettingsGithub.property.oauthApiUrl">oauthApiUrl</a></code> | <code>string</code> | GitHub API base URL mise uses to validate native OAuth tokens. |
 | <code><a href="#mise-projen.SettingsGithub.property.oauthAuthUrl">oauthAuthUrl</a></code> | <code>string</code> | GitHub OAuth endpoint base URL for the native device flow. |
 | <code><a href="#mise-projen.SettingsGithub.property.oauthCacheGet">oauthCacheGet</a></code> | <code>string</code> | Command that prints the native GitHub OAuth refresh tokens stored by github.oauth_cache_set. |
+| <code><a href="#mise-projen.SettingsGithub.property.oauthCacheSecureEnclave">oauthCacheSecureEnclave</a></code> | <code>boolean</code> | Keep the native GitHub OAuth refresh token behind Touch ID in the macOS Secure Enclave. |
 | <code><a href="#mise-projen.SettingsGithub.property.oauthCacheSet">oauthCacheSet</a></code> | <code>string</code> | Command that stores the native GitHub OAuth refresh tokens, read from its stdin. |
 | <code><a href="#mise-projen.SettingsGithub.property.oauthClientId">oauthClientId</a></code> | <code>string</code> | GitHub App client ID that turns on native OAuth device-flow tokens. |
 | <code><a href="#mise-projen.SettingsGithub.property.oauthCopyCode">oauthCopyCode</a></code> | <code>boolean</code> | Copy the one-time device code to the clipboard during the native GitHub OAuth device flow. |
@@ -9227,6 +9303,18 @@ public readonly oauthCacheGet: string;
 - *Type:* string
 
 Command that prints the native GitHub OAuth refresh tokens stored by github.oauth_cache_set.
+
+---
+
+##### `oauthCacheSecureEnclave`<sup>Optional</sup> <a name="oauthCacheSecureEnclave" id="mise-projen.SettingsGithub.property.oauthCacheSecureEnclave"></a>
+
+```typescript
+public readonly oauthCacheSecureEnclave: boolean;
+```
+
+- *Type:* boolean
+
+Keep the native GitHub OAuth refresh token behind Touch ID in the macOS Secure Enclave.
 
 ---
 
