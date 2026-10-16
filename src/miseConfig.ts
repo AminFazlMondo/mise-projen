@@ -1746,7 +1746,7 @@ export interface Settings {
   readonly useVersionsHost?: boolean;
 
   /**
-   * Send anonymous download statistics to mise-versions after installing a tool.
+   * Send download statistics to mise-versions after installing a tool.
    *
    * @schema settings#use_versions_host_track
    */
