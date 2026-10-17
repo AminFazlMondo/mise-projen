@@ -6583,7 +6583,7 @@ const settings: Settings = { ... }
 | <code><a href="#mise-projen.Settings.property.upgrade">upgrade</a></code> | <code><a href="#mise-projen.SettingsUpgrade">SettingsUpgrade</a></code> | *No description.* |
 | <code><a href="#mise-projen.Settings.property.urlReplacements">urlReplacements</a></code> | <code>{[ key: string ]: string}</code> | URL patterns and replacements that mise's HTTP client applies before sending a request, for mirrors and proxies. |
 | <code><a href="#mise-projen.Settings.property.useFileShellForExecutableTasks">useFileShellForExecutableTasks</a></code> | <code>boolean</code> | Run executable file tasks through a shell instead of executing them directly. |
-| <code><a href="#mise-projen.Settings.property.useVersionsHost">useVersionsHost</a></code> | <code>boolean</code> | Get version lists, public GitHub release metadata and attestations from mise-versions instead of upstream APIs. |
+| <code><a href="#mise-projen.Settings.property.useVersionsHost">useVersionsHost</a></code> | <code>boolean</code> | Get version lists, public GitHub release metadata and attestations from mise-versions before upstream APIs. |
 | <code><a href="#mise-projen.Settings.property.useVersionsHostTrack">useVersionsHostTrack</a></code> | <code>boolean</code> | Send download statistics to mise-versions after installing a tool. |
 | <code><a href="#mise-projen.Settings.property.verbose">verbose</a></code> | <code>boolean</code> | Show extra output, such as installation logs, and set the log level to debug; |
 | <code><a href="#mise-projen.Settings.property.windowsDefaultFileShellArgs">windowsDefaultFileShellArgs</a></code> | <code>string</code> | Shell that runs a file task on Windows when the task sets no `shell` and the file has no shebang or known extension. |
@@ -8539,7 +8539,7 @@ public readonly useVersionsHost: boolean;
 
 - *Type:* boolean
 
-Get version lists, public GitHub release metadata and attestations from mise-versions instead of upstream APIs.
+Get version lists, public GitHub release metadata and attestations from mise-versions before upstream APIs.
 
 ---
 
