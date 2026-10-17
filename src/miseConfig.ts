@@ -1739,7 +1739,7 @@ export interface Settings {
   readonly useFileShellForExecutableTasks?: boolean;
 
   /**
-   * Get version lists, public GitHub release metadata and attestations from mise-versions instead of upstream APIs.
+   * Get version lists, public GitHub release metadata and attestations from mise-versions before upstream APIs.
    *
    * @schema settings#use_versions_host
    */
