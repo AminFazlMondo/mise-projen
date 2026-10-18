@@ -5952,6 +5952,27 @@ export interface MiseTomlSchemaBootstrapRepos {
    * @schema MiseTomlSchemaBootstrapRepos#ref
    */
   readonly ref?: string;
+
+  /**
+   * partial clone filter passed to `git clone --filter`, such as `blob:none`; applies to the first clone only
+   *
+   * @schema MiseTomlSchemaBootstrapRepos#filter
+   */
+  readonly filter?: string;
+
+  /**
+   * shallow clone depth passed to `git clone --depth`; applies to the first clone only
+   *
+   * @schema MiseTomlSchemaBootstrapRepos#depth
+   */
+  readonly depth?: number;
+
+  /**
+   * clone with `--recurse-submodules`; applies to the first clone only
+   *
+   * @schema MiseTomlSchemaBootstrapRepos#submodules
+   */
+  readonly submodules?: boolean;
 }
 
 /**
@@ -5964,6 +5985,9 @@ export function toJson_MiseTomlSchemaBootstrapRepos(obj: MiseTomlSchemaBootstrap
   const result = {
     'url': obj.url,
     'ref': obj.ref,
+    'filter': obj.filter,
+    'depth': obj.depth,
+    'submodules': obj.submodules,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});

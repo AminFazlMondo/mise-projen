@@ -4884,7 +4884,10 @@ const miseTomlSchemaBootstrapRepos: MiseTomlSchemaBootstrapRepos = { ... }
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapRepos.property.url">url</a></code> | <code>string</code> | git repository URL. |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapRepos.property.depth">depth</a></code> | <code>number</code> | shallow clone depth passed to `git clone --depth`; |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapRepos.property.filter">filter</a></code> | <code>string</code> | partial clone filter passed to `git clone --filter`, such as `blob:none`; |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapRepos.property.ref">ref</a></code> | <code>string</code> | optional branch, tag, or full commit SHA to check out. |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapRepos.property.submodules">submodules</a></code> | <code>boolean</code> | clone with `--recurse-submodules`; |
 
 ---
 
@@ -4900,6 +4903,34 @@ git repository URL.
 
 ---
 
+##### `depth`<sup>Optional</sup> <a name="depth" id="mise-projen.MiseTomlSchemaBootstrapRepos.property.depth"></a>
+
+```typescript
+public readonly depth: number;
+```
+
+- *Type:* number
+
+shallow clone depth passed to `git clone --depth`;
+
+applies to the first clone only
+
+---
+
+##### `filter`<sup>Optional</sup> <a name="filter" id="mise-projen.MiseTomlSchemaBootstrapRepos.property.filter"></a>
+
+```typescript
+public readonly filter: string;
+```
+
+- *Type:* string
+
+partial clone filter passed to `git clone --filter`, such as `blob:none`;
+
+applies to the first clone only
+
+---
+
 ##### `ref`<sup>Optional</sup> <a name="ref" id="mise-projen.MiseTomlSchemaBootstrapRepos.property.ref"></a>
 
 ```typescript
@@ -4909,6 +4940,20 @@ public readonly ref: string;
 - *Type:* string
 
 optional branch, tag, or full commit SHA to check out.
+
+---
+
+##### `submodules`<sup>Optional</sup> <a name="submodules" id="mise-projen.MiseTomlSchemaBootstrapRepos.property.submodules"></a>
+
+```typescript
+public readonly submodules: boolean;
+```
+
+- *Type:* boolean
+
+clone with `--recurse-submodules`;
+
+applies to the first clone only
 
 ---
 
