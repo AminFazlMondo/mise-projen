@@ -921,11 +921,11 @@ export interface Settings {
   readonly envConfD?: boolean;
 
   /**
-   * Dotenv file name to load from the current directory and each parent directory.
+   * Dotenv file names to load from the current directory and each parent directory.
    *
    * @schema settings#env_file
    */
-  readonly envFile?: string;
+  readonly envFile?: string[];
 
   /**
    * Expand shell-style variables such as `$FOO` and `${BAR:-default}` in `[env]` values.
@@ -1376,11 +1376,11 @@ export interface Settings {
   readonly packslip?: SettingsPackslip;
 
   /**
-   * Require explicit, content-bound trust for project config, and re-verify provenance on every install.
+   * Turn on paranoid mode: `true` for every protection, or a list of categories (`config`, `env_files`, `plugins`, `provenance`) for only those.
    *
    * @schema settings#paranoid
    */
-  readonly paranoid?: boolean;
+  readonly paranoid?: any;
 
   /**
    * Make `mise use` write the resolved version, such as `24.14.0` for `node@24`, instead of the requested one.
@@ -1859,7 +1859,7 @@ export function toJson_Settings(obj: Settings | undefined): Record<string, any> 
     'env_cache': obj.envCache,
     'env_cache_ttl': obj.envCacheTtl,
     'env_conf_d': obj.envConfD,
-    'env_file': obj.envFile,
+    'env_file': obj.envFile?.map(y => y),
     'env_shell_expand': obj.envShellExpand,
     'erlang': toJson_SettingsErlang(obj.erlang),
     'exec_auto_install': obj.execAutoInstall,
@@ -2204,18 +2204,14 @@ export interface MiseTomlSchemaBootstrap {
   readonly brew?: MiseTomlSchemaBootstrapBrew;
 
   /**
-   * commands to run before and after bootstrap phases
-   *
    * @schema MiseTomlSchemaBootstrap#hooks
    */
-  readonly hooks?: MiseTomlSchemaBootstrapHooks;
+  readonly hooks?: BootstrapHooks;
 
   /**
-   * declarative mise shell activation snippets, applied with `mise bootstrap mise-shell-activate apply`
-   *
    * @schema MiseTomlSchemaBootstrap#mise_shell_activate
    */
-  readonly miseShellActivate?: MiseTomlSchemaBootstrapMiseShellActivate;
+  readonly miseShellActivate?: BootstrapMiseShellActivate;
 
   /**
    * sensitive bootstrap inputs read from environment variables, keyed by secret name
@@ -2263,8 +2259,8 @@ export function toJson_MiseTomlSchemaBootstrap(obj: MiseTomlSchemaBootstrap | un
     'apt': toJson_MiseTomlSchemaBootstrapApt(obj.apt),
     'dnf': toJson_MiseTomlSchemaBootstrapDnf(obj.dnf),
     'brew': toJson_MiseTomlSchemaBootstrapBrew(obj.brew),
-    'hooks': toJson_MiseTomlSchemaBootstrapHooks(obj.hooks),
-    'mise_shell_activate': toJson_MiseTomlSchemaBootstrapMiseShellActivate(obj.miseShellActivate),
+    'hooks': toJson_BootstrapHooks(obj.hooks),
+    'mise_shell_activate': toJson_BootstrapMiseShellActivate(obj.miseShellActivate),
     'secrets': ((obj.secrets) === undefined) ? undefined : (Object.entries(obj.secrets).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'groups': ((obj.groups) === undefined) ? undefined : (Object.entries(obj.groups).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: toJson_MiseTomlSchemaBootstrapGroups(i[1]) }), {})),
     'users': ((obj.users) === undefined) ? undefined : (Object.entries(obj.users).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: toJson_MiseTomlSchemaBootstrapUsers(i[1]) }), {})),
@@ -5474,16 +5470,16 @@ export interface MiseTomlSchemaBootstrapFiles {
   readonly replace?: boolean;
 
   /**
+   * @schema MiseTomlSchemaBootstrapFiles#notify
+   */
+  readonly notify?: string[];
+
+  /**
    * OS or OS/arch selectors; entries on other platforms are skipped
    *
    * @schema MiseTomlSchemaBootstrapFiles#os
    */
   readonly os?: string[];
-
-  /**
-   * @schema MiseTomlSchemaBootstrapFiles#notify
-   */
-  readonly notify?: string[];
 }
 
 /**
@@ -5504,8 +5500,8 @@ export function toJson_MiseTomlSchemaBootstrapFiles(obj: MiseTomlSchemaBootstrap
     'remove_empty': obj.removeEmpty,
     'state': obj.state,
     'replace': obj.replace,
-    'os': obj.os?.map(y => y),
     'notify': obj.notify?.map(y => y),
+    'os': obj.os?.map(y => y),
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -5552,16 +5548,16 @@ export interface MiseTomlSchemaBootstrapDirectories {
   readonly replace?: boolean;
 
   /**
+   * @schema MiseTomlSchemaBootstrapDirectories#notify
+   */
+  readonly notify?: string[];
+
+  /**
    * OS or OS/arch selectors; entries on other platforms are skipped
    *
    * @schema MiseTomlSchemaBootstrapDirectories#os
    */
   readonly os?: string[];
-
-  /**
-   * @schema MiseTomlSchemaBootstrapDirectories#notify
-   */
-  readonly notify?: string[];
 }
 
 /**
@@ -5579,8 +5575,8 @@ export function toJson_MiseTomlSchemaBootstrapDirectories(obj: MiseTomlSchemaBoo
     'state': obj.state,
     'recursive': obj.recursive,
     'replace': obj.replace,
-    'os': obj.os?.map(y => y),
     'notify': obj.notify?.map(y => y),
+    'os': obj.os?.map(y => y),
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -6001,39 +5997,29 @@ export function toJson_MiseTomlSchemaBootstrapRepos(obj: MiseTomlSchemaBootstrap
  */
 export interface MiseTomlSchemaBootstrapMacos {
   /**
-   * curated Dock preferences that compile into macOS defaults
-   *
    * @schema MiseTomlSchemaBootstrapMacos#dock
    */
-  readonly dock?: MiseTomlSchemaBootstrapMacosDock;
+  readonly dock?: BootstrapMacosDock;
 
   /**
-   * curated Finder preferences that compile into macOS defaults
-   *
    * @schema MiseTomlSchemaBootstrapMacos#finder
    */
-  readonly finder?: MiseTomlSchemaBootstrapMacosFinder;
+  readonly finder?: BootstrapMacosFinder;
 
   /**
-   * curated keyboard preferences that compile into macOS defaults
-   *
    * @schema MiseTomlSchemaBootstrapMacos#keyboard
    */
-  readonly keyboard?: MiseTomlSchemaBootstrapMacosKeyboard;
+  readonly keyboard?: BootstrapMacosKeyboard;
 
   /**
-   * curated trackpad preferences that compile into macOS defaults
-   *
    * @schema MiseTomlSchemaBootstrapMacos#trackpad
    */
-  readonly trackpad?: MiseTomlSchemaBootstrapMacosTrackpad;
+  readonly trackpad?: BootstrapMacosTrackpad;
 
   /**
-   * macOS user defaults to apply with `mise bootstrap macos defaults apply`, keyed by preferences domain (e.g. "com.apple.dock", "NSGlobalDomain")
-   *
    * @schema MiseTomlSchemaBootstrapMacos#defaults
    */
-  readonly defaults?: { [key: string]: { [key: string]: MiseTomlSchemaBootstrapMacosDefaults } };
+  readonly defaults?: { [key: string]: { [key: string]: any } };
 
   /**
    * Explicit macOS preferences with a selectable host scope
@@ -6043,18 +6029,18 @@ export interface MiseTomlSchemaBootstrapMacos {
   readonly defaultsEntries?: MiseTomlSchemaBootstrapMacosDefaultsEntries[];
 
   /**
-   * applications to open at login (System Settings > General > Login Items & Extensions)
-   *
-   * @schema MiseTomlSchemaBootstrapMacos#login_items
-   */
-  readonly loginItems?: MiseTomlSchemaBootstrapMacosLoginItems;
-
-  /**
    * macOS launchd bootstrap config
    *
    * @schema MiseTomlSchemaBootstrapMacos#launchd
    */
   readonly launchd?: MiseTomlSchemaBootstrapMacosLaunchd;
+
+  /**
+   * applications to open at login (System Settings > General > Login Items & Extensions)
+   *
+   * @schema MiseTomlSchemaBootstrapMacos#login_items
+   */
+  readonly loginItems?: MiseTomlSchemaBootstrapMacosLoginItems;
 }
 
 /**
@@ -6065,14 +6051,14 @@ export interface MiseTomlSchemaBootstrapMacos {
 export function toJson_MiseTomlSchemaBootstrapMacos(obj: MiseTomlSchemaBootstrapMacos | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
-    'dock': toJson_MiseTomlSchemaBootstrapMacosDock(obj.dock),
-    'finder': toJson_MiseTomlSchemaBootstrapMacosFinder(obj.finder),
-    'keyboard': toJson_MiseTomlSchemaBootstrapMacosKeyboard(obj.keyboard),
-    'trackpad': toJson_MiseTomlSchemaBootstrapMacosTrackpad(obj.trackpad),
-    'defaults': ((obj.defaults) === undefined) ? undefined : (Object.entries(obj.defaults).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: ((i[1]) === undefined) ? undefined : (Object.entries(i[1]).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1]?.value }), {})) }), {})),
+    'dock': toJson_BootstrapMacosDock(obj.dock),
+    'finder': toJson_BootstrapMacosFinder(obj.finder),
+    'keyboard': toJson_BootstrapMacosKeyboard(obj.keyboard),
+    'trackpad': toJson_BootstrapMacosTrackpad(obj.trackpad),
+    'defaults': ((obj.defaults) === undefined) ? undefined : (Object.entries(obj.defaults).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: ((i[1]) === undefined) ? undefined : (Object.entries(i[1]).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})) }), {})),
     'defaults_entries': obj.defaultsEntries?.map(y => toJson_MiseTomlSchemaBootstrapMacosDefaultsEntries(y)),
-    'login_items': toJson_MiseTomlSchemaBootstrapMacosLoginItems(obj.loginItems),
     'launchd': toJson_MiseTomlSchemaBootstrapMacosLaunchd(obj.launchd),
+    'login_items': toJson_MiseTomlSchemaBootstrapMacosLoginItems(obj.loginItems),
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -6123,7 +6109,7 @@ export function toJson_MiseTomlSchemaBootstrapLinux(obj: MiseTomlSchemaBootstrap
  */
 export interface MiseTomlSchemaBootstrapUser {
   /**
-   * current user's desired login shell, applied with `chsh -s`; must be an absolute path
+   * current user's desired login shell, applied with `chsh -s`; a template that must render to an absolute path
    *
    * @schema MiseTomlSchemaBootstrapUser#login_shell
    */
@@ -6152,11 +6138,9 @@ export function toJson_MiseTomlSchemaBootstrapUser(obj: MiseTomlSchemaBootstrapU
  */
 export interface MiseTomlSchemaBootstrapApt {
   /**
-   * apt repositories added before apt packages are installed, keyed by a name used in the files mise writes
-   *
    * @schema MiseTomlSchemaBootstrapApt#sources
    */
-  readonly sources?: { [key: string]: MiseTomlSchemaBootstrapAptSources };
+  readonly sources?: { [key: string]: BootstrapAptSources };
 }
 
 /**
@@ -6167,7 +6151,7 @@ export interface MiseTomlSchemaBootstrapApt {
 export function toJson_MiseTomlSchemaBootstrapApt(obj: MiseTomlSchemaBootstrapApt | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
-    'sources': ((obj.sources) === undefined) ? undefined : (Object.entries(obj.sources).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: toJson_MiseTomlSchemaBootstrapAptSources(i[1]) }), {})),
+    'sources': ((obj.sources) === undefined) ? undefined : (Object.entries(obj.sources).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: toJson_BootstrapAptSources(i[1]) }), {})),
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -6181,11 +6165,9 @@ export function toJson_MiseTomlSchemaBootstrapApt(obj: MiseTomlSchemaBootstrapAp
  */
 export interface MiseTomlSchemaBootstrapDnf {
   /**
-   * dnf repositories enabled before dnf packages are installed, keyed by a name for the entry
-   *
    * @schema MiseTomlSchemaBootstrapDnf#repos
    */
-  readonly repos?: { [key: string]: MiseTomlSchemaBootstrapDnfRepos };
+  readonly repos?: { [key: string]: BootstrapDnfRepos };
 }
 
 /**
@@ -6196,7 +6178,7 @@ export interface MiseTomlSchemaBootstrapDnf {
 export function toJson_MiseTomlSchemaBootstrapDnf(obj: MiseTomlSchemaBootstrapDnf | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
-    'repos': ((obj.repos) === undefined) ? undefined : (Object.entries(obj.repos).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: toJson_MiseTomlSchemaBootstrapDnfRepos(i[1]) }), {})),
+    'repos': ((obj.repos) === undefined) ? undefined : (Object.entries(obj.repos).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: toJson_BootstrapDnfRepos(i[1]) }), {})),
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -6243,93 +6225,93 @@ export function toJson_MiseTomlSchemaBootstrapBrew(obj: MiseTomlSchemaBootstrapB
 /**
  * commands to run before and after bootstrap phases
  *
- * @schema MiseTomlSchemaBootstrapHooks
+ * @schema bootstrap_hooks
  */
-export interface MiseTomlSchemaBootstrapHooks {
+export interface BootstrapHooks {
   /**
-   * @schema MiseTomlSchemaBootstrapHooks#pre-packages
+   * @schema bootstrap_hooks#pre-packages
    */
   readonly prePackages?: any;
 
 
   /**
-   * @schema MiseTomlSchemaBootstrapHooks#post-packages
+   * @schema bootstrap_hooks#post-packages
    */
   readonly postPackages?: any;
 
 
   /**
-   * @schema MiseTomlSchemaBootstrapHooks#pre-repos
+   * @schema bootstrap_hooks#pre-repos
    */
   readonly preRepos?: any;
 
 
   /**
-   * @schema MiseTomlSchemaBootstrapHooks#post-repos
+   * @schema bootstrap_hooks#post-repos
    */
   readonly postRepos?: any;
 
 
   /**
-   * @schema MiseTomlSchemaBootstrapHooks#pre-dotfiles
+   * @schema bootstrap_hooks#pre-dotfiles
    */
   readonly preDotfiles?: any;
 
 
   /**
-   * @schema MiseTomlSchemaBootstrapHooks#post-dotfiles
+   * @schema bootstrap_hooks#post-dotfiles
    */
   readonly postDotfiles?: any;
 
 
   /**
-   * @schema MiseTomlSchemaBootstrapHooks#pre-defaults
+   * @schema bootstrap_hooks#pre-defaults
    */
   readonly preDefaults?: any;
 
 
   /**
-   * @schema MiseTomlSchemaBootstrapHooks#post-defaults
+   * @schema bootstrap_hooks#post-defaults
    */
   readonly postDefaults?: any;
 
 
   /**
-   * @schema MiseTomlSchemaBootstrapHooks#pre-user
+   * @schema bootstrap_hooks#pre-user
    */
   readonly preUser?: any;
 
 
   /**
-   * @schema MiseTomlSchemaBootstrapHooks#post-user
+   * @schema bootstrap_hooks#post-user
    */
   readonly postUser?: any;
 
 
   /**
-   * @schema MiseTomlSchemaBootstrapHooks#pre-tools
+   * @schema bootstrap_hooks#pre-tools
    */
   readonly preTools?: any;
 
 
   /**
-   * @schema MiseTomlSchemaBootstrapHooks#post-tools
+   * @schema bootstrap_hooks#post-tools
    */
   readonly postTools?: any;
 
 
   /**
-   * @schema MiseTomlSchemaBootstrapHooks#final
+   * @schema bootstrap_hooks#final
    */
   readonly final?: any;
 }
 
 /**
- * Converts an object of type 'MiseTomlSchemaBootstrapHooks' to JSON representation.
+ * Converts an object of type 'BootstrapHooks' to JSON representation.
  * @internal
  */
 /* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_MiseTomlSchemaBootstrapHooks(obj: MiseTomlSchemaBootstrapHooks | undefined): Record<string, any> | undefined {
+export function toJson_BootstrapHooks(obj: BootstrapHooks | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
     'pre-packages': obj.prePackages,
@@ -6354,56 +6336,56 @@ export function toJson_MiseTomlSchemaBootstrapHooks(obj: MiseTomlSchemaBootstrap
 /**
  * declarative mise shell activation snippets, applied with `mise bootstrap mise-shell-activate apply`
  *
- * @schema MiseTomlSchemaBootstrapMiseShellActivate
+ * @schema bootstrap_mise_shell_activate
  */
-export interface MiseTomlSchemaBootstrapMiseShellActivate {
+export interface BootstrapMiseShellActivate {
   /**
-   * @schema MiseTomlSchemaBootstrapMiseShellActivate#bash
+   * @schema bootstrap_mise_shell_activate#bash
    */
   readonly bash?: any;
 
   /**
-   * @schema MiseTomlSchemaBootstrapMiseShellActivate#zsh
+   * @schema bootstrap_mise_shell_activate#zsh
    */
   readonly zsh?: any;
 
   /**
-   * @schema MiseTomlSchemaBootstrapMiseShellActivate#fish
+   * @schema bootstrap_mise_shell_activate#fish
    */
   readonly fish?: any;
 
   /**
-   * @schema MiseTomlSchemaBootstrapMiseShellActivate#bash_profile
+   * @schema bootstrap_mise_shell_activate#bash_profile
    */
   readonly bashProfile?: any;
 
   /**
-   * @schema MiseTomlSchemaBootstrapMiseShellActivate#bashrc
+   * @schema bootstrap_mise_shell_activate#bashrc
    */
   readonly bashrc?: any;
 
   /**
-   * @schema MiseTomlSchemaBootstrapMiseShellActivate#zshenv
+   * @schema bootstrap_mise_shell_activate#zshenv
    */
   readonly zshenv?: any;
 
   /**
-   * @schema MiseTomlSchemaBootstrapMiseShellActivate#zprofile
+   * @schema bootstrap_mise_shell_activate#zprofile
    */
   readonly zprofile?: any;
 
   /**
-   * @schema MiseTomlSchemaBootstrapMiseShellActivate#zshrc
+   * @schema bootstrap_mise_shell_activate#zshrc
    */
   readonly zshrc?: any;
 }
 
 /**
- * Converts an object of type 'MiseTomlSchemaBootstrapMiseShellActivate' to JSON representation.
+ * Converts an object of type 'BootstrapMiseShellActivate' to JSON representation.
  * @internal
  */
 /* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_MiseTomlSchemaBootstrapMiseShellActivate(obj: MiseTomlSchemaBootstrapMiseShellActivate | undefined): Record<string, any> | undefined {
+export function toJson_BootstrapMiseShellActivate(obj: BootstrapMiseShellActivate | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
     'bash': obj.bash,
@@ -7408,86 +7390,86 @@ export enum MiseTomlSchemaBootstrapComposeDownImages {
 /**
  * curated Dock preferences that compile into macOS defaults
  *
- * @schema MiseTomlSchemaBootstrapMacosDock
+ * @schema bootstrap_macos_dock
  */
-export interface MiseTomlSchemaBootstrapMacosDock {
+export interface BootstrapMacosDock {
   /**
    * Pinned application paths in order; absolute or ~/ paths ending in .app. An empty array removes application tiles.
    *
-   * @schema MiseTomlSchemaBootstrapMacosDock#apps
+   * @schema bootstrap_macos_dock#apps
    */
   readonly apps?: string[];
 
   /**
    * delay before showing the Dock
    *
-   * @schema MiseTomlSchemaBootstrapMacosDock#autohide_delay
+   * @schema bootstrap_macos_dock#autohide_delay
    */
   readonly autohideDelay?: number;
 
   /**
    * Dock autohide animation time modifier
    *
-   * @schema MiseTomlSchemaBootstrapMacosDock#autohide_time_modifier
+   * @schema bootstrap_macos_dock#autohide_time_modifier
    */
   readonly autohideTimeModifier?: number;
 
   /**
    * hide and show the Dock automatically
    *
-   * @schema MiseTomlSchemaBootstrapMacosDock#autohide
+   * @schema bootstrap_macos_dock#autohide
    */
   readonly autohide?: boolean;
 
   /**
    * Dock screen edge
    *
-   * @schema MiseTomlSchemaBootstrapMacosDock#orientation
+   * @schema bootstrap_macos_dock#orientation
    */
-  readonly orientation?: MiseTomlSchemaBootstrapMacosDockOrientation;
+  readonly orientation?: BootstrapMacosDockOrientation;
 
   /**
    * Dock icon size
    *
-   * @schema MiseTomlSchemaBootstrapMacosDock#tilesize
+   * @schema bootstrap_macos_dock#tilesize
    */
   readonly tilesize?: number;
 
   /**
    * enable Dock magnification
    *
-   * @schema MiseTomlSchemaBootstrapMacosDock#magnification
+   * @schema bootstrap_macos_dock#magnification
    */
   readonly magnification?: boolean;
 
   /**
    * Dock magnified icon size
    *
-   * @schema MiseTomlSchemaBootstrapMacosDock#largesize
+   * @schema bootstrap_macos_dock#largesize
    */
   readonly largesize?: number;
 
   /**
    * show recent applications in the Dock
    *
-   * @schema MiseTomlSchemaBootstrapMacosDock#show_recents
+   * @schema bootstrap_macos_dock#show_recents
    */
   readonly showRecents?: boolean;
 
   /**
    * automatically rearrange Spaces based on most recent use
    *
-   * @schema MiseTomlSchemaBootstrapMacosDock#mru_spaces
+   * @schema bootstrap_macos_dock#mru_spaces
    */
   readonly mruSpaces?: boolean;
 }
 
 /**
- * Converts an object of type 'MiseTomlSchemaBootstrapMacosDock' to JSON representation.
+ * Converts an object of type 'BootstrapMacosDock' to JSON representation.
  * @internal
  */
 /* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_MiseTomlSchemaBootstrapMacosDock(obj: MiseTomlSchemaBootstrapMacosDock | undefined): Record<string, any> | undefined {
+export function toJson_BootstrapMacosDock(obj: BootstrapMacosDock | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
     'apps': obj.apps?.map(y => y),
@@ -7509,65 +7491,65 @@ export function toJson_MiseTomlSchemaBootstrapMacosDock(obj: MiseTomlSchemaBoots
 /**
  * curated Finder preferences that compile into macOS defaults
  *
- * @schema MiseTomlSchemaBootstrapMacosFinder
+ * @schema bootstrap_macos_finder
  */
-export interface MiseTomlSchemaBootstrapMacosFinder {
+export interface BootstrapMacosFinder {
   /**
    * keep folders first when sorting by name
    *
-   * @schema MiseTomlSchemaBootstrapMacosFinder#sort_folders_first
+   * @schema bootstrap_macos_finder#sort_folders_first
    */
   readonly sortFoldersFirst?: boolean;
 
   /**
    * save new documents to iCloud by default (applies globally to application save dialogs)
    *
-   * @schema MiseTomlSchemaBootstrapMacosFinder#save_new_documents_to_cloud
+   * @schema bootstrap_macos_finder#save_new_documents_to_cloud
    */
   readonly saveNewDocumentsToCloud?: boolean;
 
   /**
    * show hidden files in Finder
    *
-   * @schema MiseTomlSchemaBootstrapMacosFinder#show_all_files
+   * @schema bootstrap_macos_finder#show_all_files
    */
   readonly showAllFiles?: boolean;
 
   /**
    * show the Finder path bar
    *
-   * @schema MiseTomlSchemaBootstrapMacosFinder#show_pathbar
+   * @schema bootstrap_macos_finder#show_pathbar
    */
   readonly showPathbar?: boolean;
 
   /**
    * show the Finder status bar
    *
-   * @schema MiseTomlSchemaBootstrapMacosFinder#show_status_bar
+   * @schema bootstrap_macos_finder#show_status_bar
    */
   readonly showStatusBar?: boolean;
 
   /**
    * show the warning when changing file extensions
    *
-   * @schema MiseTomlSchemaBootstrapMacosFinder#show_extensions_warning
+   * @schema bootstrap_macos_finder#show_extensions_warning
    */
   readonly showExtensionsWarning?: boolean;
 
   /**
    * Finder preferred view style
    *
-   * @schema MiseTomlSchemaBootstrapMacosFinder#preferred_view_style
+   * @schema bootstrap_macos_finder#preferred_view_style
    */
-  readonly preferredViewStyle?: MiseTomlSchemaBootstrapMacosFinderPreferredViewStyle;
+  readonly preferredViewStyle?: BootstrapMacosFinderPreferredViewStyle;
 }
 
 /**
- * Converts an object of type 'MiseTomlSchemaBootstrapMacosFinder' to JSON representation.
+ * Converts an object of type 'BootstrapMacosFinder' to JSON representation.
  * @internal
  */
 /* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_MiseTomlSchemaBootstrapMacosFinder(obj: MiseTomlSchemaBootstrapMacosFinder | undefined): Record<string, any> | undefined {
+export function toJson_BootstrapMacosFinder(obj: BootstrapMacosFinder | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
     'sort_folders_first': obj.sortFoldersFirst,
@@ -7586,58 +7568,58 @@ export function toJson_MiseTomlSchemaBootstrapMacosFinder(obj: MiseTomlSchemaBoo
 /**
  * curated keyboard preferences that compile into macOS defaults
  *
- * @schema MiseTomlSchemaBootstrapMacosKeyboard
+ * @schema bootstrap_macos_keyboard
  */
-export interface MiseTomlSchemaBootstrapMacosKeyboard {
+export interface BootstrapMacosKeyboard {
   /**
    * automatically capitalize words
    *
-   * @schema MiseTomlSchemaBootstrapMacosKeyboard#automatic_capitalization
+   * @schema bootstrap_macos_keyboard#automatic_capitalization
    */
   readonly automaticCapitalization?: boolean;
 
   /**
    * automatically correct spelling
    *
-   * @schema MiseTomlSchemaBootstrapMacosKeyboard#automatic_spelling_correction
+   * @schema bootstrap_macos_keyboard#automatic_spelling_correction
    */
   readonly automaticSpellingCorrection?: boolean;
 
   /**
    * keyboard repeat interval
    *
-   * @schema MiseTomlSchemaBootstrapMacosKeyboard#key_repeat
+   * @schema bootstrap_macos_keyboard#key_repeat
    */
   readonly keyRepeat?: number;
 
   /**
    * delay before key repeat starts
    *
-   * @schema MiseTomlSchemaBootstrapMacosKeyboard#initial_key_repeat
+   * @schema bootstrap_macos_keyboard#initial_key_repeat
    */
   readonly initialKeyRepeat?: number;
 
   /**
    * enable press-and-hold accent picker
    *
-   * @schema MiseTomlSchemaBootstrapMacosKeyboard#press_and_hold
+   * @schema bootstrap_macos_keyboard#press_and_hold
    */
   readonly pressAndHold?: boolean;
 
   /**
    * use F1, F2, etc. as standard function keys
    *
-   * @schema MiseTomlSchemaBootstrapMacosKeyboard#fn_state
+   * @schema bootstrap_macos_keyboard#fn_state
    */
   readonly fnState?: boolean;
 }
 
 /**
- * Converts an object of type 'MiseTomlSchemaBootstrapMacosKeyboard' to JSON representation.
+ * Converts an object of type 'BootstrapMacosKeyboard' to JSON representation.
  * @internal
  */
 /* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_MiseTomlSchemaBootstrapMacosKeyboard(obj: MiseTomlSchemaBootstrapMacosKeyboard | undefined): Record<string, any> | undefined {
+export function toJson_BootstrapMacosKeyboard(obj: BootstrapMacosKeyboard | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
     'automatic_capitalization': obj.automaticCapitalization,
@@ -7655,30 +7637,30 @@ export function toJson_MiseTomlSchemaBootstrapMacosKeyboard(obj: MiseTomlSchemaB
 /**
  * curated trackpad preferences that compile into macOS defaults
  *
- * @schema MiseTomlSchemaBootstrapMacosTrackpad
+ * @schema bootstrap_macos_trackpad
  */
-export interface MiseTomlSchemaBootstrapMacosTrackpad {
+export interface BootstrapMacosTrackpad {
   /**
    * enable tap to click for built-in and Bluetooth trackpads
    *
-   * @schema MiseTomlSchemaBootstrapMacosTrackpad#tap_to_click
+   * @schema bootstrap_macos_trackpad#tap_to_click
    */
   readonly tapToClick?: boolean;
 
   /**
    * enable three finger drag for built-in and Bluetooth trackpads
    *
-   * @schema MiseTomlSchemaBootstrapMacosTrackpad#three_finger_drag
+   * @schema bootstrap_macos_trackpad#three_finger_drag
    */
   readonly threeFingerDrag?: boolean;
 }
 
 /**
- * Converts an object of type 'MiseTomlSchemaBootstrapMacosTrackpad' to JSON representation.
+ * Converts an object of type 'BootstrapMacosTrackpad' to JSON representation.
  * @internal
  */
 /* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_MiseTomlSchemaBootstrapMacosTrackpad(obj: MiseTomlSchemaBootstrapMacosTrackpad | undefined): Record<string, any> | undefined {
+export function toJson_BootstrapMacosTrackpad(obj: BootstrapMacosTrackpad | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
     'tap_to_click': obj.tapToClick,
@@ -7688,25 +7670,6 @@ export function toJson_MiseTomlSchemaBootstrapMacosTrackpad(obj: MiseTomlSchemaB
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
- * desired value, written with the matching `defaults write` type (-bool, -int, -float, -string)
- *
- * @schema MiseTomlSchemaBootstrapMacosDefaults
- */
-export class MiseTomlSchemaBootstrapMacosDefaults {
-  public static fromBoolean(value: boolean): MiseTomlSchemaBootstrapMacosDefaults {
-    return new MiseTomlSchemaBootstrapMacosDefaults(value);
-  }
-  public static fromNumber(value: number): MiseTomlSchemaBootstrapMacosDefaults {
-    return new MiseTomlSchemaBootstrapMacosDefaults(value);
-  }
-  public static fromString(value: string): MiseTomlSchemaBootstrapMacosDefaults {
-    return new MiseTomlSchemaBootstrapMacosDefaults(value);
-  }
-  private constructor(public readonly value: boolean | number | string) {
-  }
-}
 
 /**
  * @schema MiseTomlSchemaBootstrapMacosDefaultsEntries
@@ -7723,16 +7686,16 @@ export interface MiseTomlSchemaBootstrapMacosDefaultsEntries {
   readonly key: string;
 
   /**
+   * @schema MiseTomlSchemaBootstrapMacosDefaultsEntries#host
+   */
+  readonly host?: MiseTomlSchemaBootstrapMacosDefaultsEntriesHost;
+
+  /**
    * Dictionary keys below the preference key; omitted to replace the whole value
    *
    * @schema MiseTomlSchemaBootstrapMacosDefaultsEntries#path
    */
   readonly path?: string[];
-
-  /**
-   * @schema MiseTomlSchemaBootstrapMacosDefaultsEntries#host
-   */
-  readonly host?: MiseTomlSchemaBootstrapMacosDefaultsEntriesHost;
 
   /**
    * @schema MiseTomlSchemaBootstrapMacosDefaultsEntries#value
@@ -7750,9 +7713,38 @@ export function toJson_MiseTomlSchemaBootstrapMacosDefaultsEntries(obj: MiseToml
   const result = {
     'domain': obj.domain,
     'key': obj.key,
-    'path': obj.path?.map(y => y),
     'host': obj.host,
+    'path': obj.path?.map(y => y),
     'value': obj.value,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * macOS launchd bootstrap config
+ *
+ * @schema MiseTomlSchemaBootstrapMacosLaunchd
+ */
+export interface MiseTomlSchemaBootstrapMacosLaunchd {
+  /**
+   * macOS user LaunchAgents to write and load with `mise bootstrap macos launchd-agents apply`
+   *
+   * @schema MiseTomlSchemaBootstrapMacosLaunchd#agents
+   */
+  readonly agents?: { [key: string]: MiseTomlSchemaBootstrapMacosLaunchdAgents };
+}
+
+/**
+ * Converts an object of type 'MiseTomlSchemaBootstrapMacosLaunchd' to JSON representation.
+ * @internal
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_MiseTomlSchemaBootstrapMacosLaunchd(obj: MiseTomlSchemaBootstrapMacosLaunchd | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'agents': ((obj.agents) === undefined) ? undefined : (Object.entries(obj.agents).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: toJson_MiseTomlSchemaBootstrapMacosLaunchdAgents(i[1]) }), {})),
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -7790,35 +7782,6 @@ export function toJson_MiseTomlSchemaBootstrapMacosLoginItems(obj: MiseTomlSchem
   const result = {
     'apps': obj.apps?.map(y => y),
     'exclusive': obj.exclusive,
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
- * macOS launchd bootstrap config
- *
- * @schema MiseTomlSchemaBootstrapMacosLaunchd
- */
-export interface MiseTomlSchemaBootstrapMacosLaunchd {
-  /**
-   * macOS user LaunchAgents to write and load with `mise bootstrap macos launchd-agents apply`
-   *
-   * @schema MiseTomlSchemaBootstrapMacosLaunchd#agents
-   */
-  readonly agents?: { [key: string]: MiseTomlSchemaBootstrapMacosLaunchdAgents };
-}
-
-/**
- * Converts an object of type 'MiseTomlSchemaBootstrapMacosLaunchd' to JSON representation.
- * @internal
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_MiseTomlSchemaBootstrapMacosLaunchd(obj: MiseTomlSchemaBootstrapMacosLaunchd | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'agents': ((obj.agents) === undefined) ? undefined : (Object.entries(obj.agents).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: toJson_MiseTomlSchemaBootstrapMacosLaunchdAgents(i[1]) }), {})),
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -7932,65 +7895,65 @@ export function toJson_MiseTomlSchemaBootstrapLinuxSystemd(obj: MiseTomlSchemaBo
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * @schema MiseTomlSchemaBootstrapAptSources
+ * @schema BootstrapAptSources
  */
-export interface MiseTomlSchemaBootstrapAptSources {
+export interface BootstrapAptSources {
   /**
    * Launchpad PPA as owner/archive, such as git-core/ppa; added on Ubuntu and Ubuntu-based releases only
    *
-   * @schema MiseTomlSchemaBootstrapAptSources#ppa
+   * @schema BootstrapAptSources#ppa
    */
   readonly ppa?: string;
 
   /**
    * repository URL(s), space-separated
    *
-   * @schema MiseTomlSchemaBootstrapAptSources#uris
+   * @schema BootstrapAptSources#uris
    */
   readonly uris?: string;
 
   /**
    * suite(s), space-separated; defaults to the release codename
    *
-   * @schema MiseTomlSchemaBootstrapAptSources#suites
+   * @schema BootstrapAptSources#suites
    */
   readonly suites?: string;
 
   /**
    * component(s), space-separated; defaults to main, or none when suites is a path ending in /
    *
-   * @schema MiseTomlSchemaBootstrapAptSources#components
+   * @schema BootstrapAptSources#components
    */
   readonly components?: string;
 
   /**
    * architecture(s) to fetch, space-separated
    *
-   * @schema MiseTomlSchemaBootstrapAptSources#architectures
+   * @schema BootstrapAptSources#architectures
    */
   readonly architectures?: string;
 
   /**
    * http(s) URL of the repository's signing key, armored or binary
    *
-   * @schema MiseTomlSchemaBootstrapAptSources#key
+   * @schema BootstrapAptSources#key
    */
   readonly key?: string;
 
   /**
    * full primary key fingerprint(s) the signing key must have; required with key
    *
-   * @schema MiseTomlSchemaBootstrapAptSources#fingerprint
+   * @schema BootstrapAptSources#fingerprint
    */
   readonly fingerprint?: string[];
 }
 
 /**
- * Converts an object of type 'MiseTomlSchemaBootstrapAptSources' to JSON representation.
+ * Converts an object of type 'BootstrapAptSources' to JSON representation.
  * @internal
  */
 /* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_MiseTomlSchemaBootstrapAptSources(obj: MiseTomlSchemaBootstrapAptSources | undefined): Record<string, any> | undefined {
+export function toJson_BootstrapAptSources(obj: BootstrapAptSources | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
     'ppa': obj.ppa,
@@ -8007,23 +7970,23 @@ export function toJson_MiseTomlSchemaBootstrapAptSources(obj: MiseTomlSchemaBoot
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * @schema MiseTomlSchemaBootstrapDnfRepos
+ * @schema BootstrapDnfRepos
  */
-export interface MiseTomlSchemaBootstrapDnfRepos {
+export interface BootstrapDnfRepos {
   /**
    * COPR project as owner/project or @group/project, such as scottames/ghostty; enabled as dnf copr enable would
    *
-   * @schema MiseTomlSchemaBootstrapDnfRepos#copr
+   * @schema BootstrapDnfRepos#copr
    */
   readonly copr: string;
 }
 
 /**
- * Converts an object of type 'MiseTomlSchemaBootstrapDnfRepos' to JSON representation.
+ * Converts an object of type 'BootstrapDnfRepos' to JSON representation.
  * @internal
  */
 /* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_MiseTomlSchemaBootstrapDnfRepos(obj: MiseTomlSchemaBootstrapDnfRepos | undefined): Record<string, any> | undefined {
+export function toJson_BootstrapDnfRepos(obj: BootstrapDnfRepos | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
     'copr': obj.copr,
@@ -8060,9 +8023,9 @@ export enum MiseTomlSchemaBootstrapUsersState {
 /**
  * Dock screen edge
  *
- * @schema MiseTomlSchemaBootstrapMacosDockOrientation
+ * @schema BootstrapMacosDockOrientation
  */
-export enum MiseTomlSchemaBootstrapMacosDockOrientation {
+export enum BootstrapMacosDockOrientation {
   /** bottom */
   BOTTOM = "bottom",
   /** left */
@@ -8074,9 +8037,9 @@ export enum MiseTomlSchemaBootstrapMacosDockOrientation {
 /**
  * Finder preferred view style
  *
- * @schema MiseTomlSchemaBootstrapMacosFinderPreferredViewStyle
+ * @schema BootstrapMacosFinderPreferredViewStyle
  */
-export enum MiseTomlSchemaBootstrapMacosFinderPreferredViewStyle {
+export enum BootstrapMacosFinderPreferredViewStyle {
   /** icon */
   ICON = "icon",
   /** list */
@@ -8130,6 +8093,13 @@ export interface MiseTomlSchemaBootstrapMacosLaunchdAgents {
   readonly keepAlive?: boolean;
 
   /**
+   * write KeepAlive = { SuccessfulExit = false }, so launchd relaunches the job only after a failure; cannot be combined with keep_alive
+   *
+   * @schema MiseTomlSchemaBootstrapMacosLaunchdAgents#keep_alive_on_failure
+   */
+  readonly keepAliveOnFailure?: boolean;
+
+  /**
    * write StartInterval in seconds
    *
    * @schema MiseTomlSchemaBootstrapMacosLaunchdAgents#start_interval
@@ -8144,6 +8114,13 @@ export interface MiseTomlSchemaBootstrapMacosLaunchdAgents {
   readonly throttleInterval?: number;
 
   /**
+   * write Nice, the niceness of the process, from -20 to 20
+   *
+   * @schema MiseTomlSchemaBootstrapMacosLaunchdAgents#nice
+   */
+  readonly nice?: number;
+
+  /**
    * write ProcessType, the scheduling band launchd runs the job in
    *
    * @schema MiseTomlSchemaBootstrapMacosLaunchdAgents#process_type
@@ -8151,18 +8128,18 @@ export interface MiseTomlSchemaBootstrapMacosLaunchdAgents {
   readonly processType?: MiseTomlSchemaBootstrapMacosLaunchdAgentsProcessType;
 
   /**
-   * write QueueDirectories (absolute paths; `~` and `~/` are expanded)
-   *
-   * @schema MiseTomlSchemaBootstrapMacosLaunchdAgents#queue_directories
-   */
-  readonly queueDirectories?: string[];
-
-  /**
    * write one or more StartCalendarInterval schedules
    *
    * @schema MiseTomlSchemaBootstrapMacosLaunchdAgents#start_calendar_interval
    */
   readonly startCalendarInterval?: LaunchdCalendarInterval[];
+
+  /**
+   * write QueueDirectories (absolute paths; `~` and `~/` are expanded)
+   *
+   * @schema MiseTomlSchemaBootstrapMacosLaunchdAgents#queue_directories
+   */
+  readonly queueDirectories?: string[];
 
   /**
    * environment variables for EnvironmentVariables
@@ -8212,11 +8189,13 @@ export function toJson_MiseTomlSchemaBootstrapMacosLaunchdAgents(obj: MiseTomlSc
     'args': obj.args?.map(y => y),
     'run_at_load': obj.runAtLoad,
     'keep_alive': obj.keepAlive,
+    'keep_alive_on_failure': obj.keepAliveOnFailure,
     'start_interval': obj.startInterval,
     'throttle_interval': obj.throttleInterval,
+    'nice': obj.nice,
     'process_type': obj.processType,
-    'queue_directories': obj.queueDirectories?.map(y => y),
     'start_calendar_interval': obj.startCalendarInterval?.map(y => toJson_LaunchdCalendarInterval(y)),
+    'queue_directories': obj.queueDirectories?.map(y => y),
     'environment': ((obj.environment) === undefined) ? undefined : (Object.entries(obj.environment).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'working_directory': obj.workingDirectory,
     'stdout_path': obj.stdoutPath,

@@ -331,6 +331,826 @@ The generated mise config file.
 
 ## Structs <a name="Structs" id="Structs"></a>
 
+### BootstrapAptSources <a name="BootstrapAptSources" id="mise-projen.BootstrapAptSources"></a>
+
+#### Initializer <a name="Initializer" id="mise-projen.BootstrapAptSources.Initializer"></a>
+
+```typescript
+import { BootstrapAptSources } from 'mise-projen'
+
+const bootstrapAptSources: BootstrapAptSources = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#mise-projen.BootstrapAptSources.property.architectures">architectures</a></code> | <code>string</code> | architecture(s) to fetch, space-separated. |
+| <code><a href="#mise-projen.BootstrapAptSources.property.components">components</a></code> | <code>string</code> | component(s), space-separated; |
+| <code><a href="#mise-projen.BootstrapAptSources.property.fingerprint">fingerprint</a></code> | <code>string[]</code> | full primary key fingerprint(s) the signing key must have; |
+| <code><a href="#mise-projen.BootstrapAptSources.property.key">key</a></code> | <code>string</code> | http(s) URL of the repository's signing key, armored or binary. |
+| <code><a href="#mise-projen.BootstrapAptSources.property.ppa">ppa</a></code> | <code>string</code> | Launchpad PPA as owner/archive, such as git-core/ppa; |
+| <code><a href="#mise-projen.BootstrapAptSources.property.suites">suites</a></code> | <code>string</code> | suite(s), space-separated; |
+| <code><a href="#mise-projen.BootstrapAptSources.property.uris">uris</a></code> | <code>string</code> | repository URL(s), space-separated. |
+
+---
+
+##### `architectures`<sup>Optional</sup> <a name="architectures" id="mise-projen.BootstrapAptSources.property.architectures"></a>
+
+```typescript
+public readonly architectures: string;
+```
+
+- *Type:* string
+
+architecture(s) to fetch, space-separated.
+
+---
+
+##### `components`<sup>Optional</sup> <a name="components" id="mise-projen.BootstrapAptSources.property.components"></a>
+
+```typescript
+public readonly components: string;
+```
+
+- *Type:* string
+
+component(s), space-separated;
+
+defaults to main, or none when suites is a path ending in /
+
+---
+
+##### `fingerprint`<sup>Optional</sup> <a name="fingerprint" id="mise-projen.BootstrapAptSources.property.fingerprint"></a>
+
+```typescript
+public readonly fingerprint: string[];
+```
+
+- *Type:* string[]
+
+full primary key fingerprint(s) the signing key must have;
+
+required with key
+
+---
+
+##### `key`<sup>Optional</sup> <a name="key" id="mise-projen.BootstrapAptSources.property.key"></a>
+
+```typescript
+public readonly key: string;
+```
+
+- *Type:* string
+
+http(s) URL of the repository's signing key, armored or binary.
+
+---
+
+##### `ppa`<sup>Optional</sup> <a name="ppa" id="mise-projen.BootstrapAptSources.property.ppa"></a>
+
+```typescript
+public readonly ppa: string;
+```
+
+- *Type:* string
+
+Launchpad PPA as owner/archive, such as git-core/ppa;
+
+added on Ubuntu and Ubuntu-based releases only
+
+---
+
+##### `suites`<sup>Optional</sup> <a name="suites" id="mise-projen.BootstrapAptSources.property.suites"></a>
+
+```typescript
+public readonly suites: string;
+```
+
+- *Type:* string
+
+suite(s), space-separated;
+
+defaults to the release codename
+
+---
+
+##### `uris`<sup>Optional</sup> <a name="uris" id="mise-projen.BootstrapAptSources.property.uris"></a>
+
+```typescript
+public readonly uris: string;
+```
+
+- *Type:* string
+
+repository URL(s), space-separated.
+
+---
+
+### BootstrapDnfRepos <a name="BootstrapDnfRepos" id="mise-projen.BootstrapDnfRepos"></a>
+
+#### Initializer <a name="Initializer" id="mise-projen.BootstrapDnfRepos.Initializer"></a>
+
+```typescript
+import { BootstrapDnfRepos } from 'mise-projen'
+
+const bootstrapDnfRepos: BootstrapDnfRepos = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#mise-projen.BootstrapDnfRepos.property.copr">copr</a></code> | <code>string</code> | COPR project as owner/project or. |
+
+---
+
+##### `copr`<sup>Required</sup> <a name="copr" id="mise-projen.BootstrapDnfRepos.property.copr"></a>
+
+```typescript
+public readonly copr: string;
+```
+
+- *Type:* string
+
+COPR project as owner/project or.
+
+---
+
+### BootstrapHooks <a name="BootstrapHooks" id="mise-projen.BootstrapHooks"></a>
+
+commands to run before and after bootstrap phases.
+
+#### Initializer <a name="Initializer" id="mise-projen.BootstrapHooks.Initializer"></a>
+
+```typescript
+import { BootstrapHooks } from 'mise-projen'
+
+const bootstrapHooks: BootstrapHooks = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#mise-projen.BootstrapHooks.property.final">final</a></code> | <code>any</code> | *No description.* |
+| <code><a href="#mise-projen.BootstrapHooks.property.postDefaults">postDefaults</a></code> | <code>any</code> | *No description.* |
+| <code><a href="#mise-projen.BootstrapHooks.property.postDotfiles">postDotfiles</a></code> | <code>any</code> | *No description.* |
+| <code><a href="#mise-projen.BootstrapHooks.property.postPackages">postPackages</a></code> | <code>any</code> | *No description.* |
+| <code><a href="#mise-projen.BootstrapHooks.property.postRepos">postRepos</a></code> | <code>any</code> | *No description.* |
+| <code><a href="#mise-projen.BootstrapHooks.property.postTools">postTools</a></code> | <code>any</code> | *No description.* |
+| <code><a href="#mise-projen.BootstrapHooks.property.postUser">postUser</a></code> | <code>any</code> | *No description.* |
+| <code><a href="#mise-projen.BootstrapHooks.property.preDefaults">preDefaults</a></code> | <code>any</code> | *No description.* |
+| <code><a href="#mise-projen.BootstrapHooks.property.preDotfiles">preDotfiles</a></code> | <code>any</code> | *No description.* |
+| <code><a href="#mise-projen.BootstrapHooks.property.prePackages">prePackages</a></code> | <code>any</code> | *No description.* |
+| <code><a href="#mise-projen.BootstrapHooks.property.preRepos">preRepos</a></code> | <code>any</code> | *No description.* |
+| <code><a href="#mise-projen.BootstrapHooks.property.preTools">preTools</a></code> | <code>any</code> | *No description.* |
+| <code><a href="#mise-projen.BootstrapHooks.property.preUser">preUser</a></code> | <code>any</code> | *No description.* |
+
+---
+
+##### `final`<sup>Optional</sup> <a name="final" id="mise-projen.BootstrapHooks.property.final"></a>
+
+```typescript
+public readonly final: any;
+```
+
+- *Type:* any
+
+---
+
+##### `postDefaults`<sup>Optional</sup> <a name="postDefaults" id="mise-projen.BootstrapHooks.property.postDefaults"></a>
+
+```typescript
+public readonly postDefaults: any;
+```
+
+- *Type:* any
+
+---
+
+##### `postDotfiles`<sup>Optional</sup> <a name="postDotfiles" id="mise-projen.BootstrapHooks.property.postDotfiles"></a>
+
+```typescript
+public readonly postDotfiles: any;
+```
+
+- *Type:* any
+
+---
+
+##### `postPackages`<sup>Optional</sup> <a name="postPackages" id="mise-projen.BootstrapHooks.property.postPackages"></a>
+
+```typescript
+public readonly postPackages: any;
+```
+
+- *Type:* any
+
+---
+
+##### `postRepos`<sup>Optional</sup> <a name="postRepos" id="mise-projen.BootstrapHooks.property.postRepos"></a>
+
+```typescript
+public readonly postRepos: any;
+```
+
+- *Type:* any
+
+---
+
+##### `postTools`<sup>Optional</sup> <a name="postTools" id="mise-projen.BootstrapHooks.property.postTools"></a>
+
+```typescript
+public readonly postTools: any;
+```
+
+- *Type:* any
+
+---
+
+##### `postUser`<sup>Optional</sup> <a name="postUser" id="mise-projen.BootstrapHooks.property.postUser"></a>
+
+```typescript
+public readonly postUser: any;
+```
+
+- *Type:* any
+
+---
+
+##### `preDefaults`<sup>Optional</sup> <a name="preDefaults" id="mise-projen.BootstrapHooks.property.preDefaults"></a>
+
+```typescript
+public readonly preDefaults: any;
+```
+
+- *Type:* any
+
+---
+
+##### `preDotfiles`<sup>Optional</sup> <a name="preDotfiles" id="mise-projen.BootstrapHooks.property.preDotfiles"></a>
+
+```typescript
+public readonly preDotfiles: any;
+```
+
+- *Type:* any
+
+---
+
+##### `prePackages`<sup>Optional</sup> <a name="prePackages" id="mise-projen.BootstrapHooks.property.prePackages"></a>
+
+```typescript
+public readonly prePackages: any;
+```
+
+- *Type:* any
+
+---
+
+##### `preRepos`<sup>Optional</sup> <a name="preRepos" id="mise-projen.BootstrapHooks.property.preRepos"></a>
+
+```typescript
+public readonly preRepos: any;
+```
+
+- *Type:* any
+
+---
+
+##### `preTools`<sup>Optional</sup> <a name="preTools" id="mise-projen.BootstrapHooks.property.preTools"></a>
+
+```typescript
+public readonly preTools: any;
+```
+
+- *Type:* any
+
+---
+
+##### `preUser`<sup>Optional</sup> <a name="preUser" id="mise-projen.BootstrapHooks.property.preUser"></a>
+
+```typescript
+public readonly preUser: any;
+```
+
+- *Type:* any
+
+---
+
+### BootstrapMacosDock <a name="BootstrapMacosDock" id="mise-projen.BootstrapMacosDock"></a>
+
+curated Dock preferences that compile into macOS defaults.
+
+#### Initializer <a name="Initializer" id="mise-projen.BootstrapMacosDock.Initializer"></a>
+
+```typescript
+import { BootstrapMacosDock } from 'mise-projen'
+
+const bootstrapMacosDock: BootstrapMacosDock = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#mise-projen.BootstrapMacosDock.property.apps">apps</a></code> | <code>string[]</code> | Pinned application paths in order; |
+| <code><a href="#mise-projen.BootstrapMacosDock.property.autohide">autohide</a></code> | <code>boolean</code> | hide and show the Dock automatically. |
+| <code><a href="#mise-projen.BootstrapMacosDock.property.autohideDelay">autohideDelay</a></code> | <code>number</code> | delay before showing the Dock. |
+| <code><a href="#mise-projen.BootstrapMacosDock.property.autohideTimeModifier">autohideTimeModifier</a></code> | <code>number</code> | Dock autohide animation time modifier. |
+| <code><a href="#mise-projen.BootstrapMacosDock.property.largesize">largesize</a></code> | <code>number</code> | Dock magnified icon size. |
+| <code><a href="#mise-projen.BootstrapMacosDock.property.magnification">magnification</a></code> | <code>boolean</code> | enable Dock magnification. |
+| <code><a href="#mise-projen.BootstrapMacosDock.property.mruSpaces">mruSpaces</a></code> | <code>boolean</code> | automatically rearrange Spaces based on most recent use. |
+| <code><a href="#mise-projen.BootstrapMacosDock.property.orientation">orientation</a></code> | <code><a href="#mise-projen.BootstrapMacosDockOrientation">BootstrapMacosDockOrientation</a></code> | Dock screen edge. |
+| <code><a href="#mise-projen.BootstrapMacosDock.property.showRecents">showRecents</a></code> | <code>boolean</code> | show recent applications in the Dock. |
+| <code><a href="#mise-projen.BootstrapMacosDock.property.tilesize">tilesize</a></code> | <code>number</code> | Dock icon size. |
+
+---
+
+##### `apps`<sup>Optional</sup> <a name="apps" id="mise-projen.BootstrapMacosDock.property.apps"></a>
+
+```typescript
+public readonly apps: string[];
+```
+
+- *Type:* string[]
+
+Pinned application paths in order;
+
+absolute or ~/ paths ending in .app. An empty array removes application tiles.
+
+---
+
+##### `autohide`<sup>Optional</sup> <a name="autohide" id="mise-projen.BootstrapMacosDock.property.autohide"></a>
+
+```typescript
+public readonly autohide: boolean;
+```
+
+- *Type:* boolean
+
+hide and show the Dock automatically.
+
+---
+
+##### `autohideDelay`<sup>Optional</sup> <a name="autohideDelay" id="mise-projen.BootstrapMacosDock.property.autohideDelay"></a>
+
+```typescript
+public readonly autohideDelay: number;
+```
+
+- *Type:* number
+
+delay before showing the Dock.
+
+---
+
+##### `autohideTimeModifier`<sup>Optional</sup> <a name="autohideTimeModifier" id="mise-projen.BootstrapMacosDock.property.autohideTimeModifier"></a>
+
+```typescript
+public readonly autohideTimeModifier: number;
+```
+
+- *Type:* number
+
+Dock autohide animation time modifier.
+
+---
+
+##### `largesize`<sup>Optional</sup> <a name="largesize" id="mise-projen.BootstrapMacosDock.property.largesize"></a>
+
+```typescript
+public readonly largesize: number;
+```
+
+- *Type:* number
+
+Dock magnified icon size.
+
+---
+
+##### `magnification`<sup>Optional</sup> <a name="magnification" id="mise-projen.BootstrapMacosDock.property.magnification"></a>
+
+```typescript
+public readonly magnification: boolean;
+```
+
+- *Type:* boolean
+
+enable Dock magnification.
+
+---
+
+##### `mruSpaces`<sup>Optional</sup> <a name="mruSpaces" id="mise-projen.BootstrapMacosDock.property.mruSpaces"></a>
+
+```typescript
+public readonly mruSpaces: boolean;
+```
+
+- *Type:* boolean
+
+automatically rearrange Spaces based on most recent use.
+
+---
+
+##### `orientation`<sup>Optional</sup> <a name="orientation" id="mise-projen.BootstrapMacosDock.property.orientation"></a>
+
+```typescript
+public readonly orientation: BootstrapMacosDockOrientation;
+```
+
+- *Type:* <a href="#mise-projen.BootstrapMacosDockOrientation">BootstrapMacosDockOrientation</a>
+
+Dock screen edge.
+
+---
+
+##### `showRecents`<sup>Optional</sup> <a name="showRecents" id="mise-projen.BootstrapMacosDock.property.showRecents"></a>
+
+```typescript
+public readonly showRecents: boolean;
+```
+
+- *Type:* boolean
+
+show recent applications in the Dock.
+
+---
+
+##### `tilesize`<sup>Optional</sup> <a name="tilesize" id="mise-projen.BootstrapMacosDock.property.tilesize"></a>
+
+```typescript
+public readonly tilesize: number;
+```
+
+- *Type:* number
+
+Dock icon size.
+
+---
+
+### BootstrapMacosFinder <a name="BootstrapMacosFinder" id="mise-projen.BootstrapMacosFinder"></a>
+
+curated Finder preferences that compile into macOS defaults.
+
+#### Initializer <a name="Initializer" id="mise-projen.BootstrapMacosFinder.Initializer"></a>
+
+```typescript
+import { BootstrapMacosFinder } from 'mise-projen'
+
+const bootstrapMacosFinder: BootstrapMacosFinder = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#mise-projen.BootstrapMacosFinder.property.preferredViewStyle">preferredViewStyle</a></code> | <code><a href="#mise-projen.BootstrapMacosFinderPreferredViewStyle">BootstrapMacosFinderPreferredViewStyle</a></code> | Finder preferred view style. |
+| <code><a href="#mise-projen.BootstrapMacosFinder.property.saveNewDocumentsToCloud">saveNewDocumentsToCloud</a></code> | <code>boolean</code> | save new documents to iCloud by default (applies globally to application save dialogs). |
+| <code><a href="#mise-projen.BootstrapMacosFinder.property.showAllFiles">showAllFiles</a></code> | <code>boolean</code> | show hidden files in Finder. |
+| <code><a href="#mise-projen.BootstrapMacosFinder.property.showExtensionsWarning">showExtensionsWarning</a></code> | <code>boolean</code> | show the warning when changing file extensions. |
+| <code><a href="#mise-projen.BootstrapMacosFinder.property.showPathbar">showPathbar</a></code> | <code>boolean</code> | show the Finder path bar. |
+| <code><a href="#mise-projen.BootstrapMacosFinder.property.showStatusBar">showStatusBar</a></code> | <code>boolean</code> | show the Finder status bar. |
+| <code><a href="#mise-projen.BootstrapMacosFinder.property.sortFoldersFirst">sortFoldersFirst</a></code> | <code>boolean</code> | keep folders first when sorting by name. |
+
+---
+
+##### `preferredViewStyle`<sup>Optional</sup> <a name="preferredViewStyle" id="mise-projen.BootstrapMacosFinder.property.preferredViewStyle"></a>
+
+```typescript
+public readonly preferredViewStyle: BootstrapMacosFinderPreferredViewStyle;
+```
+
+- *Type:* <a href="#mise-projen.BootstrapMacosFinderPreferredViewStyle">BootstrapMacosFinderPreferredViewStyle</a>
+
+Finder preferred view style.
+
+---
+
+##### `saveNewDocumentsToCloud`<sup>Optional</sup> <a name="saveNewDocumentsToCloud" id="mise-projen.BootstrapMacosFinder.property.saveNewDocumentsToCloud"></a>
+
+```typescript
+public readonly saveNewDocumentsToCloud: boolean;
+```
+
+- *Type:* boolean
+
+save new documents to iCloud by default (applies globally to application save dialogs).
+
+---
+
+##### `showAllFiles`<sup>Optional</sup> <a name="showAllFiles" id="mise-projen.BootstrapMacosFinder.property.showAllFiles"></a>
+
+```typescript
+public readonly showAllFiles: boolean;
+```
+
+- *Type:* boolean
+
+show hidden files in Finder.
+
+---
+
+##### `showExtensionsWarning`<sup>Optional</sup> <a name="showExtensionsWarning" id="mise-projen.BootstrapMacosFinder.property.showExtensionsWarning"></a>
+
+```typescript
+public readonly showExtensionsWarning: boolean;
+```
+
+- *Type:* boolean
+
+show the warning when changing file extensions.
+
+---
+
+##### `showPathbar`<sup>Optional</sup> <a name="showPathbar" id="mise-projen.BootstrapMacosFinder.property.showPathbar"></a>
+
+```typescript
+public readonly showPathbar: boolean;
+```
+
+- *Type:* boolean
+
+show the Finder path bar.
+
+---
+
+##### `showStatusBar`<sup>Optional</sup> <a name="showStatusBar" id="mise-projen.BootstrapMacosFinder.property.showStatusBar"></a>
+
+```typescript
+public readonly showStatusBar: boolean;
+```
+
+- *Type:* boolean
+
+show the Finder status bar.
+
+---
+
+##### `sortFoldersFirst`<sup>Optional</sup> <a name="sortFoldersFirst" id="mise-projen.BootstrapMacosFinder.property.sortFoldersFirst"></a>
+
+```typescript
+public readonly sortFoldersFirst: boolean;
+```
+
+- *Type:* boolean
+
+keep folders first when sorting by name.
+
+---
+
+### BootstrapMacosKeyboard <a name="BootstrapMacosKeyboard" id="mise-projen.BootstrapMacosKeyboard"></a>
+
+curated keyboard preferences that compile into macOS defaults.
+
+#### Initializer <a name="Initializer" id="mise-projen.BootstrapMacosKeyboard.Initializer"></a>
+
+```typescript
+import { BootstrapMacosKeyboard } from 'mise-projen'
+
+const bootstrapMacosKeyboard: BootstrapMacosKeyboard = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#mise-projen.BootstrapMacosKeyboard.property.automaticCapitalization">automaticCapitalization</a></code> | <code>boolean</code> | automatically capitalize words. |
+| <code><a href="#mise-projen.BootstrapMacosKeyboard.property.automaticSpellingCorrection">automaticSpellingCorrection</a></code> | <code>boolean</code> | automatically correct spelling. |
+| <code><a href="#mise-projen.BootstrapMacosKeyboard.property.fnState">fnState</a></code> | <code>boolean</code> | use F1, F2, etc. |
+| <code><a href="#mise-projen.BootstrapMacosKeyboard.property.initialKeyRepeat">initialKeyRepeat</a></code> | <code>number</code> | delay before key repeat starts. |
+| <code><a href="#mise-projen.BootstrapMacosKeyboard.property.keyRepeat">keyRepeat</a></code> | <code>number</code> | keyboard repeat interval. |
+| <code><a href="#mise-projen.BootstrapMacosKeyboard.property.pressAndHold">pressAndHold</a></code> | <code>boolean</code> | enable press-and-hold accent picker. |
+
+---
+
+##### `automaticCapitalization`<sup>Optional</sup> <a name="automaticCapitalization" id="mise-projen.BootstrapMacosKeyboard.property.automaticCapitalization"></a>
+
+```typescript
+public readonly automaticCapitalization: boolean;
+```
+
+- *Type:* boolean
+
+automatically capitalize words.
+
+---
+
+##### `automaticSpellingCorrection`<sup>Optional</sup> <a name="automaticSpellingCorrection" id="mise-projen.BootstrapMacosKeyboard.property.automaticSpellingCorrection"></a>
+
+```typescript
+public readonly automaticSpellingCorrection: boolean;
+```
+
+- *Type:* boolean
+
+automatically correct spelling.
+
+---
+
+##### `fnState`<sup>Optional</sup> <a name="fnState" id="mise-projen.BootstrapMacosKeyboard.property.fnState"></a>
+
+```typescript
+public readonly fnState: boolean;
+```
+
+- *Type:* boolean
+
+use F1, F2, etc.
+
+as standard function keys
+
+---
+
+##### `initialKeyRepeat`<sup>Optional</sup> <a name="initialKeyRepeat" id="mise-projen.BootstrapMacosKeyboard.property.initialKeyRepeat"></a>
+
+```typescript
+public readonly initialKeyRepeat: number;
+```
+
+- *Type:* number
+
+delay before key repeat starts.
+
+---
+
+##### `keyRepeat`<sup>Optional</sup> <a name="keyRepeat" id="mise-projen.BootstrapMacosKeyboard.property.keyRepeat"></a>
+
+```typescript
+public readonly keyRepeat: number;
+```
+
+- *Type:* number
+
+keyboard repeat interval.
+
+---
+
+##### `pressAndHold`<sup>Optional</sup> <a name="pressAndHold" id="mise-projen.BootstrapMacosKeyboard.property.pressAndHold"></a>
+
+```typescript
+public readonly pressAndHold: boolean;
+```
+
+- *Type:* boolean
+
+enable press-and-hold accent picker.
+
+---
+
+### BootstrapMacosTrackpad <a name="BootstrapMacosTrackpad" id="mise-projen.BootstrapMacosTrackpad"></a>
+
+curated trackpad preferences that compile into macOS defaults.
+
+#### Initializer <a name="Initializer" id="mise-projen.BootstrapMacosTrackpad.Initializer"></a>
+
+```typescript
+import { BootstrapMacosTrackpad } from 'mise-projen'
+
+const bootstrapMacosTrackpad: BootstrapMacosTrackpad = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#mise-projen.BootstrapMacosTrackpad.property.tapToClick">tapToClick</a></code> | <code>boolean</code> | enable tap to click for built-in and Bluetooth trackpads. |
+| <code><a href="#mise-projen.BootstrapMacosTrackpad.property.threeFingerDrag">threeFingerDrag</a></code> | <code>boolean</code> | enable three finger drag for built-in and Bluetooth trackpads. |
+
+---
+
+##### `tapToClick`<sup>Optional</sup> <a name="tapToClick" id="mise-projen.BootstrapMacosTrackpad.property.tapToClick"></a>
+
+```typescript
+public readonly tapToClick: boolean;
+```
+
+- *Type:* boolean
+
+enable tap to click for built-in and Bluetooth trackpads.
+
+---
+
+##### `threeFingerDrag`<sup>Optional</sup> <a name="threeFingerDrag" id="mise-projen.BootstrapMacosTrackpad.property.threeFingerDrag"></a>
+
+```typescript
+public readonly threeFingerDrag: boolean;
+```
+
+- *Type:* boolean
+
+enable three finger drag for built-in and Bluetooth trackpads.
+
+---
+
+### BootstrapMiseShellActivate <a name="BootstrapMiseShellActivate" id="mise-projen.BootstrapMiseShellActivate"></a>
+
+declarative mise shell activation snippets, applied with `mise bootstrap mise-shell-activate apply`.
+
+#### Initializer <a name="Initializer" id="mise-projen.BootstrapMiseShellActivate.Initializer"></a>
+
+```typescript
+import { BootstrapMiseShellActivate } from 'mise-projen'
+
+const bootstrapMiseShellActivate: BootstrapMiseShellActivate = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#mise-projen.BootstrapMiseShellActivate.property.bash">bash</a></code> | <code>any</code> | *No description.* |
+| <code><a href="#mise-projen.BootstrapMiseShellActivate.property.bashProfile">bashProfile</a></code> | <code>any</code> | *No description.* |
+| <code><a href="#mise-projen.BootstrapMiseShellActivate.property.bashrc">bashrc</a></code> | <code>any</code> | *No description.* |
+| <code><a href="#mise-projen.BootstrapMiseShellActivate.property.fish">fish</a></code> | <code>any</code> | *No description.* |
+| <code><a href="#mise-projen.BootstrapMiseShellActivate.property.zprofile">zprofile</a></code> | <code>any</code> | *No description.* |
+| <code><a href="#mise-projen.BootstrapMiseShellActivate.property.zsh">zsh</a></code> | <code>any</code> | *No description.* |
+| <code><a href="#mise-projen.BootstrapMiseShellActivate.property.zshenv">zshenv</a></code> | <code>any</code> | *No description.* |
+| <code><a href="#mise-projen.BootstrapMiseShellActivate.property.zshrc">zshrc</a></code> | <code>any</code> | *No description.* |
+
+---
+
+##### `bash`<sup>Optional</sup> <a name="bash" id="mise-projen.BootstrapMiseShellActivate.property.bash"></a>
+
+```typescript
+public readonly bash: any;
+```
+
+- *Type:* any
+
+---
+
+##### `bashProfile`<sup>Optional</sup> <a name="bashProfile" id="mise-projen.BootstrapMiseShellActivate.property.bashProfile"></a>
+
+```typescript
+public readonly bashProfile: any;
+```
+
+- *Type:* any
+
+---
+
+##### `bashrc`<sup>Optional</sup> <a name="bashrc" id="mise-projen.BootstrapMiseShellActivate.property.bashrc"></a>
+
+```typescript
+public readonly bashrc: any;
+```
+
+- *Type:* any
+
+---
+
+##### `fish`<sup>Optional</sup> <a name="fish" id="mise-projen.BootstrapMiseShellActivate.property.fish"></a>
+
+```typescript
+public readonly fish: any;
+```
+
+- *Type:* any
+
+---
+
+##### `zprofile`<sup>Optional</sup> <a name="zprofile" id="mise-projen.BootstrapMiseShellActivate.property.zprofile"></a>
+
+```typescript
+public readonly zprofile: any;
+```
+
+- *Type:* any
+
+---
+
+##### `zsh`<sup>Optional</sup> <a name="zsh" id="mise-projen.BootstrapMiseShellActivate.property.zsh"></a>
+
+```typescript
+public readonly zsh: any;
+```
+
+- *Type:* any
+
+---
+
+##### `zshenv`<sup>Optional</sup> <a name="zshenv" id="mise-projen.BootstrapMiseShellActivate.property.zshenv"></a>
+
+```typescript
+public readonly zshenv: any;
+```
+
+- *Type:* any
+
+---
+
+##### `zshrc`<sup>Optional</sup> <a name="zshrc" id="mise-projen.BootstrapMiseShellActivate.property.zshrc"></a>
+
+```typescript
+public readonly zshrc: any;
+```
+
+- *Type:* any
+
+---
+
 ### DepsProvider <a name="DepsProvider" id="mise-projen.DepsProvider"></a>
 
 Prepare provider configuration.
@@ -1413,10 +2233,10 @@ const miseTomlSchemaBootstrap: MiseTomlSchemaBootstrap = { ... }
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrap.property.dotfileGroups">dotfileGroups</a></code> | <code>string[]</code> | the dotfile groups this machine applies; |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrap.property.files">files</a></code> | <code>{[ key: string ]: <a href="#mise-projen.MiseTomlSchemaBootstrapFiles">MiseTomlSchemaBootstrapFiles</a>}</code> | Managed system files keyed by absolute target path. |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrap.property.groups">groups</a></code> | <code>{[ key: string ]: <a href="#mise-projen.MiseTomlSchemaBootstrapGroups">MiseTomlSchemaBootstrapGroups</a>}</code> | [experimental] Linux groups that bootstrap creates or removes, keyed by group name. |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrap.property.hooks">hooks</a></code> | <code><a href="#mise-projen.MiseTomlSchemaBootstrapHooks">MiseTomlSchemaBootstrapHooks</a></code> | commands to run before and after bootstrap phases. |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrap.property.hooks">hooks</a></code> | <code><a href="#mise-projen.BootstrapHooks">BootstrapHooks</a></code> | *No description.* |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrap.property.linux">linux</a></code> | <code><a href="#mise-projen.MiseTomlSchemaBootstrapLinux">MiseTomlSchemaBootstrapLinux</a></code> | Linux-specific bootstrap config. |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrap.property.macos">macos</a></code> | <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacos">MiseTomlSchemaBootstrapMacos</a></code> | macOS-specific bootstrap config. |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrap.property.miseShellActivate">miseShellActivate</a></code> | <code><a href="#mise-projen.MiseTomlSchemaBootstrapMiseShellActivate">MiseTomlSchemaBootstrapMiseShellActivate</a></code> | declarative mise shell activation snippets, applied with `mise bootstrap mise-shell-activate apply`. |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrap.property.miseShellActivate">miseShellActivate</a></code> | <code><a href="#mise-projen.BootstrapMiseShellActivate">BootstrapMiseShellActivate</a></code> | *No description.* |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrap.property.packages">packages</a></code> | <code>{[ key: string ]: any}</code> | system packages to install with `mise bootstrap packages apply`, keyed by "manager:package" (e.g. "apt:libssl-dev", "brew:postgresql@17", "dnf:openssl-devel", "pacman:base-devel"). |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrap.property.plugins">plugins</a></code> | <code>{[ key: string ]: string}</code> | package manager plugins to install with `mise bootstrap plugins apply`, keyed by manager name. |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrap.property.remote">remote</a></code> | <code><a href="#mise-projen.MiseTomlSchemaBootstrapRemote">MiseTomlSchemaBootstrapRemote</a></code> | OpenSSH targets used by `mise bootstrap remote`. |
@@ -1543,12 +2363,10 @@ public readonly groups: {[ key: string ]: MiseTomlSchemaBootstrapGroups};
 ##### `hooks`<sup>Optional</sup> <a name="hooks" id="mise-projen.MiseTomlSchemaBootstrap.property.hooks"></a>
 
 ```typescript
-public readonly hooks: MiseTomlSchemaBootstrapHooks;
+public readonly hooks: BootstrapHooks;
 ```
 
-- *Type:* <a href="#mise-projen.MiseTomlSchemaBootstrapHooks">MiseTomlSchemaBootstrapHooks</a>
-
-commands to run before and after bootstrap phases.
+- *Type:* <a href="#mise-projen.BootstrapHooks">BootstrapHooks</a>
 
 ---
 
@@ -1579,12 +2397,10 @@ macOS-specific bootstrap config.
 ##### `miseShellActivate`<sup>Optional</sup> <a name="miseShellActivate" id="mise-projen.MiseTomlSchemaBootstrap.property.miseShellActivate"></a>
 
 ```typescript
-public readonly miseShellActivate: MiseTomlSchemaBootstrapMiseShellActivate;
+public readonly miseShellActivate: BootstrapMiseShellActivate;
 ```
 
-- *Type:* <a href="#mise-projen.MiseTomlSchemaBootstrapMiseShellActivate">MiseTomlSchemaBootstrapMiseShellActivate</a>
-
-declarative mise shell activation snippets, applied with `mise bootstrap mise-shell-activate apply`.
+- *Type:* <a href="#mise-projen.BootstrapMiseShellActivate">BootstrapMiseShellActivate</a>
 
 ---
 
@@ -1700,135 +2516,17 @@ const miseTomlSchemaBootstrapApt: MiseTomlSchemaBootstrapApt = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapApt.property.sources">sources</a></code> | <code>{[ key: string ]: <a href="#mise-projen.MiseTomlSchemaBootstrapAptSources">MiseTomlSchemaBootstrapAptSources</a>}</code> | apt repositories added before apt packages are installed, keyed by a name used in the files mise writes. |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapApt.property.sources">sources</a></code> | <code>{[ key: string ]: <a href="#mise-projen.BootstrapAptSources">BootstrapAptSources</a>}</code> | *No description.* |
 
 ---
 
 ##### `sources`<sup>Optional</sup> <a name="sources" id="mise-projen.MiseTomlSchemaBootstrapApt.property.sources"></a>
 
 ```typescript
-public readonly sources: {[ key: string ]: MiseTomlSchemaBootstrapAptSources};
+public readonly sources: {[ key: string ]: BootstrapAptSources};
 ```
 
-- *Type:* {[ key: string ]: <a href="#mise-projen.MiseTomlSchemaBootstrapAptSources">MiseTomlSchemaBootstrapAptSources</a>}
-
-apt repositories added before apt packages are installed, keyed by a name used in the files mise writes.
-
----
-
-### MiseTomlSchemaBootstrapAptSources <a name="MiseTomlSchemaBootstrapAptSources" id="mise-projen.MiseTomlSchemaBootstrapAptSources"></a>
-
-#### Initializer <a name="Initializer" id="mise-projen.MiseTomlSchemaBootstrapAptSources.Initializer"></a>
-
-```typescript
-import { MiseTomlSchemaBootstrapAptSources } from 'mise-projen'
-
-const miseTomlSchemaBootstrapAptSources: MiseTomlSchemaBootstrapAptSources = { ... }
-```
-
-#### Properties <a name="Properties" id="Properties"></a>
-
-| **Name** | **Type** | **Description** |
-| --- | --- | --- |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapAptSources.property.architectures">architectures</a></code> | <code>string</code> | architecture(s) to fetch, space-separated. |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapAptSources.property.components">components</a></code> | <code>string</code> | component(s), space-separated; |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapAptSources.property.fingerprint">fingerprint</a></code> | <code>string[]</code> | full primary key fingerprint(s) the signing key must have; |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapAptSources.property.key">key</a></code> | <code>string</code> | http(s) URL of the repository's signing key, armored or binary. |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapAptSources.property.ppa">ppa</a></code> | <code>string</code> | Launchpad PPA as owner/archive, such as git-core/ppa; |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapAptSources.property.suites">suites</a></code> | <code>string</code> | suite(s), space-separated; |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapAptSources.property.uris">uris</a></code> | <code>string</code> | repository URL(s), space-separated. |
-
----
-
-##### `architectures`<sup>Optional</sup> <a name="architectures" id="mise-projen.MiseTomlSchemaBootstrapAptSources.property.architectures"></a>
-
-```typescript
-public readonly architectures: string;
-```
-
-- *Type:* string
-
-architecture(s) to fetch, space-separated.
-
----
-
-##### `components`<sup>Optional</sup> <a name="components" id="mise-projen.MiseTomlSchemaBootstrapAptSources.property.components"></a>
-
-```typescript
-public readonly components: string;
-```
-
-- *Type:* string
-
-component(s), space-separated;
-
-defaults to main, or none when suites is a path ending in /
-
----
-
-##### `fingerprint`<sup>Optional</sup> <a name="fingerprint" id="mise-projen.MiseTomlSchemaBootstrapAptSources.property.fingerprint"></a>
-
-```typescript
-public readonly fingerprint: string[];
-```
-
-- *Type:* string[]
-
-full primary key fingerprint(s) the signing key must have;
-
-required with key
-
----
-
-##### `key`<sup>Optional</sup> <a name="key" id="mise-projen.MiseTomlSchemaBootstrapAptSources.property.key"></a>
-
-```typescript
-public readonly key: string;
-```
-
-- *Type:* string
-
-http(s) URL of the repository's signing key, armored or binary.
-
----
-
-##### `ppa`<sup>Optional</sup> <a name="ppa" id="mise-projen.MiseTomlSchemaBootstrapAptSources.property.ppa"></a>
-
-```typescript
-public readonly ppa: string;
-```
-
-- *Type:* string
-
-Launchpad PPA as owner/archive, such as git-core/ppa;
-
-added on Ubuntu and Ubuntu-based releases only
-
----
-
-##### `suites`<sup>Optional</sup> <a name="suites" id="mise-projen.MiseTomlSchemaBootstrapAptSources.property.suites"></a>
-
-```typescript
-public readonly suites: string;
-```
-
-- *Type:* string
-
-suite(s), space-separated;
-
-defaults to the release codename
-
----
-
-##### `uris`<sup>Optional</sup> <a name="uris" id="mise-projen.MiseTomlSchemaBootstrapAptSources.property.uris"></a>
-
-```typescript
-public readonly uris: string;
-```
-
-- *Type:* string
-
-repository URL(s), space-separated.
+- *Type:* {[ key: string ]: <a href="#mise-projen.BootstrapAptSources">BootstrapAptSources</a>}
 
 ---
 
@@ -2290,49 +2988,17 @@ const miseTomlSchemaBootstrapDnf: MiseTomlSchemaBootstrapDnf = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapDnf.property.repos">repos</a></code> | <code>{[ key: string ]: <a href="#mise-projen.MiseTomlSchemaBootstrapDnfRepos">MiseTomlSchemaBootstrapDnfRepos</a>}</code> | dnf repositories enabled before dnf packages are installed, keyed by a name for the entry. |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapDnf.property.repos">repos</a></code> | <code>{[ key: string ]: <a href="#mise-projen.BootstrapDnfRepos">BootstrapDnfRepos</a>}</code> | *No description.* |
 
 ---
 
 ##### `repos`<sup>Optional</sup> <a name="repos" id="mise-projen.MiseTomlSchemaBootstrapDnf.property.repos"></a>
 
 ```typescript
-public readonly repos: {[ key: string ]: MiseTomlSchemaBootstrapDnfRepos};
+public readonly repos: {[ key: string ]: BootstrapDnfRepos};
 ```
 
-- *Type:* {[ key: string ]: <a href="#mise-projen.MiseTomlSchemaBootstrapDnfRepos">MiseTomlSchemaBootstrapDnfRepos</a>}
-
-dnf repositories enabled before dnf packages are installed, keyed by a name for the entry.
-
----
-
-### MiseTomlSchemaBootstrapDnfRepos <a name="MiseTomlSchemaBootstrapDnfRepos" id="mise-projen.MiseTomlSchemaBootstrapDnfRepos"></a>
-
-#### Initializer <a name="Initializer" id="mise-projen.MiseTomlSchemaBootstrapDnfRepos.Initializer"></a>
-
-```typescript
-import { MiseTomlSchemaBootstrapDnfRepos } from 'mise-projen'
-
-const miseTomlSchemaBootstrapDnfRepos: MiseTomlSchemaBootstrapDnfRepos = { ... }
-```
-
-#### Properties <a name="Properties" id="Properties"></a>
-
-| **Name** | **Type** | **Description** |
-| --- | --- | --- |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapDnfRepos.property.copr">copr</a></code> | <code>string</code> | COPR project as owner/project or. |
-
----
-
-##### `copr`<sup>Required</sup> <a name="copr" id="mise-projen.MiseTomlSchemaBootstrapDnfRepos.property.copr"></a>
-
-```typescript
-public readonly copr: string;
-```
-
-- *Type:* string
-
-COPR project as owner/project or.
+- *Type:* {[ key: string ]: <a href="#mise-projen.BootstrapDnfRepos">BootstrapDnfRepos</a>}
 
 ---
 
@@ -2546,168 +3212,6 @@ public readonly system: boolean;
 - *Type:* boolean
 
 create a system group.
-
----
-
-### MiseTomlSchemaBootstrapHooks <a name="MiseTomlSchemaBootstrapHooks" id="mise-projen.MiseTomlSchemaBootstrapHooks"></a>
-
-commands to run before and after bootstrap phases.
-
-#### Initializer <a name="Initializer" id="mise-projen.MiseTomlSchemaBootstrapHooks.Initializer"></a>
-
-```typescript
-import { MiseTomlSchemaBootstrapHooks } from 'mise-projen'
-
-const miseTomlSchemaBootstrapHooks: MiseTomlSchemaBootstrapHooks = { ... }
-```
-
-#### Properties <a name="Properties" id="Properties"></a>
-
-| **Name** | **Type** | **Description** |
-| --- | --- | --- |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapHooks.property.final">final</a></code> | <code>any</code> | *No description.* |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapHooks.property.postDefaults">postDefaults</a></code> | <code>any</code> | *No description.* |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapHooks.property.postDotfiles">postDotfiles</a></code> | <code>any</code> | *No description.* |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapHooks.property.postPackages">postPackages</a></code> | <code>any</code> | *No description.* |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapHooks.property.postRepos">postRepos</a></code> | <code>any</code> | *No description.* |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapHooks.property.postTools">postTools</a></code> | <code>any</code> | *No description.* |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapHooks.property.postUser">postUser</a></code> | <code>any</code> | *No description.* |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapHooks.property.preDefaults">preDefaults</a></code> | <code>any</code> | *No description.* |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapHooks.property.preDotfiles">preDotfiles</a></code> | <code>any</code> | *No description.* |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapHooks.property.prePackages">prePackages</a></code> | <code>any</code> | *No description.* |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapHooks.property.preRepos">preRepos</a></code> | <code>any</code> | *No description.* |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapHooks.property.preTools">preTools</a></code> | <code>any</code> | *No description.* |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapHooks.property.preUser">preUser</a></code> | <code>any</code> | *No description.* |
-
----
-
-##### `final`<sup>Optional</sup> <a name="final" id="mise-projen.MiseTomlSchemaBootstrapHooks.property.final"></a>
-
-```typescript
-public readonly final: any;
-```
-
-- *Type:* any
-
----
-
-##### `postDefaults`<sup>Optional</sup> <a name="postDefaults" id="mise-projen.MiseTomlSchemaBootstrapHooks.property.postDefaults"></a>
-
-```typescript
-public readonly postDefaults: any;
-```
-
-- *Type:* any
-
----
-
-##### `postDotfiles`<sup>Optional</sup> <a name="postDotfiles" id="mise-projen.MiseTomlSchemaBootstrapHooks.property.postDotfiles"></a>
-
-```typescript
-public readonly postDotfiles: any;
-```
-
-- *Type:* any
-
----
-
-##### `postPackages`<sup>Optional</sup> <a name="postPackages" id="mise-projen.MiseTomlSchemaBootstrapHooks.property.postPackages"></a>
-
-```typescript
-public readonly postPackages: any;
-```
-
-- *Type:* any
-
----
-
-##### `postRepos`<sup>Optional</sup> <a name="postRepos" id="mise-projen.MiseTomlSchemaBootstrapHooks.property.postRepos"></a>
-
-```typescript
-public readonly postRepos: any;
-```
-
-- *Type:* any
-
----
-
-##### `postTools`<sup>Optional</sup> <a name="postTools" id="mise-projen.MiseTomlSchemaBootstrapHooks.property.postTools"></a>
-
-```typescript
-public readonly postTools: any;
-```
-
-- *Type:* any
-
----
-
-##### `postUser`<sup>Optional</sup> <a name="postUser" id="mise-projen.MiseTomlSchemaBootstrapHooks.property.postUser"></a>
-
-```typescript
-public readonly postUser: any;
-```
-
-- *Type:* any
-
----
-
-##### `preDefaults`<sup>Optional</sup> <a name="preDefaults" id="mise-projen.MiseTomlSchemaBootstrapHooks.property.preDefaults"></a>
-
-```typescript
-public readonly preDefaults: any;
-```
-
-- *Type:* any
-
----
-
-##### `preDotfiles`<sup>Optional</sup> <a name="preDotfiles" id="mise-projen.MiseTomlSchemaBootstrapHooks.property.preDotfiles"></a>
-
-```typescript
-public readonly preDotfiles: any;
-```
-
-- *Type:* any
-
----
-
-##### `prePackages`<sup>Optional</sup> <a name="prePackages" id="mise-projen.MiseTomlSchemaBootstrapHooks.property.prePackages"></a>
-
-```typescript
-public readonly prePackages: any;
-```
-
-- *Type:* any
-
----
-
-##### `preRepos`<sup>Optional</sup> <a name="preRepos" id="mise-projen.MiseTomlSchemaBootstrapHooks.property.preRepos"></a>
-
-```typescript
-public readonly preRepos: any;
-```
-
-- *Type:* any
-
----
-
-##### `preTools`<sup>Optional</sup> <a name="preTools" id="mise-projen.MiseTomlSchemaBootstrapHooks.property.preTools"></a>
-
-```typescript
-public readonly preTools: any;
-```
-
-- *Type:* any
-
----
-
-##### `preUser`<sup>Optional</sup> <a name="preUser" id="mise-projen.MiseTomlSchemaBootstrapHooks.property.preUser"></a>
-
-```typescript
-public readonly preUser: any;
-```
-
-- *Type:* any
 
 ---
 
@@ -3574,26 +4078,24 @@ const miseTomlSchemaBootstrapMacos: MiseTomlSchemaBootstrapMacos = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacos.property.defaults">defaults</a></code> | <code>{[ key: string ]: {[ key: string ]: <a href="#mise-projen.MiseTomlSchemaBootstrapMacosDefaults">MiseTomlSchemaBootstrapMacosDefaults</a>}}</code> | macOS user defaults to apply with `mise bootstrap macos defaults apply`, keyed by preferences domain (e.g. "com.apple.dock", "NSGlobalDomain"). |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacos.property.defaults">defaults</a></code> | <code>{[ key: string ]: {[ key: string ]: any}}</code> | *No description.* |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacos.property.defaultsEntries">defaultsEntries</a></code> | <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosDefaultsEntries">MiseTomlSchemaBootstrapMacosDefaultsEntries</a>[]</code> | Explicit macOS preferences with a selectable host scope. |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacos.property.dock">dock</a></code> | <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosDock">MiseTomlSchemaBootstrapMacosDock</a></code> | curated Dock preferences that compile into macOS defaults. |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacos.property.finder">finder</a></code> | <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosFinder">MiseTomlSchemaBootstrapMacosFinder</a></code> | curated Finder preferences that compile into macOS defaults. |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacos.property.keyboard">keyboard</a></code> | <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosKeyboard">MiseTomlSchemaBootstrapMacosKeyboard</a></code> | curated keyboard preferences that compile into macOS defaults. |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacos.property.dock">dock</a></code> | <code><a href="#mise-projen.BootstrapMacosDock">BootstrapMacosDock</a></code> | *No description.* |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacos.property.finder">finder</a></code> | <code><a href="#mise-projen.BootstrapMacosFinder">BootstrapMacosFinder</a></code> | *No description.* |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacos.property.keyboard">keyboard</a></code> | <code><a href="#mise-projen.BootstrapMacosKeyboard">BootstrapMacosKeyboard</a></code> | *No description.* |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacos.property.launchd">launchd</a></code> | <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosLaunchd">MiseTomlSchemaBootstrapMacosLaunchd</a></code> | macOS launchd bootstrap config. |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacos.property.loginItems">loginItems</a></code> | <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosLoginItems">MiseTomlSchemaBootstrapMacosLoginItems</a></code> | applications to open at login (System Settings > General > Login Items & Extensions). |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacos.property.trackpad">trackpad</a></code> | <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosTrackpad">MiseTomlSchemaBootstrapMacosTrackpad</a></code> | curated trackpad preferences that compile into macOS defaults. |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacos.property.trackpad">trackpad</a></code> | <code><a href="#mise-projen.BootstrapMacosTrackpad">BootstrapMacosTrackpad</a></code> | *No description.* |
 
 ---
 
 ##### `defaults`<sup>Optional</sup> <a name="defaults" id="mise-projen.MiseTomlSchemaBootstrapMacos.property.defaults"></a>
 
 ```typescript
-public readonly defaults: {[ key: string ]: {[ key: string ]: MiseTomlSchemaBootstrapMacosDefaults}};
+public readonly defaults: {[ key: string ]: {[ key: string ]: any}};
 ```
 
-- *Type:* {[ key: string ]: {[ key: string ]: <a href="#mise-projen.MiseTomlSchemaBootstrapMacosDefaults">MiseTomlSchemaBootstrapMacosDefaults</a>}}
-
-macOS user defaults to apply with `mise bootstrap macos defaults apply`, keyed by preferences domain (e.g. "com.apple.dock", "NSGlobalDomain").
+- *Type:* {[ key: string ]: {[ key: string ]: any}}
 
 ---
 
@@ -3612,36 +4114,30 @@ Explicit macOS preferences with a selectable host scope.
 ##### `dock`<sup>Optional</sup> <a name="dock" id="mise-projen.MiseTomlSchemaBootstrapMacos.property.dock"></a>
 
 ```typescript
-public readonly dock: MiseTomlSchemaBootstrapMacosDock;
+public readonly dock: BootstrapMacosDock;
 ```
 
-- *Type:* <a href="#mise-projen.MiseTomlSchemaBootstrapMacosDock">MiseTomlSchemaBootstrapMacosDock</a>
-
-curated Dock preferences that compile into macOS defaults.
+- *Type:* <a href="#mise-projen.BootstrapMacosDock">BootstrapMacosDock</a>
 
 ---
 
 ##### `finder`<sup>Optional</sup> <a name="finder" id="mise-projen.MiseTomlSchemaBootstrapMacos.property.finder"></a>
 
 ```typescript
-public readonly finder: MiseTomlSchemaBootstrapMacosFinder;
+public readonly finder: BootstrapMacosFinder;
 ```
 
-- *Type:* <a href="#mise-projen.MiseTomlSchemaBootstrapMacosFinder">MiseTomlSchemaBootstrapMacosFinder</a>
-
-curated Finder preferences that compile into macOS defaults.
+- *Type:* <a href="#mise-projen.BootstrapMacosFinder">BootstrapMacosFinder</a>
 
 ---
 
 ##### `keyboard`<sup>Optional</sup> <a name="keyboard" id="mise-projen.MiseTomlSchemaBootstrapMacos.property.keyboard"></a>
 
 ```typescript
-public readonly keyboard: MiseTomlSchemaBootstrapMacosKeyboard;
+public readonly keyboard: BootstrapMacosKeyboard;
 ```
 
-- *Type:* <a href="#mise-projen.MiseTomlSchemaBootstrapMacosKeyboard">MiseTomlSchemaBootstrapMacosKeyboard</a>
-
-curated keyboard preferences that compile into macOS defaults.
+- *Type:* <a href="#mise-projen.BootstrapMacosKeyboard">BootstrapMacosKeyboard</a>
 
 ---
 
@@ -3672,12 +4168,10 @@ applications to open at login (System Settings > General > Login Items & Extensi
 ##### `trackpad`<sup>Optional</sup> <a name="trackpad" id="mise-projen.MiseTomlSchemaBootstrapMacos.property.trackpad"></a>
 
 ```typescript
-public readonly trackpad: MiseTomlSchemaBootstrapMacosTrackpad;
+public readonly trackpad: BootstrapMacosTrackpad;
 ```
 
-- *Type:* <a href="#mise-projen.MiseTomlSchemaBootstrapMacosTrackpad">MiseTomlSchemaBootstrapMacosTrackpad</a>
-
-curated trackpad preferences that compile into macOS defaults.
+- *Type:* <a href="#mise-projen.BootstrapMacosTrackpad">BootstrapMacosTrackpad</a>
 
 ---
 
@@ -3757,366 +4251,6 @@ omitted to replace the whole value
 
 ---
 
-### MiseTomlSchemaBootstrapMacosDock <a name="MiseTomlSchemaBootstrapMacosDock" id="mise-projen.MiseTomlSchemaBootstrapMacosDock"></a>
-
-curated Dock preferences that compile into macOS defaults.
-
-#### Initializer <a name="Initializer" id="mise-projen.MiseTomlSchemaBootstrapMacosDock.Initializer"></a>
-
-```typescript
-import { MiseTomlSchemaBootstrapMacosDock } from 'mise-projen'
-
-const miseTomlSchemaBootstrapMacosDock: MiseTomlSchemaBootstrapMacosDock = { ... }
-```
-
-#### Properties <a name="Properties" id="Properties"></a>
-
-| **Name** | **Type** | **Description** |
-| --- | --- | --- |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosDock.property.apps">apps</a></code> | <code>string[]</code> | Pinned application paths in order; |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosDock.property.autohide">autohide</a></code> | <code>boolean</code> | hide and show the Dock automatically. |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosDock.property.autohideDelay">autohideDelay</a></code> | <code>number</code> | delay before showing the Dock. |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosDock.property.autohideTimeModifier">autohideTimeModifier</a></code> | <code>number</code> | Dock autohide animation time modifier. |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosDock.property.largesize">largesize</a></code> | <code>number</code> | Dock magnified icon size. |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosDock.property.magnification">magnification</a></code> | <code>boolean</code> | enable Dock magnification. |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosDock.property.mruSpaces">mruSpaces</a></code> | <code>boolean</code> | automatically rearrange Spaces based on most recent use. |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosDock.property.orientation">orientation</a></code> | <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosDockOrientation">MiseTomlSchemaBootstrapMacosDockOrientation</a></code> | Dock screen edge. |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosDock.property.showRecents">showRecents</a></code> | <code>boolean</code> | show recent applications in the Dock. |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosDock.property.tilesize">tilesize</a></code> | <code>number</code> | Dock icon size. |
-
----
-
-##### `apps`<sup>Optional</sup> <a name="apps" id="mise-projen.MiseTomlSchemaBootstrapMacosDock.property.apps"></a>
-
-```typescript
-public readonly apps: string[];
-```
-
-- *Type:* string[]
-
-Pinned application paths in order;
-
-absolute or ~/ paths ending in .app. An empty array removes application tiles.
-
----
-
-##### `autohide`<sup>Optional</sup> <a name="autohide" id="mise-projen.MiseTomlSchemaBootstrapMacosDock.property.autohide"></a>
-
-```typescript
-public readonly autohide: boolean;
-```
-
-- *Type:* boolean
-
-hide and show the Dock automatically.
-
----
-
-##### `autohideDelay`<sup>Optional</sup> <a name="autohideDelay" id="mise-projen.MiseTomlSchemaBootstrapMacosDock.property.autohideDelay"></a>
-
-```typescript
-public readonly autohideDelay: number;
-```
-
-- *Type:* number
-
-delay before showing the Dock.
-
----
-
-##### `autohideTimeModifier`<sup>Optional</sup> <a name="autohideTimeModifier" id="mise-projen.MiseTomlSchemaBootstrapMacosDock.property.autohideTimeModifier"></a>
-
-```typescript
-public readonly autohideTimeModifier: number;
-```
-
-- *Type:* number
-
-Dock autohide animation time modifier.
-
----
-
-##### `largesize`<sup>Optional</sup> <a name="largesize" id="mise-projen.MiseTomlSchemaBootstrapMacosDock.property.largesize"></a>
-
-```typescript
-public readonly largesize: number;
-```
-
-- *Type:* number
-
-Dock magnified icon size.
-
----
-
-##### `magnification`<sup>Optional</sup> <a name="magnification" id="mise-projen.MiseTomlSchemaBootstrapMacosDock.property.magnification"></a>
-
-```typescript
-public readonly magnification: boolean;
-```
-
-- *Type:* boolean
-
-enable Dock magnification.
-
----
-
-##### `mruSpaces`<sup>Optional</sup> <a name="mruSpaces" id="mise-projen.MiseTomlSchemaBootstrapMacosDock.property.mruSpaces"></a>
-
-```typescript
-public readonly mruSpaces: boolean;
-```
-
-- *Type:* boolean
-
-automatically rearrange Spaces based on most recent use.
-
----
-
-##### `orientation`<sup>Optional</sup> <a name="orientation" id="mise-projen.MiseTomlSchemaBootstrapMacosDock.property.orientation"></a>
-
-```typescript
-public readonly orientation: MiseTomlSchemaBootstrapMacosDockOrientation;
-```
-
-- *Type:* <a href="#mise-projen.MiseTomlSchemaBootstrapMacosDockOrientation">MiseTomlSchemaBootstrapMacosDockOrientation</a>
-
-Dock screen edge.
-
----
-
-##### `showRecents`<sup>Optional</sup> <a name="showRecents" id="mise-projen.MiseTomlSchemaBootstrapMacosDock.property.showRecents"></a>
-
-```typescript
-public readonly showRecents: boolean;
-```
-
-- *Type:* boolean
-
-show recent applications in the Dock.
-
----
-
-##### `tilesize`<sup>Optional</sup> <a name="tilesize" id="mise-projen.MiseTomlSchemaBootstrapMacosDock.property.tilesize"></a>
-
-```typescript
-public readonly tilesize: number;
-```
-
-- *Type:* number
-
-Dock icon size.
-
----
-
-### MiseTomlSchemaBootstrapMacosFinder <a name="MiseTomlSchemaBootstrapMacosFinder" id="mise-projen.MiseTomlSchemaBootstrapMacosFinder"></a>
-
-curated Finder preferences that compile into macOS defaults.
-
-#### Initializer <a name="Initializer" id="mise-projen.MiseTomlSchemaBootstrapMacosFinder.Initializer"></a>
-
-```typescript
-import { MiseTomlSchemaBootstrapMacosFinder } from 'mise-projen'
-
-const miseTomlSchemaBootstrapMacosFinder: MiseTomlSchemaBootstrapMacosFinder = { ... }
-```
-
-#### Properties <a name="Properties" id="Properties"></a>
-
-| **Name** | **Type** | **Description** |
-| --- | --- | --- |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosFinder.property.preferredViewStyle">preferredViewStyle</a></code> | <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosFinderPreferredViewStyle">MiseTomlSchemaBootstrapMacosFinderPreferredViewStyle</a></code> | Finder preferred view style. |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosFinder.property.saveNewDocumentsToCloud">saveNewDocumentsToCloud</a></code> | <code>boolean</code> | save new documents to iCloud by default (applies globally to application save dialogs). |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosFinder.property.showAllFiles">showAllFiles</a></code> | <code>boolean</code> | show hidden files in Finder. |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosFinder.property.showExtensionsWarning">showExtensionsWarning</a></code> | <code>boolean</code> | show the warning when changing file extensions. |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosFinder.property.showPathbar">showPathbar</a></code> | <code>boolean</code> | show the Finder path bar. |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosFinder.property.showStatusBar">showStatusBar</a></code> | <code>boolean</code> | show the Finder status bar. |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosFinder.property.sortFoldersFirst">sortFoldersFirst</a></code> | <code>boolean</code> | keep folders first when sorting by name. |
-
----
-
-##### `preferredViewStyle`<sup>Optional</sup> <a name="preferredViewStyle" id="mise-projen.MiseTomlSchemaBootstrapMacosFinder.property.preferredViewStyle"></a>
-
-```typescript
-public readonly preferredViewStyle: MiseTomlSchemaBootstrapMacosFinderPreferredViewStyle;
-```
-
-- *Type:* <a href="#mise-projen.MiseTomlSchemaBootstrapMacosFinderPreferredViewStyle">MiseTomlSchemaBootstrapMacosFinderPreferredViewStyle</a>
-
-Finder preferred view style.
-
----
-
-##### `saveNewDocumentsToCloud`<sup>Optional</sup> <a name="saveNewDocumentsToCloud" id="mise-projen.MiseTomlSchemaBootstrapMacosFinder.property.saveNewDocumentsToCloud"></a>
-
-```typescript
-public readonly saveNewDocumentsToCloud: boolean;
-```
-
-- *Type:* boolean
-
-save new documents to iCloud by default (applies globally to application save dialogs).
-
----
-
-##### `showAllFiles`<sup>Optional</sup> <a name="showAllFiles" id="mise-projen.MiseTomlSchemaBootstrapMacosFinder.property.showAllFiles"></a>
-
-```typescript
-public readonly showAllFiles: boolean;
-```
-
-- *Type:* boolean
-
-show hidden files in Finder.
-
----
-
-##### `showExtensionsWarning`<sup>Optional</sup> <a name="showExtensionsWarning" id="mise-projen.MiseTomlSchemaBootstrapMacosFinder.property.showExtensionsWarning"></a>
-
-```typescript
-public readonly showExtensionsWarning: boolean;
-```
-
-- *Type:* boolean
-
-show the warning when changing file extensions.
-
----
-
-##### `showPathbar`<sup>Optional</sup> <a name="showPathbar" id="mise-projen.MiseTomlSchemaBootstrapMacosFinder.property.showPathbar"></a>
-
-```typescript
-public readonly showPathbar: boolean;
-```
-
-- *Type:* boolean
-
-show the Finder path bar.
-
----
-
-##### `showStatusBar`<sup>Optional</sup> <a name="showStatusBar" id="mise-projen.MiseTomlSchemaBootstrapMacosFinder.property.showStatusBar"></a>
-
-```typescript
-public readonly showStatusBar: boolean;
-```
-
-- *Type:* boolean
-
-show the Finder status bar.
-
----
-
-##### `sortFoldersFirst`<sup>Optional</sup> <a name="sortFoldersFirst" id="mise-projen.MiseTomlSchemaBootstrapMacosFinder.property.sortFoldersFirst"></a>
-
-```typescript
-public readonly sortFoldersFirst: boolean;
-```
-
-- *Type:* boolean
-
-keep folders first when sorting by name.
-
----
-
-### MiseTomlSchemaBootstrapMacosKeyboard <a name="MiseTomlSchemaBootstrapMacosKeyboard" id="mise-projen.MiseTomlSchemaBootstrapMacosKeyboard"></a>
-
-curated keyboard preferences that compile into macOS defaults.
-
-#### Initializer <a name="Initializer" id="mise-projen.MiseTomlSchemaBootstrapMacosKeyboard.Initializer"></a>
-
-```typescript
-import { MiseTomlSchemaBootstrapMacosKeyboard } from 'mise-projen'
-
-const miseTomlSchemaBootstrapMacosKeyboard: MiseTomlSchemaBootstrapMacosKeyboard = { ... }
-```
-
-#### Properties <a name="Properties" id="Properties"></a>
-
-| **Name** | **Type** | **Description** |
-| --- | --- | --- |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosKeyboard.property.automaticCapitalization">automaticCapitalization</a></code> | <code>boolean</code> | automatically capitalize words. |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosKeyboard.property.automaticSpellingCorrection">automaticSpellingCorrection</a></code> | <code>boolean</code> | automatically correct spelling. |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosKeyboard.property.fnState">fnState</a></code> | <code>boolean</code> | use F1, F2, etc. |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosKeyboard.property.initialKeyRepeat">initialKeyRepeat</a></code> | <code>number</code> | delay before key repeat starts. |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosKeyboard.property.keyRepeat">keyRepeat</a></code> | <code>number</code> | keyboard repeat interval. |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosKeyboard.property.pressAndHold">pressAndHold</a></code> | <code>boolean</code> | enable press-and-hold accent picker. |
-
----
-
-##### `automaticCapitalization`<sup>Optional</sup> <a name="automaticCapitalization" id="mise-projen.MiseTomlSchemaBootstrapMacosKeyboard.property.automaticCapitalization"></a>
-
-```typescript
-public readonly automaticCapitalization: boolean;
-```
-
-- *Type:* boolean
-
-automatically capitalize words.
-
----
-
-##### `automaticSpellingCorrection`<sup>Optional</sup> <a name="automaticSpellingCorrection" id="mise-projen.MiseTomlSchemaBootstrapMacosKeyboard.property.automaticSpellingCorrection"></a>
-
-```typescript
-public readonly automaticSpellingCorrection: boolean;
-```
-
-- *Type:* boolean
-
-automatically correct spelling.
-
----
-
-##### `fnState`<sup>Optional</sup> <a name="fnState" id="mise-projen.MiseTomlSchemaBootstrapMacosKeyboard.property.fnState"></a>
-
-```typescript
-public readonly fnState: boolean;
-```
-
-- *Type:* boolean
-
-use F1, F2, etc.
-
-as standard function keys
-
----
-
-##### `initialKeyRepeat`<sup>Optional</sup> <a name="initialKeyRepeat" id="mise-projen.MiseTomlSchemaBootstrapMacosKeyboard.property.initialKeyRepeat"></a>
-
-```typescript
-public readonly initialKeyRepeat: number;
-```
-
-- *Type:* number
-
-delay before key repeat starts.
-
----
-
-##### `keyRepeat`<sup>Optional</sup> <a name="keyRepeat" id="mise-projen.MiseTomlSchemaBootstrapMacosKeyboard.property.keyRepeat"></a>
-
-```typescript
-public readonly keyRepeat: number;
-```
-
-- *Type:* number
-
-keyboard repeat interval.
-
----
-
-##### `pressAndHold`<sup>Optional</sup> <a name="pressAndHold" id="mise-projen.MiseTomlSchemaBootstrapMacosKeyboard.property.pressAndHold"></a>
-
-```typescript
-public readonly pressAndHold: boolean;
-```
-
-- *Type:* boolean
-
-enable press-and-hold accent picker.
-
----
-
 ### MiseTomlSchemaBootstrapMacosLaunchd <a name="MiseTomlSchemaBootstrapMacosLaunchd" id="mise-projen.MiseTomlSchemaBootstrapMacosLaunchd"></a>
 
 macOS launchd bootstrap config.
@@ -4167,7 +4301,9 @@ const miseTomlSchemaBootstrapMacosLaunchdAgents: MiseTomlSchemaBootstrapMacosLau
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosLaunchdAgents.property.args">args</a></code> | <code>string[]</code> | additional ProgramArguments entries. |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosLaunchdAgents.property.environment">environment</a></code> | <code>{[ key: string ]: string}</code> | environment variables for EnvironmentVariables. |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosLaunchdAgents.property.keepAlive">keepAlive</a></code> | <code>boolean</code> | write KeepAlive. |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosLaunchdAgents.property.keepAliveOnFailure">keepAliveOnFailure</a></code> | <code>boolean</code> | write KeepAlive = { SuccessfulExit = false }, so launchd relaunches the job only after a failure; |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosLaunchdAgents.property.kickstart">kickstart</a></code> | <code>boolean</code> | run `launchctl kickstart -k` after loading the agent. |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosLaunchdAgents.property.nice">nice</a></code> | <code>number</code> | write Nice, the niceness of the process, from -20 to 20. |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosLaunchdAgents.property.processType">processType</a></code> | <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosLaunchdAgentsProcessType">MiseTomlSchemaBootstrapMacosLaunchdAgentsProcessType</a></code> | write ProcessType, the scheduling band launchd runs the job in. |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosLaunchdAgents.property.queueDirectories">queueDirectories</a></code> | <code>string[]</code> | write QueueDirectories (absolute paths; |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosLaunchdAgents.property.runAtLoad">runAtLoad</a></code> | <code>boolean</code> | write RunAtLoad. |
@@ -4228,6 +4364,20 @@ write KeepAlive.
 
 ---
 
+##### `keepAliveOnFailure`<sup>Optional</sup> <a name="keepAliveOnFailure" id="mise-projen.MiseTomlSchemaBootstrapMacosLaunchdAgents.property.keepAliveOnFailure"></a>
+
+```typescript
+public readonly keepAliveOnFailure: boolean;
+```
+
+- *Type:* boolean
+
+write KeepAlive = { SuccessfulExit = false }, so launchd relaunches the job only after a failure;
+
+cannot be combined with keep_alive
+
+---
+
 ##### `kickstart`<sup>Optional</sup> <a name="kickstart" id="mise-projen.MiseTomlSchemaBootstrapMacosLaunchdAgents.property.kickstart"></a>
 
 ```typescript
@@ -4237,6 +4387,18 @@ public readonly kickstart: boolean;
 - *Type:* boolean
 
 run `launchctl kickstart -k` after loading the agent.
+
+---
+
+##### `nice`<sup>Optional</sup> <a name="nice" id="mise-projen.MiseTomlSchemaBootstrapMacosLaunchdAgents.property.nice"></a>
+
+```typescript
+public readonly nice: number;
+```
+
+- *Type:* number
+
+write Nice, the niceness of the process, from -20 to 20.
 
 ---
 
@@ -4392,158 +4554,6 @@ public readonly exclusive: boolean;
 - *Type:* boolean
 
 also remove login items that are not declared (default: false, so apps that register themselves are left alone).
-
----
-
-### MiseTomlSchemaBootstrapMacosTrackpad <a name="MiseTomlSchemaBootstrapMacosTrackpad" id="mise-projen.MiseTomlSchemaBootstrapMacosTrackpad"></a>
-
-curated trackpad preferences that compile into macOS defaults.
-
-#### Initializer <a name="Initializer" id="mise-projen.MiseTomlSchemaBootstrapMacosTrackpad.Initializer"></a>
-
-```typescript
-import { MiseTomlSchemaBootstrapMacosTrackpad } from 'mise-projen'
-
-const miseTomlSchemaBootstrapMacosTrackpad: MiseTomlSchemaBootstrapMacosTrackpad = { ... }
-```
-
-#### Properties <a name="Properties" id="Properties"></a>
-
-| **Name** | **Type** | **Description** |
-| --- | --- | --- |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosTrackpad.property.tapToClick">tapToClick</a></code> | <code>boolean</code> | enable tap to click for built-in and Bluetooth trackpads. |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosTrackpad.property.threeFingerDrag">threeFingerDrag</a></code> | <code>boolean</code> | enable three finger drag for built-in and Bluetooth trackpads. |
-
----
-
-##### `tapToClick`<sup>Optional</sup> <a name="tapToClick" id="mise-projen.MiseTomlSchemaBootstrapMacosTrackpad.property.tapToClick"></a>
-
-```typescript
-public readonly tapToClick: boolean;
-```
-
-- *Type:* boolean
-
-enable tap to click for built-in and Bluetooth trackpads.
-
----
-
-##### `threeFingerDrag`<sup>Optional</sup> <a name="threeFingerDrag" id="mise-projen.MiseTomlSchemaBootstrapMacosTrackpad.property.threeFingerDrag"></a>
-
-```typescript
-public readonly threeFingerDrag: boolean;
-```
-
-- *Type:* boolean
-
-enable three finger drag for built-in and Bluetooth trackpads.
-
----
-
-### MiseTomlSchemaBootstrapMiseShellActivate <a name="MiseTomlSchemaBootstrapMiseShellActivate" id="mise-projen.MiseTomlSchemaBootstrapMiseShellActivate"></a>
-
-declarative mise shell activation snippets, applied with `mise bootstrap mise-shell-activate apply`.
-
-#### Initializer <a name="Initializer" id="mise-projen.MiseTomlSchemaBootstrapMiseShellActivate.Initializer"></a>
-
-```typescript
-import { MiseTomlSchemaBootstrapMiseShellActivate } from 'mise-projen'
-
-const miseTomlSchemaBootstrapMiseShellActivate: MiseTomlSchemaBootstrapMiseShellActivate = { ... }
-```
-
-#### Properties <a name="Properties" id="Properties"></a>
-
-| **Name** | **Type** | **Description** |
-| --- | --- | --- |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapMiseShellActivate.property.bash">bash</a></code> | <code>any</code> | *No description.* |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapMiseShellActivate.property.bashProfile">bashProfile</a></code> | <code>any</code> | *No description.* |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapMiseShellActivate.property.bashrc">bashrc</a></code> | <code>any</code> | *No description.* |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapMiseShellActivate.property.fish">fish</a></code> | <code>any</code> | *No description.* |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapMiseShellActivate.property.zprofile">zprofile</a></code> | <code>any</code> | *No description.* |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapMiseShellActivate.property.zsh">zsh</a></code> | <code>any</code> | *No description.* |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapMiseShellActivate.property.zshenv">zshenv</a></code> | <code>any</code> | *No description.* |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapMiseShellActivate.property.zshrc">zshrc</a></code> | <code>any</code> | *No description.* |
-
----
-
-##### `bash`<sup>Optional</sup> <a name="bash" id="mise-projen.MiseTomlSchemaBootstrapMiseShellActivate.property.bash"></a>
-
-```typescript
-public readonly bash: any;
-```
-
-- *Type:* any
-
----
-
-##### `bashProfile`<sup>Optional</sup> <a name="bashProfile" id="mise-projen.MiseTomlSchemaBootstrapMiseShellActivate.property.bashProfile"></a>
-
-```typescript
-public readonly bashProfile: any;
-```
-
-- *Type:* any
-
----
-
-##### `bashrc`<sup>Optional</sup> <a name="bashrc" id="mise-projen.MiseTomlSchemaBootstrapMiseShellActivate.property.bashrc"></a>
-
-```typescript
-public readonly bashrc: any;
-```
-
-- *Type:* any
-
----
-
-##### `fish`<sup>Optional</sup> <a name="fish" id="mise-projen.MiseTomlSchemaBootstrapMiseShellActivate.property.fish"></a>
-
-```typescript
-public readonly fish: any;
-```
-
-- *Type:* any
-
----
-
-##### `zprofile`<sup>Optional</sup> <a name="zprofile" id="mise-projen.MiseTomlSchemaBootstrapMiseShellActivate.property.zprofile"></a>
-
-```typescript
-public readonly zprofile: any;
-```
-
-- *Type:* any
-
----
-
-##### `zsh`<sup>Optional</sup> <a name="zsh" id="mise-projen.MiseTomlSchemaBootstrapMiseShellActivate.property.zsh"></a>
-
-```typescript
-public readonly zsh: any;
-```
-
-- *Type:* any
-
----
-
-##### `zshenv`<sup>Optional</sup> <a name="zshenv" id="mise-projen.MiseTomlSchemaBootstrapMiseShellActivate.property.zshenv"></a>
-
-```typescript
-public readonly zshenv: any;
-```
-
-- *Type:* any
-
----
-
-##### `zshrc`<sup>Optional</sup> <a name="zshrc" id="mise-projen.MiseTomlSchemaBootstrapMiseShellActivate.property.zshrc"></a>
-
-```typescript
-public readonly zshrc: any;
-```
-
-- *Type:* any
 
 ---
 
@@ -5151,7 +5161,7 @@ public readonly loginShell: string;
 
 current user's desired login shell, applied with `chsh -s`;
 
-must be an absolute path
+a template that must render to an absolute path
 
 ---
 
@@ -6502,7 +6512,7 @@ const settings: Settings = { ... }
 | <code><a href="#mise-projen.Settings.property.envCache">envCache</a></code> | <code>boolean</code> | [experimental] Cache computed environments on disk for nested mise commands. |
 | <code><a href="#mise-projen.Settings.property.envCacheTtl">envCacheTtl</a></code> | <code>string</code> | How long a cached environment stays valid. |
 | <code><a href="#mise-projen.Settings.property.envConfD">envConfD</a></code> | <code>boolean</code> | Enable environment-specific filenames in conf.d directories. |
-| <code><a href="#mise-projen.Settings.property.envFile">envFile</a></code> | <code>string</code> | Dotenv file name to load from the current directory and each parent directory. |
+| <code><a href="#mise-projen.Settings.property.envFile">envFile</a></code> | <code>string[]</code> | Dotenv file names to load from the current directory and each parent directory. |
 | <code><a href="#mise-projen.Settings.property.envShellExpand">envShellExpand</a></code> | <code>boolean</code> | Expand shell-style variables such as `$FOO` and `${BAR:-default}` in `[env]` values. |
 | <code><a href="#mise-projen.Settings.property.erlang">erlang</a></code> | <code><a href="#mise-projen.SettingsErlang">SettingsErlang</a></code> | *No description.* |
 | <code><a href="#mise-projen.Settings.property.execAutoInstall">execAutoInstall</a></code> | <code>boolean</code> | Install missing tools automatically when you run `mise exec`. |
@@ -6571,7 +6581,7 @@ const settings: Settings = { ... }
 | <code><a href="#mise-projen.Settings.property.overrideConfigFilenames">overrideConfigFilenames</a></code> | <code>string[]</code> | Project config filenames that mise looks for instead of `mise.toml`, `.mise.toml` and the other standard names. |
 | <code><a href="#mise-projen.Settings.property.overrideToolVersionsFilenames">overrideToolVersionsFilenames</a></code> | <code>string[]</code> | Filenames that mise reads as `.tool-versions` files instead of `.tool-versions`. |
 | <code><a href="#mise-projen.Settings.property.packslip">packslip</a></code> | <code><a href="#mise-projen.SettingsPackslip">SettingsPackslip</a></code> | *No description.* |
-| <code><a href="#mise-projen.Settings.property.paranoid">paranoid</a></code> | <code>boolean</code> | Require explicit, content-bound trust for project config, and re-verify provenance on every install. |
+| <code><a href="#mise-projen.Settings.property.paranoid">paranoid</a></code> | <code>any</code> | Turn on paranoid mode: `true` for every protection, or a list of categories (`config`, `env_files`, `plugins`, `provenance`) for only those. |
 | <code><a href="#mise-projen.Settings.property.pin">pin</a></code> | <code>boolean</code> | Make `mise use` write the resolved version, such as `24.14.0` for `node@24`, instead of the requested one. |
 | <code><a href="#mise-projen.Settings.property.pipx">pipx</a></code> | <code><a href="#mise-projen.SettingsPipx">SettingsPipx</a></code> | *No description.* |
 | <code><a href="#mise-projen.Settings.property.pluginAutoupdateLastCheckDuration">pluginAutoupdateLastCheckDuration</a></code> | <code>string</code> | [deprecated] Has no effect; |
@@ -7107,12 +7117,12 @@ Enable environment-specific filenames in conf.d directories.
 ##### `envFile`<sup>Optional</sup> <a name="envFile" id="mise-projen.Settings.property.envFile"></a>
 
 ```typescript
-public readonly envFile: string;
+public readonly envFile: string[];
 ```
 
-- *Type:* string
+- *Type:* string[]
 
-Dotenv file name to load from the current directory and each parent directory.
+Dotenv file names to load from the current directory and each parent directory.
 
 ---
 
@@ -7921,12 +7931,12 @@ public readonly packslip: SettingsPackslip;
 ##### `paranoid`<sup>Optional</sup> <a name="paranoid" id="mise-projen.Settings.property.paranoid"></a>
 
 ```typescript
-public readonly paranoid: boolean;
+public readonly paranoid: any;
 ```
 
-- *Type:* boolean
+- *Type:* any
 
-Require explicit, content-bound trust for project config, and re-verify provenance on every install.
+Turn on paranoid mode: `true` for every protection, or a list of categories (`config`, `env_files`, `plugins`, `provenance`) for only those.
 
 ---
 
@@ -12741,82 +12751,6 @@ public readonly value: string | number;
 ---
 
 
-### MiseTomlSchemaBootstrapMacosDefaults <a name="MiseTomlSchemaBootstrapMacosDefaults" id="mise-projen.MiseTomlSchemaBootstrapMacosDefaults"></a>
-
-desired value, written with the matching `defaults write` type (-bool, -int, -float, -string).
-
-
-#### Static Functions <a name="Static Functions" id="Static Functions"></a>
-
-| **Name** | **Description** |
-| --- | --- |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosDefaults.fromBoolean">fromBoolean</a></code> | *No description.* |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosDefaults.fromNumber">fromNumber</a></code> | *No description.* |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosDefaults.fromString">fromString</a></code> | *No description.* |
-
----
-
-##### `fromBoolean` <a name="fromBoolean" id="mise-projen.MiseTomlSchemaBootstrapMacosDefaults.fromBoolean"></a>
-
-```typescript
-import { MiseTomlSchemaBootstrapMacosDefaults } from 'mise-projen'
-
-MiseTomlSchemaBootstrapMacosDefaults.fromBoolean(value: boolean)
-```
-
-###### `value`<sup>Required</sup> <a name="value" id="mise-projen.MiseTomlSchemaBootstrapMacosDefaults.fromBoolean.parameter.value"></a>
-
-- *Type:* boolean
-
----
-
-##### `fromNumber` <a name="fromNumber" id="mise-projen.MiseTomlSchemaBootstrapMacosDefaults.fromNumber"></a>
-
-```typescript
-import { MiseTomlSchemaBootstrapMacosDefaults } from 'mise-projen'
-
-MiseTomlSchemaBootstrapMacosDefaults.fromNumber(value: number)
-```
-
-###### `value`<sup>Required</sup> <a name="value" id="mise-projen.MiseTomlSchemaBootstrapMacosDefaults.fromNumber.parameter.value"></a>
-
-- *Type:* number
-
----
-
-##### `fromString` <a name="fromString" id="mise-projen.MiseTomlSchemaBootstrapMacosDefaults.fromString"></a>
-
-```typescript
-import { MiseTomlSchemaBootstrapMacosDefaults } from 'mise-projen'
-
-MiseTomlSchemaBootstrapMacosDefaults.fromString(value: string)
-```
-
-###### `value`<sup>Required</sup> <a name="value" id="mise-projen.MiseTomlSchemaBootstrapMacosDefaults.fromString.parameter.value"></a>
-
-- *Type:* string
-
----
-
-#### Properties <a name="Properties" id="Properties"></a>
-
-| **Name** | **Type** | **Description** |
-| --- | --- | --- |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosDefaults.property.value">value</a></code> | <code>string \| number \| boolean</code> | *No description.* |
-
----
-
-##### `value`<sup>Required</sup> <a name="value" id="mise-projen.MiseTomlSchemaBootstrapMacosDefaults.property.value"></a>
-
-```typescript
-public readonly value: string | number | boolean;
-```
-
-- *Type:* string | number | boolean
-
----
-
-
 ### SettingsPythonUvVenvAuto <a name="SettingsPythonUvVenvAuto" id="mise-projen.SettingsPythonUvVenvAuto"></a>
 
 Activate, and optionally create, the virtualenv of the uv project around the current directory.
@@ -13028,6 +12962,84 @@ pre-packages.
 ##### `POST_HYPHEN_PACKAGES` <a name="POST_HYPHEN_PACKAGES" id="mise-projen.BootstrapFilePhase.POST_HYPHEN_PACKAGES"></a>
 
 post-packages.
+
+---
+
+
+### BootstrapMacosDockOrientation <a name="BootstrapMacosDockOrientation" id="mise-projen.BootstrapMacosDockOrientation"></a>
+
+Dock screen edge.
+
+#### Members <a name="Members" id="Members"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#mise-projen.BootstrapMacosDockOrientation.BOTTOM">BOTTOM</a></code> | bottom. |
+| <code><a href="#mise-projen.BootstrapMacosDockOrientation.LEFT">LEFT</a></code> | left. |
+| <code><a href="#mise-projen.BootstrapMacosDockOrientation.RIGHT">RIGHT</a></code> | right. |
+
+---
+
+##### `BOTTOM` <a name="BOTTOM" id="mise-projen.BootstrapMacosDockOrientation.BOTTOM"></a>
+
+bottom.
+
+---
+
+
+##### `LEFT` <a name="LEFT" id="mise-projen.BootstrapMacosDockOrientation.LEFT"></a>
+
+left.
+
+---
+
+
+##### `RIGHT` <a name="RIGHT" id="mise-projen.BootstrapMacosDockOrientation.RIGHT"></a>
+
+right.
+
+---
+
+
+### BootstrapMacosFinderPreferredViewStyle <a name="BootstrapMacosFinderPreferredViewStyle" id="mise-projen.BootstrapMacosFinderPreferredViewStyle"></a>
+
+Finder preferred view style.
+
+#### Members <a name="Members" id="Members"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#mise-projen.BootstrapMacosFinderPreferredViewStyle.ICON">ICON</a></code> | icon. |
+| <code><a href="#mise-projen.BootstrapMacosFinderPreferredViewStyle.LIST">LIST</a></code> | list. |
+| <code><a href="#mise-projen.BootstrapMacosFinderPreferredViewStyle.COLUMN">COLUMN</a></code> | column. |
+| <code><a href="#mise-projen.BootstrapMacosFinderPreferredViewStyle.GALLERY">GALLERY</a></code> | gallery. |
+
+---
+
+##### `ICON` <a name="ICON" id="mise-projen.BootstrapMacosFinderPreferredViewStyle.ICON"></a>
+
+icon.
+
+---
+
+
+##### `LIST` <a name="LIST" id="mise-projen.BootstrapMacosFinderPreferredViewStyle.LIST"></a>
+
+list.
+
+---
+
+
+##### `COLUMN` <a name="COLUMN" id="mise-projen.BootstrapMacosFinderPreferredViewStyle.COLUMN"></a>
+
+column.
+
+---
+
+
+##### `GALLERY` <a name="GALLERY" id="mise-projen.BootstrapMacosFinderPreferredViewStyle.GALLERY"></a>
+
+gallery.
 
 ---
 
@@ -13673,84 +13685,6 @@ any.
 ##### `CURRENT` <a name="CURRENT" id="mise-projen.MiseTomlSchemaBootstrapMacosDefaultsEntriesHost.CURRENT"></a>
 
 current.
-
----
-
-
-### MiseTomlSchemaBootstrapMacosDockOrientation <a name="MiseTomlSchemaBootstrapMacosDockOrientation" id="mise-projen.MiseTomlSchemaBootstrapMacosDockOrientation"></a>
-
-Dock screen edge.
-
-#### Members <a name="Members" id="Members"></a>
-
-| **Name** | **Description** |
-| --- | --- |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosDockOrientation.BOTTOM">BOTTOM</a></code> | bottom. |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosDockOrientation.LEFT">LEFT</a></code> | left. |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosDockOrientation.RIGHT">RIGHT</a></code> | right. |
-
----
-
-##### `BOTTOM` <a name="BOTTOM" id="mise-projen.MiseTomlSchemaBootstrapMacosDockOrientation.BOTTOM"></a>
-
-bottom.
-
----
-
-
-##### `LEFT` <a name="LEFT" id="mise-projen.MiseTomlSchemaBootstrapMacosDockOrientation.LEFT"></a>
-
-left.
-
----
-
-
-##### `RIGHT` <a name="RIGHT" id="mise-projen.MiseTomlSchemaBootstrapMacosDockOrientation.RIGHT"></a>
-
-right.
-
----
-
-
-### MiseTomlSchemaBootstrapMacosFinderPreferredViewStyle <a name="MiseTomlSchemaBootstrapMacosFinderPreferredViewStyle" id="mise-projen.MiseTomlSchemaBootstrapMacosFinderPreferredViewStyle"></a>
-
-Finder preferred view style.
-
-#### Members <a name="Members" id="Members"></a>
-
-| **Name** | **Description** |
-| --- | --- |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosFinderPreferredViewStyle.ICON">ICON</a></code> | icon. |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosFinderPreferredViewStyle.LIST">LIST</a></code> | list. |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosFinderPreferredViewStyle.COLUMN">COLUMN</a></code> | column. |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosFinderPreferredViewStyle.GALLERY">GALLERY</a></code> | gallery. |
-
----
-
-##### `ICON` <a name="ICON" id="mise-projen.MiseTomlSchemaBootstrapMacosFinderPreferredViewStyle.ICON"></a>
-
-icon.
-
----
-
-
-##### `LIST` <a name="LIST" id="mise-projen.MiseTomlSchemaBootstrapMacosFinderPreferredViewStyle.LIST"></a>
-
-list.
-
----
-
-
-##### `COLUMN` <a name="COLUMN" id="mise-projen.MiseTomlSchemaBootstrapMacosFinderPreferredViewStyle.COLUMN"></a>
-
-column.
-
----
-
-
-##### `GALLERY` <a name="GALLERY" id="mise-projen.MiseTomlSchemaBootstrapMacosFinderPreferredViewStyle.GALLERY"></a>
-
-gallery.
 
 ---
 
