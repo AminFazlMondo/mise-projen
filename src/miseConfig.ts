@@ -118,14 +118,14 @@ export interface MiseTomlSchema {
   readonly plugins?: { [key: string]: string };
 
   /**
-   * configure deps providers
+   * [experimental] configure deps providers
    *
    * @schema MiseTomlSchema#deps
    */
   readonly deps?: MiseTomlSchemaDeps;
 
   /**
-   * configuration for `mise oci build`
+   * [experimental] configuration for `mise oci build`
    *
    * @schema MiseTomlSchema#oci
    */
@@ -419,7 +419,7 @@ export function toJson_MiseTomlSchemaSecrets(obj: MiseTomlSchemaSecrets | undefi
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * configure deps providers
+ * [experimental] configure deps providers
  *
  * @schema MiseTomlSchemaDeps
  */
@@ -538,7 +538,7 @@ export function toJson_MiseTomlSchemaDeps(obj: MiseTomlSchemaDeps | undefined): 
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * configuration for `mise oci build`
+ * [experimental] configuration for `mise oci build`
  *
  * @schema MiseTomlSchemaOci
  */
@@ -2003,6 +2003,8 @@ export function toJson_Settings(obj: Settings | undefined): Record<string, any> 
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * a directory tree of dotfiles deployed into a target directory
+ *
  * @schema MiseTomlSchemaDotfileGroups
  */
 export interface MiseTomlSchemaDotfileGroups {
@@ -2277,6 +2279,8 @@ export function toJson_MiseTomlSchemaBootstrap(obj: MiseTomlSchemaBootstrap | un
  */
 export interface MiseTomlSchemaHistory {
   /**
+   * encryption for dotfiles tracked with encrypt = true
+   *
    * @schema MiseTomlSchemaHistory#encryption
    */
   readonly encryption?: MiseTomlSchemaHistoryEncryption;
@@ -2303,7 +2307,7 @@ export interface MiseTomlSchemaHistory {
   readonly machine?: string;
 
   /**
-   * commands run once after a rollback or undo writes a path matching the glob (trusted global or system config only)
+   * commands run once after a rollback, undo, pull, or dotfiles apply writes a path matching the glob (trusted global or system config only)
    *
    * @schema MiseTomlSchemaHistory#reload
    */
@@ -2482,26 +2486,36 @@ export function toJson_ToolConfig(obj: ToolConfig | undefined): Record<string, a
  */
 export interface Hooks {
   /**
+   * hooks to run when an activated shell moves into the project
+   *
    * @schema hooks#enter
    */
   readonly enter?: any[];
 
   /**
+   * hooks to run when an activated shell moves out of the project
+   *
    * @schema hooks#leave
    */
   readonly leave?: any[];
 
   /**
+   * hooks to run when an activated shell changes to a directory inside the project
+   *
    * @schema hooks#cd
    */
   readonly cd?: any[];
 
   /**
+   * hooks to run before mise installs tools
+   *
    * @schema hooks#preinstall
    */
   readonly preinstall?: any[];
 
   /**
+   * hooks to run after mise installs tools
+   *
    * @schema hooks#postinstall
    */
   readonly postinstall?: any[];
@@ -2555,6 +2569,8 @@ export function toJson_Vars(obj: Vars | undefined): Record<string, any> | undefi
  */
 export interface Doctor {
   /**
+   * Checks run by mise doctor project, keyed by check name.
+   *
    * @schema doctor#checks
    */
   readonly checks?: { [key: string]: DoctorChecks };
@@ -2576,15 +2592,21 @@ export function toJson_Doctor(obj: Doctor | undefined): Record<string, any> | un
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * A PostgreSQL, CockroachDB or NATS server that every checkout shares, with a separate database or NATS account for each.
+ *
  * @schema MiseTomlSchemaDaemonProviders
  */
 export interface MiseTomlSchemaDaemonProviders {
   /**
+   * Service preset that runs the server.
+   *
    * @schema MiseTomlSchemaDaemonProviders#preset
    */
   readonly preset: MiseTomlSchemaDaemonProvidersPreset;
 
   /**
+   * Version request for the preset's tool.
+   *
    * @schema MiseTomlSchemaDaemonProviders#version
    */
   readonly version: string;
@@ -2595,21 +2617,30 @@ export interface MiseTomlSchemaDaemonProviders {
   readonly port?: any;
 
   /**
+   * Overrides for the preset's additional named ports.
+   *
    * @schema MiseTomlSchemaDaemonProviders#ports
    */
   readonly ports?: { [key: string]: number };
 
   /**
+   * Preset options, such as `database`.
+   *
    * @schema MiseTomlSchemaDaemonProviders#options
    */
   readonly options?: any;
 
   /**
+   * Persistent server data directory; a relative path resolves inside the provider's state directory. Defaults to $MISE_STATE_DIR/daemon-providers/<name>/data.
+   *
+   * @default MISE_STATE_DIR/daemon-providers/<name>/data.
    * @schema MiseTomlSchemaDaemonProviders#data_dir
    */
   readonly dataDir?: string;
 
   /**
+   * Tool to install the server from, in place of the preset's default.
+   *
    * @schema MiseTomlSchemaDaemonProviders#tool
    */
   readonly tool?: string;
@@ -2674,6 +2705,8 @@ export function toJson_MiseTomlSchemaDaemonsSettings(obj: MiseTomlSchemaDaemonsS
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * Changes to the workspace project with this ID, or a new project when the ID is new
+ *
  * @schema MonorepoProjects
  */
 export interface MonorepoProjects {
@@ -2783,6 +2816,13 @@ export interface DepsProvider {
   readonly auto?: boolean;
 
   /**
+   * Command to run when stale
+   *
+   * @schema deps_provider#run
+   */
+  readonly run?: string;
+
+  /**
    * Files/patterns to check for changes
    *
    * @schema deps_provider#sources
@@ -2795,13 +2835,6 @@ export interface DepsProvider {
    * @schema deps_provider#outputs
    */
   readonly outputs?: string[];
-
-  /**
-   * Command to run when stale
-   *
-   * @schema deps_provider#run
-   */
-  readonly run?: string;
 
   /**
    * Environment variables to set
@@ -2848,9 +2881,9 @@ export function toJson_DepsProvider(obj: DepsProvider | undefined): Record<strin
   if (obj === undefined) { return undefined; }
   const result = {
     'auto': obj.auto,
+    'run': obj.run,
     'sources': obj.sources?.map(y => y),
     'outputs': obj.outputs?.map(y => y),
-    'run': obj.run,
     'env': ((obj.env) === undefined) ? undefined : (Object.entries(obj.env).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'dir': obj.dir,
     'description': obj.description,
@@ -3161,6 +3194,13 @@ export interface SettingsDotfiles {
    * @schema SettingsDotfiles#root
    */
   readonly root?: string;
+
+  /**
+   * On Windows, deploy dotfile files as symbolic links instead of copies.
+   *
+   * @schema SettingsDotfiles#windows_symlinks
+   */
+  readonly windowsSymlinks?: boolean;
 }
 
 /**
@@ -3174,6 +3214,7 @@ export function toJson_SettingsDotfiles(obj: SettingsDotfiles | undefined): Reco
     'default_mode': obj.defaultMode,
     'relative_symlinks': obj.relativeSymlinks,
     'root': obj.root,
+    'windows_symlinks': obj.windowsSymlinks,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -5414,6 +5455,8 @@ export enum MiseTomlSchemaDotfileGroupsManifest {
 }
 
 /**
+ * file whose content, owner, group, and mode mise manages, keyed by an absolute or ~/ target path
+ *
  * @schema MiseTomlSchemaBootstrapFiles
  */
 export interface MiseTomlSchemaBootstrapFiles {
@@ -5423,31 +5466,43 @@ export interface MiseTomlSchemaBootstrapFiles {
   readonly phase?: BootstrapFilePhase;
 
   /**
+   * file to copy the content from; a relative path resolves from the declaring config's directory and ~/ from your home directory
+   *
    * @schema MiseTomlSchemaBootstrapFiles#source
    */
   readonly source?: string;
 
   /**
+   * inline file content; cannot be combined with source
+   *
    * @schema MiseTomlSchemaBootstrapFiles#content
    */
   readonly content?: string;
 
   /**
+   * user that should own the file; left as it is when unset
+   *
    * @schema MiseTomlSchemaBootstrapFiles#owner
    */
   readonly owner?: string;
 
   /**
+   * group that should own the file; left as it is when unset
+   *
    * @schema MiseTomlSchemaBootstrapFiles#group
    */
   readonly group?: string;
 
   /**
+   * octal permissions such as "0640"; defaults to "0644" for a file with source or content, otherwise left as it is
+   *
    * @schema MiseTomlSchemaBootstrapFiles#mode
    */
   readonly mode?: string;
 
   /**
+   * render source or content with mise's template engine; without it, template syntax is written unchanged
+   *
    * @schema MiseTomlSchemaBootstrapFiles#template
    */
   readonly template?: boolean;
@@ -5460,16 +5515,22 @@ export interface MiseTomlSchemaBootstrapFiles {
   readonly removeEmpty?: boolean;
 
   /**
+   * present creates or updates the file; absent removes it whatever its content
+   *
    * @schema MiseTomlSchemaBootstrapFiles#state
    */
   readonly state?: MiseTomlSchemaBootstrapFilesState;
 
   /**
+   * replace a path of another type at the target, such as an empty directory; requires source or content
+   *
    * @schema MiseTomlSchemaBootstrapFiles#replace
    */
   readonly replace?: boolean;
 
   /**
+   * system services declared in [bootstrap.services] to reload or restart when mise changes this file
+   *
    * @schema MiseTomlSchemaBootstrapFiles#notify
    */
   readonly notify?: string[];
@@ -5509,6 +5570,8 @@ export function toJson_MiseTomlSchemaBootstrapFiles(obj: MiseTomlSchemaBootstrap
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * directory whose owner, group, and mode mise manages, keyed by an absolute or ~/ target path
+ *
  * @schema MiseTomlSchemaBootstrapDirectories
  */
 export interface MiseTomlSchemaBootstrapDirectories {
@@ -5518,36 +5581,50 @@ export interface MiseTomlSchemaBootstrapDirectories {
   readonly phase?: BootstrapFilePhase;
 
   /**
+   * user that should own the directory; left as it is when unset, and parents mise creates get the system defaults
+   *
    * @schema MiseTomlSchemaBootstrapDirectories#owner
    */
   readonly owner?: string;
 
   /**
+   * group that should own the directory; left as it is when unset, and parents mise creates get the system defaults
+   *
    * @schema MiseTomlSchemaBootstrapDirectories#group
    */
   readonly group?: string;
 
   /**
+   * octal permissions such as "0755"; defaults to "0755"
+   *
    * @schema MiseTomlSchemaBootstrapDirectories#mode
    */
   readonly mode?: string;
 
   /**
+   * present creates the directory with any missing parents; absent removes it, which must then be empty unless recursive is set
+   *
    * @schema MiseTomlSchemaBootstrapDirectories#state
    */
   readonly state?: MiseTomlSchemaBootstrapDirectoriesState;
 
   /**
+   * with state = "absent", delete the directory and everything in it
+   *
    * @schema MiseTomlSchemaBootstrapDirectories#recursive
    */
   readonly recursive?: boolean;
 
   /**
+   * replace a path of another type at the target, such as a file
+   *
    * @schema MiseTomlSchemaBootstrapDirectories#replace
    */
   readonly replace?: boolean;
 
   /**
+   * system services declared in [bootstrap.services] to reload or restart when mise changes this directory
+   *
    * @schema MiseTomlSchemaBootstrapDirectories#notify
    */
   readonly notify?: string[];
@@ -5661,15 +5738,21 @@ export function toJson_MiseTomlSchemaBootstrapRemote(obj: MiseTomlSchemaBootstra
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * Linux systemd system unit that mise starts, stops, enables, or masks, or a user service mise defines from command or builtin
+ *
  * @schema MiseTomlSchemaBootstrapServices
  */
 export interface MiseTomlSchemaBootstrapServices {
   /**
+   * running or stopped; absent removes a user service's definition (user scope only)
+   *
    * @schema MiseTomlSchemaBootstrapServices#state
    */
   readonly state?: MiseTomlSchemaBootstrapServicesState;
 
   /**
+   * start the service at boot (system scope) or at login (user scope)
+   *
    * @schema MiseTomlSchemaBootstrapServices#enabled
    */
   readonly enabled?: boolean;
@@ -5711,26 +5794,36 @@ export interface MiseTomlSchemaBootstrapServices {
   readonly command?: string;
 
   /**
+   * text the service manager shows for the service; user scope only
+   *
    * @schema MiseTomlSchemaBootstrapServices#description
    */
   readonly description?: string;
 
   /**
+   * when to restart the process after it exits: on-failure, always, or never; on Windows, always and on-failure both retry failed runs only; user scope only
+   *
    * @schema MiseTomlSchemaBootstrapServices#restart
    */
   readonly restart?: MiseTomlSchemaBootstrapServicesRestart;
 
   /**
+   * environment variables for the process; user scope only
+   *
    * @schema MiseTomlSchemaBootstrapServices#environment
    */
   readonly environment?: { [key: string]: string };
 
   /**
+   * directory to run the process in, with ~ expanded; user scope only
+   *
    * @schema MiseTomlSchemaBootstrapServices#working_directory
    */
   readonly workingDirectory?: string;
 
   /**
+   * start the service only after `mise bootstrap` installs [tools] and plugin packages; user scope only
+   *
    * @schema MiseTomlSchemaBootstrapServices#requires_tools
    */
   readonly requiresTools?: boolean;
@@ -5763,6 +5856,8 @@ export function toJson_MiseTomlSchemaBootstrapServices(obj: MiseTomlSchemaBootst
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * Docker Compose project that mise brings up, stops, or removes
+ *
  * @schema MiseTomlSchemaBootstrapCompose
  */
 export interface MiseTomlSchemaBootstrapCompose {
@@ -5795,41 +5890,57 @@ export interface MiseTomlSchemaBootstrapCompose {
   readonly projectName?: string;
 
   /**
+   * Compose profiles to enable, passed with --profile
+   *
    * @schema MiseTomlSchemaBootstrapCompose#profiles
    */
   readonly profiles?: string[];
 
   /**
+   * services to manage; defaults to every service the files and profiles enable
+   *
    * @schema MiseTomlSchemaBootstrapCompose#services
    */
   readonly services?: string[];
 
   /**
+   * services that run once and count as converged after exiting with code 0; when services is set, they must be listed there too
+   *
    * @schema MiseTomlSchemaBootstrapCompose#oneshot
    */
   readonly oneshot?: string[];
 
   /**
+   * running (compose up), stopped (compose stop, keeping containers and data), or absent (compose down)
+   *
    * @schema MiseTomlSchemaBootstrapCompose#state
    */
   readonly state?: MiseTomlSchemaBootstrapComposeState;
 
   /**
+   * image pull policy passed to compose up as --pull
+   *
    * @schema MiseTomlSchemaBootstrapCompose#pull
    */
   readonly pull?: MiseTomlSchemaBootstrapComposePull;
 
   /**
+   * auto lets Compose decide, always passes --build, never passes --no-build
+   *
    * @schema MiseTomlSchemaBootstrapCompose#build
    */
   readonly buildValue?: MiseTomlSchemaBootstrapComposeBuild;
 
   /**
+   * auto lets Compose decide, always passes --force-recreate, never passes --no-recreate
+   *
    * @schema MiseTomlSchemaBootstrapCompose#recreate
    */
   readonly recreate?: MiseTomlSchemaBootstrapComposeRecreate;
 
   /**
+   * pass --wait to compose up, so it waits for services to be running and healthy
+   *
    * @schema MiseTomlSchemaBootstrapCompose#wait
    */
   readonly wait?: boolean;
@@ -5849,26 +5960,36 @@ export interface MiseTomlSchemaBootstrapCompose {
   readonly timeout?: number;
 
   /**
+   * remove containers for services that are no longer in the Compose model
+   *
    * @schema MiseTomlSchemaBootstrapCompose#remove_orphans
    */
   readonly removeOrphans?: boolean;
 
   /**
+   * pass --renew-anon-volumes to compose up, recreating anonymous volumes
+   *
    * @schema MiseTomlSchemaBootstrapCompose#renew_anonymous_volumes
    */
   readonly renewAnonymousVolumes?: boolean;
 
   /**
+   * pass --volumes to compose down, removing the project's volumes
+   *
    * @schema MiseTomlSchemaBootstrapCompose#down_volumes
    */
   readonly downVolumes?: boolean;
 
   /**
+   * images compose down removes, passed as --rmi
+   *
    * @schema MiseTomlSchemaBootstrapCompose#down_images
    */
   readonly downImages?: MiseTomlSchemaBootstrapComposeDownImages;
 
   /**
+   * run every Compose and engine command through sudo, for a project on the system Docker daemon
+   *
    * @schema MiseTomlSchemaBootstrapCompose#sudo
    */
   readonly sudo?: boolean;
@@ -5932,6 +6053,8 @@ export function toJson_MiseTomlSchemaBootstrapCompose(obj: MiseTomlSchemaBootstr
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * git repository to clone to this path, then keep on ref when one is set
+ *
  * @schema MiseTomlSchemaBootstrapRepos
  */
 export interface MiseTomlSchemaBootstrapRepos {
@@ -6340,41 +6463,57 @@ export function toJson_BootstrapHooks(obj: BootstrapHooks | undefined): Record<s
  */
 export interface BootstrapMiseShellActivate {
   /**
+   * manage the activation blocks in ~/.bash_profile (shims) and ~/.bashrc (activate); a mode applies to both files
+   *
    * @schema bootstrap_mise_shell_activate#bash
    */
   readonly bash?: any;
 
   /**
+   * manage the activation blocks in ~/.zprofile (shims) and ~/.zshrc (activate); a mode applies to both files, and ~/.zshenv is never written
+   *
    * @schema bootstrap_mise_shell_activate#zsh
    */
   readonly zsh?: any;
 
   /**
+   * manage the activation block in ~/.config/fish/config.fish; activate by default, and auto activates interactive shells and uses shims otherwise
+   *
    * @schema bootstrap_mise_shell_activate#fish
    */
   readonly fish?: any;
 
   /**
+   * manage the activation block in ~/.bash_profile; shims by default
+   *
    * @schema bootstrap_mise_shell_activate#bash_profile
    */
   readonly bashProfile?: any;
 
   /**
+   * manage the activation block in ~/.bashrc; activate by default
+   *
    * @schema bootstrap_mise_shell_activate#bashrc
    */
   readonly bashrc?: any;
 
   /**
+   * manage the activation block in ~/.zshenv, which zsh reads for every script; shims by default
+   *
    * @schema bootstrap_mise_shell_activate#zshenv
    */
   readonly zshenv?: any;
 
   /**
+   * manage the activation block in ~/.zprofile; shims by default
+   *
    * @schema bootstrap_mise_shell_activate#zprofile
    */
   readonly zprofile?: any;
 
   /**
+   * manage the activation block in ~/.zshrc; activate by default
+   *
    * @schema bootstrap_mise_shell_activate#zshrc
    */
   readonly zshrc?: any;
@@ -6403,6 +6542,8 @@ export function toJson_BootstrapMiseShellActivate(obj: BootstrapMiseShellActivat
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * local Linux group that bootstrap creates, updates, or removes
+ *
  * @schema MiseTomlSchemaBootstrapGroups
  */
 export interface MiseTomlSchemaBootstrapGroups {
@@ -6446,6 +6587,8 @@ export function toJson_MiseTomlSchemaBootstrapGroups(obj: MiseTomlSchemaBootstra
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * local Linux user that bootstrap creates, updates, or removes
+ *
  * @schema MiseTomlSchemaBootstrapUsers
  */
 export interface MiseTomlSchemaBootstrapUsers {
@@ -6561,6 +6704,8 @@ export function toJson_MiseTomlSchemaBootstrapUsers(obj: MiseTomlSchemaBootstrap
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * encryption for dotfiles tracked with encrypt = true
+ *
  * @schema MiseTomlSchemaHistoryEncryption
  */
 export interface MiseTomlSchemaHistoryEncryption {
@@ -6678,6 +6823,8 @@ export function toJson_TaskConfigCache(obj: TaskConfigCache | undefined): Record
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * A check: a command that passes when it exits zero.
+ *
  * @schema DoctorChecks
  */
 export interface DoctorChecks {
@@ -6754,6 +6901,8 @@ export function toJson_DoctorChecks(obj: DoctorChecks | undefined): Record<strin
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * Service preset that runs the server.
+ *
  * @schema MiseTomlSchemaDaemonProvidersPreset
  */
 export enum MiseTomlSchemaDaemonProvidersPreset {
@@ -7092,6 +7241,8 @@ export enum BootstrapFilePhase {
 }
 
 /**
+ * present creates or updates the file; absent removes it whatever its content
+ *
  * @schema MiseTomlSchemaBootstrapFilesState
  */
 export enum MiseTomlSchemaBootstrapFilesState {
@@ -7102,6 +7253,8 @@ export enum MiseTomlSchemaBootstrapFilesState {
 }
 
 /**
+ * present creates the directory with any missing parents; absent removes it, which must then be empty unless recursive is set
+ *
  * @schema MiseTomlSchemaBootstrapDirectoriesState
  */
 export enum MiseTomlSchemaBootstrapDirectoriesState {
@@ -7126,6 +7279,8 @@ export class BootstrapRemoteInstallMise {
 }
 
 /**
+ * SSH target that `mise bootstrap remote` can bootstrap, selected by name or tag
+ *
  * @schema MiseTomlSchemaBootstrapRemoteHosts
  */
 export interface MiseTomlSchemaBootstrapRemoteHosts {
@@ -7265,6 +7420,8 @@ export function toJson_MiseTomlSchemaBootstrapRemoteHosts(obj: MiseTomlSchemaBoo
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * running or stopped; absent removes a user service's definition (user scope only)
+ *
  * @schema MiseTomlSchemaBootstrapServicesState
  */
 export enum MiseTomlSchemaBootstrapServicesState {
@@ -7318,6 +7475,8 @@ export enum MiseTomlSchemaBootstrapServicesBuiltin {
 }
 
 /**
+ * when to restart the process after it exits: on-failure, always, or never; on Windows, always and on-failure both retry failed runs only; user scope only
+ *
  * @schema MiseTomlSchemaBootstrapServicesRestart
  */
 export enum MiseTomlSchemaBootstrapServicesRestart {
@@ -7330,6 +7489,8 @@ export enum MiseTomlSchemaBootstrapServicesRestart {
 }
 
 /**
+ * running (compose up), stopped (compose stop, keeping containers and data), or absent (compose down)
+ *
  * @schema MiseTomlSchemaBootstrapComposeState
  */
 export enum MiseTomlSchemaBootstrapComposeState {
@@ -7342,6 +7503,8 @@ export enum MiseTomlSchemaBootstrapComposeState {
 }
 
 /**
+ * image pull policy passed to compose up as --pull
+ *
  * @schema MiseTomlSchemaBootstrapComposePull
  */
 export enum MiseTomlSchemaBootstrapComposePull {
@@ -7354,6 +7517,8 @@ export enum MiseTomlSchemaBootstrapComposePull {
 }
 
 /**
+ * auto lets Compose decide, always passes --build, never passes --no-build
+ *
  * @schema MiseTomlSchemaBootstrapComposeBuild
  */
 export enum MiseTomlSchemaBootstrapComposeBuild {
@@ -7366,6 +7531,8 @@ export enum MiseTomlSchemaBootstrapComposeBuild {
 }
 
 /**
+ * auto lets Compose decide, always passes --force-recreate, never passes --no-recreate
+ *
  * @schema MiseTomlSchemaBootstrapComposeRecreate
  */
 export enum MiseTomlSchemaBootstrapComposeRecreate {
@@ -7378,6 +7545,8 @@ export enum MiseTomlSchemaBootstrapComposeRecreate {
 }
 
 /**
+ * images compose down removes, passed as --rmi
+ *
  * @schema MiseTomlSchemaBootstrapComposeDownImages
  */
 export enum MiseTomlSchemaBootstrapComposeDownImages {
@@ -7676,16 +7845,22 @@ export function toJson_BootstrapMacosTrackpad(obj: BootstrapMacosTrackpad | unde
  */
 export interface MiseTomlSchemaBootstrapMacosDefaultsEntries {
   /**
+   * preferences domain, such as "com.apple.dock" or "NSGlobalDomain"; -g and -globalDomain mean NSGlobalDomain
+   *
    * @schema MiseTomlSchemaBootstrapMacosDefaultsEntries#domain
    */
   readonly domain: string;
 
   /**
+   * preference key within the domain
+   *
    * @schema MiseTomlSchemaBootstrapMacosDefaultsEntries#key
    */
   readonly key: string;
 
   /**
+   * any writes the preference for every host; current writes it for this machine only, like defaults -currentHost
+   *
    * @schema MiseTomlSchemaBootstrapMacosDefaultsEntries#host
    */
   readonly host?: MiseTomlSchemaBootstrapMacosDefaultsEntriesHost;
@@ -7698,6 +7873,8 @@ export interface MiseTomlSchemaBootstrapMacosDefaultsEntries {
   readonly path?: string[];
 
   /**
+   * desired value, written with the matching property list type; replaces the selected value in full
+   *
    * @schema MiseTomlSchemaBootstrapMacosDefaultsEntries#value
    */
   readonly value: any;
@@ -7895,6 +8072,8 @@ export function toJson_MiseTomlSchemaBootstrapLinuxSystemd(obj: MiseTomlSchemaBo
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * apt source: a Launchpad PPA, or repository URIs with the key that signs them
+ *
  * @schema BootstrapAptSources
  */
 export interface BootstrapAptSources {
@@ -7970,6 +8149,8 @@ export function toJson_BootstrapAptSources(obj: BootstrapAptSources | undefined)
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * dnf repository to enable, given as a COPR project
+ *
  * @schema BootstrapDnfRepos
  */
 export interface BootstrapDnfRepos {
@@ -8051,6 +8232,8 @@ export enum BootstrapMacosFinderPreferredViewStyle {
 }
 
 /**
+ * any writes the preference for every host; current writes it for this machine only, like defaults -currentHost
+ *
  * @schema MiseTomlSchemaBootstrapMacosDefaultsEntriesHost
  */
 export enum MiseTomlSchemaBootstrapMacosDefaultsEntriesHost {
@@ -8061,6 +8244,8 @@ export enum MiseTomlSchemaBootstrapMacosDefaultsEntriesHost {
 }
 
 /**
+ * macOS LaunchAgent written to ~/Library/LaunchAgents/dev.mise.<name>.plist and loaded for the current user
+ *
  * @schema MiseTomlSchemaBootstrapMacosLaunchdAgents
  */
 export interface MiseTomlSchemaBootstrapMacosLaunchdAgents {
@@ -8277,16 +8462,22 @@ export interface MiseTomlSchemaBootstrapLinuxFirewallRules {
   readonly name: string;
 
   /**
+   * present adds the rule; absent removes a rule mise added earlier
+   *
    * @schema MiseTomlSchemaBootstrapLinuxFirewallRules#state
    */
   readonly state?: MiseTomlSchemaBootstrapLinuxFirewallRulesState;
 
   /**
+   * traffic direction the rule matches
+   *
    * @schema MiseTomlSchemaBootstrapLinuxFirewallRules#direction
    */
   readonly direction?: MiseTomlSchemaBootstrapLinuxFirewallRulesDirection;
 
   /**
+   * what to do with matching traffic; limit needs incoming TCP and is not available on firewalld
+   *
    * @schema MiseTomlSchemaBootstrapLinuxFirewallRules#action
    */
   readonly action?: MiseTomlSchemaBootstrapLinuxFirewallRulesAction;
@@ -8299,6 +8490,8 @@ export interface MiseTomlSchemaBootstrapLinuxFirewallRules {
   readonly port?: MiseTomlSchemaBootstrapLinuxFirewallRulesPort;
 
   /**
+   * protocol to match; any when unset, and UFW supports only tcp and udp
+   *
    * @schema MiseTomlSchemaBootstrapLinuxFirewallRules#protocol
    */
   readonly protocol?: MiseTomlSchemaBootstrapLinuxFirewallRulesProtocol;
@@ -8349,6 +8542,8 @@ export function toJson_MiseTomlSchemaBootstrapLinuxFirewallRules(obj: MiseTomlSc
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * systemd user unit written to ~/.config/systemd/user/dev.mise.<name>.service, or .timer when it sets a timer key
+ *
  * @schema MiseTomlSchemaBootstrapLinuxSystemdUnits
  */
 export interface MiseTomlSchemaBootstrapLinuxSystemdUnits {
@@ -8702,26 +8897,36 @@ export enum MiseTomlSchemaBootstrapMacosLaunchdAgentsProcessType {
  */
 export interface LaunchdCalendarInterval {
   /**
+   * minute of the hour, 0-59; every minute when unset
+   *
    * @schema launchd_calendar_interval#minute
    */
   readonly minute?: number;
 
   /**
+   * hour of the day, 0-23; every hour when unset
+   *
    * @schema launchd_calendar_interval#hour
    */
   readonly hour?: number;
 
   /**
+   * day of the month, 1-31; every day when unset
+   *
    * @schema launchd_calendar_interval#day
    */
   readonly day?: number;
 
   /**
+   * day of the week, 0-7, where 0 and 7 are Sunday; every day when unset
+   *
    * @schema launchd_calendar_interval#weekday
    */
   readonly weekday?: number;
 
   /**
+   * month of the year, 1-12; every month when unset
+   *
    * @schema launchd_calendar_interval#month
    */
   readonly month?: number;
@@ -8747,6 +8952,8 @@ export function toJson_LaunchdCalendarInterval(obj: LaunchdCalendarInterval | un
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * present adds the rule; absent removes a rule mise added earlier
+ *
  * @schema MiseTomlSchemaBootstrapLinuxFirewallRulesState
  */
 export enum MiseTomlSchemaBootstrapLinuxFirewallRulesState {
@@ -8757,6 +8964,8 @@ export enum MiseTomlSchemaBootstrapLinuxFirewallRulesState {
 }
 
 /**
+ * traffic direction the rule matches
+ *
  * @schema MiseTomlSchemaBootstrapLinuxFirewallRulesDirection
  */
 export enum MiseTomlSchemaBootstrapLinuxFirewallRulesDirection {
@@ -8767,6 +8976,8 @@ export enum MiseTomlSchemaBootstrapLinuxFirewallRulesDirection {
 }
 
 /**
+ * what to do with matching traffic; limit needs incoming TCP and is not available on firewalld
+ *
  * @schema MiseTomlSchemaBootstrapLinuxFirewallRulesAction
  */
 export enum MiseTomlSchemaBootstrapLinuxFirewallRulesAction {
@@ -8797,6 +9008,8 @@ export class MiseTomlSchemaBootstrapLinuxFirewallRulesPort {
 }
 
 /**
+ * protocol to match; any when unset, and UFW supports only tcp and udp
+ *
  * @schema MiseTomlSchemaBootstrapLinuxFirewallRulesProtocol
  */
 export enum MiseTomlSchemaBootstrapLinuxFirewallRulesProtocol {
