@@ -333,6 +333,8 @@ The generated mise config file.
 
 ### BootstrapAptSources <a name="BootstrapAptSources" id="mise-projen.BootstrapAptSources"></a>
 
+apt source: a Launchpad PPA, or repository URIs with the key that signs them.
+
 #### Initializer <a name="Initializer" id="mise-projen.BootstrapAptSources.Initializer"></a>
 
 ```typescript
@@ -448,6 +450,8 @@ repository URL(s), space-separated.
 ---
 
 ### BootstrapDnfRepos <a name="BootstrapDnfRepos" id="mise-projen.BootstrapDnfRepos"></a>
+
+dnf repository to enable, given as a COPR project.
 
 #### Initializer <a name="Initializer" id="mise-projen.BootstrapDnfRepos.Initializer"></a>
 
@@ -1060,14 +1064,14 @@ const bootstrapMiseShellActivate: BootstrapMiseShellActivate = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#mise-projen.BootstrapMiseShellActivate.property.bash">bash</a></code> | <code>any</code> | *No description.* |
-| <code><a href="#mise-projen.BootstrapMiseShellActivate.property.bashProfile">bashProfile</a></code> | <code>any</code> | *No description.* |
-| <code><a href="#mise-projen.BootstrapMiseShellActivate.property.bashrc">bashrc</a></code> | <code>any</code> | *No description.* |
-| <code><a href="#mise-projen.BootstrapMiseShellActivate.property.fish">fish</a></code> | <code>any</code> | *No description.* |
-| <code><a href="#mise-projen.BootstrapMiseShellActivate.property.zprofile">zprofile</a></code> | <code>any</code> | *No description.* |
-| <code><a href="#mise-projen.BootstrapMiseShellActivate.property.zsh">zsh</a></code> | <code>any</code> | *No description.* |
-| <code><a href="#mise-projen.BootstrapMiseShellActivate.property.zshenv">zshenv</a></code> | <code>any</code> | *No description.* |
-| <code><a href="#mise-projen.BootstrapMiseShellActivate.property.zshrc">zshrc</a></code> | <code>any</code> | *No description.* |
+| <code><a href="#mise-projen.BootstrapMiseShellActivate.property.bash">bash</a></code> | <code>any</code> | manage the activation blocks in ~/.bash_profile (shims) and ~/.bashrc (activate); a mode applies to both files. |
+| <code><a href="#mise-projen.BootstrapMiseShellActivate.property.bashProfile">bashProfile</a></code> | <code>any</code> | manage the activation block in ~/.bash_profile; shims by default. |
+| <code><a href="#mise-projen.BootstrapMiseShellActivate.property.bashrc">bashrc</a></code> | <code>any</code> | manage the activation block in ~/.bashrc; activate by default. |
+| <code><a href="#mise-projen.BootstrapMiseShellActivate.property.fish">fish</a></code> | <code>any</code> | manage the activation block in ~/.config/fish/config.fish; activate by default, and auto activates interactive shells and uses shims otherwise. |
+| <code><a href="#mise-projen.BootstrapMiseShellActivate.property.zprofile">zprofile</a></code> | <code>any</code> | manage the activation block in ~/.zprofile; shims by default. |
+| <code><a href="#mise-projen.BootstrapMiseShellActivate.property.zsh">zsh</a></code> | <code>any</code> | manage the activation blocks in ~/.zprofile (shims) and ~/.zshrc (activate); a mode applies to both files, and ~/.zshenv is never written. |
+| <code><a href="#mise-projen.BootstrapMiseShellActivate.property.zshenv">zshenv</a></code> | <code>any</code> | manage the activation block in ~/.zshenv, which zsh reads for every script; shims by default. |
+| <code><a href="#mise-projen.BootstrapMiseShellActivate.property.zshrc">zshrc</a></code> | <code>any</code> | manage the activation block in ~/.zshrc; activate by default. |
 
 ---
 
@@ -1079,6 +1083,8 @@ public readonly bash: any;
 
 - *Type:* any
 
+manage the activation blocks in ~/.bash_profile (shims) and ~/.bashrc (activate); a mode applies to both files.
+
 ---
 
 ##### `bashProfile`<sup>Optional</sup> <a name="bashProfile" id="mise-projen.BootstrapMiseShellActivate.property.bashProfile"></a>
@@ -1088,6 +1094,8 @@ public readonly bashProfile: any;
 ```
 
 - *Type:* any
+
+manage the activation block in ~/.bash_profile; shims by default.
 
 ---
 
@@ -1099,6 +1107,8 @@ public readonly bashrc: any;
 
 - *Type:* any
 
+manage the activation block in ~/.bashrc; activate by default.
+
 ---
 
 ##### `fish`<sup>Optional</sup> <a name="fish" id="mise-projen.BootstrapMiseShellActivate.property.fish"></a>
@@ -1108,6 +1118,8 @@ public readonly fish: any;
 ```
 
 - *Type:* any
+
+manage the activation block in ~/.config/fish/config.fish; activate by default, and auto activates interactive shells and uses shims otherwise.
 
 ---
 
@@ -1119,6 +1131,8 @@ public readonly zprofile: any;
 
 - *Type:* any
 
+manage the activation block in ~/.zprofile; shims by default.
+
 ---
 
 ##### `zsh`<sup>Optional</sup> <a name="zsh" id="mise-projen.BootstrapMiseShellActivate.property.zsh"></a>
@@ -1128,6 +1142,8 @@ public readonly zsh: any;
 ```
 
 - *Type:* any
+
+manage the activation blocks in ~/.zprofile (shims) and ~/.zshrc (activate); a mode applies to both files, and ~/.zshenv is never written.
 
 ---
 
@@ -1139,6 +1155,8 @@ public readonly zshenv: any;
 
 - *Type:* any
 
+manage the activation block in ~/.zshenv, which zsh reads for every script; shims by default.
+
 ---
 
 ##### `zshrc`<sup>Optional</sup> <a name="zshrc" id="mise-projen.BootstrapMiseShellActivate.property.zshrc"></a>
@@ -1148,6 +1166,8 @@ public readonly zshrc: any;
 ```
 
 - *Type:* any
+
+manage the activation block in ~/.zshrc; activate by default.
 
 ---
 
@@ -1303,7 +1323,7 @@ const doctor: Doctor = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#mise-projen.Doctor.property.checks">checks</a></code> | <code>{[ key: string ]: <a href="#mise-projen.DoctorChecks">DoctorChecks</a>}</code> | *No description.* |
+| <code><a href="#mise-projen.Doctor.property.checks">checks</a></code> | <code>{[ key: string ]: <a href="#mise-projen.DoctorChecks">DoctorChecks</a>}</code> | Checks run by mise doctor project, keyed by check name. |
 
 ---
 
@@ -1315,9 +1335,13 @@ public readonly checks: {[ key: string ]: DoctorChecks};
 
 - *Type:* {[ key: string ]: <a href="#mise-projen.DoctorChecks">DoctorChecks</a>}
 
+Checks run by mise doctor project, keyed by check name.
+
 ---
 
 ### DoctorChecks <a name="DoctorChecks" id="mise-projen.DoctorChecks"></a>
+
+A check: a command that passes when it exits zero.
 
 #### Initializer <a name="Initializer" id="mise-projen.DoctorChecks.Initializer"></a>
 
@@ -1465,11 +1489,11 @@ const hooks: Hooks = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#mise-projen.Hooks.property.cd">cd</a></code> | <code>any[]</code> | *No description.* |
-| <code><a href="#mise-projen.Hooks.property.enter">enter</a></code> | <code>any[]</code> | *No description.* |
-| <code><a href="#mise-projen.Hooks.property.leave">leave</a></code> | <code>any[]</code> | *No description.* |
-| <code><a href="#mise-projen.Hooks.property.postinstall">postinstall</a></code> | <code>any[]</code> | *No description.* |
-| <code><a href="#mise-projen.Hooks.property.preinstall">preinstall</a></code> | <code>any[]</code> | *No description.* |
+| <code><a href="#mise-projen.Hooks.property.cd">cd</a></code> | <code>any[]</code> | hooks to run when an activated shell changes to a directory inside the project. |
+| <code><a href="#mise-projen.Hooks.property.enter">enter</a></code> | <code>any[]</code> | hooks to run when an activated shell moves into the project. |
+| <code><a href="#mise-projen.Hooks.property.leave">leave</a></code> | <code>any[]</code> | hooks to run when an activated shell moves out of the project. |
+| <code><a href="#mise-projen.Hooks.property.postinstall">postinstall</a></code> | <code>any[]</code> | hooks to run after mise installs tools. |
+| <code><a href="#mise-projen.Hooks.property.preinstall">preinstall</a></code> | <code>any[]</code> | hooks to run before mise installs tools. |
 
 ---
 
@@ -1481,6 +1505,8 @@ public readonly cd: any[];
 
 - *Type:* any[]
 
+hooks to run when an activated shell changes to a directory inside the project.
+
 ---
 
 ##### `enter`<sup>Optional</sup> <a name="enter" id="mise-projen.Hooks.property.enter"></a>
@@ -1490,6 +1516,8 @@ public readonly enter: any[];
 ```
 
 - *Type:* any[]
+
+hooks to run when an activated shell moves into the project.
 
 ---
 
@@ -1501,6 +1529,8 @@ public readonly leave: any[];
 
 - *Type:* any[]
 
+hooks to run when an activated shell moves out of the project.
+
 ---
 
 ##### `postinstall`<sup>Optional</sup> <a name="postinstall" id="mise-projen.Hooks.property.postinstall"></a>
@@ -1511,6 +1541,8 @@ public readonly postinstall: any[];
 
 - *Type:* any[]
 
+hooks to run after mise installs tools.
+
 ---
 
 ##### `preinstall`<sup>Optional</sup> <a name="preinstall" id="mise-projen.Hooks.property.preinstall"></a>
@@ -1520,6 +1552,8 @@ public readonly preinstall: any[];
 ```
 
 - *Type:* any[]
+
+hooks to run before mise installs tools.
 
 ---
 
@@ -1539,11 +1573,11 @@ const launchdCalendarInterval: LaunchdCalendarInterval = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#mise-projen.LaunchdCalendarInterval.property.day">day</a></code> | <code>number</code> | *No description.* |
-| <code><a href="#mise-projen.LaunchdCalendarInterval.property.hour">hour</a></code> | <code>number</code> | *No description.* |
-| <code><a href="#mise-projen.LaunchdCalendarInterval.property.minute">minute</a></code> | <code>number</code> | *No description.* |
-| <code><a href="#mise-projen.LaunchdCalendarInterval.property.month">month</a></code> | <code>number</code> | *No description.* |
-| <code><a href="#mise-projen.LaunchdCalendarInterval.property.weekday">weekday</a></code> | <code>number</code> | *No description.* |
+| <code><a href="#mise-projen.LaunchdCalendarInterval.property.day">day</a></code> | <code>number</code> | day of the month, 1-31; |
+| <code><a href="#mise-projen.LaunchdCalendarInterval.property.hour">hour</a></code> | <code>number</code> | hour of the day, 0-23; |
+| <code><a href="#mise-projen.LaunchdCalendarInterval.property.minute">minute</a></code> | <code>number</code> | minute of the hour, 0-59; |
+| <code><a href="#mise-projen.LaunchdCalendarInterval.property.month">month</a></code> | <code>number</code> | month of the year, 1-12; |
+| <code><a href="#mise-projen.LaunchdCalendarInterval.property.weekday">weekday</a></code> | <code>number</code> | day of the week, 0-7, where 0 and 7 are Sunday; |
 
 ---
 
@@ -1555,6 +1589,10 @@ public readonly day: number;
 
 - *Type:* number
 
+day of the month, 1-31;
+
+every day when unset
+
 ---
 
 ##### `hour`<sup>Optional</sup> <a name="hour" id="mise-projen.LaunchdCalendarInterval.property.hour"></a>
@@ -1564,6 +1602,10 @@ public readonly hour: number;
 ```
 
 - *Type:* number
+
+hour of the day, 0-23;
+
+every hour when unset
 
 ---
 
@@ -1575,6 +1617,10 @@ public readonly minute: number;
 
 - *Type:* number
 
+minute of the hour, 0-59;
+
+every minute when unset
+
 ---
 
 ##### `month`<sup>Optional</sup> <a name="month" id="mise-projen.LaunchdCalendarInterval.property.month"></a>
@@ -1585,6 +1631,10 @@ public readonly month: number;
 
 - *Type:* number
 
+month of the year, 1-12;
+
+every month when unset
+
 ---
 
 ##### `weekday`<sup>Optional</sup> <a name="weekday" id="mise-projen.LaunchdCalendarInterval.property.weekday"></a>
@@ -1594,6 +1644,10 @@ public readonly weekday: number;
 ```
 
 - *Type:* number
+
+day of the week, 0-7, where 0 and 7 are Sunday;
+
+every day when unset
 
 ---
 
@@ -1731,7 +1785,7 @@ const miseTomlSchema: MiseTomlSchema = { ... }
 | <code><a href="#mise-projen.MiseTomlSchema.property.daemonProviders">daemonProviders</a></code> | <code>{[ key: string ]: <a href="#mise-projen.MiseTomlSchemaDaemonProviders">MiseTomlSchemaDaemonProviders</a>}</code> | Experimental shared servers owned by the user. |
 | <code><a href="#mise-projen.MiseTomlSchema.property.daemons">daemons</a></code> | <code>{[ key: string ]: any}</code> | Experimental project daemons: custom pitchfork commands or managed presets. |
 | <code><a href="#mise-projen.MiseTomlSchema.property.daemonsSettings">daemonsSettings</a></code> | <code><a href="#mise-projen.MiseTomlSchemaDaemonsSettings">MiseTomlSchemaDaemonsSettings</a></code> | Experimental project-wide daemon options. |
-| <code><a href="#mise-projen.MiseTomlSchema.property.deps">deps</a></code> | <code><a href="#mise-projen.MiseTomlSchemaDeps">MiseTomlSchemaDeps</a></code> | configure deps providers. |
+| <code><a href="#mise-projen.MiseTomlSchema.property.deps">deps</a></code> | <code><a href="#mise-projen.MiseTomlSchemaDeps">MiseTomlSchemaDeps</a></code> | [experimental] configure deps providers. |
 | <code><a href="#mise-projen.MiseTomlSchema.property.doctor">doctor</a></code> | <code><a href="#mise-projen.Doctor">Doctor</a></code> | *No description.* |
 | <code><a href="#mise-projen.MiseTomlSchema.property.dotenv">dotenv</a></code> | <code>any</code> | dotenv file(s) to load. |
 | <code><a href="#mise-projen.MiseTomlSchema.property.dotfileGroups">dotfileGroups</a></code> | <code>{[ key: string ]: <a href="#mise-projen.MiseTomlSchemaDotfileGroups">MiseTomlSchemaDotfileGroups</a>}</code> | named directory trees of dotfiles, applied with `mise dotfiles apply` or `mise bootstrap` while [bootstrap] dotfile_groups selects them (or is unset). |
@@ -1746,7 +1800,7 @@ const miseTomlSchema: MiseTomlSchema = { ... }
 | <code><a href="#mise-projen.MiseTomlSchema.property.minVersion">minVersion</a></code> | <code>any</code> | minimum version of mise required to use this config. |
 | <code><a href="#mise-projen.MiseTomlSchema.property.monorepo">monorepo</a></code> | <code><a href="#mise-projen.Monorepo">Monorepo</a></code> | configuration for monorepo task discovery. |
 | <code><a href="#mise-projen.MiseTomlSchema.property.monorepoRoot">monorepoRoot</a></code> | <code>boolean</code> | marks this config as a monorepo root for task path syntax. |
-| <code><a href="#mise-projen.MiseTomlSchema.property.oci">oci</a></code> | <code><a href="#mise-projen.MiseTomlSchemaOci">MiseTomlSchemaOci</a></code> | configuration for `mise oci build`. |
+| <code><a href="#mise-projen.MiseTomlSchema.property.oci">oci</a></code> | <code><a href="#mise-projen.MiseTomlSchemaOci">MiseTomlSchemaOci</a></code> | [experimental] configuration for `mise oci build`. |
 | <code><a href="#mise-projen.MiseTomlSchema.property.plugins">plugins</a></code> | <code>{[ key: string ]: string}</code> | plugins to use. |
 | <code><a href="#mise-projen.MiseTomlSchema.property.redactions">redactions</a></code> | <code>string[]</code> | env or vars keys to redact from logs. |
 | <code><a href="#mise-projen.MiseTomlSchema.property.secrets">secrets</a></code> | <code><a href="#mise-projen.MiseTomlSchemaSecrets">MiseTomlSchemaSecrets</a></code> | [experimental] Sources for mise secrets: values resolved only when mise starts a task or `mise x` command that was granted them. |
@@ -1848,7 +1902,7 @@ public readonly deps: MiseTomlSchemaDeps;
 
 - *Type:* <a href="#mise-projen.MiseTomlSchemaDeps">MiseTomlSchemaDeps</a>
 
-configure deps providers.
+[experimental] configure deps providers.
 
 ---
 
@@ -2034,7 +2088,7 @@ public readonly oci: MiseTomlSchemaOci;
 
 - *Type:* <a href="#mise-projen.MiseTomlSchemaOci">MiseTomlSchemaOci</a>
 
-configuration for `mise oci build`.
+[experimental] configuration for `mise oci build`.
 
 ---
 
@@ -2577,6 +2631,8 @@ Homebrew tap names mapped to custom git URLs.
 
 ### MiseTomlSchemaBootstrapCompose <a name="MiseTomlSchemaBootstrapCompose" id="mise-projen.MiseTomlSchemaBootstrapCompose"></a>
 
+Docker Compose project that mise brings up, stops, or removes.
+
 #### Initializer <a name="Initializer" id="mise-projen.MiseTomlSchemaBootstrapCompose.Initializer"></a>
 
 ```typescript
@@ -2590,26 +2646,26 @@ const miseTomlSchemaBootstrapCompose: MiseTomlSchemaBootstrapCompose = { ... }
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapCompose.property.projectDir">projectDir</a></code> | <code>string</code> | absolute directory containing the Compose project. |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapCompose.property.buildValue">buildValue</a></code> | <code><a href="#mise-projen.MiseTomlSchemaBootstrapComposeBuild">MiseTomlSchemaBootstrapComposeBuild</a></code> | *No description.* |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapCompose.property.buildValue">buildValue</a></code> | <code><a href="#mise-projen.MiseTomlSchemaBootstrapComposeBuild">MiseTomlSchemaBootstrapComposeBuild</a></code> | auto lets Compose decide, always passes --build, never passes --no-build. |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapCompose.property.command">command</a></code> | <code>string[]</code> | standalone Compose command. |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapCompose.property.dependsOn">dependsOn</a></code> | <code>string[]</code> | bootstrap resource dependencies. |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapCompose.property.downImages">downImages</a></code> | <code><a href="#mise-projen.MiseTomlSchemaBootstrapComposeDownImages">MiseTomlSchemaBootstrapComposeDownImages</a></code> | *No description.* |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapCompose.property.downVolumes">downVolumes</a></code> | <code>boolean</code> | *No description.* |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapCompose.property.downImages">downImages</a></code> | <code><a href="#mise-projen.MiseTomlSchemaBootstrapComposeDownImages">MiseTomlSchemaBootstrapComposeDownImages</a></code> | images compose down removes, passed as --rmi. |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapCompose.property.downVolumes">downVolumes</a></code> | <code>boolean</code> | pass --volumes to compose down, removing the project's volumes. |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapCompose.property.engineCommand">engineCommand</a></code> | <code>string[]</code> | container engine command. |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapCompose.property.envFiles">envFiles</a></code> | <code>string[]</code> | environment file paths relative to project_dir unless absolute. |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapCompose.property.files">files</a></code> | <code>string[]</code> | Compose file paths relative to project_dir unless absolute. |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapCompose.property.oneshot">oneshot</a></code> | <code>string[]</code> | *No description.* |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapCompose.property.profiles">profiles</a></code> | <code>string[]</code> | *No description.* |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapCompose.property.oneshot">oneshot</a></code> | <code>string[]</code> | services that run once and count as converged after exiting with code 0; |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapCompose.property.profiles">profiles</a></code> | <code>string[]</code> | Compose profiles to enable, passed with --profile. |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapCompose.property.projectName">projectName</a></code> | <code>string</code> | optional Compose project name. |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapCompose.property.pull">pull</a></code> | <code><a href="#mise-projen.MiseTomlSchemaBootstrapComposePull">MiseTomlSchemaBootstrapComposePull</a></code> | *No description.* |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapCompose.property.recreate">recreate</a></code> | <code><a href="#mise-projen.MiseTomlSchemaBootstrapComposeRecreate">MiseTomlSchemaBootstrapComposeRecreate</a></code> | *No description.* |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapCompose.property.removeOrphans">removeOrphans</a></code> | <code>boolean</code> | *No description.* |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapCompose.property.renewAnonymousVolumes">renewAnonymousVolumes</a></code> | <code>boolean</code> | *No description.* |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapCompose.property.services">services</a></code> | <code>string[]</code> | *No description.* |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapCompose.property.state">state</a></code> | <code><a href="#mise-projen.MiseTomlSchemaBootstrapComposeState">MiseTomlSchemaBootstrapComposeState</a></code> | *No description.* |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapCompose.property.sudo">sudo</a></code> | <code>boolean</code> | *No description.* |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapCompose.property.pull">pull</a></code> | <code><a href="#mise-projen.MiseTomlSchemaBootstrapComposePull">MiseTomlSchemaBootstrapComposePull</a></code> | image pull policy passed to compose up as --pull. |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapCompose.property.recreate">recreate</a></code> | <code><a href="#mise-projen.MiseTomlSchemaBootstrapComposeRecreate">MiseTomlSchemaBootstrapComposeRecreate</a></code> | auto lets Compose decide, always passes --force-recreate, never passes --no-recreate. |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapCompose.property.removeOrphans">removeOrphans</a></code> | <code>boolean</code> | remove containers for services that are no longer in the Compose model. |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapCompose.property.renewAnonymousVolumes">renewAnonymousVolumes</a></code> | <code>boolean</code> | pass --renew-anon-volumes to compose up, recreating anonymous volumes. |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapCompose.property.services">services</a></code> | <code>string[]</code> | services to manage; |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapCompose.property.state">state</a></code> | <code><a href="#mise-projen.MiseTomlSchemaBootstrapComposeState">MiseTomlSchemaBootstrapComposeState</a></code> | running (compose up), stopped (compose stop, keeping containers and data), or absent (compose down). |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapCompose.property.sudo">sudo</a></code> | <code>boolean</code> | run every Compose and engine command through sudo, for a project on the system Docker daemon. |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapCompose.property.timeout">timeout</a></code> | <code>number</code> | Compose shutdown timeout in seconds. |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapCompose.property.wait">wait</a></code> | <code>boolean</code> | *No description.* |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapCompose.property.wait">wait</a></code> | <code>boolean</code> | pass --wait to compose up, so it waits for services to be running and healthy. |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapCompose.property.waitTimeout">waitTimeout</a></code> | <code>number</code> | wait timeout in seconds. |
 
 ---
@@ -2633,6 +2689,8 @@ public readonly buildValue: MiseTomlSchemaBootstrapComposeBuild;
 ```
 
 - *Type:* <a href="#mise-projen.MiseTomlSchemaBootstrapComposeBuild">MiseTomlSchemaBootstrapComposeBuild</a>
+
+auto lets Compose decide, always passes --build, never passes --no-build.
 
 ---
 
@@ -2668,6 +2726,8 @@ public readonly downImages: MiseTomlSchemaBootstrapComposeDownImages;
 
 - *Type:* <a href="#mise-projen.MiseTomlSchemaBootstrapComposeDownImages">MiseTomlSchemaBootstrapComposeDownImages</a>
 
+images compose down removes, passed as --rmi.
+
 ---
 
 ##### `downVolumes`<sup>Optional</sup> <a name="downVolumes" id="mise-projen.MiseTomlSchemaBootstrapCompose.property.downVolumes"></a>
@@ -2677,6 +2737,8 @@ public readonly downVolumes: boolean;
 ```
 
 - *Type:* boolean
+
+pass --volumes to compose down, removing the project's volumes.
 
 ---
 
@@ -2724,6 +2786,10 @@ public readonly oneshot: string[];
 
 - *Type:* string[]
 
+services that run once and count as converged after exiting with code 0;
+
+when services is set, they must be listed there too
+
 ---
 
 ##### `profiles`<sup>Optional</sup> <a name="profiles" id="mise-projen.MiseTomlSchemaBootstrapCompose.property.profiles"></a>
@@ -2733,6 +2799,8 @@ public readonly profiles: string[];
 ```
 
 - *Type:* string[]
+
+Compose profiles to enable, passed with --profile.
 
 ---
 
@@ -2756,6 +2824,8 @@ public readonly pull: MiseTomlSchemaBootstrapComposePull;
 
 - *Type:* <a href="#mise-projen.MiseTomlSchemaBootstrapComposePull">MiseTomlSchemaBootstrapComposePull</a>
 
+image pull policy passed to compose up as --pull.
+
 ---
 
 ##### `recreate`<sup>Optional</sup> <a name="recreate" id="mise-projen.MiseTomlSchemaBootstrapCompose.property.recreate"></a>
@@ -2765,6 +2835,8 @@ public readonly recreate: MiseTomlSchemaBootstrapComposeRecreate;
 ```
 
 - *Type:* <a href="#mise-projen.MiseTomlSchemaBootstrapComposeRecreate">MiseTomlSchemaBootstrapComposeRecreate</a>
+
+auto lets Compose decide, always passes --force-recreate, never passes --no-recreate.
 
 ---
 
@@ -2776,6 +2848,8 @@ public readonly removeOrphans: boolean;
 
 - *Type:* boolean
 
+remove containers for services that are no longer in the Compose model.
+
 ---
 
 ##### `renewAnonymousVolumes`<sup>Optional</sup> <a name="renewAnonymousVolumes" id="mise-projen.MiseTomlSchemaBootstrapCompose.property.renewAnonymousVolumes"></a>
@@ -2785,6 +2859,8 @@ public readonly renewAnonymousVolumes: boolean;
 ```
 
 - *Type:* boolean
+
+pass --renew-anon-volumes to compose up, recreating anonymous volumes.
 
 ---
 
@@ -2796,6 +2872,10 @@ public readonly services: string[];
 
 - *Type:* string[]
 
+services to manage;
+
+defaults to every service the files and profiles enable
+
 ---
 
 ##### `state`<sup>Optional</sup> <a name="state" id="mise-projen.MiseTomlSchemaBootstrapCompose.property.state"></a>
@@ -2806,6 +2886,8 @@ public readonly state: MiseTomlSchemaBootstrapComposeState;
 
 - *Type:* <a href="#mise-projen.MiseTomlSchemaBootstrapComposeState">MiseTomlSchemaBootstrapComposeState</a>
 
+running (compose up), stopped (compose stop, keeping containers and data), or absent (compose down).
+
 ---
 
 ##### `sudo`<sup>Optional</sup> <a name="sudo" id="mise-projen.MiseTomlSchemaBootstrapCompose.property.sudo"></a>
@@ -2815,6 +2897,8 @@ public readonly sudo: boolean;
 ```
 
 - *Type:* boolean
+
+run every Compose and engine command through sudo, for a project on the system Docker daemon.
 
 ---
 
@@ -2838,6 +2922,8 @@ public readonly wait: boolean;
 
 - *Type:* boolean
 
+pass --wait to compose up, so it waits for services to be running and healthy.
+
 ---
 
 ##### `waitTimeout`<sup>Optional</sup> <a name="waitTimeout" id="mise-projen.MiseTomlSchemaBootstrapCompose.property.waitTimeout"></a>
@@ -2854,6 +2940,8 @@ wait timeout in seconds.
 
 ### MiseTomlSchemaBootstrapDirectories <a name="MiseTomlSchemaBootstrapDirectories" id="mise-projen.MiseTomlSchemaBootstrapDirectories"></a>
 
+directory whose owner, group, and mode mise manages, keyed by an absolute or ~/ target path.
+
 #### Initializer <a name="Initializer" id="mise-projen.MiseTomlSchemaBootstrapDirectories.Initializer"></a>
 
 ```typescript
@@ -2866,15 +2954,15 @@ const miseTomlSchemaBootstrapDirectories: MiseTomlSchemaBootstrapDirectories = {
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapDirectories.property.group">group</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapDirectories.property.mode">mode</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapDirectories.property.notify">notify</a></code> | <code>string[]</code> | *No description.* |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapDirectories.property.group">group</a></code> | <code>string</code> | group that should own the directory; |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapDirectories.property.mode">mode</a></code> | <code>string</code> | octal permissions such as "0755"; |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapDirectories.property.notify">notify</a></code> | <code>string[]</code> | system services declared in [bootstrap.services] to reload or restart when mise changes this directory. |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapDirectories.property.os">os</a></code> | <code>string[]</code> | OS or OS/arch selectors; |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapDirectories.property.owner">owner</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapDirectories.property.owner">owner</a></code> | <code>string</code> | user that should own the directory; |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapDirectories.property.phase">phase</a></code> | <code><a href="#mise-projen.BootstrapFilePhase">BootstrapFilePhase</a></code> | *No description.* |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapDirectories.property.recursive">recursive</a></code> | <code>boolean</code> | *No description.* |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapDirectories.property.replace">replace</a></code> | <code>boolean</code> | *No description.* |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapDirectories.property.state">state</a></code> | <code><a href="#mise-projen.MiseTomlSchemaBootstrapDirectoriesState">MiseTomlSchemaBootstrapDirectoriesState</a></code> | *No description.* |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapDirectories.property.recursive">recursive</a></code> | <code>boolean</code> | with state = "absent", delete the directory and everything in it. |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapDirectories.property.replace">replace</a></code> | <code>boolean</code> | replace a path of another type at the target, such as a file. |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapDirectories.property.state">state</a></code> | <code><a href="#mise-projen.MiseTomlSchemaBootstrapDirectoriesState">MiseTomlSchemaBootstrapDirectoriesState</a></code> | present creates the directory with any missing parents; |
 
 ---
 
@@ -2886,6 +2974,10 @@ public readonly group: string;
 
 - *Type:* string
 
+group that should own the directory;
+
+left as it is when unset, and parents mise creates get the system defaults
+
 ---
 
 ##### `mode`<sup>Optional</sup> <a name="mode" id="mise-projen.MiseTomlSchemaBootstrapDirectories.property.mode"></a>
@@ -2896,6 +2988,10 @@ public readonly mode: string;
 
 - *Type:* string
 
+octal permissions such as "0755";
+
+defaults to "0755"
+
 ---
 
 ##### `notify`<sup>Optional</sup> <a name="notify" id="mise-projen.MiseTomlSchemaBootstrapDirectories.property.notify"></a>
@@ -2905,6 +3001,8 @@ public readonly notify: string[];
 ```
 
 - *Type:* string[]
+
+system services declared in [bootstrap.services] to reload or restart when mise changes this directory.
 
 ---
 
@@ -2930,6 +3028,10 @@ public readonly owner: string;
 
 - *Type:* string
 
+user that should own the directory;
+
+left as it is when unset, and parents mise creates get the system defaults
+
 ---
 
 ##### `phase`<sup>Optional</sup> <a name="phase" id="mise-projen.MiseTomlSchemaBootstrapDirectories.property.phase"></a>
@@ -2950,6 +3052,8 @@ public readonly recursive: boolean;
 
 - *Type:* boolean
 
+with state = "absent", delete the directory and everything in it.
+
 ---
 
 ##### `replace`<sup>Optional</sup> <a name="replace" id="mise-projen.MiseTomlSchemaBootstrapDirectories.property.replace"></a>
@@ -2960,6 +3064,8 @@ public readonly replace: boolean;
 
 - *Type:* boolean
 
+replace a path of another type at the target, such as a file.
+
 ---
 
 ##### `state`<sup>Optional</sup> <a name="state" id="mise-projen.MiseTomlSchemaBootstrapDirectories.property.state"></a>
@@ -2969,6 +3075,10 @@ public readonly state: MiseTomlSchemaBootstrapDirectoriesState;
 ```
 
 - *Type:* <a href="#mise-projen.MiseTomlSchemaBootstrapDirectoriesState">MiseTomlSchemaBootstrapDirectoriesState</a>
+
+present creates the directory with any missing parents;
+
+absent removes it, which must then be empty unless recursive is set
 
 ---
 
@@ -3004,6 +3114,8 @@ public readonly repos: {[ key: string ]: BootstrapDnfRepos};
 
 ### MiseTomlSchemaBootstrapFiles <a name="MiseTomlSchemaBootstrapFiles" id="mise-projen.MiseTomlSchemaBootstrapFiles"></a>
 
+file whose content, owner, group, and mode mise manages, keyed by an absolute or ~/ target path.
+
 #### Initializer <a name="Initializer" id="mise-projen.MiseTomlSchemaBootstrapFiles.Initializer"></a>
 
 ```typescript
@@ -3016,18 +3128,18 @@ const miseTomlSchemaBootstrapFiles: MiseTomlSchemaBootstrapFiles = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapFiles.property.content">content</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapFiles.property.group">group</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapFiles.property.mode">mode</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapFiles.property.notify">notify</a></code> | <code>string[]</code> | *No description.* |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapFiles.property.content">content</a></code> | <code>string</code> | inline file content; |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapFiles.property.group">group</a></code> | <code>string</code> | group that should own the file; |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapFiles.property.mode">mode</a></code> | <code>string</code> | octal permissions such as "0640"; |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapFiles.property.notify">notify</a></code> | <code>string[]</code> | system services declared in [bootstrap.services] to reload or restart when mise changes this file. |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapFiles.property.os">os</a></code> | <code>string[]</code> | OS or OS/arch selectors; |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapFiles.property.owner">owner</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapFiles.property.owner">owner</a></code> | <code>string</code> | user that should own the file; |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapFiles.property.phase">phase</a></code> | <code><a href="#mise-projen.BootstrapFilePhase">BootstrapFilePhase</a></code> | *No description.* |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapFiles.property.removeEmpty">removeEmpty</a></code> | <code>boolean</code> | remove the target when the template renders to empty or whitespace-only content; |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapFiles.property.replace">replace</a></code> | <code>boolean</code> | *No description.* |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapFiles.property.source">source</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapFiles.property.state">state</a></code> | <code><a href="#mise-projen.MiseTomlSchemaBootstrapFilesState">MiseTomlSchemaBootstrapFilesState</a></code> | *No description.* |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapFiles.property.template">template</a></code> | <code>boolean</code> | *No description.* |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapFiles.property.replace">replace</a></code> | <code>boolean</code> | replace a path of another type at the target, such as an empty directory; |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapFiles.property.source">source</a></code> | <code>string</code> | file to copy the content from; |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapFiles.property.state">state</a></code> | <code><a href="#mise-projen.MiseTomlSchemaBootstrapFilesState">MiseTomlSchemaBootstrapFilesState</a></code> | present creates or updates the file; |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapFiles.property.template">template</a></code> | <code>boolean</code> | render source or content with mise's template engine; |
 
 ---
 
@@ -3039,6 +3151,10 @@ public readonly content: string;
 
 - *Type:* string
 
+inline file content;
+
+cannot be combined with source
+
 ---
 
 ##### `group`<sup>Optional</sup> <a name="group" id="mise-projen.MiseTomlSchemaBootstrapFiles.property.group"></a>
@@ -3048,6 +3164,10 @@ public readonly group: string;
 ```
 
 - *Type:* string
+
+group that should own the file;
+
+left as it is when unset
 
 ---
 
@@ -3059,6 +3179,10 @@ public readonly mode: string;
 
 - *Type:* string
 
+octal permissions such as "0640";
+
+defaults to "0644" for a file with source or content, otherwise left as it is
+
 ---
 
 ##### `notify`<sup>Optional</sup> <a name="notify" id="mise-projen.MiseTomlSchemaBootstrapFiles.property.notify"></a>
@@ -3068,6 +3192,8 @@ public readonly notify: string[];
 ```
 
 - *Type:* string[]
+
+system services declared in [bootstrap.services] to reload or restart when mise changes this file.
 
 ---
 
@@ -3092,6 +3218,10 @@ public readonly owner: string;
 ```
 
 - *Type:* string
+
+user that should own the file;
+
+left as it is when unset
 
 ---
 
@@ -3127,6 +3257,10 @@ public readonly replace: boolean;
 
 - *Type:* boolean
 
+replace a path of another type at the target, such as an empty directory;
+
+requires source or content
+
 ---
 
 ##### `source`<sup>Optional</sup> <a name="source" id="mise-projen.MiseTomlSchemaBootstrapFiles.property.source"></a>
@@ -3136,6 +3270,10 @@ public readonly source: string;
 ```
 
 - *Type:* string
+
+file to copy the content from;
+
+a relative path resolves from the declaring config's directory and ~/ from your home directory
 
 ---
 
@@ -3147,6 +3285,10 @@ public readonly state: MiseTomlSchemaBootstrapFilesState;
 
 - *Type:* <a href="#mise-projen.MiseTomlSchemaBootstrapFilesState">MiseTomlSchemaBootstrapFilesState</a>
 
+present creates or updates the file;
+
+absent removes it whatever its content
+
 ---
 
 ##### `template`<sup>Optional</sup> <a name="template" id="mise-projen.MiseTomlSchemaBootstrapFiles.property.template"></a>
@@ -3157,9 +3299,15 @@ public readonly template: boolean;
 
 - *Type:* boolean
 
+render source or content with mise's template engine;
+
+without it, template syntax is written unchanged
+
 ---
 
 ### MiseTomlSchemaBootstrapGroups <a name="MiseTomlSchemaBootstrapGroups" id="mise-projen.MiseTomlSchemaBootstrapGroups"></a>
+
+local Linux group that bootstrap creates, updates, or removes.
 
 #### Initializer <a name="Initializer" id="mise-projen.MiseTomlSchemaBootstrapGroups.Initializer"></a>
 
@@ -3389,14 +3537,14 @@ const miseTomlSchemaBootstrapLinuxFirewallRules: MiseTomlSchemaBootstrapLinuxFir
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapLinuxFirewallRules.property.name">name</a></code> | <code>string</code> | stable managed rule identifier. |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapLinuxFirewallRules.property.action">action</a></code> | <code><a href="#mise-projen.MiseTomlSchemaBootstrapLinuxFirewallRulesAction">MiseTomlSchemaBootstrapLinuxFirewallRulesAction</a></code> | *No description.* |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapLinuxFirewallRules.property.action">action</a></code> | <code><a href="#mise-projen.MiseTomlSchemaBootstrapLinuxFirewallRulesAction">MiseTomlSchemaBootstrapLinuxFirewallRulesAction</a></code> | what to do with matching traffic; |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapLinuxFirewallRules.property.destination">destination</a></code> | <code>string</code> | destination IPv4 or IPv6 CIDR network. |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapLinuxFirewallRules.property.direction">direction</a></code> | <code><a href="#mise-projen.MiseTomlSchemaBootstrapLinuxFirewallRulesDirection">MiseTomlSchemaBootstrapLinuxFirewallRulesDirection</a></code> | *No description.* |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapLinuxFirewallRules.property.direction">direction</a></code> | <code><a href="#mise-projen.MiseTomlSchemaBootstrapLinuxFirewallRulesDirection">MiseTomlSchemaBootstrapLinuxFirewallRulesDirection</a></code> | traffic direction the rule matches. |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapLinuxFirewallRules.property.interface">interface</a></code> | <code>string</code> | network interface (nftables and UFW only). |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapLinuxFirewallRules.property.port">port</a></code> | <code><a href="#mise-projen.MiseTomlSchemaBootstrapLinuxFirewallRulesPort">MiseTomlSchemaBootstrapLinuxFirewallRulesPort</a></code> | single port number or inclusive range. |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapLinuxFirewallRules.property.protocol">protocol</a></code> | <code><a href="#mise-projen.MiseTomlSchemaBootstrapLinuxFirewallRulesProtocol">MiseTomlSchemaBootstrapLinuxFirewallRulesProtocol</a></code> | *No description.* |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapLinuxFirewallRules.property.protocol">protocol</a></code> | <code><a href="#mise-projen.MiseTomlSchemaBootstrapLinuxFirewallRulesProtocol">MiseTomlSchemaBootstrapLinuxFirewallRulesProtocol</a></code> | protocol to match; |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapLinuxFirewallRules.property.source">source</a></code> | <code>string</code> | source IPv4 or IPv6 CIDR network. |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapLinuxFirewallRules.property.state">state</a></code> | <code><a href="#mise-projen.MiseTomlSchemaBootstrapLinuxFirewallRulesState">MiseTomlSchemaBootstrapLinuxFirewallRulesState</a></code> | *No description.* |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapLinuxFirewallRules.property.state">state</a></code> | <code><a href="#mise-projen.MiseTomlSchemaBootstrapLinuxFirewallRulesState">MiseTomlSchemaBootstrapLinuxFirewallRulesState</a></code> | present adds the rule; |
 
 ---
 
@@ -3420,6 +3568,10 @@ public readonly action: MiseTomlSchemaBootstrapLinuxFirewallRulesAction;
 
 - *Type:* <a href="#mise-projen.MiseTomlSchemaBootstrapLinuxFirewallRulesAction">MiseTomlSchemaBootstrapLinuxFirewallRulesAction</a>
 
+what to do with matching traffic;
+
+limit needs incoming TCP and is not available on firewalld
+
 ---
 
 ##### `destination`<sup>Optional</sup> <a name="destination" id="mise-projen.MiseTomlSchemaBootstrapLinuxFirewallRules.property.destination"></a>
@@ -3441,6 +3593,8 @@ public readonly direction: MiseTomlSchemaBootstrapLinuxFirewallRulesDirection;
 ```
 
 - *Type:* <a href="#mise-projen.MiseTomlSchemaBootstrapLinuxFirewallRulesDirection">MiseTomlSchemaBootstrapLinuxFirewallRulesDirection</a>
+
+traffic direction the rule matches.
 
 ---
 
@@ -3476,6 +3630,10 @@ public readonly protocol: MiseTomlSchemaBootstrapLinuxFirewallRulesProtocol;
 
 - *Type:* <a href="#mise-projen.MiseTomlSchemaBootstrapLinuxFirewallRulesProtocol">MiseTomlSchemaBootstrapLinuxFirewallRulesProtocol</a>
 
+protocol to match;
+
+any when unset, and UFW supports only tcp and udp
+
 ---
 
 ##### `source`<sup>Optional</sup> <a name="source" id="mise-projen.MiseTomlSchemaBootstrapLinuxFirewallRules.property.source"></a>
@@ -3497,6 +3655,10 @@ public readonly state: MiseTomlSchemaBootstrapLinuxFirewallRulesState;
 ```
 
 - *Type:* <a href="#mise-projen.MiseTomlSchemaBootstrapLinuxFirewallRulesState">MiseTomlSchemaBootstrapLinuxFirewallRulesState</a>
+
+present adds the rule;
+
+absent removes a rule mise added earlier
 
 ---
 
@@ -3533,6 +3695,8 @@ systemd user services and timers to write and start with `mise bootstrap linux s
 ---
 
 ### MiseTomlSchemaBootstrapLinuxSystemdUnits <a name="MiseTomlSchemaBootstrapLinuxSystemdUnits" id="mise-projen.MiseTomlSchemaBootstrapLinuxSystemdUnits"></a>
+
+systemd user unit written to ~/.config/systemd/user/dev.mise.<name>.service, or .timer when it sets a timer key.
 
 #### Initializer <a name="Initializer" id="mise-projen.MiseTomlSchemaBootstrapLinuxSystemdUnits.Initializer"></a>
 
@@ -4189,10 +4353,10 @@ const miseTomlSchemaBootstrapMacosDefaultsEntries: MiseTomlSchemaBootstrapMacosD
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosDefaultsEntries.property.domain">domain</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosDefaultsEntries.property.key">key</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosDefaultsEntries.property.value">value</a></code> | <code>any</code> | *No description.* |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosDefaultsEntries.property.host">host</a></code> | <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosDefaultsEntriesHost">MiseTomlSchemaBootstrapMacosDefaultsEntriesHost</a></code> | *No description.* |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosDefaultsEntries.property.domain">domain</a></code> | <code>string</code> | preferences domain, such as "com.apple.dock" or "NSGlobalDomain"; -g and -globalDomain mean NSGlobalDomain. |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosDefaultsEntries.property.key">key</a></code> | <code>string</code> | preference key within the domain. |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosDefaultsEntries.property.value">value</a></code> | <code>any</code> | desired value, written with the matching property list type; |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosDefaultsEntries.property.host">host</a></code> | <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosDefaultsEntriesHost">MiseTomlSchemaBootstrapMacosDefaultsEntriesHost</a></code> | any writes the preference for every host; |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosDefaultsEntries.property.path">path</a></code> | <code>string[]</code> | Dictionary keys below the preference key; |
 
 ---
@@ -4205,6 +4369,8 @@ public readonly domain: string;
 
 - *Type:* string
 
+preferences domain, such as "com.apple.dock" or "NSGlobalDomain"; -g and -globalDomain mean NSGlobalDomain.
+
 ---
 
 ##### `key`<sup>Required</sup> <a name="key" id="mise-projen.MiseTomlSchemaBootstrapMacosDefaultsEntries.property.key"></a>
@@ -4214,6 +4380,8 @@ public readonly key: string;
 ```
 
 - *Type:* string
+
+preference key within the domain.
 
 ---
 
@@ -4225,6 +4393,10 @@ public readonly value: any;
 
 - *Type:* any
 
+desired value, written with the matching property list type;
+
+replaces the selected value in full
+
 ---
 
 ##### `host`<sup>Optional</sup> <a name="host" id="mise-projen.MiseTomlSchemaBootstrapMacosDefaultsEntries.property.host"></a>
@@ -4234,6 +4406,10 @@ public readonly host: MiseTomlSchemaBootstrapMacosDefaultsEntriesHost;
 ```
 
 - *Type:* <a href="#mise-projen.MiseTomlSchemaBootstrapMacosDefaultsEntriesHost">MiseTomlSchemaBootstrapMacosDefaultsEntriesHost</a>
+
+any writes the preference for every host;
+
+current writes it for this machine only, like defaults -currentHost
 
 ---
 
@@ -4284,6 +4460,8 @@ macOS user LaunchAgents to write and load with `mise bootstrap macos launchd-age
 ---
 
 ### MiseTomlSchemaBootstrapMacosLaunchdAgents <a name="MiseTomlSchemaBootstrapMacosLaunchdAgents" id="mise-projen.MiseTomlSchemaBootstrapMacosLaunchdAgents"></a>
+
+macOS LaunchAgent written to ~/Library/LaunchAgents/dev.mise.<name>.plist and loaded for the current user.
 
 #### Initializer <a name="Initializer" id="mise-projen.MiseTomlSchemaBootstrapMacosLaunchdAgents.Initializer"></a>
 
@@ -4669,6 +4847,8 @@ local project directory sent to inventory hosts.
 
 ### MiseTomlSchemaBootstrapRemoteHosts <a name="MiseTomlSchemaBootstrapRemoteHosts" id="mise-projen.MiseTomlSchemaBootstrapRemoteHosts"></a>
 
+SSH target that `mise bootstrap remote` can bootstrap, selected by name or tag.
+
 #### Initializer <a name="Initializer" id="mise-projen.MiseTomlSchemaBootstrapRemoteHosts.Initializer"></a>
 
 ```typescript
@@ -4881,6 +5061,8 @@ SSH user.
 
 ### MiseTomlSchemaBootstrapRepos <a name="MiseTomlSchemaBootstrapRepos" id="mise-projen.MiseTomlSchemaBootstrapRepos"></a>
 
+git repository to clone to this path, then keep on ref when one is set.
+
 #### Initializer <a name="Initializer" id="mise-projen.MiseTomlSchemaBootstrapRepos.Initializer"></a>
 
 ```typescript
@@ -4969,6 +5151,8 @@ applies to the first clone only
 
 ### MiseTomlSchemaBootstrapServices <a name="MiseTomlSchemaBootstrapServices" id="mise-projen.MiseTomlSchemaBootstrapServices"></a>
 
+Linux systemd system unit that mise starts, stops, enables, or masks, or a user service mise defines from command or builtin.
+
 #### Initializer <a name="Initializer" id="mise-projen.MiseTomlSchemaBootstrapServices.Initializer"></a>
 
 ```typescript
@@ -4983,16 +5167,16 @@ const miseTomlSchemaBootstrapServices: MiseTomlSchemaBootstrapServices = { ... }
 | --- | --- | --- |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapServices.property.builtin">builtin</a></code> | <code><a href="#mise-projen.MiseTomlSchemaBootstrapServicesBuiltin">MiseTomlSchemaBootstrapServicesBuiltin</a></code> | A mise-provided user service. |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapServices.property.command">command</a></code> | <code>string</code> | User service command; |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapServices.property.description">description</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapServices.property.enabled">enabled</a></code> | <code>boolean</code> | *No description.* |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapServices.property.environment">environment</a></code> | <code>{[ key: string ]: string}</code> | *No description.* |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapServices.property.description">description</a></code> | <code>string</code> | text the service manager shows for the service; |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapServices.property.enabled">enabled</a></code> | <code>boolean</code> | start the service at boot (system scope) or at login (user scope). |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapServices.property.environment">environment</a></code> | <code>{[ key: string ]: string}</code> | environment variables for the process; |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapServices.property.masked">masked</a></code> | <code>boolean</code> | System scope only. |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapServices.property.onChange">onChange</a></code> | <code><a href="#mise-projen.MiseTomlSchemaBootstrapServicesOnChange">MiseTomlSchemaBootstrapServicesOnChange</a></code> | System scope only. |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapServices.property.requiresTools">requiresTools</a></code> | <code>boolean</code> | *No description.* |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapServices.property.restart">restart</a></code> | <code><a href="#mise-projen.MiseTomlSchemaBootstrapServicesRestart">MiseTomlSchemaBootstrapServicesRestart</a></code> | *No description.* |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapServices.property.requiresTools">requiresTools</a></code> | <code>boolean</code> | start the service only after `mise bootstrap` installs [tools] and plugin packages; |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapServices.property.restart">restart</a></code> | <code><a href="#mise-projen.MiseTomlSchemaBootstrapServicesRestart">MiseTomlSchemaBootstrapServicesRestart</a></code> | when to restart the process after it exits: on-failure, always, or never; |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapServices.property.scope">scope</a></code> | <code><a href="#mise-projen.MiseTomlSchemaBootstrapServicesScope">MiseTomlSchemaBootstrapServicesScope</a></code> | Defaults to system; |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapServices.property.state">state</a></code> | <code><a href="#mise-projen.MiseTomlSchemaBootstrapServicesState">MiseTomlSchemaBootstrapServicesState</a></code> | *No description.* |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapServices.property.workingDirectory">workingDirectory</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapServices.property.state">state</a></code> | <code><a href="#mise-projen.MiseTomlSchemaBootstrapServicesState">MiseTomlSchemaBootstrapServicesState</a></code> | running or stopped; |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapServices.property.workingDirectory">workingDirectory</a></code> | <code>string</code> | directory to run the process in, with ~ expanded; |
 
 ---
 
@@ -5030,6 +5214,10 @@ public readonly description: string;
 
 - *Type:* string
 
+text the service manager shows for the service;
+
+user scope only
+
 ---
 
 ##### `enabled`<sup>Optional</sup> <a name="enabled" id="mise-projen.MiseTomlSchemaBootstrapServices.property.enabled"></a>
@@ -5040,6 +5228,8 @@ public readonly enabled: boolean;
 
 - *Type:* boolean
 
+start the service at boot (system scope) or at login (user scope).
+
 ---
 
 ##### `environment`<sup>Optional</sup> <a name="environment" id="mise-projen.MiseTomlSchemaBootstrapServices.property.environment"></a>
@@ -5049,6 +5239,10 @@ public readonly environment: {[ key: string ]: string};
 ```
 
 - *Type:* {[ key: string ]: string}
+
+environment variables for the process;
+
+user scope only
 
 ---
 
@@ -5084,6 +5278,10 @@ public readonly requiresTools: boolean;
 
 - *Type:* boolean
 
+start the service only after `mise bootstrap` installs [tools] and plugin packages;
+
+user scope only
+
 ---
 
 ##### `restart`<sup>Optional</sup> <a name="restart" id="mise-projen.MiseTomlSchemaBootstrapServices.property.restart"></a>
@@ -5093,6 +5291,10 @@ public readonly restart: MiseTomlSchemaBootstrapServicesRestart;
 ```
 
 - *Type:* <a href="#mise-projen.MiseTomlSchemaBootstrapServicesRestart">MiseTomlSchemaBootstrapServicesRestart</a>
+
+when to restart the process after it exits: on-failure, always, or never;
+
+on Windows, always and on-failure both retry failed runs only; user scope only
 
 ---
 
@@ -5119,6 +5321,10 @@ public readonly state: MiseTomlSchemaBootstrapServicesState;
 
 - *Type:* <a href="#mise-projen.MiseTomlSchemaBootstrapServicesState">MiseTomlSchemaBootstrapServicesState</a>
 
+running or stopped;
+
+absent removes a user service's definition (user scope only)
+
 ---
 
 ##### `workingDirectory`<sup>Optional</sup> <a name="workingDirectory" id="mise-projen.MiseTomlSchemaBootstrapServices.property.workingDirectory"></a>
@@ -5128,6 +5334,10 @@ public readonly workingDirectory: string;
 ```
 
 - *Type:* string
+
+directory to run the process in, with ~ expanded;
+
+user scope only
 
 ---
 
@@ -5166,6 +5376,8 @@ a template that must render to an absolute path
 ---
 
 ### MiseTomlSchemaBootstrapUsers <a name="MiseTomlSchemaBootstrapUsers" id="mise-projen.MiseTomlSchemaBootstrapUsers"></a>
+
+local Linux user that bootstrap creates, updates, or removes.
 
 #### Initializer <a name="Initializer" id="mise-projen.MiseTomlSchemaBootstrapUsers.Initializer"></a>
 
@@ -5346,6 +5558,8 @@ numeric user ID.
 
 ### MiseTomlSchemaDaemonProviders <a name="MiseTomlSchemaDaemonProviders" id="mise-projen.MiseTomlSchemaDaemonProviders"></a>
 
+A PostgreSQL, CockroachDB or NATS server that every checkout shares, with a separate database or NATS account for each.
+
 #### Initializer <a name="Initializer" id="mise-projen.MiseTomlSchemaDaemonProviders.Initializer"></a>
 
 ```typescript
@@ -5358,13 +5572,13 @@ const miseTomlSchemaDaemonProviders: MiseTomlSchemaDaemonProviders = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#mise-projen.MiseTomlSchemaDaemonProviders.property.preset">preset</a></code> | <code><a href="#mise-projen.MiseTomlSchemaDaemonProvidersPreset">MiseTomlSchemaDaemonProvidersPreset</a></code> | *No description.* |
-| <code><a href="#mise-projen.MiseTomlSchemaDaemonProviders.property.version">version</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#mise-projen.MiseTomlSchemaDaemonProviders.property.dataDir">dataDir</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#mise-projen.MiseTomlSchemaDaemonProviders.property.options">options</a></code> | <code>any</code> | *No description.* |
+| <code><a href="#mise-projen.MiseTomlSchemaDaemonProviders.property.preset">preset</a></code> | <code><a href="#mise-projen.MiseTomlSchemaDaemonProvidersPreset">MiseTomlSchemaDaemonProvidersPreset</a></code> | Service preset that runs the server. |
+| <code><a href="#mise-projen.MiseTomlSchemaDaemonProviders.property.version">version</a></code> | <code>string</code> | Version request for the preset's tool. |
+| <code><a href="#mise-projen.MiseTomlSchemaDaemonProviders.property.dataDir">dataDir</a></code> | <code>string</code> | Persistent server data directory; |
+| <code><a href="#mise-projen.MiseTomlSchemaDaemonProviders.property.options">options</a></code> | <code>any</code> | Preset options, such as `database`. |
 | <code><a href="#mise-projen.MiseTomlSchemaDaemonProviders.property.port">port</a></code> | <code>any</code> | *No description.* |
-| <code><a href="#mise-projen.MiseTomlSchemaDaemonProviders.property.ports">ports</a></code> | <code>{[ key: string ]: number}</code> | *No description.* |
-| <code><a href="#mise-projen.MiseTomlSchemaDaemonProviders.property.tool">tool</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#mise-projen.MiseTomlSchemaDaemonProviders.property.ports">ports</a></code> | <code>{[ key: string ]: number}</code> | Overrides for the preset's additional named ports. |
+| <code><a href="#mise-projen.MiseTomlSchemaDaemonProviders.property.tool">tool</a></code> | <code>string</code> | Tool to install the server from, in place of the preset's default. |
 
 ---
 
@@ -5376,6 +5590,8 @@ public readonly preset: MiseTomlSchemaDaemonProvidersPreset;
 
 - *Type:* <a href="#mise-projen.MiseTomlSchemaDaemonProvidersPreset">MiseTomlSchemaDaemonProvidersPreset</a>
 
+Service preset that runs the server.
+
 ---
 
 ##### `version`<sup>Required</sup> <a name="version" id="mise-projen.MiseTomlSchemaDaemonProviders.property.version"></a>
@@ -5386,6 +5602,8 @@ public readonly version: string;
 
 - *Type:* string
 
+Version request for the preset's tool.
+
 ---
 
 ##### `dataDir`<sup>Optional</sup> <a name="dataDir" id="mise-projen.MiseTomlSchemaDaemonProviders.property.dataDir"></a>
@@ -5395,6 +5613,11 @@ public readonly dataDir: string;
 ```
 
 - *Type:* string
+- *Default:* MISE_STATE_DIR/daemon-providers/<name>/data.
+
+Persistent server data directory;
+
+a relative path resolves inside the provider's state directory. Defaults to $MISE_STATE_DIR/daemon-providers/<name>/data.
 
 ---
 
@@ -5405,6 +5628,8 @@ public readonly options: any;
 ```
 
 - *Type:* any
+
+Preset options, such as `database`.
 
 ---
 
@@ -5426,6 +5651,8 @@ public readonly ports: {[ key: string ]: number};
 
 - *Type:* {[ key: string ]: number}
 
+Overrides for the preset's additional named ports.
+
 ---
 
 ##### `tool`<sup>Optional</sup> <a name="tool" id="mise-projen.MiseTomlSchemaDaemonProviders.property.tool"></a>
@@ -5435,6 +5662,8 @@ public readonly tool: string;
 ```
 
 - *Type:* string
+
+Tool to install the server from, in place of the preset's default.
 
 ---
 
@@ -5485,7 +5714,7 @@ Append a worktree-specific suffix to an explicit namespace when the project root
 
 ### MiseTomlSchemaDeps <a name="MiseTomlSchemaDeps" id="mise-projen.MiseTomlSchemaDeps"></a>
 
-configure deps providers.
+[experimental] configure deps providers.
 
 #### Initializer <a name="Initializer" id="mise-projen.MiseTomlSchemaDeps.Initializer"></a>
 
@@ -5682,6 +5911,8 @@ public readonly yarn: DepsProvider;
 
 ### MiseTomlSchemaDotfileGroups <a name="MiseTomlSchemaDotfileGroups" id="mise-projen.MiseTomlSchemaDotfileGroups"></a>
 
+a directory tree of dotfiles deployed into a target directory.
+
 #### Initializer <a name="Initializer" id="mise-projen.MiseTomlSchemaDotfileGroups.Initializer"></a>
 
 ```typescript
@@ -5823,12 +6054,12 @@ const miseTomlSchemaHistory: MiseTomlSchemaHistory = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#mise-projen.MiseTomlSchemaHistory.property.encryption">encryption</a></code> | <code><a href="#mise-projen.MiseTomlSchemaHistoryEncryption">MiseTomlSchemaHistoryEncryption</a></code> | *No description.* |
+| <code><a href="#mise-projen.MiseTomlSchemaHistory.property.encryption">encryption</a></code> | <code><a href="#mise-projen.MiseTomlSchemaHistoryEncryption">MiseTomlSchemaHistoryEncryption</a></code> | encryption for dotfiles tracked with encrypt = true. |
 | <code><a href="#mise-projen.MiseTomlSchemaHistory.property.exclude">exclude</a></code> | <code>string[]</code> | globs never captured by dotfiles history; |
 | <code><a href="#mise-projen.MiseTomlSchemaHistory.property.gitEmail">gitEmail</a></code> | <code>string</code> | email used for history commit authors and committers; |
 | <code><a href="#mise-projen.MiseTomlSchemaHistory.property.machine">machine</a></code> | <code>string</code> | this machine's name in per-machine streams (variants = [{ machine = true }]) instead of the name generated with the history store. |
 | <code><a href="#mise-projen.MiseTomlSchemaHistory.property.origin">origin</a></code> | <code><a href="#mise-projen.MiseTomlSchemaHistoryOrigin">MiseTomlSchemaHistoryOrigin</a></code> | the setup repository this machine publishes to and fetches from; |
-| <code><a href="#mise-projen.MiseTomlSchemaHistory.property.reload">reload</a></code> | <code>{[ key: string ]: string}</code> | commands run once after a rollback or undo writes a path matching the glob (trusted global or system config only). |
+| <code><a href="#mise-projen.MiseTomlSchemaHistory.property.reload">reload</a></code> | <code>{[ key: string ]: string}</code> | commands run once after a rollback, undo, pull, or dotfiles apply writes a path matching the glob (trusted global or system config only). |
 
 ---
 
@@ -5839,6 +6070,8 @@ public readonly encryption: MiseTomlSchemaHistoryEncryption;
 ```
 
 - *Type:* <a href="#mise-projen.MiseTomlSchemaHistoryEncryption">MiseTomlSchemaHistoryEncryption</a>
+
+encryption for dotfiles tracked with encrypt = true.
 
 ---
 
@@ -5904,11 +6137,13 @@ public readonly reload: {[ key: string ]: string};
 
 - *Type:* {[ key: string ]: string}
 
-commands run once after a rollback or undo writes a path matching the glob (trusted global or system config only).
+commands run once after a rollback, undo, pull, or dotfiles apply writes a path matching the glob (trusted global or system config only).
 
 ---
 
 ### MiseTomlSchemaHistoryEncryption <a name="MiseTomlSchemaHistoryEncryption" id="mise-projen.MiseTomlSchemaHistoryEncryption"></a>
+
+encryption for dotfiles tracked with encrypt = true.
 
 #### Initializer <a name="Initializer" id="mise-projen.MiseTomlSchemaHistoryEncryption.Initializer"></a>
 
@@ -5987,7 +6222,7 @@ the setup branch.
 
 ### MiseTomlSchemaOci <a name="MiseTomlSchemaOci" id="mise-projen.MiseTomlSchemaOci"></a>
 
-configuration for `mise oci build`.
+[experimental] configuration for `mise oci build`.
 
 #### Initializer <a name="Initializer" id="mise-projen.MiseTomlSchemaOci.Initializer"></a>
 
@@ -6365,6 +6600,8 @@ Task defaults applied by task name across inferred and explicit workspace projec
 ---
 
 ### MonorepoProjects <a name="MonorepoProjects" id="mise-projen.MonorepoProjects"></a>
+
+Changes to the workspace project with this ID, or a new project when the ID is new.
 
 #### Initializer <a name="Initializer" id="mise-projen.MonorepoProjects.Initializer"></a>
 
@@ -9035,6 +9272,7 @@ const settingsDotfiles: SettingsDotfiles = { ... }
 | <code><a href="#mise-projen.SettingsDotfiles.property.defaultMode">defaultMode</a></code> | <code><a href="#mise-projen.SettingsDotfilesDefaultMode">SettingsDotfilesDefaultMode</a></code> | Mode for `[dotfiles]` entries that do not set `mode`. |
 | <code><a href="#mise-projen.SettingsDotfiles.property.relativeSymlinks">relativeSymlinks</a></code> | <code>boolean</code> | Create dotfile symlinks with relative targets instead of absolute ones. |
 | <code><a href="#mise-projen.SettingsDotfiles.property.root">root</a></code> | <code>string</code> | Directory that holds dotfile sources for entries without a `source`. |
+| <code><a href="#mise-projen.SettingsDotfiles.property.windowsSymlinks">windowsSymlinks</a></code> | <code>boolean</code> | On Windows, deploy dotfile files as symbolic links instead of copies. |
 
 ---
 
@@ -9071,6 +9309,18 @@ public readonly root: string;
 - *Type:* string
 
 Directory that holds dotfile sources for entries without a `source`.
+
+---
+
+##### `windowsSymlinks`<sup>Optional</sup> <a name="windowsSymlinks" id="mise-projen.SettingsDotfiles.property.windowsSymlinks"></a>
+
+```typescript
+public readonly windowsSymlinks: boolean;
+```
+
+- *Type:* boolean
+
+On Windows, deploy dotfile files as symbolic links instead of copies.
 
 ---
 
@@ -13046,6 +13296,8 @@ gallery.
 
 ### MiseTomlSchemaBootstrapComposeBuild <a name="MiseTomlSchemaBootstrapComposeBuild" id="mise-projen.MiseTomlSchemaBootstrapComposeBuild"></a>
 
+auto lets Compose decide, always passes --build, never passes --no-build.
+
 #### Members <a name="Members" id="Members"></a>
 
 | **Name** | **Description** |
@@ -13079,6 +13331,8 @@ never.
 
 ### MiseTomlSchemaBootstrapComposeDownImages <a name="MiseTomlSchemaBootstrapComposeDownImages" id="mise-projen.MiseTomlSchemaBootstrapComposeDownImages"></a>
 
+images compose down removes, passed as --rmi.
+
 #### Members <a name="Members" id="Members"></a>
 
 | **Name** | **Description** |
@@ -13103,6 +13357,8 @@ all.
 
 
 ### MiseTomlSchemaBootstrapComposePull <a name="MiseTomlSchemaBootstrapComposePull" id="mise-projen.MiseTomlSchemaBootstrapComposePull"></a>
+
+image pull policy passed to compose up as --pull.
 
 #### Members <a name="Members" id="Members"></a>
 
@@ -13137,6 +13393,8 @@ never.
 
 ### MiseTomlSchemaBootstrapComposeRecreate <a name="MiseTomlSchemaBootstrapComposeRecreate" id="mise-projen.MiseTomlSchemaBootstrapComposeRecreate"></a>
 
+auto lets Compose decide, always passes --force-recreate, never passes --no-recreate.
+
 #### Members <a name="Members" id="Members"></a>
 
 | **Name** | **Description** |
@@ -13169,6 +13427,8 @@ never.
 
 
 ### MiseTomlSchemaBootstrapComposeState <a name="MiseTomlSchemaBootstrapComposeState" id="mise-projen.MiseTomlSchemaBootstrapComposeState"></a>
+
+running (compose up), stopped (compose stop, keeping containers and data), or absent (compose down).
 
 #### Members <a name="Members" id="Members"></a>
 
@@ -13203,6 +13463,10 @@ absent.
 
 ### MiseTomlSchemaBootstrapDirectoriesState <a name="MiseTomlSchemaBootstrapDirectoriesState" id="mise-projen.MiseTomlSchemaBootstrapDirectoriesState"></a>
 
+present creates the directory with any missing parents;
+
+absent removes it, which must then be empty unless recursive is set
+
 #### Members <a name="Members" id="Members"></a>
 
 | **Name** | **Description** |
@@ -13227,6 +13491,10 @@ absent.
 
 
 ### MiseTomlSchemaBootstrapFilesState <a name="MiseTomlSchemaBootstrapFilesState" id="mise-projen.MiseTomlSchemaBootstrapFilesState"></a>
+
+present creates or updates the file;
+
+absent removes it whatever its content
 
 #### Members <a name="Members" id="Members"></a>
 
@@ -13395,6 +13663,10 @@ reject.
 
 ### MiseTomlSchemaBootstrapLinuxFirewallRulesAction <a name="MiseTomlSchemaBootstrapLinuxFirewallRulesAction" id="mise-projen.MiseTomlSchemaBootstrapLinuxFirewallRulesAction"></a>
 
+what to do with matching traffic;
+
+limit needs incoming TCP and is not available on firewalld
+
 #### Members <a name="Members" id="Members"></a>
 
 | **Name** | **Description** |
@@ -13436,6 +13708,8 @@ reject.
 
 ### MiseTomlSchemaBootstrapLinuxFirewallRulesDirection <a name="MiseTomlSchemaBootstrapLinuxFirewallRulesDirection" id="mise-projen.MiseTomlSchemaBootstrapLinuxFirewallRulesDirection"></a>
 
+traffic direction the rule matches.
+
 #### Members <a name="Members" id="Members"></a>
 
 | **Name** | **Description** |
@@ -13460,6 +13734,10 @@ outgoing.
 
 
 ### MiseTomlSchemaBootstrapLinuxFirewallRulesProtocol <a name="MiseTomlSchemaBootstrapLinuxFirewallRulesProtocol" id="mise-projen.MiseTomlSchemaBootstrapLinuxFirewallRulesProtocol"></a>
+
+protocol to match;
+
+any when unset, and UFW supports only tcp and udp
 
 #### Members <a name="Members" id="Members"></a>
 
@@ -13501,6 +13779,10 @@ dccp.
 
 
 ### MiseTomlSchemaBootstrapLinuxFirewallRulesState <a name="MiseTomlSchemaBootstrapLinuxFirewallRulesState" id="mise-projen.MiseTomlSchemaBootstrapLinuxFirewallRulesState"></a>
+
+present adds the rule;
+
+absent removes a rule mise added earlier
 
 #### Members <a name="Members" id="Members"></a>
 
@@ -13666,6 +13948,10 @@ idle.
 
 ### MiseTomlSchemaBootstrapMacosDefaultsEntriesHost <a name="MiseTomlSchemaBootstrapMacosDefaultsEntriesHost" id="mise-projen.MiseTomlSchemaBootstrapMacosDefaultsEntriesHost"></a>
 
+any writes the preference for every host;
+
+current writes it for this machine only, like defaults -currentHost
+
 #### Members <a name="Members" id="Members"></a>
 
 | **Name** | **Description** |
@@ -13804,6 +14090,10 @@ none.
 
 ### MiseTomlSchemaBootstrapServicesRestart <a name="MiseTomlSchemaBootstrapServicesRestart" id="mise-projen.MiseTomlSchemaBootstrapServicesRestart"></a>
 
+when to restart the process after it exits: on-failure, always, or never;
+
+on Windows, always and on-failure both retry failed runs only; user scope only
+
 #### Members <a name="Members" id="Members"></a>
 
 | **Name** | **Description** |
@@ -13866,6 +14156,10 @@ user.
 
 ### MiseTomlSchemaBootstrapServicesState <a name="MiseTomlSchemaBootstrapServicesState" id="mise-projen.MiseTomlSchemaBootstrapServicesState"></a>
 
+running or stopped;
+
+absent removes a user service's definition (user scope only)
+
 #### Members <a name="Members" id="Members"></a>
 
 | **Name** | **Description** |
@@ -13925,6 +14219,8 @@ absent.
 
 
 ### MiseTomlSchemaDaemonProvidersPreset <a name="MiseTomlSchemaDaemonProvidersPreset" id="mise-projen.MiseTomlSchemaDaemonProvidersPreset"></a>
+
+Service preset that runs the server.
 
 #### Members <a name="Members" id="Members"></a>
 
