@@ -4271,6 +4271,13 @@ export function toJson_SettingsPrune(obj: SettingsPrune | undefined): Record<str
  */
 export interface SettingsPypi {
   /**
+   * Read a `pypi:` index password from a `keyring` command when the index URL names a user but no password.
+   *
+   * @schema SettingsPypi#keyring_provider
+   */
+  readonly keyringProvider?: SettingsPypiKeyringProvider;
+
+  /**
    * Package index URL that `pypi:` tools list versions from, with `{}` in place of the package name.
    *
    * @schema SettingsPypi#registry_url
@@ -4293,6 +4300,7 @@ export interface SettingsPypi {
 export function toJson_SettingsPypi(obj: SettingsPypi | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'keyring_provider': obj.keyringProvider,
     'registry_url': obj.registryUrl,
     'uvx': obj.uvx,
   };
@@ -6232,7 +6240,7 @@ export function toJson_MiseTomlSchemaBootstrapLinux(obj: MiseTomlSchemaBootstrap
  */
 export interface MiseTomlSchemaBootstrapUser {
   /**
-   * current user's desired login shell, applied with `chsh -s`; a template that must render to an absolute path
+   * current user's desired login shell, applied with `chsh -s`; an absolute path or a bare shell name resolved after packages are installed; may be a template
    *
    * @schema MiseTomlSchemaBootstrapUser#login_shell
    */
@@ -7033,6 +7041,18 @@ export enum SettingsNpmPackageManager {
   BUN = "bun",
   /** pnpm */
   PNPM = "pnpm",
+}
+
+/**
+ * Read a `pypi:` index password from a `keyring` command when the index URL names a user but no password.
+ *
+ * @schema SettingsPypiKeyringProvider
+ */
+export enum SettingsPypiKeyringProvider {
+  /** disabled */
+  DISABLED = "disabled",
+  /** subprocess */
+  SUBPROCESS = "subprocess",
 }
 
 /**

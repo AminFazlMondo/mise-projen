@@ -5371,7 +5371,7 @@ public readonly loginShell: string;
 
 current user's desired login shell, applied with `chsh -s`;
 
-a template that must render to an absolute path
+an absolute path or a bare shell name resolved after packages are installed; may be a template
 
 ---
 
@@ -10757,8 +10757,21 @@ const settingsPypi: SettingsPypi = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
+| <code><a href="#mise-projen.SettingsPypi.property.keyringProvider">keyringProvider</a></code> | <code><a href="#mise-projen.SettingsPypiKeyringProvider">SettingsPypiKeyringProvider</a></code> | Read a `pypi:` index password from a `keyring` command when the index URL names a user but no password. |
 | <code><a href="#mise-projen.SettingsPypi.property.registryUrl">registryUrl</a></code> | <code>string</code> | Package index URL that `pypi:` tools list versions from, with `{}` in place of the package name. |
 | <code><a href="#mise-projen.SettingsPypi.property.uvx">uvx</a></code> | <code>boolean</code> | Install `pypi:` tools with uv when uv is available, and with pipx otherwise. |
+
+---
+
+##### `keyringProvider`<sup>Optional</sup> <a name="keyringProvider" id="mise-projen.SettingsPypi.property.keyringProvider"></a>
+
+```typescript
+public readonly keyringProvider: SettingsPypiKeyringProvider;
+```
+
+- *Type:* <a href="#mise-projen.SettingsPypiKeyringProvider">SettingsPypiKeyringProvider</a>
+
+Read a `pypi:` index password from a `keyring` command when the index URL names a user but no password.
 
 ---
 
@@ -14742,6 +14755,33 @@ bun.
 ##### `PNPM` <a name="PNPM" id="mise-projen.SettingsNpmPackageManager.PNPM"></a>
 
 pnpm.
+
+---
+
+
+### SettingsPypiKeyringProvider <a name="SettingsPypiKeyringProvider" id="mise-projen.SettingsPypiKeyringProvider"></a>
+
+Read a `pypi:` index password from a `keyring` command when the index URL names a user but no password.
+
+#### Members <a name="Members" id="Members"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#mise-projen.SettingsPypiKeyringProvider.DISABLED">DISABLED</a></code> | disabled. |
+| <code><a href="#mise-projen.SettingsPypiKeyringProvider.SUBPROCESS">SUBPROCESS</a></code> | subprocess. |
+
+---
+
+##### `DISABLED` <a name="DISABLED" id="mise-projen.SettingsPypiKeyringProvider.DISABLED"></a>
+
+disabled.
+
+---
+
+
+##### `SUBPROCESS` <a name="SUBPROCESS" id="mise-projen.SettingsPypiKeyringProvider.SUBPROCESS"></a>
+
+subprocess.
 
 ---
 
