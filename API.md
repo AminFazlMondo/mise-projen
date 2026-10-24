@@ -1356,6 +1356,7 @@ const doctorChecks: DoctorChecks = { ... }
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#mise-projen.DoctorChecks.property.run">run</a></code> | <code>string</code> | Diagnostic command. |
+| <code><a href="#mise-projen.DoctorChecks.property.depends">depends</a></code> | <code>string[]</code> | Names of checks that must pass first. |
 | <code><a href="#mise-projen.DoctorChecks.property.description">description</a></code> | <code>string</code> | Human-readable requirement checked by the command. |
 | <code><a href="#mise-projen.DoctorChecks.property.dir">dir</a></code> | <code>string</code> | Working directory. |
 | <code><a href="#mise-projen.DoctorChecks.property.hint">hint</a></code> | <code>string</code> | Remediation guidance displayed on failure; |
@@ -1376,6 +1377,20 @@ public readonly run: string;
 Diagnostic command.
 
 Exit zero to pass; other exit codes fail.
+
+---
+
+##### `depends`<sup>Optional</sup> <a name="depends" id="mise-projen.DoctorChecks.property.depends"></a>
+
+```typescript
+public readonly depends: string[];
+```
+
+- *Type:* string[]
+
+Names of checks that must pass first.
+
+If one does not pass, this check is reported as blocked and its command does not run.
 
 ---
 
@@ -6819,7 +6834,7 @@ const settings: Settings = { ... }
 | <code><a href="#mise-projen.Settings.property.overrideToolVersionsFilenames">overrideToolVersionsFilenames</a></code> | <code>string[]</code> | Filenames that mise reads as `.tool-versions` files instead of `.tool-versions`. |
 | <code><a href="#mise-projen.Settings.property.packslip">packslip</a></code> | <code><a href="#mise-projen.SettingsPackslip">SettingsPackslip</a></code> | *No description.* |
 | <code><a href="#mise-projen.Settings.property.paranoid">paranoid</a></code> | <code>any</code> | Turn on paranoid mode: `true` for every protection, or a list of categories (`config`, `env_files`, `plugins`, `provenance`) for only those. |
-| <code><a href="#mise-projen.Settings.property.pin">pin</a></code> | <code>boolean</code> | Make `mise use` write the resolved version, such as `24.14.0` for `node@24`, instead of the requested one. |
+| <code><a href="#mise-projen.Settings.property.pin">pin</a></code> | <code>boolean</code> | Make `mise use` and `mise upgrade --bump` write the resolved version, such as `24.14.0` for `node@24`, instead of the requested one. |
 | <code><a href="#mise-projen.Settings.property.pipx">pipx</a></code> | <code><a href="#mise-projen.SettingsPipx">SettingsPipx</a></code> | *No description.* |
 | <code><a href="#mise-projen.Settings.property.pluginAutoupdateLastCheckDuration">pluginAutoupdateLastCheckDuration</a></code> | <code>string</code> | [deprecated] Has no effect; |
 | <code><a href="#mise-projen.Settings.property.preferOffline">preferOffline</a></code> | <code>boolean</code> | Use cached version lists instead of fetching new ones, and go to the network only when nothing is cached. |
@@ -8185,7 +8200,7 @@ public readonly pin: boolean;
 
 - *Type:* boolean
 
-Make `mise use` write the resolved version, such as `24.14.0` for `node@24`, instead of the requested one.
+Make `mise use` and `mise upgrade --bump` write the resolved version, such as `24.14.0` for `node@24`, instead of the requested one.
 
 ---
 
