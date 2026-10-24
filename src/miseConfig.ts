@@ -1383,7 +1383,7 @@ export interface Settings {
   readonly paranoid?: any;
 
   /**
-   * Make `mise use` write the resolved version, such as `24.14.0` for `node@24`, instead of the requested one.
+   * Make `mise use` and `mise upgrade --bump` write the resolved version, such as `24.14.0` for `node@24`, instead of the requested one.
    *
    * @schema settings#pin
    */
@@ -6885,6 +6885,13 @@ export interface DoctorChecks {
    * @schema DoctorChecks#os
    */
   readonly os?: string[];
+
+  /**
+   * Names of checks that must pass first. If one does not pass, this check is reported as blocked and its command does not run.
+   *
+   * @schema DoctorChecks#depends
+   */
+  readonly depends?: string[];
 }
 
 /**
@@ -6902,6 +6909,7 @@ export function toJson_DoctorChecks(obj: DoctorChecks | undefined): Record<strin
     'dir': obj.dir,
     'shell': obj.shell,
     'os': obj.os?.map(y => y),
+    'depends': obj.depends?.map(y => y),
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
