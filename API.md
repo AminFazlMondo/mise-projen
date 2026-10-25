@@ -6769,6 +6769,7 @@ const settings: Settings = { ... }
 | <code><a href="#mise-projen.Settings.property.erlang">erlang</a></code> | <code><a href="#mise-projen.SettingsErlang">SettingsErlang</a></code> | *No description.* |
 | <code><a href="#mise-projen.Settings.property.execAutoInstall">execAutoInstall</a></code> | <code>boolean</code> | Install missing tools automatically when you run `mise exec`. |
 | <code><a href="#mise-projen.Settings.property.experimental">experimental</a></code> | <code>boolean</code> | Enable experimental features, which may change or be removed in any release. |
+| <code><a href="#mise-projen.Settings.property.extractMaxRatio">extractMaxRatio</a></code> | <code>number</code> | How many times its own size a downloaded archive or compressed file may unpack to. |
 | <code><a href="#mise-projen.Settings.property.fetchRemoteVersionsCache">fetchRemoteVersionsCache</a></code> | <code>string</code> | How long a tool's cached list of available versions stays fresh. |
 | <code><a href="#mise-projen.Settings.property.fetchRemoteVersionsTimeout">fetchRemoteVersionsTimeout</a></code> | <code>string</code> | Timeout for looking up a tool's available versions. |
 | <code><a href="#mise-projen.Settings.property.forgejo">forgejo</a></code> | <code><a href="#mise-projen.SettingsForgejo">SettingsForgejo</a></code> | *No description.* |
@@ -6812,7 +6813,7 @@ const settings: Settings = { ... }
 | <code><a href="#mise-projen.Settings.property.lockedVerifyProvenance">lockedVerifyProvenance</a></code> | <code>boolean</code> | Re-verify provenance at install time even when the lockfile already records it. |
 | <code><a href="#mise-projen.Settings.property.lockfile">lockfile</a></code> | <code>boolean</code> | Create, read and update `mise.lock` lockfiles for tool versions. |
 | <code><a href="#mise-projen.Settings.property.lockfileAutoPrune">lockfileAutoPrune</a></code> | <code>boolean</code> | Remove lockfile tools that are absent from the active configuration. |
-| <code><a href="#mise-projen.Settings.property.lockfileMode">lockfileMode</a></code> | <code><a href="#mise-projen.SettingsLockfileMode">SettingsLockfileMode</a></code> | How lockfiles are written: entry by entry, or rebuilt from the current requests. |
+| <code><a href="#mise-projen.Settings.property.lockfileMode">lockfileMode</a></code> | <code><a href="#mise-projen.SettingsLockfileMode">SettingsLockfileMode</a></code> | How lockfiles are written: rebuilt from the current requests, or entry by entry. |
 | <code><a href="#mise-projen.Settings.property.lockfilePlatforms">lockfilePlatforms</a></code> | <code>string[]</code> | Platforms to resolve lockfile URLs and checksums for. |
 | <code><a href="#mise-projen.Settings.property.logLevel">logLevel</a></code> | <code><a href="#mise-projen.SettingsLogLevel">SettingsLogLevel</a></code> | Log level for mise's own output. |
 | <code><a href="#mise-projen.Settings.property.minimumReleaseAge">minimumReleaseAge</a></code> | <code>string</code> | Skip versions published more recently than this duration or date. |
@@ -7424,6 +7425,18 @@ Enable experimental features, which may change or be removed in any release.
 
 ---
 
+##### `extractMaxRatio`<sup>Optional</sup> <a name="extractMaxRatio" id="mise-projen.Settings.property.extractMaxRatio"></a>
+
+```typescript
+public readonly extractMaxRatio: number;
+```
+
+- *Type:* number
+
+How many times its own size a downloaded archive or compressed file may unpack to.
+
+---
+
 ##### `fetchRemoteVersionsCache`<sup>Optional</sup> <a name="fetchRemoteVersionsCache" id="mise-projen.Settings.property.fetchRemoteVersionsCache"></a>
 
 ```typescript
@@ -7946,7 +7959,7 @@ public readonly lockfileMode: SettingsLockfileMode;
 
 - *Type:* <a href="#mise-projen.SettingsLockfileMode">SettingsLockfileMode</a>
 
-How lockfiles are written: entry by entry, or rebuilt from the current requests.
+How lockfiles are written: rebuilt from the current requests, or entry by entry.
 
 ---
 
@@ -9537,6 +9550,7 @@ const settingsGithub: SettingsGithub = { ... }
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#mise-projen.SettingsGithub.property.credentialCommand">credentialCommand</a></code> | <code>string</code> | Command that prints a GitHub token on stdout. |
+| <code><a href="#mise-projen.SettingsGithub.property.enterpriseHosts">enterpriseHosts</a></code> | <code>string[]</code> | Extra GitHub Enterprise hosts that receive your GitHub token on their `/api/v3` URLs. |
 | <code><a href="#mise-projen.SettingsGithub.property.ghCliTokens">ghCliTokens</a></code> | <code>boolean</code> | Read GitHub tokens that the gh CLI stores in its `hosts.yml` file. |
 | <code><a href="#mise-projen.SettingsGithub.property.githubAttestations">githubAttestations</a></code> | <code>boolean</code> | Verify GitHub artifact attestations for github backend tools. |
 | <code><a href="#mise-projen.SettingsGithub.property.oauthApiUrl">oauthApiUrl</a></code> | <code>string</code> | GitHub API base URL mise uses to validate native OAuth tokens. |
@@ -9563,6 +9577,18 @@ public readonly credentialCommand: string;
 - *Type:* string
 
 Command that prints a GitHub token on stdout.
+
+---
+
+##### `enterpriseHosts`<sup>Optional</sup> <a name="enterpriseHosts" id="mise-projen.SettingsGithub.property.enterpriseHosts"></a>
+
+```typescript
+public readonly enterpriseHosts: string[];
+```
+
+- *Type:* string[]
+
+Extra GitHub Enterprise hosts that receive your GitHub token on their `/api/v3` URLs.
 
 ---
 
@@ -14639,7 +14665,7 @@ system.
 
 ### SettingsLockfileMode <a name="SettingsLockfileMode" id="mise-projen.SettingsLockfileMode"></a>
 
-How lockfiles are written: entry by entry, or rebuilt from the current requests.
+How lockfiles are written: rebuilt from the current requests, or entry by entry.
 
 #### Members <a name="Members" id="Members"></a>
 
