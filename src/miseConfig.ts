@@ -954,6 +954,13 @@ export interface Settings {
   readonly experimental?: boolean;
 
   /**
+   * How many times its own size a downloaded archive or compressed file may unpack to.
+   *
+   * @schema settings#extract_max_ratio
+   */
+  readonly extractMaxRatio?: number;
+
+  /**
    * How long a tool's cached list of available versions stays fresh.
    *
    * @schema settings#fetch_remote_versions_cache
@@ -1239,7 +1246,7 @@ export interface Settings {
   readonly lockfileAutoPrune?: boolean;
 
   /**
-   * How lockfiles are written: entry by entry, or rebuilt from the current requests.
+   * How lockfiles are written: rebuilt from the current requests, or entry by entry.
    *
    * @schema settings#lockfile_mode
    */
@@ -1864,6 +1871,7 @@ export function toJson_Settings(obj: Settings | undefined): Record<string, any> 
     'erlang': toJson_SettingsErlang(obj.erlang),
     'exec_auto_install': obj.execAutoInstall,
     'experimental': obj.experimental,
+    'extract_max_ratio': obj.extractMaxRatio,
     'fetch_remote_versions_cache': obj.fetchRemoteVersionsCache,
     'fetch_remote_versions_timeout': obj.fetchRemoteVersionsTimeout,
     'forgejo': toJson_SettingsForgejo(obj.forgejo),
@@ -3370,6 +3378,13 @@ export interface SettingsGithub {
   readonly credentialCommand?: string;
 
   /**
+   * Extra GitHub Enterprise hosts that receive your GitHub token on their `/api/v3` URLs.
+   *
+   * @schema SettingsGithub#enterprise_hosts
+   */
+  readonly enterpriseHosts?: string[];
+
+  /**
    * Read GitHub tokens that the gh CLI stores in its `hosts.yml` file.
    *
    * @schema SettingsGithub#gh_cli_tokens
@@ -3477,6 +3492,7 @@ export function toJson_SettingsGithub(obj: SettingsGithub | undefined): Record<s
   if (obj === undefined) { return undefined; }
   const result = {
     'credential_command': obj.credentialCommand,
+    'enterprise_hosts': obj.enterpriseHosts?.map(y => y),
     'gh_cli_tokens': obj.ghCliTokens,
     'github_attestations': obj.githubAttestations,
     'oauth_api_url': obj.oauthApiUrl,
@@ -3856,7 +3872,7 @@ export enum SettingsLockedScopes {
 }
 
 /**
- * How lockfiles are written: entry by entry, or rebuilt from the current requests.
+ * How lockfiles are written: rebuilt from the current requests, or entry by entry.
  *
  * @schema SettingsLockfileMode
  */
