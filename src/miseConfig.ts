@@ -5762,7 +5762,7 @@ export function toJson_MiseTomlSchemaBootstrapRemote(obj: MiseTomlSchemaBootstra
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * Linux systemd system unit that mise starts, stops, enables, or masks, or a user service mise defines from command or builtin
+ * Linux systemd unit that mise starts, stops, enables, or masks (a system unit, or with scope user an existing user unit), or a user service mise defines from command or builtin
  *
  * @schema MiseTomlSchemaBootstrapServices
  */
@@ -6346,6 +6346,13 @@ export interface MiseTomlSchemaBootstrapBrew {
   readonly adopt?: boolean;
 
   /**
+   * write Homebrew's cask metadata after mise installs a brew-cask package, so `brew upgrade` and `brew outdated` manage it afterwards
+   *
+   * @schema MiseTomlSchemaBootstrapBrew#homebrew_metadata
+   */
+  readonly homebrewMetadata?: boolean;
+
+  /**
    * Homebrew tap names mapped to custom git URLs
    *
    * @schema MiseTomlSchemaBootstrapBrew#taps
@@ -6362,6 +6369,7 @@ export function toJson_MiseTomlSchemaBootstrapBrew(obj: MiseTomlSchemaBootstrapB
   if (obj === undefined) { return undefined; }
   const result = {
     'adopt': obj.adopt,
+    'homebrew_metadata': obj.homebrewMetadata,
     'taps': ((obj.taps) === undefined) ? undefined : (Object.entries(obj.taps).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
   };
   // filter undefined values
@@ -8371,6 +8379,13 @@ export interface MiseTomlSchemaBootstrapMacosLaunchdAgents {
   readonly queueDirectories?: string[];
 
   /**
+   * write LaunchEvents, keyed by event stream, then event name, with launchd's case-sensitive property names
+   *
+   * @schema MiseTomlSchemaBootstrapMacosLaunchdAgents#launch_events
+   */
+  readonly launchEvents?: { [key: string]: { [key: string]: { [key: string]: any } } };
+
+  /**
    * environment variables for EnvironmentVariables
    *
    * @schema MiseTomlSchemaBootstrapMacosLaunchdAgents#environment
@@ -8425,6 +8440,7 @@ export function toJson_MiseTomlSchemaBootstrapMacosLaunchdAgents(obj: MiseTomlSc
     'process_type': obj.processType,
     'start_calendar_interval': obj.startCalendarInterval?.map(y => toJson_LaunchdCalendarInterval(y)),
     'queue_directories': obj.queueDirectories?.map(y => y),
+    'launch_events': ((obj.launchEvents) === undefined) ? undefined : (Object.entries(obj.launchEvents).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: ((i[1]) === undefined) ? undefined : (Object.entries(i[1]).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: ((i[1]) === undefined) ? undefined : (Object.entries(i[1]).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})) }), {})) }), {})),
     'environment': ((obj.environment) === undefined) ? undefined : (Object.entries(obj.environment).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'working_directory': obj.workingDirectory,
     'stdout_path': obj.stdoutPath,
