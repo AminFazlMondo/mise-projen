@@ -2616,6 +2616,7 @@ const miseTomlSchemaBootstrapBrew: MiseTomlSchemaBootstrapBrew = { ... }
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapBrew.property.adopt">adopt</a></code> | <code>boolean</code> | adopt existing app artifacts by default for configured brew-cask packages. |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapBrew.property.homebrewMetadata">homebrewMetadata</a></code> | <code>boolean</code> | write Homebrew's cask metadata after mise installs a brew-cask package, so `brew upgrade` and `brew outdated` manage it afterwards. |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapBrew.property.taps">taps</a></code> | <code>{[ key: string ]: string}</code> | Homebrew tap names mapped to custom git URLs. |
 
 ---
@@ -2629,6 +2630,18 @@ public readonly adopt: boolean;
 - *Type:* boolean
 
 adopt existing app artifacts by default for configured brew-cask packages.
+
+---
+
+##### `homebrewMetadata`<sup>Optional</sup> <a name="homebrewMetadata" id="mise-projen.MiseTomlSchemaBootstrapBrew.property.homebrewMetadata"></a>
+
+```typescript
+public readonly homebrewMetadata: boolean;
+```
+
+- *Type:* boolean
+
+write Homebrew's cask metadata after mise installs a brew-cask package, so `brew upgrade` and `brew outdated` manage it afterwards.
 
 ---
 
@@ -4496,6 +4509,7 @@ const miseTomlSchemaBootstrapMacosLaunchdAgents: MiseTomlSchemaBootstrapMacosLau
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosLaunchdAgents.property.keepAlive">keepAlive</a></code> | <code>boolean</code> | write KeepAlive. |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosLaunchdAgents.property.keepAliveOnFailure">keepAliveOnFailure</a></code> | <code>boolean</code> | write KeepAlive = { SuccessfulExit = false }, so launchd relaunches the job only after a failure; |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosLaunchdAgents.property.kickstart">kickstart</a></code> | <code>boolean</code> | run `launchctl kickstart -k` after loading the agent. |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosLaunchdAgents.property.launchEvents">launchEvents</a></code> | <code>{[ key: string ]: {[ key: string ]: {[ key: string ]: any}}}</code> | write LaunchEvents, keyed by event stream, then event name, with launchd's case-sensitive property names. |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosLaunchdAgents.property.nice">nice</a></code> | <code>number</code> | write Nice, the niceness of the process, from -20 to 20. |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosLaunchdAgents.property.processType">processType</a></code> | <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosLaunchdAgentsProcessType">MiseTomlSchemaBootstrapMacosLaunchdAgentsProcessType</a></code> | write ProcessType, the scheduling band launchd runs the job in. |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosLaunchdAgents.property.queueDirectories">queueDirectories</a></code> | <code>string[]</code> | write QueueDirectories (absolute paths; |
@@ -4580,6 +4594,18 @@ public readonly kickstart: boolean;
 - *Type:* boolean
 
 run `launchctl kickstart -k` after loading the agent.
+
+---
+
+##### `launchEvents`<sup>Optional</sup> <a name="launchEvents" id="mise-projen.MiseTomlSchemaBootstrapMacosLaunchdAgents.property.launchEvents"></a>
+
+```typescript
+public readonly launchEvents: {[ key: string ]: {[ key: string ]: {[ key: string ]: any}}};
+```
+
+- *Type:* {[ key: string ]: {[ key: string ]: {[ key: string ]: any}}}
+
+write LaunchEvents, keyed by event stream, then event name, with launchd's case-sensitive property names.
 
 ---
 
@@ -5166,7 +5192,7 @@ applies to the first clone only
 
 ### MiseTomlSchemaBootstrapServices <a name="MiseTomlSchemaBootstrapServices" id="mise-projen.MiseTomlSchemaBootstrapServices"></a>
 
-Linux systemd system unit that mise starts, stops, enables, or masks, or a user service mise defines from command or builtin.
+Linux systemd unit that mise starts, stops, enables, or masks (a system unit, or with scope user an existing user unit), or a user service mise defines from command or builtin.
 
 #### Initializer <a name="Initializer" id="mise-projen.MiseTomlSchemaBootstrapServices.Initializer"></a>
 
