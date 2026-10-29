@@ -1171,6 +1171,13 @@ export interface Settings {
   readonly installLayout?: SettingsInstallLayout;
 
   /**
+   * Connect to remote hosts over IPv4 only.
+   *
+   * @schema settings#ipv4_only
+   */
+  readonly ipv4Only?: boolean;
+
+  /**
    * @schema settings#java
    */
   readonly java?: SettingsJava;
@@ -1904,6 +1911,7 @@ export function toJson_Settings(obj: Settings | undefined): Record<string, any> 
     'ignored_config_paths': obj.ignoredConfigPaths?.map(y => y),
     'install_before': obj.installBefore,
     'install_layout': obj.installLayout,
+    'ipv4_only': obj.ipv4Only,
     'java': toJson_SettingsJava(obj.java),
     'jobs': obj.jobs,
     'legacy_version_file': obj.legacyVersionFile,
