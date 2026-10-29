@@ -6828,6 +6828,7 @@ const settings: Settings = { ... }
 | <code><a href="#mise-projen.Settings.property.ignoredConfigPaths">ignoredConfigPaths</a></code> | <code>string[]</code> | Config files and directories mise does not load. |
 | <code><a href="#mise-projen.Settings.property.installBefore">installBefore</a></code> | <code>string</code> | [deprecated] Install only versions released before this date; |
 | <code><a href="#mise-projen.Settings.property.installLayout">installLayout</a></code> | <code><a href="#mise-projen.SettingsInstallLayout">SettingsInstallLayout</a></code> | [experimental] Name installations by what they are (`identity`) instead of `installs/<tool>/<version>` (`legacy`). |
+| <code><a href="#mise-projen.Settings.property.ipv4Only">ipv4Only</a></code> | <code>boolean</code> | Connect to remote hosts over IPv4 only. |
 | <code><a href="#mise-projen.Settings.property.java">java</a></code> | <code><a href="#mise-projen.SettingsJava">SettingsJava</a></code> | *No description.* |
 | <code><a href="#mise-projen.Settings.property.jobs">jobs</a></code> | <code>number</code> | How many jobs to run concurrently such as tool installs. |
 | <code><a href="#mise-projen.Settings.property.legacyVersionFile">legacyVersionFile</a></code> | <code>boolean</code> | [deprecated] No effect; |
@@ -7836,6 +7837,18 @@ public readonly installLayout: SettingsInstallLayout;
 - *Type:* <a href="#mise-projen.SettingsInstallLayout">SettingsInstallLayout</a>
 
 [experimental] Name installations by what they are (`identity`) instead of `installs/<tool>/<version>` (`legacy`).
+
+---
+
+##### `ipv4Only`<sup>Optional</sup> <a name="ipv4Only" id="mise-projen.Settings.property.ipv4Only"></a>
+
+```typescript
+public readonly ipv4Only: boolean;
+```
+
+- *Type:* boolean
+
+Connect to remote hosts over IPv4 only.
 
 ---
 
