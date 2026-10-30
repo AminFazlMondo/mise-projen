@@ -2074,7 +2074,7 @@ export interface MiseTomlSchemaDotfileGroups {
   readonly relative?: boolean;
 
   /**
-   * whole-file entries for parts of the tree, keyed by target path inside the group's target and written like [dotfiles] entries; each is cut out of the walk. A missing source is found under the root at the entry's path inside the target, and a relative source starts at the root
+   * entries for parts of the tree, written like [dotfiles] entries and applied only while the group is selected. A whole-file entry is keyed by its target path inside the group's target and cut out of the walk; a block, line, or merge edit is keyed by the path of the file it edits, inside the group's target, then "/" and an id. A missing source is found under the root at the entry's path inside the target, and a relative source starts at the root
    *
    * @schema MiseTomlSchemaDotfileGroups#entries
    */
