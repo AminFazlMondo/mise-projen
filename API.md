@@ -5968,7 +5968,7 @@ const miseTomlSchemaDotfileGroups: MiseTomlSchemaDotfileGroups = { ... }
 | --- | --- | --- |
 | <code><a href="#mise-projen.MiseTomlSchemaDotfileGroups.property.root">root</a></code> | <code>string</code> | the directory tree the group deploys; |
 | <code><a href="#mise-projen.MiseTomlSchemaDotfileGroups.property.dotPrefix">dotPrefix</a></code> | <code>boolean</code> | deploy each source path component named "dot-<name>" as ".<name>", like GNU Stow's --dotfiles. |
-| <code><a href="#mise-projen.MiseTomlSchemaDotfileGroups.property.entries">entries</a></code> | <code>{[ key: string ]: any}</code> | whole-file entries for parts of the tree, keyed by target path inside the group's target and written like [dotfiles] entries; |
+| <code><a href="#mise-projen.MiseTomlSchemaDotfileGroups.property.entries">entries</a></code> | <code>{[ key: string ]: any}</code> | entries for parts of the tree, written like [dotfiles] entries and applied only while the group is selected. |
 | <code><a href="#mise-projen.MiseTomlSchemaDotfileGroups.property.exclude">exclude</a></code> | <code>string[]</code> | glob patterns of source paths to skip, as for [dotfiles] exclude. |
 | <code><a href="#mise-projen.MiseTomlSchemaDotfileGroups.property.manifest">manifest</a></code> | <code><a href="#mise-projen.MiseTomlSchemaDotfileGroupsManifest">MiseTomlSchemaDotfileGroupsManifest</a></code> | source manifest used to select managed files from the tree. |
 | <code><a href="#mise-projen.MiseTomlSchemaDotfileGroups.property.mode">mode</a></code> | <code><a href="#mise-projen.MiseTomlSchemaDotfileGroupsMode">MiseTomlSchemaDotfileGroupsMode</a></code> | how the tree is deployed. |
@@ -6011,9 +6011,9 @@ public readonly entries: {[ key: string ]: any};
 
 - *Type:* {[ key: string ]: any}
 
-whole-file entries for parts of the tree, keyed by target path inside the group's target and written like [dotfiles] entries;
+entries for parts of the tree, written like [dotfiles] entries and applied only while the group is selected.
 
-each is cut out of the walk. A missing source is found under the root at the entry's path inside the target, and a relative source starts at the root
+A whole-file entry is keyed by its target path inside the group's target and cut out of the walk; a block, line, or merge edit is keyed by the path of the file it edits, inside the group's target, then "/" and an id. A missing source is found under the root at the entry's path inside the target, and a relative source starts at the root
 
 ---
 
