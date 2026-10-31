@@ -954,6 +954,13 @@ export interface Settings {
   readonly experimental?: boolean;
 
   /**
+   * PEM bundle of CA certificates mise trusts in addition to its usual roots.
+   *
+   * @schema settings#extra_ca_certs
+   */
+  readonly extraCaCerts?: string;
+
+  /**
    * How many times its own size a downloaded archive or compressed file may unpack to.
    *
    * @schema settings#extract_max_ratio
@@ -1878,6 +1885,7 @@ export function toJson_Settings(obj: Settings | undefined): Record<string, any> 
     'erlang': toJson_SettingsErlang(obj.erlang),
     'exec_auto_install': obj.execAutoInstall,
     'experimental': obj.experimental,
+    'extra_ca_certs': obj.extraCaCerts,
     'extract_max_ratio': obj.extractMaxRatio,
     'fetch_remote_versions_cache': obj.fetchRemoteVersionsCache,
     'fetch_remote_versions_timeout': obj.fetchRemoteVersionsTimeout,
@@ -2637,7 +2645,7 @@ export interface MiseTomlSchemaDaemonProviders {
    *
    * @schema MiseTomlSchemaDaemonProviders#ports
    */
-  readonly ports?: { [key: string]: number };
+  readonly ports?: { [key: string]: any };
 
   /**
    * Preset options, such as `database`.
