@@ -5618,7 +5618,7 @@ const miseTomlSchemaDaemonProviders: MiseTomlSchemaDaemonProviders = { ... }
 | <code><a href="#mise-projen.MiseTomlSchemaDaemonProviders.property.dataDir">dataDir</a></code> | <code>string</code> | Persistent server data directory; |
 | <code><a href="#mise-projen.MiseTomlSchemaDaemonProviders.property.options">options</a></code> | <code>any</code> | Preset options, such as `database`. |
 | <code><a href="#mise-projen.MiseTomlSchemaDaemonProviders.property.port">port</a></code> | <code>any</code> | *No description.* |
-| <code><a href="#mise-projen.MiseTomlSchemaDaemonProviders.property.ports">ports</a></code> | <code>{[ key: string ]: number}</code> | Overrides for the preset's additional named ports. |
+| <code><a href="#mise-projen.MiseTomlSchemaDaemonProviders.property.ports">ports</a></code> | <code>{[ key: string ]: any}</code> | Overrides for the preset's additional named ports. |
 | <code><a href="#mise-projen.MiseTomlSchemaDaemonProviders.property.tool">tool</a></code> | <code>string</code> | Tool to install the server from, in place of the preset's default. |
 
 ---
@@ -5687,10 +5687,10 @@ public readonly port: any;
 ##### `ports`<sup>Optional</sup> <a name="ports" id="mise-projen.MiseTomlSchemaDaemonProviders.property.ports"></a>
 
 ```typescript
-public readonly ports: {[ key: string ]: number};
+public readonly ports: {[ key: string ]: any};
 ```
 
-- *Type:* {[ key: string ]: number}
+- *Type:* {[ key: string ]: any}
 
 Overrides for the preset's additional named ports.
 
@@ -6795,6 +6795,7 @@ const settings: Settings = { ... }
 | <code><a href="#mise-projen.Settings.property.erlang">erlang</a></code> | <code><a href="#mise-projen.SettingsErlang">SettingsErlang</a></code> | *No description.* |
 | <code><a href="#mise-projen.Settings.property.execAutoInstall">execAutoInstall</a></code> | <code>boolean</code> | Install missing tools automatically when you run `mise exec`. |
 | <code><a href="#mise-projen.Settings.property.experimental">experimental</a></code> | <code>boolean</code> | Enable experimental features, which may change or be removed in any release. |
+| <code><a href="#mise-projen.Settings.property.extraCaCerts">extraCaCerts</a></code> | <code>string</code> | PEM bundle of CA certificates mise trusts in addition to its usual roots. |
 | <code><a href="#mise-projen.Settings.property.extractMaxRatio">extractMaxRatio</a></code> | <code>number</code> | How many times its own size a downloaded archive or compressed file may unpack to. |
 | <code><a href="#mise-projen.Settings.property.fetchRemoteVersionsCache">fetchRemoteVersionsCache</a></code> | <code>string</code> | How long a tool's cached list of available versions stays fresh. |
 | <code><a href="#mise-projen.Settings.property.fetchRemoteVersionsTimeout">fetchRemoteVersionsTimeout</a></code> | <code>string</code> | Timeout for looking up a tool's available versions. |
@@ -7449,6 +7450,18 @@ public readonly experimental: boolean;
 - *Type:* boolean
 
 Enable experimental features, which may change or be removed in any release.
+
+---
+
+##### `extraCaCerts`<sup>Optional</sup> <a name="extraCaCerts" id="mise-projen.Settings.property.extraCaCerts"></a>
+
+```typescript
+public readonly extraCaCerts: string;
+```
+
+- *Type:* string
+
+PEM bundle of CA certificates mise trusts in addition to its usual roots.
 
 ---
 
