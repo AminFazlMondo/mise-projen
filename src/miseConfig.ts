@@ -907,6 +907,13 @@ export interface Settings {
   readonly envCache?: boolean;
 
   /**
+   * [experimental] Let the environment cache hold values marked `redact = true`.
+   *
+   * @schema settings#env_cache_redacted
+   */
+  readonly envCacheRedacted?: boolean;
+
+  /**
    * How long a cached environment stays valid.
    *
    * @schema settings#env_cache_ttl
@@ -1878,6 +1885,7 @@ export function toJson_Settings(obj: Settings | undefined): Record<string, any> 
     'enable_tools': obj.enableTools?.map(y => y),
     'env': obj.env?.map(y => y),
     'env_cache': obj.envCache,
+    'env_cache_redacted': obj.envCacheRedacted,
     'env_cache_ttl': obj.envCacheTtl,
     'env_conf_d': obj.envConfD,
     'env_file': obj.envFile?.map(y => y),
