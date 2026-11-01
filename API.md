@@ -6788,6 +6788,7 @@ const settings: Settings = { ... }
 | <code><a href="#mise-projen.Settings.property.enableTools">enableTools</a></code> | <code>string[]</code> | Allowlist of configured tools mise uses; |
 | <code><a href="#mise-projen.Settings.property.env">env</a></code> | <code>string[]</code> | Config environments to load, such as `development` for `mise.development.toml`. |
 | <code><a href="#mise-projen.Settings.property.envCache">envCache</a></code> | <code>boolean</code> | [experimental] Cache computed environments on disk for nested mise commands. |
+| <code><a href="#mise-projen.Settings.property.envCacheRedacted">envCacheRedacted</a></code> | <code>boolean</code> | [experimental] Let the environment cache hold values marked `redact = true`. |
 | <code><a href="#mise-projen.Settings.property.envCacheTtl">envCacheTtl</a></code> | <code>string</code> | How long a cached environment stays valid. |
 | <code><a href="#mise-projen.Settings.property.envConfD">envConfD</a></code> | <code>boolean</code> | Enable environment-specific filenames in conf.d directories. |
 | <code><a href="#mise-projen.Settings.property.envFile">envFile</a></code> | <code>string[]</code> | Dotenv file names to load from the current directory and each parent directory. |
@@ -7368,6 +7369,18 @@ public readonly envCache: boolean;
 - *Type:* boolean
 
 [experimental] Cache computed environments on disk for nested mise commands.
+
+---
+
+##### `envCacheRedacted`<sup>Optional</sup> <a name="envCacheRedacted" id="mise-projen.Settings.property.envCacheRedacted"></a>
+
+```typescript
+public readonly envCacheRedacted: boolean;
+```
+
+- *Type:* boolean
+
+[experimental] Let the environment cache hold values marked `redact = true`.
 
 ---
 
