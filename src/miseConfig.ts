@@ -1157,13 +1157,6 @@ export interface Settings {
   readonly idiomaticVersionFileEnableTools?: string[];
 
   /**
-   * Ignore idiomatic version file fields that only declare a minimum compatible version.
-   *
-   * @schema settings#idiomatic_version_file_ignore_minimum_versions
-   */
-  readonly idiomaticVersionFileIgnoreMinimumVersions?: boolean;
-
-  /**
    * Config files and directories mise does not load.
    *
    * @schema settings#ignored_config_paths
@@ -1237,6 +1230,13 @@ export interface Settings {
    * @schema settings#locked
    */
   readonly locked?: boolean;
+
+  /**
+   * Make locked mode fail when the lockfile has no checksum for a download.
+   *
+   * @schema settings#locked_require_checksum
+   */
+  readonly lockedRequireChecksum?: boolean;
 
   /**
    * Config scopes where invocation-wide locked mode is enforced.
@@ -1923,7 +1923,6 @@ export function toJson_Settings(obj: Settings | undefined): Record<string, any> 
     'idiomatic_version_file_disable_files': obj.idiomaticVersionFileDisableFiles?.map(y => y),
     'idiomatic_version_file_disable_tools': obj.idiomaticVersionFileDisableTools?.map(y => y),
     'idiomatic_version_file_enable_tools': obj.idiomaticVersionFileEnableTools?.map(y => y),
-    'idiomatic_version_file_ignore_minimum_versions': obj.idiomaticVersionFileIgnoreMinimumVersions,
     'ignored_config_paths': obj.ignoredConfigPaths?.map(y => y),
     'install_before': obj.installBefore,
     'install_layout': obj.installLayout,
@@ -1935,6 +1934,7 @@ export function toJson_Settings(obj: Settings | undefined): Record<string, any> 
     'libc': obj.libc,
     'libgit2': obj.libgit2,
     'locked': obj.locked,
+    'locked_require_checksum': obj.lockedRequireChecksum,
     'locked_scopes': obj.lockedScopes?.map(y => y),
     'locked_verify_provenance': obj.lockedVerifyProvenance,
     'lockfile': obj.lockfile,
@@ -2055,6 +2055,13 @@ export interface MiseTomlSchemaDotfileGroups {
   readonly target?: string;
 
   /**
+   * dotfile groups (by name) and whole-file entries (by target path) mise writes before it deploys this group and its entries
+   *
+   * @schema MiseTomlSchemaDotfileGroups#depends
+   */
+  readonly depends?: string[];
+
+  /**
    * how the tree is deployed
    *
    * @schema MiseTomlSchemaDotfileGroups#mode
@@ -2107,6 +2114,7 @@ export function toJson_MiseTomlSchemaDotfileGroups(obj: MiseTomlSchemaDotfileGro
   const result = {
     'root': obj.root,
     'target': obj.target,
+    'depends': obj.depends?.map(y => y),
     'mode': obj.mode,
     'exclude': obj.exclude?.map(y => y),
     'dot_prefix': obj.dotPrefix,
@@ -4107,6 +4115,13 @@ export interface SettingsNpm {
   readonly packageManager?: SettingsNpmPackageManager;
 
   /**
+   * Verify the Sigstore provenance npm publishes for an `npm:` tool's own package.
+   *
+   * @schema SettingsNpm#provenance
+   */
+  readonly provenance?: boolean;
+
+  /**
    * Use the npm CLI instead of mise's built-in client for `npm:` version metadata and default installs.
    *
    * @schema SettingsNpm#shell_out
@@ -4124,6 +4139,7 @@ export function toJson_SettingsNpm(obj: SettingsNpm | undefined): Record<string,
   const result = {
     'bun': obj.bun,
     'package_manager': obj.packageManager,
+    'provenance': obj.provenance,
     'shell_out': obj.shellOut,
   };
   // filter undefined values
@@ -5183,6 +5199,13 @@ export interface SettingsTask {
   readonly disableSpecFromRunScripts?: boolean;
 
   /**
+   * How long a task waits for a lock another run holds before it fails.
+   *
+   * @schema SettingsTask#lock_timeout
+   */
+  readonly lockTimeout?: string;
+
+  /**
    * Maximum directory depth for automatic monorepo discovery, which is deprecated.
    *
    * @schema SettingsTask#monorepo_depth
@@ -5302,6 +5325,7 @@ export function toJson_SettingsTask(obj: SettingsTask | undefined): Record<strin
     'cache_remote_url': obj.cacheRemoteUrl,
     'disable_paths': obj.disablePaths?.map(y => y),
     'disable_spec_from_run_scripts': obj.disableSpecFromRunScripts,
+    'lock_timeout': obj.lockTimeout,
     'monorepo_depth': obj.monorepoDepth,
     'monorepo_exclude_dirs': obj.monorepoExcludeDirs?.map(y => y),
     'monorepo_respect_gitignore': obj.monorepoRespectGitignore,

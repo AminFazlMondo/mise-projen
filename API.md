@@ -5967,6 +5967,7 @@ const miseTomlSchemaDotfileGroups: MiseTomlSchemaDotfileGroups = { ... }
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#mise-projen.MiseTomlSchemaDotfileGroups.property.root">root</a></code> | <code>string</code> | the directory tree the group deploys; |
+| <code><a href="#mise-projen.MiseTomlSchemaDotfileGroups.property.depends">depends</a></code> | <code>string[]</code> | dotfile groups (by name) and whole-file entries (by target path) mise writes before it deploys this group and its entries. |
 | <code><a href="#mise-projen.MiseTomlSchemaDotfileGroups.property.dotPrefix">dotPrefix</a></code> | <code>boolean</code> | deploy each source path component named "dot-<name>" as ".<name>", like GNU Stow's --dotfiles. |
 | <code><a href="#mise-projen.MiseTomlSchemaDotfileGroups.property.entries">entries</a></code> | <code>{[ key: string ]: any}</code> | entries for parts of the tree, written like [dotfiles] entries and applied only while the group is selected. |
 | <code><a href="#mise-projen.MiseTomlSchemaDotfileGroups.property.exclude">exclude</a></code> | <code>string[]</code> | glob patterns of source paths to skip, as for [dotfiles] exclude. |
@@ -5988,6 +5989,18 @@ public readonly root: string;
 the directory tree the group deploys;
 
 a relative path resolves against dotfiles.root
+
+---
+
+##### `depends`<sup>Optional</sup> <a name="depends" id="mise-projen.MiseTomlSchemaDotfileGroups.property.depends"></a>
+
+```typescript
+public readonly depends: string[];
+```
+
+- *Type:* string[]
+
+dotfile groups (by name) and whole-file entries (by target path) mise writes before it deploys this group and its entries.
 
 ---
 
@@ -6826,7 +6839,6 @@ const settings: Settings = { ... }
 | <code><a href="#mise-projen.Settings.property.idiomaticVersionFileDisableFiles">idiomaticVersionFileDisableFiles</a></code> | <code>string[]</code> | Idiomatic version files to ignore for one tool, as `tool:filename` pairs. |
 | <code><a href="#mise-projen.Settings.property.idiomaticVersionFileDisableTools">idiomaticVersionFileDisableTools</a></code> | <code>string[]</code> | [deprecated] No effect; |
 | <code><a href="#mise-projen.Settings.property.idiomaticVersionFileEnableTools">idiomaticVersionFileEnableTools</a></code> | <code>string[]</code> | Tools that read idiomatic version files such as `.node-version` or `.ruby-version`. |
-| <code><a href="#mise-projen.Settings.property.idiomaticVersionFileIgnoreMinimumVersions">idiomaticVersionFileIgnoreMinimumVersions</a></code> | <code>boolean</code> | Ignore idiomatic version file fields that only declare a minimum compatible version. |
 | <code><a href="#mise-projen.Settings.property.ignoredConfigPaths">ignoredConfigPaths</a></code> | <code>string[]</code> | Config files and directories mise does not load. |
 | <code><a href="#mise-projen.Settings.property.installBefore">installBefore</a></code> | <code>string</code> | [deprecated] Install only versions released before this date; |
 | <code><a href="#mise-projen.Settings.property.installLayout">installLayout</a></code> | <code><a href="#mise-projen.SettingsInstallLayout">SettingsInstallLayout</a></code> | [experimental] Name installations by what they are (`identity`) instead of `installs/<tool>/<version>` (`legacy`). |
@@ -6838,6 +6850,7 @@ const settings: Settings = { ... }
 | <code><a href="#mise-projen.Settings.property.libc">libc</a></code> | <code><a href="#mise-projen.SettingsLibc">SettingsLibc</a></code> | Libc build to install on Linux when a tool publishes both glibc and musl builds. |
 | <code><a href="#mise-projen.Settings.property.libgit2">libgit2</a></code> | <code>boolean</code> | Clone Git repositories with the built-in gix library instead of running `git`; |
 | <code><a href="#mise-projen.Settings.property.locked">locked</a></code> | <code>boolean</code> | Require tool versions and download URLs to come from the lockfile. |
+| <code><a href="#mise-projen.Settings.property.lockedRequireChecksum">lockedRequireChecksum</a></code> | <code>boolean</code> | Make locked mode fail when the lockfile has no checksum for a download. |
 | <code><a href="#mise-projen.Settings.property.lockedScopes">lockedScopes</a></code> | <code><a href="#mise-projen.SettingsLockedScopes">SettingsLockedScopes</a>[]</code> | Config scopes where invocation-wide locked mode is enforced. |
 | <code><a href="#mise-projen.Settings.property.lockedVerifyProvenance">lockedVerifyProvenance</a></code> | <code>boolean</code> | Re-verify provenance at install time even when the lockfile already records it. |
 | <code><a href="#mise-projen.Settings.property.lockfile">lockfile</a></code> | <code>boolean</code> | Create, read and update `mise.lock` lockfiles for tool versions. |
@@ -7816,18 +7829,6 @@ Tools that read idiomatic version files such as `.node-version` or `.ruby-versio
 
 ---
 
-##### `idiomaticVersionFileIgnoreMinimumVersions`<sup>Optional</sup> <a name="idiomaticVersionFileIgnoreMinimumVersions" id="mise-projen.Settings.property.idiomaticVersionFileIgnoreMinimumVersions"></a>
-
-```typescript
-public readonly idiomaticVersionFileIgnoreMinimumVersions: boolean;
-```
-
-- *Type:* boolean
-
-Ignore idiomatic version file fields that only declare a minimum compatible version.
-
----
-
 ##### `ignoredConfigPaths`<sup>Optional</sup> <a name="ignoredConfigPaths" id="mise-projen.Settings.property.ignoredConfigPaths"></a>
 
 ```typescript
@@ -7965,6 +7966,18 @@ public readonly locked: boolean;
 - *Type:* boolean
 
 Require tool versions and download URLs to come from the lockfile.
+
+---
+
+##### `lockedRequireChecksum`<sup>Optional</sup> <a name="lockedRequireChecksum" id="mise-projen.Settings.property.lockedRequireChecksum"></a>
+
+```typescript
+public readonly lockedRequireChecksum: boolean;
+```
+
+- *Type:* boolean
+
+Make locked mode fail when the lockfile has no checksum for a download.
 
 ---
 
@@ -10592,6 +10605,7 @@ const settingsNpm: SettingsNpm = { ... }
 | --- | --- | --- |
 | <code><a href="#mise-projen.SettingsNpm.property.bun">bun</a></code> | <code>boolean</code> | [deprecated] Install `npm:` tools with bun; |
 | <code><a href="#mise-projen.SettingsNpm.property.packageManager">packageManager</a></code> | <code><a href="#mise-projen.SettingsNpmPackageManager">SettingsNpmPackageManager</a></code> | Package manager that installs `npm:` tools. |
+| <code><a href="#mise-projen.SettingsNpm.property.provenance">provenance</a></code> | <code>boolean</code> | Verify the Sigstore provenance npm publishes for an `npm:` tool's own package. |
 | <code><a href="#mise-projen.SettingsNpm.property.shellOut">shellOut</a></code> | <code>boolean</code> | Use the npm CLI instead of mise's built-in client for `npm:` version metadata and default installs. |
 
 ---
@@ -10619,6 +10633,18 @@ public readonly packageManager: SettingsNpmPackageManager;
 - *Type:* <a href="#mise-projen.SettingsNpmPackageManager">SettingsNpmPackageManager</a>
 
 Package manager that installs `npm:` tools.
+
+---
+
+##### `provenance`<sup>Optional</sup> <a name="provenance" id="mise-projen.SettingsNpm.property.provenance"></a>
+
+```typescript
+public readonly provenance: boolean;
+```
+
+- *Type:* boolean
+
+Verify the Sigstore provenance npm publishes for an `npm:` tool's own package.
 
 ---
 
@@ -11944,6 +11970,7 @@ const settingsTask: SettingsTask = { ... }
 | <code><a href="#mise-projen.SettingsTask.property.cacheRemoteUrl">cacheRemoteUrl</a></code> | <code>string</code> | Deprecated alias for `task.cache.remote_url`. |
 | <code><a href="#mise-projen.SettingsTask.property.disablePaths">disablePaths</a></code> | <code>string[]</code> | Paths that mise does not look for tasks in. |
 | <code><a href="#mise-projen.SettingsTask.property.disableSpecFromRunScripts">disableSpecFromRunScripts</a></code> | <code>boolean</code> | Build task usage specs only from the `usage` field, ignoring deprecated `arg()`, `option()` and `flag()` in run scripts. |
+| <code><a href="#mise-projen.SettingsTask.property.lockTimeout">lockTimeout</a></code> | <code>string</code> | How long a task waits for a lock another run holds before it fails. |
 | <code><a href="#mise-projen.SettingsTask.property.monorepoDepth">monorepoDepth</a></code> | <code>number</code> | Maximum directory depth for automatic monorepo discovery, which is deprecated. |
 | <code><a href="#mise-projen.SettingsTask.property.monorepoExcludeDirs">monorepoExcludeDirs</a></code> | <code>string[]</code> | Directory names that automatic monorepo discovery skips. |
 | <code><a href="#mise-projen.SettingsTask.property.monorepoRespectGitignore">monorepoRespectGitignore</a></code> | <code>boolean</code> | Skip directories that `.gitignore` files ignore during automatic monorepo discovery. |
@@ -12112,6 +12139,18 @@ public readonly disableSpecFromRunScripts: boolean;
 - *Type:* boolean
 
 Build task usage specs only from the `usage` field, ignoring deprecated `arg()`, `option()` and `flag()` in run scripts.
+
+---
+
+##### `lockTimeout`<sup>Optional</sup> <a name="lockTimeout" id="mise-projen.SettingsTask.property.lockTimeout"></a>
+
+```typescript
+public readonly lockTimeout: string;
+```
+
+- *Type:* string
+
+How long a task waits for a lock another run holds before it fails.
 
 ---
 
