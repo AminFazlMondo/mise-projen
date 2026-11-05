@@ -6805,6 +6805,7 @@ const settings: Settings = { ... }
 | <code><a href="#mise-projen.Settings.property.envCacheTtl">envCacheTtl</a></code> | <code>string</code> | How long a cached environment stays valid. |
 | <code><a href="#mise-projen.Settings.property.envConfD">envConfD</a></code> | <code>boolean</code> | Enable environment-specific filenames in conf.d directories. |
 | <code><a href="#mise-projen.Settings.property.envFile">envFile</a></code> | <code>string[]</code> | Dotenv file names to load from the current directory and each parent directory. |
+| <code><a href="#mise-projen.Settings.property.envSets">envSets</a></code> | <code>{[ key: string ]: string[]}</code> | Named sets of config environments, which `env` and `-E` can name. |
 | <code><a href="#mise-projen.Settings.property.envShellExpand">envShellExpand</a></code> | <code>boolean</code> | Expand shell-style variables such as `$FOO` and `${BAR:-default}` in `[env]` values. |
 | <code><a href="#mise-projen.Settings.property.erlang">erlang</a></code> | <code><a href="#mise-projen.SettingsErlang">SettingsErlang</a></code> | *No description.* |
 | <code><a href="#mise-projen.Settings.property.execAutoInstall">execAutoInstall</a></code> | <code>boolean</code> | Install missing tools automatically when you run `mise exec`. |
@@ -7430,6 +7431,18 @@ public readonly envFile: string[];
 - *Type:* string[]
 
 Dotenv file names to load from the current directory and each parent directory.
+
+---
+
+##### `envSets`<sup>Optional</sup> <a name="envSets" id="mise-projen.Settings.property.envSets"></a>
+
+```typescript
+public readonly envSets: {[ key: string ]: string[]};
+```
+
+- *Type:* {[ key: string ]: string[]}
+
+Named sets of config environments, which `env` and `-E` can name.
 
 ---
 
