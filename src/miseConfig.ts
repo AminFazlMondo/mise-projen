@@ -935,6 +935,13 @@ export interface Settings {
   readonly envFile?: string[];
 
   /**
+   * Named sets of config environments, which `env` and `-E` can name.
+   *
+   * @schema settings#env_sets
+   */
+  readonly envSets?: { [key: string]: string[] };
+
+  /**
    * Expand shell-style variables such as `$FOO` and `${BAR:-default}` in `[env]` values.
    *
    * @schema settings#env_shell_expand
@@ -1889,6 +1896,7 @@ export function toJson_Settings(obj: Settings | undefined): Record<string, any> 
     'env_cache_ttl': obj.envCacheTtl,
     'env_conf_d': obj.envConfD,
     'env_file': obj.envFile?.map(y => y),
+    'env_sets': ((obj.envSets) === undefined) ? undefined : (Object.entries(obj.envSets).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1]?.map(y => y) }), {})),
     'env_shell_expand': obj.envShellExpand,
     'erlang': toJson_SettingsErlang(obj.erlang),
     'exec_auto_install': obj.execAutoInstall,
