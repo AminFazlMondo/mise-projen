@@ -15096,6 +15096,7 @@ Default output style for `mise run`.
 | <code><a href="#mise-projen.SettingsTaskOutput.INTERLEAVE">INTERLEAVE</a></code> | interleave. |
 | <code><a href="#mise-projen.SettingsTaskOutput.KEEP_HYPHEN_ORDER">KEEP_HYPHEN_ORDER</a></code> | keep-order. |
 | <code><a href="#mise-projen.SettingsTaskOutput.REPLACING">REPLACING</a></code> | replacing. |
+| <code><a href="#mise-projen.SettingsTaskOutput.SUMMARY">SUMMARY</a></code> | summary. |
 | <code><a href="#mise-projen.SettingsTaskOutput.TIMED">TIMED</a></code> | timed. |
 | <code><a href="#mise-projen.SettingsTaskOutput.QUIET">QUIET</a></code> | quiet. |
 | <code><a href="#mise-projen.SettingsTaskOutput.SILENT">SILENT</a></code> | silent. |
@@ -15126,6 +15127,13 @@ keep-order.
 ##### `REPLACING` <a name="REPLACING" id="mise-projen.SettingsTaskOutput.REPLACING"></a>
 
 replacing.
+
+---
+
+
+##### `SUMMARY` <a name="SUMMARY" id="mise-projen.SettingsTaskOutput.SUMMARY"></a>
+
+summary.
 
 ---
 

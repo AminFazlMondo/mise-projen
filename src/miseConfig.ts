@@ -7312,6 +7312,8 @@ export enum SettingsTaskOutput {
   KEEP_HYPHEN_ORDER = "keep-order",
   /** replacing */
   REPLACING = "replacing",
+  /** summary */
+  SUMMARY = "summary",
   /** timed */
   TIMED = "timed",
   /** quiet */
