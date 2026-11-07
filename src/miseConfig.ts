@@ -5207,11 +5207,32 @@ export interface SettingsTask {
   readonly disableSpecFromRunScripts?: boolean;
 
   /**
+   * Record each task run's duration and result for `mise tasks history`.
+   *
+   * @schema SettingsTask#history
+   */
+  readonly history?: boolean;
+
+  /**
+   * How many recent runs of each task `mise tasks history` keeps.
+   *
+   * @schema SettingsTask#history_limit
+   */
+  readonly historyLimit?: number;
+
+  /**
    * How long a task waits for a lock another run holds before it fails.
    *
    * @schema SettingsTask#lock_timeout
    */
   readonly lockTimeout?: string;
+
+  /**
+   * Keep the output of each task's last run, for `mise tasks log`.
+   *
+   * @schema SettingsTask#logs
+   */
+  readonly logs?: boolean;
 
   /**
    * Maximum directory depth for automatic monorepo discovery, which is deprecated.
@@ -5333,7 +5354,10 @@ export function toJson_SettingsTask(obj: SettingsTask | undefined): Record<strin
     'cache_remote_url': obj.cacheRemoteUrl,
     'disable_paths': obj.disablePaths?.map(y => y),
     'disable_spec_from_run_scripts': obj.disableSpecFromRunScripts,
+    'history': obj.history,
+    'history_limit': obj.historyLimit,
     'lock_timeout': obj.lockTimeout,
+    'logs': obj.logs,
     'monorepo_depth': obj.monorepoDepth,
     'monorepo_exclude_dirs': obj.monorepoExcludeDirs?.map(y => y),
     'monorepo_respect_gitignore': obj.monorepoRespectGitignore,

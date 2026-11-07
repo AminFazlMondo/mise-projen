@@ -11983,7 +11983,10 @@ const settingsTask: SettingsTask = { ... }
 | <code><a href="#mise-projen.SettingsTask.property.cacheRemoteUrl">cacheRemoteUrl</a></code> | <code>string</code> | Deprecated alias for `task.cache.remote_url`. |
 | <code><a href="#mise-projen.SettingsTask.property.disablePaths">disablePaths</a></code> | <code>string[]</code> | Paths that mise does not look for tasks in. |
 | <code><a href="#mise-projen.SettingsTask.property.disableSpecFromRunScripts">disableSpecFromRunScripts</a></code> | <code>boolean</code> | Build task usage specs only from the `usage` field, ignoring deprecated `arg()`, `option()` and `flag()` in run scripts. |
+| <code><a href="#mise-projen.SettingsTask.property.history">history</a></code> | <code>boolean</code> | Record each task run's duration and result for `mise tasks history`. |
+| <code><a href="#mise-projen.SettingsTask.property.historyLimit">historyLimit</a></code> | <code>number</code> | How many recent runs of each task `mise tasks history` keeps. |
 | <code><a href="#mise-projen.SettingsTask.property.lockTimeout">lockTimeout</a></code> | <code>string</code> | How long a task waits for a lock another run holds before it fails. |
+| <code><a href="#mise-projen.SettingsTask.property.logs">logs</a></code> | <code>boolean</code> | Keep the output of each task's last run, for `mise tasks log`. |
 | <code><a href="#mise-projen.SettingsTask.property.monorepoDepth">monorepoDepth</a></code> | <code>number</code> | Maximum directory depth for automatic monorepo discovery, which is deprecated. |
 | <code><a href="#mise-projen.SettingsTask.property.monorepoExcludeDirs">monorepoExcludeDirs</a></code> | <code>string[]</code> | Directory names that automatic monorepo discovery skips. |
 | <code><a href="#mise-projen.SettingsTask.property.monorepoRespectGitignore">monorepoRespectGitignore</a></code> | <code>boolean</code> | Skip directories that `.gitignore` files ignore during automatic monorepo discovery. |
@@ -12155,6 +12158,30 @@ Build task usage specs only from the `usage` field, ignoring deprecated `arg()`,
 
 ---
 
+##### `history`<sup>Optional</sup> <a name="history" id="mise-projen.SettingsTask.property.history"></a>
+
+```typescript
+public readonly history: boolean;
+```
+
+- *Type:* boolean
+
+Record each task run's duration and result for `mise tasks history`.
+
+---
+
+##### `historyLimit`<sup>Optional</sup> <a name="historyLimit" id="mise-projen.SettingsTask.property.historyLimit"></a>
+
+```typescript
+public readonly historyLimit: number;
+```
+
+- *Type:* number
+
+How many recent runs of each task `mise tasks history` keeps.
+
+---
+
 ##### `lockTimeout`<sup>Optional</sup> <a name="lockTimeout" id="mise-projen.SettingsTask.property.lockTimeout"></a>
 
 ```typescript
@@ -12164,6 +12191,18 @@ public readonly lockTimeout: string;
 - *Type:* string
 
 How long a task waits for a lock another run holds before it fails.
+
+---
+
+##### `logs`<sup>Optional</sup> <a name="logs" id="mise-projen.SettingsTask.property.logs"></a>
+
+```typescript
+public readonly logs: boolean;
+```
+
+- *Type:* boolean
+
+Keep the output of each task's last run, for `mise tasks log`.
 
 ---
 
