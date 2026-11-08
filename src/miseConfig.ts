@@ -41,7 +41,7 @@ export interface MiseTomlSchema {
   readonly env?: Env[];
 
   /**
-   * config files merged into this one, ranking just below it: a local path (relative to this file), git::<url>//<path>.toml?ref=<ref> or oci::<registry>/<repo>[:tag|@sha256:<digest>] (the artifact holds a mise.toml). Paranoid mode requires a commit sha or digest for remote includes and rejects local ones; otherwise a branch or tag is refreshed after fetch_remote_versions_cache
+   * config files merged into this one, ranking just below it: a local path (relative to this file), git::<url>//<path>.toml?ref=<ref> oci::<registry>/<repo>[:tag|@sha256:<digest>] (the artifact holds a mise.toml) or zip::<http(s) url> (a zip archive with a mise.toml at its root). Paranoid mode requires a commit sha or digest for remote includes (so it rejects zip::) and rejects local ones; otherwise a branch or tag is refreshed after fetch_remote_versions_cache
    *
    * @schema MiseTomlSchema#include
    */
@@ -2459,7 +2459,7 @@ export interface TaskConfig {
   readonly inputGroups?: { [key: string]: string[] };
 
   /**
-   * files/directories to include searching for tasks. Can be local paths, git repository URLs using git:: prefix (e.g., git::https://github.com/org/repo.git//path?ref=branch), or OCI artifacts using oci:: prefix (e.g., oci::ghcr.io/org/tasks:1.0.0)
+   * files/directories to include searching for tasks. Can be local paths, git repository URLs using git:: prefix (e.g., git::https://github.com/org/repo.git//path?ref=branch), OCI artifacts using oci:: prefix (e.g., oci::ghcr.io/org/tasks:1.0.0), or zip archives using zip:: prefix (e.g., zip::https://example.com/tasks.zip)
    *
    * @schema task_config#includes
    */
