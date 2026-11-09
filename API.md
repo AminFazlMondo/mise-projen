@@ -11779,6 +11779,7 @@ const settingsStatus: SettingsStatus = { ... }
 | <code><a href="#mise-projen.SettingsStatus.property.missingTools">missingTools</a></code> | <code><a href="#mise-projen.SettingsStatusMissingTools">SettingsStatusMissingTools</a></code> | When to warn that tools requested by config are not installed. |
 | <code><a href="#mise-projen.SettingsStatus.property.showDepsStale">showDepsStale</a></code> | <code>boolean</code> | Warn in an activated shell when a `[deps]` provider with `auto = true` is out of date. |
 | <code><a href="#mise-projen.SettingsStatus.property.showEnv">showEnv</a></code> | <code>boolean</code> | When you change directories in an activated shell, list the environment variables that mise adds, changes or removes. |
+| <code><a href="#mise-projen.SettingsStatus.property.showEnvIgnore">showEnvIgnore</a></code> | <code>string[]</code> | Environment variable names (or glob patterns) that `status.show_env` leaves out. |
 | <code><a href="#mise-projen.SettingsStatus.property.showTools">showTools</a></code> | <code>boolean</code> | When you change directories in an activated shell, list the tool versions that become active or inactive. |
 | <code><a href="#mise-projen.SettingsStatus.property.truncate">truncate</a></code> | <code>boolean</code> | Cut the lines from `status.show_env` and `status.show_tools` to the terminal width. |
 
@@ -11817,6 +11818,18 @@ public readonly showEnv: boolean;
 - *Type:* boolean
 
 When you change directories in an activated shell, list the environment variables that mise adds, changes or removes.
+
+---
+
+##### `showEnvIgnore`<sup>Optional</sup> <a name="showEnvIgnore" id="mise-projen.SettingsStatus.property.showEnvIgnore"></a>
+
+```typescript
+public readonly showEnvIgnore: string[];
+```
+
+- *Type:* string[]
+
+Environment variable names (or glob patterns) that `status.show_env` leaves out.
 
 ---
 

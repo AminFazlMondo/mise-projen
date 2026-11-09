@@ -4978,6 +4978,13 @@ export interface SettingsStatus {
   readonly showEnv?: boolean;
 
   /**
+   * Environment variable names (or glob patterns) that `status.show_env` leaves out.
+   *
+   * @schema SettingsStatus#show_env_ignore
+   */
+  readonly showEnvIgnore?: string[];
+
+  /**
    * When you change directories in an activated shell, list the tool versions that become active or inactive.
    *
    * @schema SettingsStatus#show_tools
@@ -5003,6 +5010,7 @@ export function toJson_SettingsStatus(obj: SettingsStatus | undefined): Record<s
     'missing_tools': obj.missingTools,
     'show_deps_stale': obj.showDepsStale,
     'show_env': obj.showEnv,
+    'show_env_ignore': obj.showEnvIgnore?.map(y => y),
     'show_tools': obj.showTools,
     'truncate': obj.truncate,
   };
