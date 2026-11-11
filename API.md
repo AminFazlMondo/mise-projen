@@ -1666,6 +1666,144 @@ every day when unset
 
 ---
 
+### LaunchdResourceLimits <a name="LaunchdResourceLimits" id="mise-projen.LaunchdResourceLimits"></a>
+
+resource limits for launchd SoftResourceLimits and HardResourceLimits.
+
+#### Initializer <a name="Initializer" id="mise-projen.LaunchdResourceLimits.Initializer"></a>
+
+```typescript
+import { LaunchdResourceLimits } from 'mise-projen'
+
+const launchdResourceLimits: LaunchdResourceLimits = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#mise-projen.LaunchdResourceLimits.property.core">core</a></code> | <code>number</code> | write Core, the largest core file in bytes. |
+| <code><a href="#mise-projen.LaunchdResourceLimits.property.cpu">cpu</a></code> | <code>number</code> | write CPU, the CPU time in seconds. |
+| <code><a href="#mise-projen.LaunchdResourceLimits.property.data">data</a></code> | <code>number</code> | write Data, the data segment size in bytes. |
+| <code><a href="#mise-projen.LaunchdResourceLimits.property.fileSize">fileSize</a></code> | <code>number</code> | write FileSize, the largest file the program may create in bytes. |
+| <code><a href="#mise-projen.LaunchdResourceLimits.property.memoryLock">memoryLock</a></code> | <code>number</code> | write MemoryLock, the memory the program may lock in bytes. |
+| <code><a href="#mise-projen.LaunchdResourceLimits.property.numberOfFiles">numberOfFiles</a></code> | <code>number</code> | write NumberOfFiles, the open file descriptors; |
+| <code><a href="#mise-projen.LaunchdResourceLimits.property.numberOfProcesses">numberOfProcesses</a></code> | <code>number</code> | write NumberOfProcesses, the processes the user may run. |
+| <code><a href="#mise-projen.LaunchdResourceLimits.property.residentSetSize">residentSetSize</a></code> | <code>number</code> | write ResidentSetSize, the resident memory in bytes. |
+| <code><a href="#mise-projen.LaunchdResourceLimits.property.stack">stack</a></code> | <code>number</code> | write Stack, the stack size in bytes. |
+
+---
+
+##### `core`<sup>Optional</sup> <a name="core" id="mise-projen.LaunchdResourceLimits.property.core"></a>
+
+```typescript
+public readonly core: number;
+```
+
+- *Type:* number
+
+write Core, the largest core file in bytes.
+
+---
+
+##### `cpu`<sup>Optional</sup> <a name="cpu" id="mise-projen.LaunchdResourceLimits.property.cpu"></a>
+
+```typescript
+public readonly cpu: number;
+```
+
+- *Type:* number
+
+write CPU, the CPU time in seconds.
+
+---
+
+##### `data`<sup>Optional</sup> <a name="data" id="mise-projen.LaunchdResourceLimits.property.data"></a>
+
+```typescript
+public readonly data: number;
+```
+
+- *Type:* number
+
+write Data, the data segment size in bytes.
+
+---
+
+##### `fileSize`<sup>Optional</sup> <a name="fileSize" id="mise-projen.LaunchdResourceLimits.property.fileSize"></a>
+
+```typescript
+public readonly fileSize: number;
+```
+
+- *Type:* number
+
+write FileSize, the largest file the program may create in bytes.
+
+---
+
+##### `memoryLock`<sup>Optional</sup> <a name="memoryLock" id="mise-projen.LaunchdResourceLimits.property.memoryLock"></a>
+
+```typescript
+public readonly memoryLock: number;
+```
+
+- *Type:* number
+
+write MemoryLock, the memory the program may lock in bytes.
+
+---
+
+##### `numberOfFiles`<sup>Optional</sup> <a name="numberOfFiles" id="mise-projen.LaunchdResourceLimits.property.numberOfFiles"></a>
+
+```typescript
+public readonly numberOfFiles: number;
+```
+
+- *Type:* number
+
+write NumberOfFiles, the open file descriptors;
+
+launchd starts agents with a soft limit of 256
+
+---
+
+##### `numberOfProcesses`<sup>Optional</sup> <a name="numberOfProcesses" id="mise-projen.LaunchdResourceLimits.property.numberOfProcesses"></a>
+
+```typescript
+public readonly numberOfProcesses: number;
+```
+
+- *Type:* number
+
+write NumberOfProcesses, the processes the user may run.
+
+---
+
+##### `residentSetSize`<sup>Optional</sup> <a name="residentSetSize" id="mise-projen.LaunchdResourceLimits.property.residentSetSize"></a>
+
+```typescript
+public readonly residentSetSize: number;
+```
+
+- *Type:* number
+
+write ResidentSetSize, the resident memory in bytes.
+
+---
+
+##### `stack`<sup>Optional</sup> <a name="stack" id="mise-projen.LaunchdResourceLimits.property.stack"></a>
+
+```typescript
+public readonly stack: number;
+```
+
+- *Type:* number
+
+write Stack, the stack size in bytes.
+
+---
+
 ### MiseFileOptions <a name="MiseFileOptions" id="mise-projen.MiseFileOptions"></a>
 
 Options for `Mise` / `MiseFile`.
@@ -2306,7 +2444,7 @@ const miseTomlSchemaBootstrap: MiseTomlSchemaBootstrap = { ... }
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrap.property.linux">linux</a></code> | <code><a href="#mise-projen.MiseTomlSchemaBootstrapLinux">MiseTomlSchemaBootstrapLinux</a></code> | Linux-specific bootstrap config. |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrap.property.macos">macos</a></code> | <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacos">MiseTomlSchemaBootstrapMacos</a></code> | macOS-specific bootstrap config. |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrap.property.miseShellActivate">miseShellActivate</a></code> | <code><a href="#mise-projen.BootstrapMiseShellActivate">BootstrapMiseShellActivate</a></code> | *No description.* |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrap.property.packages">packages</a></code> | <code>{[ key: string ]: any}</code> | system packages to install with `mise bootstrap packages apply`, keyed by "manager:package" (e.g. "apt:libssl-dev", "brew:postgresql@17", "dnf:openssl-devel", "pacman:base-devel"). |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrap.property.packages">packages</a></code> | <code>{[ key: string ]: any}</code> | system packages to install with `mise bootstrap packages apply`, keyed by "manager:package", or by a bare package name that mise installs with one manager chosen from system_packages.prefer (e.g. "apt:libssl-dev", "brew:postgresql@17", "dnf:openssl-devel", "pacman:base-devel"). |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrap.property.plugins">plugins</a></code> | <code>{[ key: string ]: string}</code> | package manager plugins to install with `mise bootstrap plugins apply`, keyed by manager name. |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrap.property.remote">remote</a></code> | <code><a href="#mise-projen.MiseTomlSchemaBootstrapRemote">MiseTomlSchemaBootstrapRemote</a></code> | OpenSSH targets used by `mise bootstrap remote`. |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrap.property.repos">repos</a></code> | <code>{[ key: string ]: <a href="#mise-projen.MiseTomlSchemaBootstrapRepos">MiseTomlSchemaBootstrapRepos</a>}</code> | git repositories to clone or update with `mise bootstrap repos apply`, keyed by target path. |
@@ -2481,7 +2619,7 @@ public readonly packages: {[ key: string ]: any};
 
 - *Type:* {[ key: string ]: any}
 
-system packages to install with `mise bootstrap packages apply`, keyed by "manager:package" (e.g. "apt:libssl-dev", "brew:postgresql@17", "dnf:openssl-devel", "pacman:base-devel").
+system packages to install with `mise bootstrap packages apply`, keyed by "manager:package", or by a bare package name that mise installs with one manager chosen from system_packages.prefer (e.g. "apt:libssl-dev", "brew:postgresql@17", "dnf:openssl-devel", "pacman:base-devel").
 
 ---
 
@@ -4506,6 +4644,7 @@ const miseTomlSchemaBootstrapMacosLaunchdAgents: MiseTomlSchemaBootstrapMacosLau
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosLaunchdAgents.property.program">program</a></code> | <code>string</code> | program path for ProgramArguments[0]. |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosLaunchdAgents.property.args">args</a></code> | <code>string[]</code> | additional ProgramArguments entries. |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosLaunchdAgents.property.environment">environment</a></code> | <code>{[ key: string ]: string}</code> | environment variables for EnvironmentVariables. |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosLaunchdAgents.property.hardResourceLimits">hardResourceLimits</a></code> | <code><a href="#mise-projen.LaunchdResourceLimits">LaunchdResourceLimits</a></code> | write HardResourceLimits, the ceilings the program cannot raise its soft limits above. |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosLaunchdAgents.property.keepAlive">keepAlive</a></code> | <code>boolean</code> | write KeepAlive. |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosLaunchdAgents.property.keepAliveOnFailure">keepAliveOnFailure</a></code> | <code>boolean</code> | write KeepAlive = { SuccessfulExit = false }, so launchd relaunches the job only after a failure; |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosLaunchdAgents.property.kickstart">kickstart</a></code> | <code>boolean</code> | run `launchctl kickstart -k` after loading the agent. |
@@ -4514,6 +4653,7 @@ const miseTomlSchemaBootstrapMacosLaunchdAgents: MiseTomlSchemaBootstrapMacosLau
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosLaunchdAgents.property.processType">processType</a></code> | <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosLaunchdAgentsProcessType">MiseTomlSchemaBootstrapMacosLaunchdAgentsProcessType</a></code> | write ProcessType, the scheduling band launchd runs the job in. |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosLaunchdAgents.property.queueDirectories">queueDirectories</a></code> | <code>string[]</code> | write QueueDirectories (absolute paths; |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosLaunchdAgents.property.runAtLoad">runAtLoad</a></code> | <code>boolean</code> | write RunAtLoad. |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosLaunchdAgents.property.softResourceLimits">softResourceLimits</a></code> | <code><a href="#mise-projen.LaunchdResourceLimits">LaunchdResourceLimits</a></code> | write SoftResourceLimits, the resource limits the program starts with and may raise up to the hard limits. |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosLaunchdAgents.property.startCalendarInterval">startCalendarInterval</a></code> | <code><a href="#mise-projen.LaunchdCalendarInterval">LaunchdCalendarInterval</a>[]</code> | write one or more StartCalendarInterval schedules. |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosLaunchdAgents.property.startInterval">startInterval</a></code> | <code>number</code> | write StartInterval in seconds. |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosLaunchdAgents.property.stderrPath">stderrPath</a></code> | <code>string</code> | write StandardErrorPath. |
@@ -4556,6 +4696,18 @@ public readonly environment: {[ key: string ]: string};
 - *Type:* {[ key: string ]: string}
 
 environment variables for EnvironmentVariables.
+
+---
+
+##### `hardResourceLimits`<sup>Optional</sup> <a name="hardResourceLimits" id="mise-projen.MiseTomlSchemaBootstrapMacosLaunchdAgents.property.hardResourceLimits"></a>
+
+```typescript
+public readonly hardResourceLimits: LaunchdResourceLimits;
+```
+
+- *Type:* <a href="#mise-projen.LaunchdResourceLimits">LaunchdResourceLimits</a>
+
+write HardResourceLimits, the ceilings the program cannot raise its soft limits above.
 
 ---
 
@@ -4656,6 +4808,18 @@ public readonly runAtLoad: boolean;
 - *Type:* boolean
 
 write RunAtLoad.
+
+---
+
+##### `softResourceLimits`<sup>Optional</sup> <a name="softResourceLimits" id="mise-projen.MiseTomlSchemaBootstrapMacosLaunchdAgents.property.softResourceLimits"></a>
+
+```typescript
+public readonly softResourceLimits: LaunchdResourceLimits;
+```
+
+- *Type:* <a href="#mise-projen.LaunchdResourceLimits">LaunchdResourceLimits</a>
+
+write SoftResourceLimits, the resource limits the program starts with and may raise up to the hard limits.
 
 ---
 
@@ -10121,6 +10285,7 @@ const settingsHistory: SettingsHistory = { ... }
 | <code><a href="#mise-projen.SettingsHistory.property.describeCommand">describeCommand</a></code> | <code>string</code> | Command, such as an AI agent, that writes the description of each checkpoint the history watcher saves. |
 | <code><a href="#mise-projen.SettingsHistory.property.enabled">enabled</a></code> | <code>boolean</code> | Record Git checkpoints of tracked files around bootstrap operations and on explicit saves. |
 | <code><a href="#mise-projen.SettingsHistory.property.fetchInterval">fetchInterval</a></code> | <code>string</code> | How often the history watcher fetches from the setup repository. |
+| <code><a href="#mise-projen.SettingsHistory.property.lockWait">lockWait</a></code> | <code>string</code> | How long a command waits for another history operation before failing. |
 | <code><a href="#mise-projen.SettingsHistory.property.notify">notify</a></code> | <code>boolean</code> | Show a desktop notification when a sync conflict pauses sharing. |
 | <code><a href="#mise-projen.SettingsHistory.property.sync">sync</a></code> | <code><a href="#mise-projen.SettingsHistorySync">SettingsHistorySync</a></code> | What the history watcher shares with a connected setup repository on its own. |
 | <code><a href="#mise-projen.SettingsHistory.property.syncInterval">syncInterval</a></code> | <code>string</code> | Minimum time between automatic publishes to the setup repository after a save. |
@@ -10173,6 +10338,18 @@ public readonly fetchInterval: string;
 - *Type:* string
 
 How often the history watcher fetches from the setup repository.
+
+---
+
+##### `lockWait`<sup>Optional</sup> <a name="lockWait" id="mise-projen.SettingsHistory.property.lockWait"></a>
+
+```typescript
+public readonly lockWait: string;
+```
+
+- *Type:* string
+
+How long a command waits for another history operation before failing.
 
 ---
 
@@ -11917,6 +12094,7 @@ const settingsSystemPackages: SettingsSystemPackages = { ... }
 | <code><a href="#mise-projen.SettingsSystemPackages.property.elevateWith">elevateWith</a></code> | <code>string</code> | Command mise uses to get root instead of `sudo`, such as `run0` or `doas`. |
 | <code><a href="#mise-projen.SettingsSystemPackages.property.managers">managers</a></code> | <code>string[]</code> | Package managers that mise may use for `[bootstrap.packages]` and missing plugin dependencies. |
 | <code><a href="#mise-projen.SettingsSystemPackages.property.ostree">ostree</a></code> | <code><a href="#mise-projen.SettingsSystemPackagesOstree">SettingsSystemPackagesOstree</a></code> | What mise does with `dnf:` packages on an image-based Fedora host such as Silverblue or Bazzite. |
+| <code><a href="#mise-projen.SettingsSystemPackages.property.prefer">prefer</a></code> | <code>string[]</code> | Package managers, in order, that an unprefixed `[bootstrap.packages]` key may use. |
 | <code><a href="#mise-projen.SettingsSystemPackages.property.sudo">sudo</a></code> | <code>boolean</code> | Let mise run `sudo` for steps that need root, such as system packages and `mise install --system`. |
 
 ---
@@ -11954,6 +12132,18 @@ public readonly ostree: SettingsSystemPackagesOstree;
 - *Type:* <a href="#mise-projen.SettingsSystemPackagesOstree">SettingsSystemPackagesOstree</a>
 
 What mise does with `dnf:` packages on an image-based Fedora host such as Silverblue or Bazzite.
+
+---
+
+##### `prefer`<sup>Optional</sup> <a name="prefer" id="mise-projen.SettingsSystemPackages.property.prefer"></a>
+
+```typescript
+public readonly prefer: string[];
+```
+
+- *Type:* string[]
+
+Package managers, in order, that an unprefixed `[bootstrap.packages]` key may use.
 
 ---
 
