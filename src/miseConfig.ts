@@ -2198,7 +2198,7 @@ export interface MiseTomlSchemaBootstrap {
   readonly plugins?: { [key: string]: string };
 
   /**
-   * system packages to install with `mise bootstrap packages apply`, keyed by "manager:package" (e.g. "apt:libssl-dev", "brew:postgresql@17", "dnf:openssl-devel", "pacman:base-devel")
+   * system packages to install with `mise bootstrap packages apply`, keyed by "manager:package", or by a bare package name that mise installs with one manager chosen from system_packages.prefer (e.g. "apt:libssl-dev", "brew:postgresql@17", "dnf:openssl-devel", "pacman:base-devel")
    *
    * @schema MiseTomlSchemaBootstrap#packages
    */
@@ -3763,6 +3763,13 @@ export interface SettingsHistory {
   readonly fetchInterval?: string;
 
   /**
+   * How long a command waits for another history operation before failing.
+   *
+   * @schema SettingsHistory#lock_wait
+   */
+  readonly lockWait?: string;
+
+  /**
    * Show a desktop notification when a sync conflict pauses sharing.
    *
    * @schema SettingsHistory#notify
@@ -3801,6 +3808,7 @@ export function toJson_SettingsHistory(obj: SettingsHistory | undefined): Record
     'describe_command': obj.describeCommand,
     'enabled': obj.enabled,
     'fetch_interval': obj.fetchInterval,
+    'lock_wait': obj.lockWait,
     'notify': obj.notify,
     'sync': obj.sync,
     'sync_interval': obj.syncInterval,
@@ -5096,6 +5104,13 @@ export interface SettingsSystemPackages {
   readonly ostree?: SettingsSystemPackagesOstree;
 
   /**
+   * Package managers, in order, that an unprefixed `[bootstrap.packages]` key may use.
+   *
+   * @schema SettingsSystemPackages#prefer
+   */
+  readonly prefer?: string[];
+
+  /**
    * Let mise run `sudo` for steps that need root, such as system packages and `mise install --system`.
    *
    * @schema SettingsSystemPackages#sudo
@@ -5114,6 +5129,7 @@ export function toJson_SettingsSystemPackages(obj: SettingsSystemPackages | unde
     'elevate_with': obj.elevateWith,
     'managers': obj.managers?.map(y => y),
     'ostree': obj.ostree,
+    'prefer': obj.prefer?.map(y => y),
     'sudo': obj.sudo,
   };
   // filter undefined values
@@ -8504,6 +8520,20 @@ export interface MiseTomlSchemaBootstrapMacosLaunchdAgents {
   readonly stderrPath?: string;
 
   /**
+   * write SoftResourceLimits, the resource limits the program starts with and may raise up to the hard limits
+   *
+   * @schema MiseTomlSchemaBootstrapMacosLaunchdAgents#soft_resource_limits
+   */
+  readonly softResourceLimits?: LaunchdResourceLimits;
+
+  /**
+   * write HardResourceLimits, the ceilings the program cannot raise its soft limits above
+   *
+   * @schema MiseTomlSchemaBootstrapMacosLaunchdAgents#hard_resource_limits
+   */
+  readonly hardResourceLimits?: LaunchdResourceLimits;
+
+  /**
    * run `launchctl kickstart -k` after loading the agent
    *
    * @schema MiseTomlSchemaBootstrapMacosLaunchdAgents#kickstart
@@ -8535,6 +8565,8 @@ export function toJson_MiseTomlSchemaBootstrapMacosLaunchdAgents(obj: MiseTomlSc
     'working_directory': obj.workingDirectory,
     'stdout_path': obj.stdoutPath,
     'stderr_path': obj.stderrPath,
+    'soft_resource_limits': toJson_LaunchdResourceLimits(obj.softResourceLimits),
+    'hard_resource_limits': toJson_LaunchdResourceLimits(obj.hardResourceLimits),
     'kickstart': obj.kickstart,
   };
   // filter undefined values
@@ -9095,6 +9127,99 @@ export function toJson_LaunchdCalendarInterval(obj: LaunchdCalendarInterval | un
     'day': obj.day,
     'weekday': obj.weekday,
     'month': obj.month,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * resource limits for launchd SoftResourceLimits and HardResourceLimits
+ *
+ * @schema launchd_resource_limits
+ */
+export interface LaunchdResourceLimits {
+  /**
+   * write Core, the largest core file in bytes
+   *
+   * @schema launchd_resource_limits#core
+   */
+  readonly core?: number;
+
+  /**
+   * write CPU, the CPU time in seconds
+   *
+   * @schema launchd_resource_limits#cpu
+   */
+  readonly cpu?: number;
+
+  /**
+   * write Data, the data segment size in bytes
+   *
+   * @schema launchd_resource_limits#data
+   */
+  readonly data?: number;
+
+  /**
+   * write FileSize, the largest file the program may create in bytes
+   *
+   * @schema launchd_resource_limits#file_size
+   */
+  readonly fileSize?: number;
+
+  /**
+   * write MemoryLock, the memory the program may lock in bytes
+   *
+   * @schema launchd_resource_limits#memory_lock
+   */
+  readonly memoryLock?: number;
+
+  /**
+   * write NumberOfFiles, the open file descriptors; launchd starts agents with a soft limit of 256
+   *
+   * @schema launchd_resource_limits#number_of_files
+   */
+  readonly numberOfFiles?: number;
+
+  /**
+   * write NumberOfProcesses, the processes the user may run
+   *
+   * @schema launchd_resource_limits#number_of_processes
+   */
+  readonly numberOfProcesses?: number;
+
+  /**
+   * write ResidentSetSize, the resident memory in bytes
+   *
+   * @schema launchd_resource_limits#resident_set_size
+   */
+  readonly residentSetSize?: number;
+
+  /**
+   * write Stack, the stack size in bytes
+   *
+   * @schema launchd_resource_limits#stack
+   */
+  readonly stack?: number;
+}
+
+/**
+ * Converts an object of type 'LaunchdResourceLimits' to JSON representation.
+ * @internal
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_LaunchdResourceLimits(obj: LaunchdResourceLimits | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'core': obj.core,
+    'cpu': obj.cpu,
+    'data': obj.data,
+    'file_size': obj.fileSize,
+    'memory_lock': obj.memoryLock,
+    'number_of_files': obj.numberOfFiles,
+    'number_of_processes': obj.numberOfProcesses,
+    'resident_set_size': obj.residentSetSize,
+    'stack': obj.stack,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
