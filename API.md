@@ -11741,6 +11741,7 @@ const settingsShims: SettingsShims = { ... }
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#mise-projen.SettingsShims.property.exclude">exclude</a></code> | <code>string[]</code> | Command names that mise never creates shims for, so they resolve to whatever else is on `PATH`. |
+| <code><a href="#mise-projen.SettingsShims.property.fallbackToInstalled">fallbackToInstalled</a></code> | <code>boolean</code> | Let a shim run the latest installed version of a tool that no config file selects. |
 
 ---
 
@@ -11753,6 +11754,18 @@ public readonly exclude: string[];
 - *Type:* string[]
 
 Command names that mise never creates shims for, so they resolve to whatever else is on `PATH`.
+
+---
+
+##### `fallbackToInstalled`<sup>Optional</sup> <a name="fallbackToInstalled" id="mise-projen.SettingsShims.property.fallbackToInstalled"></a>
+
+```typescript
+public readonly fallbackToInstalled: boolean;
+```
+
+- *Type:* boolean
+
+Let a shim run the latest installed version of a tool that no config file selects.
 
 ---
 
