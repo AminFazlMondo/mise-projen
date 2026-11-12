@@ -4806,6 +4806,13 @@ export interface SettingsShims {
    * @schema SettingsShims#exclude
    */
   readonly exclude?: string[];
+
+  /**
+   * Let a shim run the latest installed version of a tool that no config file selects.
+   *
+   * @schema SettingsShims#fallback_to_installed
+   */
+  readonly fallbackToInstalled?: boolean;
 }
 
 /**
@@ -4817,6 +4824,7 @@ export function toJson_SettingsShims(obj: SettingsShims | undefined): Record<str
   if (obj === undefined) { return undefined; }
   const result = {
     'exclude': obj.exclude?.map(y => y),
+    'fallback_to_installed': obj.fallbackToInstalled,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
