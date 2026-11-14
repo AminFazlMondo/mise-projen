@@ -2450,6 +2450,7 @@ const miseTomlSchemaBootstrap: MiseTomlSchemaBootstrap = { ... }
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrap.property.repos">repos</a></code> | <code>{[ key: string ]: <a href="#mise-projen.MiseTomlSchemaBootstrapRepos">MiseTomlSchemaBootstrapRepos</a>}</code> | git repositories to clone or update with `mise bootstrap repos apply`, keyed by target path. |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrap.property.secrets">secrets</a></code> | <code>{[ key: string ]: any}</code> | sensitive bootstrap inputs read from environment variables, keyed by secret name. |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrap.property.services">services</a></code> | <code>{[ key: string ]: <a href="#mise-projen.MiseTomlSchemaBootstrapServices">MiseTomlSchemaBootstrapServices</a>}</code> | System services and portable user services managed by mise bootstrap, keyed by service name. |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrap.property.settings">settings</a></code> | <code><a href="#mise-projen.MiseTomlSchemaBootstrapSettings">MiseTomlSchemaBootstrapSettings</a></code> | [experimental] settings that bootstrap settings plugins apply, keyed by plugin name; |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrap.property.user">user</a></code> | <code><a href="#mise-projen.MiseTomlSchemaBootstrapUser">MiseTomlSchemaBootstrapUser</a></code> | current-user bootstrap settings. |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrap.property.users">users</a></code> | <code>{[ key: string ]: <a href="#mise-projen.MiseTomlSchemaBootstrapUsers">MiseTomlSchemaBootstrapUsers</a>}</code> | [experimental] Linux users that bootstrap creates or removes, keyed by user name. |
 
@@ -2680,6 +2681,20 @@ public readonly services: {[ key: string ]: MiseTomlSchemaBootstrapServices};
 - *Type:* {[ key: string ]: <a href="#mise-projen.MiseTomlSchemaBootstrapServices">MiseTomlSchemaBootstrapServices</a>}
 
 System services and portable user services managed by mise bootstrap, keyed by service name.
+
+---
+
+##### `settings`<sup>Optional</sup> <a name="settings" id="mise-projen.MiseTomlSchemaBootstrap.property.settings"></a>
+
+```typescript
+public readonly settings: MiseTomlSchemaBootstrapSettings;
+```
+
+- *Type:* <a href="#mise-projen.MiseTomlSchemaBootstrapSettings">MiseTomlSchemaBootstrapSettings</a>
+
+[experimental] settings that bootstrap settings plugins apply, keyed by plugin name;
+
+which keys a plugin accepts is up to the plugin
 
 ---
 
@@ -3294,8 +3309,10 @@ const miseTomlSchemaBootstrapFiles: MiseTomlSchemaBootstrapFiles = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapFiles.property.block">block</a></code> | <code>string</code> | block content kept between marker comments named by id, in a file mise does not own; |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapFiles.property.content">content</a></code> | <code>string</code> | inline file content; |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapFiles.property.group">group</a></code> | <code>string</code> | group that should own the file; |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapFiles.property.id">id</a></code> | <code>string</code> | names the block's marker comments, as in "# >>> mise:<id> >>>"; |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapFiles.property.mode">mode</a></code> | <code>string</code> | octal permissions such as "0640"; |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapFiles.property.notify">notify</a></code> | <code>string[]</code> | system services declared in [bootstrap.services] to reload or restart when mise changes this file. |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapFiles.property.os">os</a></code> | <code>string[]</code> | OS or OS/arch selectors; |
@@ -3306,6 +3323,20 @@ const miseTomlSchemaBootstrapFiles: MiseTomlSchemaBootstrapFiles = { ... }
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapFiles.property.source">source</a></code> | <code>string</code> | file to copy the content from; |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapFiles.property.state">state</a></code> | <code><a href="#mise-projen.MiseTomlSchemaBootstrapFilesState">MiseTomlSchemaBootstrapFilesState</a></code> | present creates or updates the file; |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapFiles.property.template">template</a></code> | <code>boolean</code> | render source or content with mise's template engine; |
+
+---
+
+##### `block`<sup>Optional</sup> <a name="block" id="mise-projen.MiseTomlSchemaBootstrapFiles.property.block"></a>
+
+```typescript
+public readonly block: string;
+```
+
+- *Type:* string
+
+block content kept between marker comments named by id, in a file mise does not own;
+
+the rest of the file is left alone, a missing file is created with just the block, and the block is appended when its markers are absent. Cannot be combined with source or content, and needs id
 
 ---
 
@@ -3337,6 +3368,20 @@ left as it is when unset
 
 ---
 
+##### `id`<sup>Optional</sup> <a name="id" id="mise-projen.MiseTomlSchemaBootstrapFiles.property.id"></a>
+
+```typescript
+public readonly id: string;
+```
+
+- *Type:* string
+
+names the block's marker comments, as in "# >>> mise:<id> >>>";
+
+required with block
+
+---
+
 ##### `mode`<sup>Optional</sup> <a name="mode" id="mise-projen.MiseTomlSchemaBootstrapFiles.property.mode"></a>
 
 ```typescript
@@ -3347,7 +3392,7 @@ public readonly mode: string;
 
 octal permissions such as "0640";
 
-defaults to "0644" for a file with source or content, otherwise left as it is
+defaults to "0644" for a file with source or content, or one a block creates, otherwise left as it is
 
 ---
 
@@ -4409,12 +4454,12 @@ const miseTomlSchemaBootstrapMacos: MiseTomlSchemaBootstrapMacos = { ... }
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacos.property.defaults">defaults</a></code> | <code>{[ key: string ]: {[ key: string ]: any}}</code> | *No description.* |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacos.property.defaultsEntries">defaultsEntries</a></code> | <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosDefaultsEntries">MiseTomlSchemaBootstrapMacosDefaultsEntries</a>[]</code> | Explicit macOS preferences with a selectable host scope. |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacos.property.defaultsEntries">defaultsEntries</a></code> | <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosDefaultsEntries">MiseTomlSchemaBootstrapMacosDefaultsEntries</a>[]</code> | deprecated: use [[bootstrap.settings.macos.defaults_entries]]. |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacos.property.dock">dock</a></code> | <code><a href="#mise-projen.BootstrapMacosDock">BootstrapMacosDock</a></code> | *No description.* |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacos.property.finder">finder</a></code> | <code><a href="#mise-projen.BootstrapMacosFinder">BootstrapMacosFinder</a></code> | *No description.* |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacos.property.keyboard">keyboard</a></code> | <code><a href="#mise-projen.BootstrapMacosKeyboard">BootstrapMacosKeyboard</a></code> | *No description.* |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacos.property.launchd">launchd</a></code> | <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosLaunchd">MiseTomlSchemaBootstrapMacosLaunchd</a></code> | macOS launchd bootstrap config. |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacos.property.loginItems">loginItems</a></code> | <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosLoginItems">MiseTomlSchemaBootstrapMacosLoginItems</a></code> | applications to open at login (System Settings > General > Login Items & Extensions). |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacos.property.loginItems">loginItems</a></code> | <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosLoginItems">MiseTomlSchemaBootstrapMacosLoginItems</a></code> | deprecated: use [bootstrap.settings.macos.login_items]. |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacos.property.trackpad">trackpad</a></code> | <code><a href="#mise-projen.BootstrapMacosTrackpad">BootstrapMacosTrackpad</a></code> | *No description.* |
 
 ---
@@ -4437,7 +4482,7 @@ public readonly defaultsEntries: MiseTomlSchemaBootstrapMacosDefaultsEntries[];
 
 - *Type:* <a href="#mise-projen.MiseTomlSchemaBootstrapMacosDefaultsEntries">MiseTomlSchemaBootstrapMacosDefaultsEntries</a>[]
 
-Explicit macOS preferences with a selectable host scope.
+deprecated: use [[bootstrap.settings.macos.defaults_entries]].
 
 ---
 
@@ -4491,7 +4536,7 @@ public readonly loginItems: MiseTomlSchemaBootstrapMacosLoginItems;
 
 - *Type:* <a href="#mise-projen.MiseTomlSchemaBootstrapMacosLoginItems">MiseTomlSchemaBootstrapMacosLoginItems</a>
 
-applications to open at login (System Settings > General > Login Items & Extensions).
+deprecated: use [bootstrap.settings.macos.login_items].
 
 ---
 
@@ -4897,7 +4942,7 @@ write WorkingDirectory.
 
 ### MiseTomlSchemaBootstrapMacosLoginItems <a name="MiseTomlSchemaBootstrapMacosLoginItems" id="mise-projen.MiseTomlSchemaBootstrapMacosLoginItems"></a>
 
-applications to open at login (System Settings > General > Login Items & Extensions).
+deprecated: use [bootstrap.settings.macos.login_items].
 
 #### Initializer <a name="Initializer" id="mise-projen.MiseTomlSchemaBootstrapMacosLoginItems.Initializer"></a>
 
@@ -5543,6 +5588,287 @@ public readonly workingDirectory: string;
 directory to run the process in, with ~ expanded;
 
 user scope only
+
+---
+
+### MiseTomlSchemaBootstrapSettings <a name="MiseTomlSchemaBootstrapSettings" id="mise-projen.MiseTomlSchemaBootstrapSettings"></a>
+
+[experimental] settings that bootstrap settings plugins apply, keyed by plugin name;
+
+which keys a plugin accepts is up to the plugin
+
+#### Initializer <a name="Initializer" id="mise-projen.MiseTomlSchemaBootstrapSettings.Initializer"></a>
+
+```typescript
+import { MiseTomlSchemaBootstrapSettings } from 'mise-projen'
+
+const miseTomlSchemaBootstrapSettings: MiseTomlSchemaBootstrapSettings = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapSettings.property.macos">macos</a></code> | <code><a href="#mise-projen.MiseTomlSchemaBootstrapSettingsMacos">MiseTomlSchemaBootstrapSettingsMacos</a></code> | macOS preferences, written the way `defaults write` writes them; |
+
+---
+
+##### `macos`<sup>Optional</sup> <a name="macos" id="mise-projen.MiseTomlSchemaBootstrapSettings.property.macos"></a>
+
+```typescript
+public readonly macos: MiseTomlSchemaBootstrapSettingsMacos;
+```
+
+- *Type:* <a href="#mise-projen.MiseTomlSchemaBootstrapSettingsMacos">MiseTomlSchemaBootstrapSettingsMacos</a>
+
+macOS preferences, written the way `defaults write` writes them;
+
+`macos` is built in, not a plugin
+
+---
+
+### MiseTomlSchemaBootstrapSettingsMacos <a name="MiseTomlSchemaBootstrapSettingsMacos" id="mise-projen.MiseTomlSchemaBootstrapSettingsMacos"></a>
+
+macOS preferences, written the way `defaults write` writes them;
+
+`macos` is built in, not a plugin
+
+#### Initializer <a name="Initializer" id="mise-projen.MiseTomlSchemaBootstrapSettingsMacos.Initializer"></a>
+
+```typescript
+import { MiseTomlSchemaBootstrapSettingsMacos } from 'mise-projen'
+
+const miseTomlSchemaBootstrapSettingsMacos: MiseTomlSchemaBootstrapSettingsMacos = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapSettingsMacos.property.defaults">defaults</a></code> | <code>{[ key: string ]: {[ key: string ]: any}}</code> | any preference, by domain and key. |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapSettingsMacos.property.defaultsEntries">defaultsEntries</a></code> | <code><a href="#mise-projen.MiseTomlSchemaBootstrapSettingsMacosDefaultsEntries">MiseTomlSchemaBootstrapSettingsMacosDefaultsEntries</a>[]</code> | Explicit macOS preferences with a selectable host scope. |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapSettingsMacos.property.dock">dock</a></code> | <code><a href="#mise-projen.BootstrapMacosDock">BootstrapMacosDock</a></code> | Dock preferences (com.apple.dock). |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapSettingsMacos.property.finder">finder</a></code> | <code><a href="#mise-projen.BootstrapMacosFinder">BootstrapMacosFinder</a></code> | Finder preferences (com.apple.finder). |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapSettingsMacos.property.keyboard">keyboard</a></code> | <code><a href="#mise-projen.BootstrapMacosKeyboard">BootstrapMacosKeyboard</a></code> | keyboard preferences. |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapSettingsMacos.property.loginItems">loginItems</a></code> | <code><a href="#mise-projen.MiseTomlSchemaBootstrapSettingsMacosLoginItems">MiseTomlSchemaBootstrapSettingsMacosLoginItems</a></code> | applications to open at login (System Settings > General > Login Items & Extensions). |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapSettingsMacos.property.trackpad">trackpad</a></code> | <code><a href="#mise-projen.BootstrapMacosTrackpad">BootstrapMacosTrackpad</a></code> | trackpad preferences. |
+
+---
+
+##### `defaults`<sup>Optional</sup> <a name="defaults" id="mise-projen.MiseTomlSchemaBootstrapSettingsMacos.property.defaults"></a>
+
+```typescript
+public readonly defaults: {[ key: string ]: {[ key: string ]: any}};
+```
+
+- *Type:* {[ key: string ]: {[ key: string ]: any}}
+
+any preference, by domain and key.
+
+---
+
+##### `defaultsEntries`<sup>Optional</sup> <a name="defaultsEntries" id="mise-projen.MiseTomlSchemaBootstrapSettingsMacos.property.defaultsEntries"></a>
+
+```typescript
+public readonly defaultsEntries: MiseTomlSchemaBootstrapSettingsMacosDefaultsEntries[];
+```
+
+- *Type:* <a href="#mise-projen.MiseTomlSchemaBootstrapSettingsMacosDefaultsEntries">MiseTomlSchemaBootstrapSettingsMacosDefaultsEntries</a>[]
+
+Explicit macOS preferences with a selectable host scope.
+
+---
+
+##### `dock`<sup>Optional</sup> <a name="dock" id="mise-projen.MiseTomlSchemaBootstrapSettingsMacos.property.dock"></a>
+
+```typescript
+public readonly dock: BootstrapMacosDock;
+```
+
+- *Type:* <a href="#mise-projen.BootstrapMacosDock">BootstrapMacosDock</a>
+
+Dock preferences (com.apple.dock).
+
+---
+
+##### `finder`<sup>Optional</sup> <a name="finder" id="mise-projen.MiseTomlSchemaBootstrapSettingsMacos.property.finder"></a>
+
+```typescript
+public readonly finder: BootstrapMacosFinder;
+```
+
+- *Type:* <a href="#mise-projen.BootstrapMacosFinder">BootstrapMacosFinder</a>
+
+Finder preferences (com.apple.finder).
+
+---
+
+##### `keyboard`<sup>Optional</sup> <a name="keyboard" id="mise-projen.MiseTomlSchemaBootstrapSettingsMacos.property.keyboard"></a>
+
+```typescript
+public readonly keyboard: BootstrapMacosKeyboard;
+```
+
+- *Type:* <a href="#mise-projen.BootstrapMacosKeyboard">BootstrapMacosKeyboard</a>
+
+keyboard preferences.
+
+---
+
+##### `loginItems`<sup>Optional</sup> <a name="loginItems" id="mise-projen.MiseTomlSchemaBootstrapSettingsMacos.property.loginItems"></a>
+
+```typescript
+public readonly loginItems: MiseTomlSchemaBootstrapSettingsMacosLoginItems;
+```
+
+- *Type:* <a href="#mise-projen.MiseTomlSchemaBootstrapSettingsMacosLoginItems">MiseTomlSchemaBootstrapSettingsMacosLoginItems</a>
+
+applications to open at login (System Settings > General > Login Items & Extensions).
+
+---
+
+##### `trackpad`<sup>Optional</sup> <a name="trackpad" id="mise-projen.MiseTomlSchemaBootstrapSettingsMacos.property.trackpad"></a>
+
+```typescript
+public readonly trackpad: BootstrapMacosTrackpad;
+```
+
+- *Type:* <a href="#mise-projen.BootstrapMacosTrackpad">BootstrapMacosTrackpad</a>
+
+trackpad preferences.
+
+---
+
+### MiseTomlSchemaBootstrapSettingsMacosDefaultsEntries <a name="MiseTomlSchemaBootstrapSettingsMacosDefaultsEntries" id="mise-projen.MiseTomlSchemaBootstrapSettingsMacosDefaultsEntries"></a>
+
+#### Initializer <a name="Initializer" id="mise-projen.MiseTomlSchemaBootstrapSettingsMacosDefaultsEntries.Initializer"></a>
+
+```typescript
+import { MiseTomlSchemaBootstrapSettingsMacosDefaultsEntries } from 'mise-projen'
+
+const miseTomlSchemaBootstrapSettingsMacosDefaultsEntries: MiseTomlSchemaBootstrapSettingsMacosDefaultsEntries = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapSettingsMacosDefaultsEntries.property.domain">domain</a></code> | <code>string</code> | preferences domain, such as "com.apple.dock" or "NSGlobalDomain"; -g and -globalDomain mean NSGlobalDomain. |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapSettingsMacosDefaultsEntries.property.key">key</a></code> | <code>string</code> | preference key within the domain. |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapSettingsMacosDefaultsEntries.property.value">value</a></code> | <code>any</code> | desired value, written with the matching property list type; |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapSettingsMacosDefaultsEntries.property.host">host</a></code> | <code><a href="#mise-projen.MiseTomlSchemaBootstrapSettingsMacosDefaultsEntriesHost">MiseTomlSchemaBootstrapSettingsMacosDefaultsEntriesHost</a></code> | any writes the preference for every host; |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapSettingsMacosDefaultsEntries.property.path">path</a></code> | <code>string[]</code> | Dictionary keys below the preference key; |
+
+---
+
+##### `domain`<sup>Required</sup> <a name="domain" id="mise-projen.MiseTomlSchemaBootstrapSettingsMacosDefaultsEntries.property.domain"></a>
+
+```typescript
+public readonly domain: string;
+```
+
+- *Type:* string
+
+preferences domain, such as "com.apple.dock" or "NSGlobalDomain"; -g and -globalDomain mean NSGlobalDomain.
+
+---
+
+##### `key`<sup>Required</sup> <a name="key" id="mise-projen.MiseTomlSchemaBootstrapSettingsMacosDefaultsEntries.property.key"></a>
+
+```typescript
+public readonly key: string;
+```
+
+- *Type:* string
+
+preference key within the domain.
+
+---
+
+##### `value`<sup>Required</sup> <a name="value" id="mise-projen.MiseTomlSchemaBootstrapSettingsMacosDefaultsEntries.property.value"></a>
+
+```typescript
+public readonly value: any;
+```
+
+- *Type:* any
+
+desired value, written with the matching property list type;
+
+replaces the selected value in full
+
+---
+
+##### `host`<sup>Optional</sup> <a name="host" id="mise-projen.MiseTomlSchemaBootstrapSettingsMacosDefaultsEntries.property.host"></a>
+
+```typescript
+public readonly host: MiseTomlSchemaBootstrapSettingsMacosDefaultsEntriesHost;
+```
+
+- *Type:* <a href="#mise-projen.MiseTomlSchemaBootstrapSettingsMacosDefaultsEntriesHost">MiseTomlSchemaBootstrapSettingsMacosDefaultsEntriesHost</a>
+
+any writes the preference for every host;
+
+current writes it for this machine only, like defaults -currentHost
+
+---
+
+##### `path`<sup>Optional</sup> <a name="path" id="mise-projen.MiseTomlSchemaBootstrapSettingsMacosDefaultsEntries.property.path"></a>
+
+```typescript
+public readonly path: string[];
+```
+
+- *Type:* string[]
+
+Dictionary keys below the preference key;
+
+omitted to replace the whole value
+
+---
+
+### MiseTomlSchemaBootstrapSettingsMacosLoginItems <a name="MiseTomlSchemaBootstrapSettingsMacosLoginItems" id="mise-projen.MiseTomlSchemaBootstrapSettingsMacosLoginItems"></a>
+
+applications to open at login (System Settings > General > Login Items & Extensions).
+
+#### Initializer <a name="Initializer" id="mise-projen.MiseTomlSchemaBootstrapSettingsMacosLoginItems.Initializer"></a>
+
+```typescript
+import { MiseTomlSchemaBootstrapSettingsMacosLoginItems } from 'mise-projen'
+
+const miseTomlSchemaBootstrapSettingsMacosLoginItems: MiseTomlSchemaBootstrapSettingsMacosLoginItems = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapSettingsMacosLoginItems.property.apps">apps</a></code> | <code>string[]</code> | application bundles to open at login: absolute or `~/` paths ending in `.app`. |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapSettingsMacosLoginItems.property.exclusive">exclusive</a></code> | <code>boolean</code> | also remove login items that are not declared (default: false, so apps that register themselves are left alone). |
+
+---
+
+##### `apps`<sup>Optional</sup> <a name="apps" id="mise-projen.MiseTomlSchemaBootstrapSettingsMacosLoginItems.property.apps"></a>
+
+```typescript
+public readonly apps: string[];
+```
+
+- *Type:* string[]
+
+application bundles to open at login: absolute or `~/` paths ending in `.app`.
+
+---
+
+##### `exclusive`<sup>Optional</sup> <a name="exclusive" id="mise-projen.MiseTomlSchemaBootstrapSettingsMacosLoginItems.property.exclusive"></a>
+
+```typescript
+public readonly exclusive: boolean;
+```
+
+- *Type:* boolean
+
+also remove login items that are not declared (default: false, so apps that register themselves are left alone).
 
 ---
 
@@ -7101,6 +7427,7 @@ const settings: Settings = { ... }
 | <code><a href="#mise-projen.Settings.property.useVersionsHost">useVersionsHost</a></code> | <code>boolean</code> | Get version lists, public GitHub release metadata and attestations from mise-versions before upstream APIs. |
 | <code><a href="#mise-projen.Settings.property.useVersionsHostTrack">useVersionsHostTrack</a></code> | <code>boolean</code> | Send download statistics to mise-versions after installing a tool. |
 | <code><a href="#mise-projen.Settings.property.verbose">verbose</a></code> | <code>boolean</code> | Show extra output, such as installation logs, and set the log level to debug; |
+| <code><a href="#mise-projen.Settings.property.versionsHostExclude">versionsHostExclude</a></code> | <code>string[]</code> | GitHub repositories that never use mise-versions, such as `my-org/*`. |
 | <code><a href="#mise-projen.Settings.property.windowsDefaultFileShellArgs">windowsDefaultFileShellArgs</a></code> | <code>string</code> | Shell that runs a file task on Windows when the task sets no `shell` and the file has no shebang or known extension. |
 | <code><a href="#mise-projen.Settings.property.windowsDefaultInlineShellArgs">windowsDefaultInlineShellArgs</a></code> | <code>string</code> | Shell and arguments that run inline scripts on Windows, such as a task's `run`, hooks and `postinstall`. |
 | <code><a href="#mise-projen.Settings.property.windowsExecutableExtensions">windowsExecutableExtensions</a></code> | <code>string[]</code> | File extensions, without the dot, that mise treats as executable on Windows. |
@@ -9141,6 +9468,18 @@ public readonly verbose: boolean;
 Show extra output, such as installation logs, and set the log level to debug;
 
 same as `--verbose`.
+
+---
+
+##### `versionsHostExclude`<sup>Optional</sup> <a name="versionsHostExclude" id="mise-projen.Settings.property.versionsHostExclude"></a>
+
+```typescript
+public readonly versionsHostExclude: string[];
+```
+
+- *Type:* string[]
+
+GitHub repositories that never use mise-versions, such as `my-org/*`.
 
 ---
 
@@ -14613,6 +14952,35 @@ stopped.
 ##### `ABSENT` <a name="ABSENT" id="mise-projen.MiseTomlSchemaBootstrapServicesState.ABSENT"></a>
 
 absent.
+
+---
+
+
+### MiseTomlSchemaBootstrapSettingsMacosDefaultsEntriesHost <a name="MiseTomlSchemaBootstrapSettingsMacosDefaultsEntriesHost" id="mise-projen.MiseTomlSchemaBootstrapSettingsMacosDefaultsEntriesHost"></a>
+
+any writes the preference for every host;
+
+current writes it for this machine only, like defaults -currentHost
+
+#### Members <a name="Members" id="Members"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapSettingsMacosDefaultsEntriesHost.ANY">ANY</a></code> | any. |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapSettingsMacosDefaultsEntriesHost.CURRENT">CURRENT</a></code> | current. |
+
+---
+
+##### `ANY` <a name="ANY" id="mise-projen.MiseTomlSchemaBootstrapSettingsMacosDefaultsEntriesHost.ANY"></a>
+
+any.
+
+---
+
+
+##### `CURRENT` <a name="CURRENT" id="mise-projen.MiseTomlSchemaBootstrapSettingsMacosDefaultsEntriesHost.CURRENT"></a>
+
+current.
 
 ---
 
