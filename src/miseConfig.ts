@@ -1795,6 +1795,13 @@ export interface Settings {
   readonly verbose?: boolean;
 
   /**
+   * GitHub repositories that never use mise-versions, such as `my-org/*`.
+   *
+   * @schema settings#versions_host_exclude
+   */
+  readonly versionsHostExclude?: string[];
+
+  /**
    * Shell that runs a file task on Windows when the task sets no `shell` and the file has no shebang or known extension.
    *
    * @schema settings#windows_default_file_shell_args
@@ -2028,6 +2035,7 @@ export function toJson_Settings(obj: Settings | undefined): Record<string, any> 
     'use_versions_host': obj.useVersionsHost,
     'use_versions_host_track': obj.useVersionsHostTrack,
     'verbose': obj.verbose,
+    'versions_host_exclude': obj.versionsHostExclude?.map(y => y),
     'windows_default_file_shell_args': obj.windowsDefaultFileShellArgs,
     'windows_default_inline_shell_args': obj.windowsDefaultInlineShellArgs,
     'windows_executable_extensions': obj.windowsExecutableExtensions?.map(y => y),
@@ -2283,6 +2291,13 @@ export interface MiseTomlSchemaBootstrap {
    * @schema MiseTomlSchemaBootstrap#users
    */
   readonly users?: { [key: string]: MiseTomlSchemaBootstrapUsers };
+
+  /**
+   * [experimental] settings that bootstrap settings plugins apply, keyed by plugin name; which keys a plugin accepts is up to the plugin
+   *
+   * @schema MiseTomlSchemaBootstrap#settings
+   */
+  readonly settings?: MiseTomlSchemaBootstrapSettings;
 }
 
 /**
@@ -2314,6 +2329,7 @@ export function toJson_MiseTomlSchemaBootstrap(obj: MiseTomlSchemaBootstrap | un
     'secrets': ((obj.secrets) === undefined) ? undefined : (Object.entries(obj.secrets).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'groups': ((obj.groups) === undefined) ? undefined : (Object.entries(obj.groups).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: toJson_MiseTomlSchemaBootstrapGroups(i[1]) }), {})),
     'users': ((obj.users) === undefined) ? undefined : (Object.entries(obj.users).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: toJson_MiseTomlSchemaBootstrapUsers(i[1]) }), {})),
+    'settings': toJson_MiseTomlSchemaBootstrapSettings(obj.settings),
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -5616,6 +5632,20 @@ export interface MiseTomlSchemaBootstrapFiles {
   readonly content?: string;
 
   /**
+   * block content kept between marker comments named by id, in a file mise does not own; the rest of the file is left alone, a missing file is created with just the block, and the block is appended when its markers are absent. Cannot be combined with source or content, and needs id
+   *
+   * @schema MiseTomlSchemaBootstrapFiles#block
+   */
+  readonly block?: string;
+
+  /**
+   * names the block's marker comments, as in "# >>> mise:<id> >>>"; required with block
+   *
+   * @schema MiseTomlSchemaBootstrapFiles#id
+   */
+  readonly id?: string;
+
+  /**
    * user that should own the file; left as it is when unset
    *
    * @schema MiseTomlSchemaBootstrapFiles#owner
@@ -5630,7 +5660,7 @@ export interface MiseTomlSchemaBootstrapFiles {
   readonly group?: string;
 
   /**
-   * octal permissions such as "0640"; defaults to "0644" for a file with source or content, otherwise left as it is
+   * octal permissions such as "0640"; defaults to "0644" for a file with source or content, or one a block creates, otherwise left as it is
    *
    * @schema MiseTomlSchemaBootstrapFiles#mode
    */
@@ -5690,6 +5720,8 @@ export function toJson_MiseTomlSchemaBootstrapFiles(obj: MiseTomlSchemaBootstrap
     'phase': obj.phase,
     'source': obj.source,
     'content': obj.content,
+    'block': obj.block,
+    'id': obj.id,
     'owner': obj.owner,
     'group': obj.group,
     'mode': obj.mode,
@@ -6281,7 +6313,7 @@ export interface MiseTomlSchemaBootstrapMacos {
   readonly defaults?: { [key: string]: { [key: string]: any } };
 
   /**
-   * Explicit macOS preferences with a selectable host scope
+   * deprecated: use [[bootstrap.settings.macos.defaults_entries]]
    *
    * @schema MiseTomlSchemaBootstrapMacos#defaults_entries
    */
@@ -6295,7 +6327,7 @@ export interface MiseTomlSchemaBootstrapMacos {
   readonly launchd?: MiseTomlSchemaBootstrapMacosLaunchd;
 
   /**
-   * applications to open at login (System Settings > General > Login Items & Extensions)
+   * deprecated: use [bootstrap.settings.macos.login_items]
    *
    * @schema MiseTomlSchemaBootstrapMacos#login_items
    */
@@ -6841,6 +6873,35 @@ export function toJson_MiseTomlSchemaBootstrapUsers(obj: MiseTomlSchemaBootstrap
     'create_home': obj.createHome,
     'move_home': obj.moveHome,
     'remove_home': obj.removeHome,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * [experimental] settings that bootstrap settings plugins apply, keyed by plugin name; which keys a plugin accepts is up to the plugin
+ *
+ * @schema MiseTomlSchemaBootstrapSettings
+ */
+export interface MiseTomlSchemaBootstrapSettings {
+  /**
+   * macOS preferences, written the way `defaults write` writes them; `macos` is built in, not a plugin
+   *
+   * @schema MiseTomlSchemaBootstrapSettings#macos
+   */
+  readonly macos?: MiseTomlSchemaBootstrapSettingsMacos;
+}
+
+/**
+ * Converts an object of type 'MiseTomlSchemaBootstrapSettings' to JSON representation.
+ * @internal
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_MiseTomlSchemaBootstrapSettings(obj: MiseTomlSchemaBootstrapSettings | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'macos': toJson_MiseTomlSchemaBootstrapSettingsMacos(obj.macos),
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -8107,7 +8168,7 @@ export function toJson_MiseTomlSchemaBootstrapMacosLaunchd(obj: MiseTomlSchemaBo
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * applications to open at login (System Settings > General > Login Items & Extensions)
+ * deprecated: use [bootstrap.settings.macos.login_items]
  *
  * @schema MiseTomlSchemaBootstrapMacosLoginItems
  */
@@ -8378,6 +8439,83 @@ export enum MiseTomlSchemaBootstrapUsersState {
   /** absent */
   ABSENT = "absent",
 }
+
+/**
+ * macOS preferences, written the way `defaults write` writes them; `macos` is built in, not a plugin
+ *
+ * @schema MiseTomlSchemaBootstrapSettingsMacos
+ */
+export interface MiseTomlSchemaBootstrapSettingsMacos {
+  /**
+   * Dock preferences (com.apple.dock)
+   *
+   * @schema MiseTomlSchemaBootstrapSettingsMacos#dock
+   */
+  readonly dock?: BootstrapMacosDock;
+
+  /**
+   * Finder preferences (com.apple.finder)
+   *
+   * @schema MiseTomlSchemaBootstrapSettingsMacos#finder
+   */
+  readonly finder?: BootstrapMacosFinder;
+
+  /**
+   * keyboard preferences
+   *
+   * @schema MiseTomlSchemaBootstrapSettingsMacos#keyboard
+   */
+  readonly keyboard?: BootstrapMacosKeyboard;
+
+  /**
+   * trackpad preferences
+   *
+   * @schema MiseTomlSchemaBootstrapSettingsMacos#trackpad
+   */
+  readonly trackpad?: BootstrapMacosTrackpad;
+
+  /**
+   * any preference, by domain and key
+   *
+   * @schema MiseTomlSchemaBootstrapSettingsMacos#defaults
+   */
+  readonly defaults?: { [key: string]: { [key: string]: any } };
+
+  /**
+   * Explicit macOS preferences with a selectable host scope
+   *
+   * @schema MiseTomlSchemaBootstrapSettingsMacos#defaults_entries
+   */
+  readonly defaultsEntries?: MiseTomlSchemaBootstrapSettingsMacosDefaultsEntries[];
+
+  /**
+   * applications to open at login (System Settings > General > Login Items & Extensions)
+   *
+   * @schema MiseTomlSchemaBootstrapSettingsMacos#login_items
+   */
+  readonly loginItems?: MiseTomlSchemaBootstrapSettingsMacosLoginItems;
+}
+
+/**
+ * Converts an object of type 'MiseTomlSchemaBootstrapSettingsMacos' to JSON representation.
+ * @internal
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_MiseTomlSchemaBootstrapSettingsMacos(obj: MiseTomlSchemaBootstrapSettingsMacos | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'dock': toJson_BootstrapMacosDock(obj.dock),
+    'finder': toJson_BootstrapMacosFinder(obj.finder),
+    'keyboard': toJson_BootstrapMacosKeyboard(obj.keyboard),
+    'trackpad': toJson_BootstrapMacosTrackpad(obj.trackpad),
+    'defaults': ((obj.defaults) === undefined) ? undefined : (Object.entries(obj.defaults).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: ((i[1]) === undefined) ? undefined : (Object.entries(i[1]).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})) }), {})),
+    'defaults_entries': obj.defaultsEntries?.map(y => toJson_MiseTomlSchemaBootstrapSettingsMacosDefaultsEntries(y)),
+    'login_items': toJson_MiseTomlSchemaBootstrapSettingsMacosLoginItems(obj.loginItems),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Dock screen edge
@@ -9077,6 +9215,102 @@ export function toJson_MiseTomlSchemaBootstrapLinuxSystemdUnits(obj: MiseTomlSch
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * @schema MiseTomlSchemaBootstrapSettingsMacosDefaultsEntries
+ */
+export interface MiseTomlSchemaBootstrapSettingsMacosDefaultsEntries {
+  /**
+   * preferences domain, such as "com.apple.dock" or "NSGlobalDomain"; -g and -globalDomain mean NSGlobalDomain
+   *
+   * @schema MiseTomlSchemaBootstrapSettingsMacosDefaultsEntries#domain
+   */
+  readonly domain: string;
+
+  /**
+   * preference key within the domain
+   *
+   * @schema MiseTomlSchemaBootstrapSettingsMacosDefaultsEntries#key
+   */
+  readonly key: string;
+
+  /**
+   * any writes the preference for every host; current writes it for this machine only, like defaults -currentHost
+   *
+   * @schema MiseTomlSchemaBootstrapSettingsMacosDefaultsEntries#host
+   */
+  readonly host?: MiseTomlSchemaBootstrapSettingsMacosDefaultsEntriesHost;
+
+  /**
+   * Dictionary keys below the preference key; omitted to replace the whole value
+   *
+   * @schema MiseTomlSchemaBootstrapSettingsMacosDefaultsEntries#path
+   */
+  readonly path?: string[];
+
+  /**
+   * desired value, written with the matching property list type; replaces the selected value in full
+   *
+   * @schema MiseTomlSchemaBootstrapSettingsMacosDefaultsEntries#value
+   */
+  readonly value: any;
+}
+
+/**
+ * Converts an object of type 'MiseTomlSchemaBootstrapSettingsMacosDefaultsEntries' to JSON representation.
+ * @internal
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_MiseTomlSchemaBootstrapSettingsMacosDefaultsEntries(obj: MiseTomlSchemaBootstrapSettingsMacosDefaultsEntries | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'domain': obj.domain,
+    'key': obj.key,
+    'host': obj.host,
+    'path': obj.path?.map(y => y),
+    'value': obj.value,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * applications to open at login (System Settings > General > Login Items & Extensions)
+ *
+ * @schema MiseTomlSchemaBootstrapSettingsMacosLoginItems
+ */
+export interface MiseTomlSchemaBootstrapSettingsMacosLoginItems {
+  /**
+   * application bundles to open at login: absolute or `~/` paths ending in `.app`
+   *
+   * @schema MiseTomlSchemaBootstrapSettingsMacosLoginItems#apps
+   */
+  readonly apps?: string[];
+
+  /**
+   * also remove login items that are not declared (default: false, so apps that register themselves are left alone)
+   *
+   * @schema MiseTomlSchemaBootstrapSettingsMacosLoginItems#exclusive
+   */
+  readonly exclusive?: boolean;
+}
+
+/**
+ * Converts an object of type 'MiseTomlSchemaBootstrapSettingsMacosLoginItems' to JSON representation.
+ * @internal
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_MiseTomlSchemaBootstrapSettingsMacosLoginItems(obj: MiseTomlSchemaBootstrapSettingsMacosLoginItems | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'apps': obj.apps?.map(y => y),
+    'exclusive': obj.exclusive,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
  * write ProcessType, the scheduling band launchd runs the job in
  *
  * @schema MiseTomlSchemaBootstrapMacosLaunchdAgentsProcessType
@@ -9355,4 +9589,16 @@ export enum MiseTomlSchemaBootstrapLinuxSystemdUnitsState {
   PRESENT = "present",
   /** absent */
   ABSENT = "absent",
+}
+
+/**
+ * any writes the preference for every host; current writes it for this machine only, like defaults -currentHost
+ *
+ * @schema MiseTomlSchemaBootstrapSettingsMacosDefaultsEntriesHost
+ */
+export enum MiseTomlSchemaBootstrapSettingsMacosDefaultsEntriesHost {
+  /** any */
+  ANY = "any",
+  /** current */
+  CURRENT = "current",
 }
