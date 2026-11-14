@@ -7211,7 +7211,10 @@ export class SettingsPythonUvVenvAuto {
   public static fromString(value: string): SettingsPythonUvVenvAuto {
     return new SettingsPythonUvVenvAuto(value);
   }
-  private constructor(public readonly value: boolean | string) {
+  public readonly value: boolean | string;
+
+  private constructor(value: boolean | string) {
+    this.value = value;
   }
 }
 
@@ -7227,7 +7230,10 @@ export class SettingsSelfUpdateAuto {
   public static fromString(value: string): SettingsSelfUpdateAuto {
     return new SettingsSelfUpdateAuto(value);
   }
-  private constructor(public readonly value: boolean | string) {
+  public readonly value: boolean | string;
+
+  private constructor(value: boolean | string) {
+    this.value = value;
   }
 }
 
@@ -7390,7 +7396,10 @@ export class SettingsToolUpdateGlobalAuto {
   public static fromString(value: string): SettingsToolUpdateGlobalAuto {
     return new SettingsToolUpdateGlobalAuto(value);
   }
-  private constructor(public readonly value: boolean | string) {
+  public readonly value: boolean | string;
+
+  private constructor(value: boolean | string) {
+    this.value = value;
   }
 }
 
@@ -7440,7 +7449,10 @@ export class BootstrapRemoteInstallMise {
   public static fromString(value: string): BootstrapRemoteInstallMise {
     return new BootstrapRemoteInstallMise(value);
   }
-  private constructor(public readonly value: boolean | string) {
+  public readonly value: boolean | string;
+
+  private constructor(value: boolean | string) {
+    this.value = value;
   }
 }
 
@@ -9286,7 +9298,10 @@ export class MiseTomlSchemaBootstrapLinuxFirewallRulesPort {
   public static fromString(value: string): MiseTomlSchemaBootstrapLinuxFirewallRulesPort {
     return new MiseTomlSchemaBootstrapLinuxFirewallRulesPort(value);
   }
-  private constructor(public readonly value: number | string) {
+  public readonly value: number | string;
+
+  private constructor(value: number | string) {
+    this.value = value;
   }
 }
 
