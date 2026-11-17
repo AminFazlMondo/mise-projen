@@ -5269,6 +5269,13 @@ export interface SettingsTask {
   readonly historyLimit?: number;
 
   /**
+   * How many slots each named task `lock` has, for locks that several runs hold at once.
+   *
+   * @schema SettingsTask#lock_pools
+   */
+  readonly lockPools?: { [key: string]: string };
+
+  /**
    * How long a task waits for a lock another run holds before it fails.
    *
    * @schema SettingsTask#lock_timeout
@@ -5404,6 +5411,7 @@ export function toJson_SettingsTask(obj: SettingsTask | undefined): Record<strin
     'disable_spec_from_run_scripts': obj.disableSpecFromRunScripts,
     'history': obj.history,
     'history_limit': obj.historyLimit,
+    'lock_pools': ((obj.lockPools) === undefined) ? undefined : (Object.entries(obj.lockPools).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'lock_timeout': obj.lockTimeout,
     'logs': obj.logs,
     'monorepo_depth': obj.monorepoDepth,
