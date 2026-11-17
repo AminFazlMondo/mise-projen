@@ -12540,6 +12540,7 @@ const settingsTask: SettingsTask = { ... }
 | <code><a href="#mise-projen.SettingsTask.property.disableSpecFromRunScripts">disableSpecFromRunScripts</a></code> | <code>boolean</code> | Build task usage specs only from the `usage` field, ignoring deprecated `arg()`, `option()` and `flag()` in run scripts. |
 | <code><a href="#mise-projen.SettingsTask.property.history">history</a></code> | <code>boolean</code> | Record each task run's duration and result for `mise tasks history`. |
 | <code><a href="#mise-projen.SettingsTask.property.historyLimit">historyLimit</a></code> | <code>number</code> | How many recent runs of each task `mise tasks history` keeps. |
+| <code><a href="#mise-projen.SettingsTask.property.lockPools">lockPools</a></code> | <code>{[ key: string ]: string}</code> | How many slots each named task `lock` has, for locks that several runs hold at once. |
 | <code><a href="#mise-projen.SettingsTask.property.lockTimeout">lockTimeout</a></code> | <code>string</code> | How long a task waits for a lock another run holds before it fails. |
 | <code><a href="#mise-projen.SettingsTask.property.logs">logs</a></code> | <code>boolean</code> | Keep the output of each task's last run, for `mise tasks log`. |
 | <code><a href="#mise-projen.SettingsTask.property.monorepoDepth">monorepoDepth</a></code> | <code>number</code> | Maximum directory depth for automatic monorepo discovery, which is deprecated. |
@@ -12734,6 +12735,18 @@ public readonly historyLimit: number;
 - *Type:* number
 
 How many recent runs of each task `mise tasks history` keeps.
+
+---
+
+##### `lockPools`<sup>Optional</sup> <a name="lockPools" id="mise-projen.SettingsTask.property.lockPools"></a>
+
+```typescript
+public readonly lockPools: {[ key: string ]: string};
+```
+
+- *Type:* {[ key: string ]: string}
+
+How many slots each named task `lock` has, for locks that several runs hold at once.
 
 ---
 
