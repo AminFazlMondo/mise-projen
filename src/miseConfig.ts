@@ -886,6 +886,13 @@ export interface Settings {
   readonly downloadCacheMaxSize?: string;
 
   /**
+   * Allowlist of backends mise may resolve and install tools with, such as `core` or `aqua`.
+   *
+   * @schema settings#enable_backends
+   */
+  readonly enableBackends?: string[];
+
+  /**
    * Allowlist of configured tools mise uses; other tools are ignored.
    *
    * @schema settings#enable_tools
@@ -1896,6 +1903,7 @@ export function toJson_Settings(obj: Settings | undefined): Record<string, any> 
     'dotnet': toJson_SettingsDotnet(obj.dotnet),
     'download_cache': obj.downloadCache,
     'download_cache_max_size': obj.downloadCacheMaxSize,
+    'enable_backends': obj.enableBackends?.map(y => y),
     'enable_tools': obj.enableTools?.map(y => y),
     'env': obj.env?.map(y => y),
     'env_cache': obj.envCache,
@@ -5715,6 +5723,13 @@ export interface MiseTomlSchemaBootstrapFiles {
    * @schema MiseTomlSchemaBootstrapFiles#os
    */
   readonly os?: string[];
+
+  /**
+   * the same as mode, under the name [dotfiles] uses; set only one of the two
+   *
+   * @schema MiseTomlSchemaBootstrapFiles#permissions
+   */
+  readonly permissions?: string;
 }
 
 /**
@@ -5739,6 +5754,7 @@ export function toJson_MiseTomlSchemaBootstrapFiles(obj: MiseTomlSchemaBootstrap
     'replace': obj.replace,
     'notify': obj.notify?.map(y => y),
     'os': obj.os?.map(y => y),
+    'permissions': obj.permissions,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -5811,6 +5827,13 @@ export interface MiseTomlSchemaBootstrapDirectories {
    * @schema MiseTomlSchemaBootstrapDirectories#os
    */
   readonly os?: string[];
+
+  /**
+   * the same as mode, under the name [dotfiles] uses; set only one of the two
+   *
+   * @schema MiseTomlSchemaBootstrapDirectories#permissions
+   */
+  readonly permissions?: string;
 }
 
 /**
@@ -5830,6 +5853,7 @@ export function toJson_MiseTomlSchemaBootstrapDirectories(obj: MiseTomlSchemaBoo
     'replace': obj.replace,
     'notify': obj.notify?.map(y => y),
     'os': obj.os?.map(y => y),
+    'permissions': obj.permissions,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -5920,7 +5944,7 @@ export function toJson_MiseTomlSchemaBootstrapRemote(obj: MiseTomlSchemaBootstra
  */
 export interface MiseTomlSchemaBootstrapServices {
   /**
-   * running or stopped; absent removes a user service's definition (user scope only)
+   * running or stopped; absent removes a user service's definition (user scope only); unchanged sets enabled without starting or stopping the unit (system services and existing user units only)
    *
    * @schema MiseTomlSchemaBootstrapServices#state
    */
@@ -7667,7 +7691,7 @@ export function toJson_MiseTomlSchemaBootstrapRemoteHosts(obj: MiseTomlSchemaBoo
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * running or stopped; absent removes a user service's definition (user scope only)
+ * running or stopped; absent removes a user service's definition (user scope only); unchanged sets enabled without starting or stopping the unit (system services and existing user units only)
  *
  * @schema MiseTomlSchemaBootstrapServicesState
  */
@@ -7678,6 +7702,8 @@ export enum MiseTomlSchemaBootstrapServicesState {
   STOPPED = "stopped",
   /** absent */
   ABSENT = "absent",
+  /** unchanged */
+  UNCHANGED = "unchanged",
 }
 
 /**

@@ -3140,6 +3140,7 @@ const miseTomlSchemaBootstrapDirectories: MiseTomlSchemaBootstrapDirectories = {
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapDirectories.property.notify">notify</a></code> | <code>string[]</code> | system services declared in [bootstrap.services] to reload or restart when mise changes this directory. |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapDirectories.property.os">os</a></code> | <code>string[]</code> | OS or OS/arch selectors; |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapDirectories.property.owner">owner</a></code> | <code>string</code> | user that should own the directory; |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapDirectories.property.permissions">permissions</a></code> | <code>string</code> | the same as mode, under the name [dotfiles] uses; |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapDirectories.property.phase">phase</a></code> | <code><a href="#mise-projen.BootstrapFilePhase">BootstrapFilePhase</a></code> | *No description.* |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapDirectories.property.recursive">recursive</a></code> | <code>boolean</code> | with state = "absent", delete the directory and everything in it. |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapDirectories.property.replace">replace</a></code> | <code>boolean</code> | replace a path of another type at the target, such as a file. |
@@ -3212,6 +3213,20 @@ public readonly owner: string;
 user that should own the directory;
 
 left as it is when unset, and parents mise creates get the system defaults
+
+---
+
+##### `permissions`<sup>Optional</sup> <a name="permissions" id="mise-projen.MiseTomlSchemaBootstrapDirectories.property.permissions"></a>
+
+```typescript
+public readonly permissions: string;
+```
+
+- *Type:* string
+
+the same as mode, under the name [dotfiles] uses;
+
+set only one of the two
 
 ---
 
@@ -3317,6 +3332,7 @@ const miseTomlSchemaBootstrapFiles: MiseTomlSchemaBootstrapFiles = { ... }
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapFiles.property.notify">notify</a></code> | <code>string[]</code> | system services declared in [bootstrap.services] to reload or restart when mise changes this file. |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapFiles.property.os">os</a></code> | <code>string[]</code> | OS or OS/arch selectors; |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapFiles.property.owner">owner</a></code> | <code>string</code> | user that should own the file; |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapFiles.property.permissions">permissions</a></code> | <code>string</code> | the same as mode, under the name [dotfiles] uses; |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapFiles.property.phase">phase</a></code> | <code><a href="#mise-projen.BootstrapFilePhase">BootstrapFilePhase</a></code> | *No description.* |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapFiles.property.removeEmpty">removeEmpty</a></code> | <code>boolean</code> | remove the target when the template renders to empty or whitespace-only content; |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapFiles.property.replace">replace</a></code> | <code>boolean</code> | replace a path of another type at the target, such as an empty directory; |
@@ -3433,6 +3449,20 @@ public readonly owner: string;
 user that should own the file;
 
 left as it is when unset
+
+---
+
+##### `permissions`<sup>Optional</sup> <a name="permissions" id="mise-projen.MiseTomlSchemaBootstrapFiles.property.permissions"></a>
+
+```typescript
+public readonly permissions: string;
+```
+
+- *Type:* string
+
+the same as mode, under the name [dotfiles] uses;
+
+set only one of the two
 
 ---
 
@@ -5573,7 +5603,7 @@ public readonly state: MiseTomlSchemaBootstrapServicesState;
 
 running or stopped;
 
-absent removes a user service's definition (user scope only)
+absent removes a user service's definition (user scope only); unchanged sets enabled without starting or stopping the unit (system services and existing user units only)
 
 ---
 
@@ -7288,6 +7318,7 @@ const settings: Settings = { ... }
 | <code><a href="#mise-projen.Settings.property.dotnet">dotnet</a></code> | <code><a href="#mise-projen.SettingsDotnet">SettingsDotnet</a></code> | *No description.* |
 | <code><a href="#mise-projen.Settings.property.downloadCache">downloadCache</a></code> | <code>boolean</code> | Reuse finished downloads instead of fetching them again. |
 | <code><a href="#mise-projen.Settings.property.downloadCacheMaxSize">downloadCacheMaxSize</a></code> | <code>string</code> | Maximum total size of the download cache, such as `500MB` or `10GiB`. |
+| <code><a href="#mise-projen.Settings.property.enableBackends">enableBackends</a></code> | <code>string[]</code> | Allowlist of backends mise may resolve and install tools with, such as `core` or `aqua`. |
 | <code><a href="#mise-projen.Settings.property.enableTools">enableTools</a></code> | <code>string[]</code> | Allowlist of configured tools mise uses; |
 | <code><a href="#mise-projen.Settings.property.env">env</a></code> | <code>string[]</code> | Config environments to load, such as `development` for `mise.development.toml`. |
 | <code><a href="#mise-projen.Settings.property.envCache">envCache</a></code> | <code>boolean</code> | [experimental] Cache computed environments on disk for nested mise commands. |
@@ -7836,6 +7867,18 @@ public readonly downloadCacheMaxSize: string;
 - *Type:* string
 
 Maximum total size of the download cache, such as `500MB` or `10GiB`.
+
+---
+
+##### `enableBackends`<sup>Optional</sup> <a name="enableBackends" id="mise-projen.Settings.property.enableBackends"></a>
+
+```typescript
+public readonly enableBackends: string[];
+```
+
+- *Type:* string[]
+
+Allowlist of backends mise may resolve and install tools with, such as `core` or `aqua`.
 
 ---
 
@@ -14936,7 +14979,7 @@ user.
 
 running or stopped;
 
-absent removes a user service's definition (user scope only)
+absent removes a user service's definition (user scope only); unchanged sets enabled without starting or stopping the unit (system services and existing user units only)
 
 #### Members <a name="Members" id="Members"></a>
 
@@ -14945,6 +14988,7 @@ absent removes a user service's definition (user scope only)
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapServicesState.RUNNING">RUNNING</a></code> | running. |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapServicesState.STOPPED">STOPPED</a></code> | stopped. |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapServicesState.ABSENT">ABSENT</a></code> | absent. |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapServicesState.UNCHANGED">UNCHANGED</a></code> | unchanged. |
 
 ---
 
@@ -14965,6 +15009,13 @@ stopped.
 ##### `ABSENT` <a name="ABSENT" id="mise-projen.MiseTomlSchemaBootstrapServicesState.ABSENT"></a>
 
 absent.
+
+---
+
+
+##### `UNCHANGED` <a name="UNCHANGED" id="mise-projen.MiseTomlSchemaBootstrapServicesState.UNCHANGED"></a>
+
+unchanged.
 
 ---
 
