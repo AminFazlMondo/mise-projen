@@ -4,6 +4,8 @@
 
 ### MiseFile <a name="MiseFile" id="mise-projen.MiseFile"></a>
 
+- *Implements:* constructs.IConstruct, constructs.IDependable
+
 The `mise.toml` file for a project, and the merge point for every `Mise` mixin applied to it.
 
 Only one `MiseFile` is allowed per project. Use `MiseFile.ensure()` to get
