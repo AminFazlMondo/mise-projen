@@ -10666,6 +10666,7 @@ const settingsHistory: SettingsHistory = { ... }
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#mise-projen.SettingsHistory.property.allowPlaintextHistory">allowPlaintextHistory</a></code> | <code>boolean</code> | Allow publishing or applying history that holds plaintext copies of files now marked for encryption, or publishing versions that look like they contain secrets. |
+| <code><a href="#mise-projen.SettingsHistory.property.allowSecretValues">allowSecretValues</a></code> | <code>string[]</code> | Values the secret scan of saved versions accepts, such as a known placeholder. |
 | <code><a href="#mise-projen.SettingsHistory.property.describeCommand">describeCommand</a></code> | <code>string</code> | Command, such as an AI agent, that writes the description of each checkpoint the history watcher saves. |
 | <code><a href="#mise-projen.SettingsHistory.property.enabled">enabled</a></code> | <code>boolean</code> | Record Git checkpoints of tracked files around bootstrap operations and on explicit saves. |
 | <code><a href="#mise-projen.SettingsHistory.property.fetchInterval">fetchInterval</a></code> | <code>string</code> | How often the history watcher fetches from the setup repository. |
@@ -10686,6 +10687,18 @@ public readonly allowPlaintextHistory: boolean;
 - *Type:* boolean
 
 Allow publishing or applying history that holds plaintext copies of files now marked for encryption, or publishing versions that look like they contain secrets.
+
+---
+
+##### `allowSecretValues`<sup>Optional</sup> <a name="allowSecretValues" id="mise-projen.SettingsHistory.property.allowSecretValues"></a>
+
+```typescript
+public readonly allowSecretValues: string[];
+```
+
+- *Type:* string[]
+
+Values the secret scan of saved versions accepts, such as a known placeholder.
 
 ---
 
@@ -13126,6 +13139,7 @@ const settingsToolUpdate: SettingsToolUpdate = { ... }
 | --- | --- | --- |
 | <code><a href="#mise-projen.SettingsToolUpdate.property.checkDuration">checkDuration</a></code> | <code>string</code> | How often mise checks for a newer version of a global tool that sets `auto_update = true`, or of every global tool with `tool_update.global_auto = true`. |
 | <code><a href="#mise-projen.SettingsToolUpdate.property.globalAuto">globalAuto</a></code> | <code><a href="#mise-projen.SettingsToolUpdateGlobalAuto">SettingsToolUpdateGlobalAuto</a></code> | Update every tool in global config automatically, as if each set `auto_update` to this value. |
+| <code><a href="#mise-projen.SettingsToolUpdate.property.selfUpdateFirst">selfUpdateFirst</a></code> | <code>boolean</code> | Update mise before automatic tool updates, and skip the tools if that fails. |
 
 ---
 
@@ -13150,6 +13164,18 @@ public readonly globalAuto: SettingsToolUpdateGlobalAuto;
 - *Type:* <a href="#mise-projen.SettingsToolUpdateGlobalAuto">SettingsToolUpdateGlobalAuto</a>
 
 Update every tool in global config automatically, as if each set `auto_update` to this value.
+
+---
+
+##### `selfUpdateFirst`<sup>Optional</sup> <a name="selfUpdateFirst" id="mise-projen.SettingsToolUpdate.property.selfUpdateFirst"></a>
+
+```typescript
+public readonly selfUpdateFirst: boolean;
+```
+
+- *Type:* boolean
+
+Update mise before automatic tool updates, and skip the tools if that fails.
 
 ---
 

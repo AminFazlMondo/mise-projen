@@ -3766,6 +3766,13 @@ export interface SettingsHistory {
   readonly allowPlaintextHistory?: boolean;
 
   /**
+   * Values the secret scan of saved versions accepts, such as a known placeholder.
+   *
+   * @schema SettingsHistory#allow_secret_values
+   */
+  readonly allowSecretValues?: string[];
+
+  /**
    * Command, such as an AI agent, that writes the description of each checkpoint the history watcher saves.
    *
    * @schema SettingsHistory#describe_command
@@ -3829,6 +3836,7 @@ export function toJson_SettingsHistory(obj: SettingsHistory | undefined): Record
   if (obj === undefined) { return undefined; }
   const result = {
     'allow_plaintext_history': obj.allowPlaintextHistory,
+    'allow_secret_values': obj.allowSecretValues?.map(y => y),
     'describe_command': obj.describeCommand,
     'enabled': obj.enabled,
     'fetch_interval': obj.fetchInterval,
@@ -5459,6 +5467,13 @@ export interface SettingsToolUpdate {
    * @schema SettingsToolUpdate#global_auto
    */
   readonly globalAuto?: SettingsToolUpdateGlobalAuto;
+
+  /**
+   * Update mise before automatic tool updates, and skip the tools if that fails.
+   *
+   * @schema SettingsToolUpdate#self_update_first
+   */
+  readonly selfUpdateFirst?: boolean;
 }
 
 /**
@@ -5471,6 +5486,7 @@ export function toJson_SettingsToolUpdate(obj: SettingsToolUpdate | undefined): 
   const result = {
     'check_duration': obj.checkDuration,
     'global_auto': obj.globalAuto?.value,
+    'self_update_first': obj.selfUpdateFirst,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
