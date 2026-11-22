@@ -6488,7 +6488,6 @@ const miseTomlSchemaDotfileGroups: MiseTomlSchemaDotfileGroups = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#mise-projen.MiseTomlSchemaDotfileGroups.property.root">root</a></code> | <code>string</code> | the directory tree the group deploys; |
 | <code><a href="#mise-projen.MiseTomlSchemaDotfileGroups.property.depends">depends</a></code> | <code>string[]</code> | dotfile groups (by name) and whole-file entries (by target path) mise writes before it deploys this group and its entries. |
 | <code><a href="#mise-projen.MiseTomlSchemaDotfileGroups.property.dotPrefix">dotPrefix</a></code> | <code>boolean</code> | deploy each source path component named "dot-<name>" as ".<name>", like GNU Stow's --dotfiles. |
 | <code><a href="#mise-projen.MiseTomlSchemaDotfileGroups.property.entries">entries</a></code> | <code>{[ key: string ]: any}</code> | entries for parts of the tree, written like [dotfiles] entries and applied only while the group is selected. |
@@ -6496,21 +6495,8 @@ const miseTomlSchemaDotfileGroups: MiseTomlSchemaDotfileGroups = { ... }
 | <code><a href="#mise-projen.MiseTomlSchemaDotfileGroups.property.manifest">manifest</a></code> | <code><a href="#mise-projen.MiseTomlSchemaDotfileGroupsManifest">MiseTomlSchemaDotfileGroupsManifest</a></code> | source manifest used to select managed files from the tree. |
 | <code><a href="#mise-projen.MiseTomlSchemaDotfileGroups.property.mode">mode</a></code> | <code><a href="#mise-projen.MiseTomlSchemaDotfileGroupsMode">MiseTomlSchemaDotfileGroupsMode</a></code> | how the tree is deployed. |
 | <code><a href="#mise-projen.MiseTomlSchemaDotfileGroups.property.relative">relative</a></code> | <code>boolean</code> | link by a path relative to the link's directory; |
+| <code><a href="#mise-projen.MiseTomlSchemaDotfileGroups.property.root">root</a></code> | <code>string</code> | the directory tree the group deploys, by default the directory named after the group; |
 | <code><a href="#mise-projen.MiseTomlSchemaDotfileGroups.property.target">target</a></code> | <code>string</code> | target directory, absolute or starting with ~/. |
-
----
-
-##### `root`<sup>Required</sup> <a name="root" id="mise-projen.MiseTomlSchemaDotfileGroups.property.root"></a>
-
-```typescript
-public readonly root: string;
-```
-
-- *Type:* string
-
-the directory tree the group deploys;
-
-a relative path resolves against dotfiles.root
 
 ---
 
@@ -6548,7 +6534,7 @@ public readonly entries: {[ key: string ]: any};
 
 entries for parts of the tree, written like [dotfiles] entries and applied only while the group is selected.
 
-A whole-file entry is keyed by its target path inside the group's target and cut out of the walk; a block, line, or merge edit is keyed by the path of the file it edits, inside the group's target, then "/" and an id. A missing source is found under the root at the entry's path inside the target, and a relative source starts at the root
+A whole-file entry is keyed by its target path and cut out of the walk; a block, line, or merge edit is keyed by the path of the file it edits, then "/" and an id. A missing source is found under the root at the entry's path inside the group's target, and a relative source starts at the root; an entry outside the group's target needs a source
 
 ---
 
@@ -6599,6 +6585,20 @@ public readonly relative: boolean;
 link by a path relative to the link's directory;
 
 overrides the dotfiles.relative_symlinks setting (ignored on Windows)
+
+---
+
+##### `root`<sup>Optional</sup> <a name="root" id="mise-projen.MiseTomlSchemaDotfileGroups.property.root"></a>
+
+```typescript
+public readonly root: string;
+```
+
+- *Type:* string
+
+the directory tree the group deploys, by default the directory named after the group;
+
+a relative path resolves against dotfiles.root
 
 ---
 

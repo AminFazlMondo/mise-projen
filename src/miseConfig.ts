@@ -2065,11 +2065,11 @@ export function toJson_Settings(obj: Settings | undefined): Record<string, any> 
  */
 export interface MiseTomlSchemaDotfileGroups {
   /**
-   * the directory tree the group deploys; a relative path resolves against dotfiles.root
+   * the directory tree the group deploys, by default the directory named after the group; a relative path resolves against dotfiles.root
    *
    * @schema MiseTomlSchemaDotfileGroups#root
    */
-  readonly root: string;
+  readonly root?: string;
 
   /**
    * target directory, absolute or starting with ~/
@@ -2121,7 +2121,7 @@ export interface MiseTomlSchemaDotfileGroups {
   readonly relative?: boolean;
 
   /**
-   * entries for parts of the tree, written like [dotfiles] entries and applied only while the group is selected. A whole-file entry is keyed by its target path inside the group's target and cut out of the walk; a block, line, or merge edit is keyed by the path of the file it edits, inside the group's target, then "/" and an id. A missing source is found under the root at the entry's path inside the target, and a relative source starts at the root
+   * entries for parts of the tree, written like [dotfiles] entries and applied only while the group is selected. A whole-file entry is keyed by its target path and cut out of the walk; a block, line, or merge edit is keyed by the path of the file it edits, then "/" and an id. A missing source is found under the root at the entry's path inside the group's target, and a relative source starts at the root; an entry outside the group's target needs a source
    *
    * @schema MiseTomlSchemaDotfileGroups#entries
    */
