@@ -1936,10 +1936,10 @@ const miseTomlSchema: MiseTomlSchema = { ... }
 | --- | --- | --- |
 | <code><a href="#mise-projen.MiseTomlSchema.property.alias">alias</a></code> | <code>{[ key: string ]: any}</code> | custom shorthands. |
 | <code><a href="#mise-projen.MiseTomlSchema.property.bootstrap">bootstrap</a></code> | <code><a href="#mise-projen.MiseTomlSchemaBootstrap">MiseTomlSchemaBootstrap</a></code> | machine-global bootstrapping (system packages, repos, macOS defaults, launchd agents, login shell). |
-| <code><a href="#mise-projen.MiseTomlSchema.property.daemonGroups">daemonGroups</a></code> | <code>{[ key: string ]: any}</code> | Experimental named groups of project daemons. |
-| <code><a href="#mise-projen.MiseTomlSchema.property.daemonProviders">daemonProviders</a></code> | <code>{[ key: string ]: <a href="#mise-projen.MiseTomlSchemaDaemonProviders">MiseTomlSchemaDaemonProviders</a>}</code> | Experimental shared servers owned by the user. |
-| <code><a href="#mise-projen.MiseTomlSchema.property.daemons">daemons</a></code> | <code>{[ key: string ]: any}</code> | Experimental project daemons: custom pitchfork commands or managed presets. |
-| <code><a href="#mise-projen.MiseTomlSchema.property.daemonsSettings">daemonsSettings</a></code> | <code><a href="#mise-projen.MiseTomlSchemaDaemonsSettings">MiseTomlSchemaDaemonsSettings</a></code> | Experimental project-wide daemon options. |
+| <code><a href="#mise-projen.MiseTomlSchema.property.daemonGroups">daemonGroups</a></code> | <code>{[ key: string ]: any}</code> | [experimental] Named groups of project daemons. |
+| <code><a href="#mise-projen.MiseTomlSchema.property.daemonProviders">daemonProviders</a></code> | <code>{[ key: string ]: <a href="#mise-projen.MiseTomlSchemaDaemonProviders">MiseTomlSchemaDaemonProviders</a>}</code> | [experimental] Shared servers owned by the user. |
+| <code><a href="#mise-projen.MiseTomlSchema.property.daemons">daemons</a></code> | <code>{[ key: string ]: any}</code> | [experimental] Project daemons: custom pitchfork commands or managed presets. |
+| <code><a href="#mise-projen.MiseTomlSchema.property.daemonsSettings">daemonsSettings</a></code> | <code><a href="#mise-projen.MiseTomlSchemaDaemonsSettings">MiseTomlSchemaDaemonsSettings</a></code> | [experimental] Project-wide daemon options. |
 | <code><a href="#mise-projen.MiseTomlSchema.property.deps">deps</a></code> | <code><a href="#mise-projen.MiseTomlSchemaDeps">MiseTomlSchemaDeps</a></code> | [experimental] configure deps providers. |
 | <code><a href="#mise-projen.MiseTomlSchema.property.doctor">doctor</a></code> | <code><a href="#mise-projen.Doctor">Doctor</a></code> | *No description.* |
 | <code><a href="#mise-projen.MiseTomlSchema.property.dotenv">dotenv</a></code> | <code>any</code> | dotenv file(s) to load. |
@@ -1949,7 +1949,7 @@ const miseTomlSchema: MiseTomlSchema = { ... }
 | <code><a href="#mise-projen.MiseTomlSchema.property.envFile">envFile</a></code> | <code>any</code> | dotenv file(s) to load. |
 | <code><a href="#mise-projen.MiseTomlSchema.property.envPath">envPath</a></code> | <code>any</code> | PATH entries to add. |
 | <code><a href="#mise-projen.MiseTomlSchema.property.experimentalMonorepoRoot">experimentalMonorepoRoot</a></code> | <code>boolean</code> | deprecated alias of monorepo_root. |
-| <code><a href="#mise-projen.MiseTomlSchema.property.history">history</a></code> | <code><a href="#mise-projen.MiseTomlSchemaHistory">MiseTomlSchemaHistory</a></code> | dotfiles history: what is never captured, reload commands, and the setup repository (https://mise.jdx.dev/history.html). |
+| <code><a href="#mise-projen.MiseTomlSchema.property.history">history</a></code> | <code><a href="#mise-projen.MiseTomlSchemaHistory">MiseTomlSchemaHistory</a></code> | dotfiles history: what is never captured, reload commands, and the setup repository (https://mise.jdx.dev/dotfiles/history.html). |
 | <code><a href="#mise-projen.MiseTomlSchema.property.hooks">hooks</a></code> | <code><a href="#mise-projen.Hooks">Hooks</a></code> | hooks to run on events like cd, enter, leave. |
 | <code><a href="#mise-projen.MiseTomlSchema.property.include">include</a></code> | <code>any</code> | config files merged into this one, ranking just below it: a local path (relative to this file), git::<url>//<path>.toml?ref=<ref> oci::<registry>/<repo>[:tag\|@sha256:<digest>] (the artifact holds a mise.toml) or zip::<http(s) url> (a zip archive with a mise.toml at its root). Paranoid mode requires a commit sha or digest for remote includes (so it rejects zip::) and rejects local ones; otherwise a branch or tag is refreshed after fetch_remote_versions_cache. |
 | <code><a href="#mise-projen.MiseTomlSchema.property.minVersion">minVersion</a></code> | <code>any</code> | minimum version of mise required to use this config. |
@@ -2005,7 +2005,7 @@ public readonly daemonGroups: {[ key: string ]: any};
 
 - *Type:* {[ key: string ]: any}
 
-Experimental named groups of project daemons.
+[experimental] Named groups of project daemons.
 
 Members are daemon names or other group names declared in the same project.
 
@@ -2019,7 +2019,7 @@ public readonly daemonProviders: {[ key: string ]: MiseTomlSchemaDaemonProviders
 
 - *Type:* {[ key: string ]: <a href="#mise-projen.MiseTomlSchemaDaemonProviders">MiseTomlSchemaDaemonProviders</a>}
 
-Experimental shared servers owned by the user.
+[experimental] Shared servers owned by the user.
 
 Only allowed in global configuration.
 
@@ -2033,7 +2033,7 @@ public readonly daemons: {[ key: string ]: any};
 
 - *Type:* {[ key: string ]: any}
 
-Experimental project daemons: custom pitchfork commands or managed presets.
+[experimental] Project daemons: custom pitchfork commands or managed presets.
 
 ---
 
@@ -2045,7 +2045,7 @@ public readonly daemonsSettings: MiseTomlSchemaDaemonsSettings;
 
 - *Type:* <a href="#mise-projen.MiseTomlSchemaDaemonsSettings">MiseTomlSchemaDaemonsSettings</a>
 
-Experimental project-wide daemon options.
+[experimental] Project-wide daemon options.
 
 ---
 
@@ -2171,7 +2171,7 @@ public readonly history: MiseTomlSchemaHistory;
 
 - *Type:* <a href="#mise-projen.MiseTomlSchemaHistory">MiseTomlSchemaHistory</a>
 
-dotfiles history: what is never captured, reload commands, and the setup repository (https://mise.jdx.dev/history.html).
+dotfiles history: what is never captured, reload commands, and the setup repository (https://mise.jdx.dev/dotfiles/history.html).
 
 ---
 
@@ -2441,7 +2441,7 @@ const miseTomlSchemaBootstrap: MiseTomlSchemaBootstrap = { ... }
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrap.property.dnf">dnf</a></code> | <code><a href="#mise-projen.MiseTomlSchemaBootstrapDnf">MiseTomlSchemaBootstrapDnf</a></code> | dnf-specific bootstrap package config. |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrap.property.dotfileGroups">dotfileGroups</a></code> | <code>string[]</code> | the dotfile groups this machine applies; |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrap.property.files">files</a></code> | <code>{[ key: string ]: <a href="#mise-projen.MiseTomlSchemaBootstrapFiles">MiseTomlSchemaBootstrapFiles</a>}</code> | Managed system files keyed by absolute target path. |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrap.property.groups">groups</a></code> | <code>{[ key: string ]: <a href="#mise-projen.MiseTomlSchemaBootstrapGroups">MiseTomlSchemaBootstrapGroups</a>}</code> | [experimental] Linux groups that bootstrap creates or removes, keyed by group name. |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrap.property.groups">groups</a></code> | <code>{[ key: string ]: <a href="#mise-projen.MiseTomlSchemaBootstrapGroups">MiseTomlSchemaBootstrapGroups</a>}</code> | Linux groups that bootstrap creates or removes, keyed by group name. |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrap.property.hooks">hooks</a></code> | <code><a href="#mise-projen.BootstrapHooks">BootstrapHooks</a></code> | *No description.* |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrap.property.linux">linux</a></code> | <code><a href="#mise-projen.MiseTomlSchemaBootstrapLinux">MiseTomlSchemaBootstrapLinux</a></code> | Linux-specific bootstrap config. |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrap.property.macos">macos</a></code> | <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacos">MiseTomlSchemaBootstrapMacos</a></code> | macOS-specific bootstrap config. |
@@ -2454,7 +2454,7 @@ const miseTomlSchemaBootstrap: MiseTomlSchemaBootstrap = { ... }
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrap.property.services">services</a></code> | <code>{[ key: string ]: <a href="#mise-projen.MiseTomlSchemaBootstrapServices">MiseTomlSchemaBootstrapServices</a>}</code> | System services and portable user services managed by mise bootstrap, keyed by service name. |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrap.property.settings">settings</a></code> | <code><a href="#mise-projen.MiseTomlSchemaBootstrapSettings">MiseTomlSchemaBootstrapSettings</a></code> | [experimental] settings that bootstrap settings plugins apply, keyed by plugin name; |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrap.property.user">user</a></code> | <code><a href="#mise-projen.MiseTomlSchemaBootstrapUser">MiseTomlSchemaBootstrapUser</a></code> | current-user bootstrap settings. |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrap.property.users">users</a></code> | <code>{[ key: string ]: <a href="#mise-projen.MiseTomlSchemaBootstrapUsers">MiseTomlSchemaBootstrapUsers</a>}</code> | [experimental] Linux users that bootstrap creates or removes, keyed by user name. |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrap.property.users">users</a></code> | <code>{[ key: string ]: <a href="#mise-projen.MiseTomlSchemaBootstrapUsers">MiseTomlSchemaBootstrapUsers</a>}</code> | Linux users that bootstrap creates or removes, keyed by user name. |
 
 ---
 
@@ -2566,7 +2566,7 @@ public readonly groups: {[ key: string ]: MiseTomlSchemaBootstrapGroups};
 
 - *Type:* {[ key: string ]: <a href="#mise-projen.MiseTomlSchemaBootstrapGroups">MiseTomlSchemaBootstrapGroups</a>}
 
-[experimental] Linux groups that bootstrap creates or removes, keyed by group name.
+Linux groups that bootstrap creates or removes, keyed by group name.
 
 ---
 
@@ -2720,7 +2720,7 @@ public readonly users: {[ key: string ]: MiseTomlSchemaBootstrapUsers};
 
 - *Type:* {[ key: string ]: <a href="#mise-projen.MiseTomlSchemaBootstrapUsers">MiseTomlSchemaBootstrapUsers</a>}
 
-[experimental] Linux users that bootstrap creates or removes, keyed by user name.
+Linux users that bootstrap creates or removes, keyed by user name.
 
 ---
 
@@ -4724,7 +4724,7 @@ const miseTomlSchemaBootstrapMacosLaunchdAgents: MiseTomlSchemaBootstrapMacosLau
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosLaunchdAgents.property.hardResourceLimits">hardResourceLimits</a></code> | <code><a href="#mise-projen.LaunchdResourceLimits">LaunchdResourceLimits</a></code> | write HardResourceLimits, the ceilings the program cannot raise its soft limits above. |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosLaunchdAgents.property.keepAlive">keepAlive</a></code> | <code>boolean</code> | write KeepAlive. |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosLaunchdAgents.property.keepAliveOnFailure">keepAliveOnFailure</a></code> | <code>boolean</code> | write KeepAlive = { SuccessfulExit = false }, so launchd relaunches the job only after a failure; |
-| <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosLaunchdAgents.property.kickstart">kickstart</a></code> | <code>boolean</code> | run `launchctl kickstart -k` after loading the agent. |
+| <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosLaunchdAgents.property.kickstart">kickstart</a></code> | <code>boolean</code> | run `launchctl kickstart` after loading the agent. |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosLaunchdAgents.property.launchEvents">launchEvents</a></code> | <code>{[ key: string ]: {[ key: string ]: {[ key: string ]: any}}}</code> | write LaunchEvents, keyed by event stream, then event name, with launchd's case-sensitive property names. |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosLaunchdAgents.property.nice">nice</a></code> | <code>number</code> | write Nice, the niceness of the process, from -20 to 20. |
 | <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosLaunchdAgents.property.processType">processType</a></code> | <code><a href="#mise-projen.MiseTomlSchemaBootstrapMacosLaunchdAgentsProcessType">MiseTomlSchemaBootstrapMacosLaunchdAgentsProcessType</a></code> | write ProcessType, the scheduling band launchd runs the job in. |
@@ -4822,7 +4822,7 @@ public readonly kickstart: boolean;
 
 - *Type:* boolean
 
-run `launchctl kickstart -k` after loading the agent.
+run `launchctl kickstart` after loading the agent.
 
 ---
 
@@ -6232,7 +6232,7 @@ Tool to install the server from, in place of the preset's default.
 
 ### MiseTomlSchemaDaemonsSettings <a name="MiseTomlSchemaDaemonsSettings" id="mise-projen.MiseTomlSchemaDaemonsSettings"></a>
 
-Experimental project-wide daemon options.
+[experimental] Project-wide daemon options.
 
 #### Initializer <a name="Initializer" id="mise-projen.MiseTomlSchemaDaemonsSettings.Initializer"></a>
 
@@ -6616,7 +6616,7 @@ target directory, absolute or starting with ~/.
 
 ### MiseTomlSchemaHistory <a name="MiseTomlSchemaHistory" id="mise-projen.MiseTomlSchemaHistory"></a>
 
-dotfiles history: what is never captured, reload commands, and the setup repository (https://mise.jdx.dev/history.html).
+dotfiles history: what is never captured, reload commands, and the setup repository (https://mise.jdx.dev/dotfiles/history.html).
 
 #### Initializer <a name="Initializer" id="mise-projen.MiseTomlSchemaHistory.Initializer"></a>
 
@@ -6701,7 +6701,7 @@ public readonly origin: MiseTomlSchemaHistoryOrigin;
 
 the setup repository this machine publishes to and fetches from;
 
-machine-local, written by `mise bootstrap dotfiles origin set`
+machine-local, written by `mise dot origin set`
 
 ---
 
@@ -6753,7 +6753,7 @@ shared age, SSH, or age-plugin public recipients for all encrypted dotfiles.
 
 the setup repository this machine publishes to and fetches from;
 
-machine-local, written by `mise bootstrap dotfiles origin set`
+machine-local, written by `mise dot origin set`
 
 #### Initializer <a name="Initializer" id="mise-projen.MiseTomlSchemaHistoryOrigin.Initializer"></a>
 
@@ -11360,8 +11360,21 @@ const settingsPackslip: SettingsPackslip = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
+| <code><a href="#mise-projen.SettingsPackslip.property.compinit">compinit</a></code> | <code>boolean</code> | Let zsh activation run `compinit -i` to register packslip completions when `compdef` is not defined yet. |
 | <code><a href="#mise-projen.SettingsPackslip.property.exec">exec</a></code> | <code>boolean</code> | Let packslip tools run their own executable at install time to generate resources, such as an agent skill. |
 | <code><a href="#mise-projen.SettingsPackslip.property.stampers">stampers</a></code> | <code>string[]</code> | Hosts that must approve a packslip release before mise lists or installs it, each as `host=PIN`. |
+
+---
+
+##### `compinit`<sup>Optional</sup> <a name="compinit" id="mise-projen.SettingsPackslip.property.compinit"></a>
+
+```typescript
+public readonly compinit: boolean;
+```
+
+- *Type:* boolean
+
+Let zsh activation run `compinit -i` to register packslip completions when `compdef` is not defined yet.
 
 ---
 
@@ -11447,6 +11460,7 @@ const settingsPrune: SettingsPrune = { ... }
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#mise-projen.SettingsPrune.property.exclude">exclude</a></code> | <code>string[]</code> | Tools that `mise prune` never removes, such as `node` or `aqua:BurntSushi/ripgrep`. |
+| <code><a href="#mise-projen.SettingsPrune.property.forgetUnusedAfter">forgetUnusedAfter</a></code> | <code>string</code> | Forget a tracked config or tool stub that no mise command has loaded for this long. |
 
 ---
 
@@ -11459,6 +11473,18 @@ public readonly exclude: string[];
 - *Type:* string[]
 
 Tools that `mise prune` never removes, such as `node` or `aqua:BurntSushi/ripgrep`.
+
+---
+
+##### `forgetUnusedAfter`<sup>Optional</sup> <a name="forgetUnusedAfter" id="mise-projen.SettingsPrune.property.forgetUnusedAfter"></a>
+
+```typescript
+public readonly forgetUnusedAfter: string;
+```
+
+- *Type:* string
+
+Forget a tracked config or tool stub that no mise command has loaded for this long.
 
 ---
 
@@ -13324,15 +13350,15 @@ const taskConfig: TaskConfig = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#mise-projen.TaskConfig.property.cache">cache</a></code> | <code><a href="#mise-projen.TaskConfigCache">TaskConfigCache</a></code> | default experimental local artifact cache configuration for eligible tasks with sources and explicit outputs. |
+| <code><a href="#mise-projen.TaskConfig.property.cache">cache</a></code> | <code><a href="#mise-projen.TaskConfigCache">TaskConfigCache</a></code> | [experimental] default local artifact cache configuration for eligible tasks with sources and explicit outputs. |
 | <code><a href="#mise-projen.TaskConfig.property.cascade">cascade</a></code> | <code>boolean</code> | cascade task configuration to descendant config roots. |
 | <code><a href="#mise-projen.TaskConfig.property.dir">dir</a></code> | <code>string</code> | default directory to run tasks in defined in this file. |
 | <code><a href="#mise-projen.TaskConfig.property.excludes">excludes</a></code> | <code>string[]</code> | config-root-relative paths or glob patterns to exclude from file-task discovery. |
-| <code><a href="#mise-projen.TaskConfig.property.globalEnv">globalEnv</a></code> | <code>string[]</code> | experimental ambient environment variable names added to every enabled task cache key in this config scope. |
-| <code><a href="#mise-projen.TaskConfig.property.globalInputs">globalInputs</a></code> | <code>string[]</code> | experimental config-root-relative source patterns added to every task in this config scope; |
-| <code><a href="#mise-projen.TaskConfig.property.globalPassThroughEnv">globalPassThroughEnv</a></code> | <code>string[]</code> | experimental ambient environment variable names preserved under environment denial without affecting task cache keys. |
+| <code><a href="#mise-projen.TaskConfig.property.globalEnv">globalEnv</a></code> | <code>string[]</code> | [experimental] ambient environment variable names added to every enabled task cache key in this config scope. |
+| <code><a href="#mise-projen.TaskConfig.property.globalInputs">globalInputs</a></code> | <code>string[]</code> | [experimental] config-root-relative source patterns added to every task in this config scope; |
+| <code><a href="#mise-projen.TaskConfig.property.globalPassThroughEnv">globalPassThroughEnv</a></code> | <code>string[]</code> | [experimental] ambient environment variable names preserved under environment denial without affecting task cache keys. |
 | <code><a href="#mise-projen.TaskConfig.property.includes">includes</a></code> | <code>string[]</code> | files/directories to include searching for tasks. |
-| <code><a href="#mise-projen.TaskConfig.property.inputGroups">inputGroups</a></code> | <code>{[ key: string ]: string[]}</code> | experimental reusable config-root-relative source groups referenced with. |
+| <code><a href="#mise-projen.TaskConfig.property.inputGroups">inputGroups</a></code> | <code>{[ key: string ]: string[]}</code> | [experimental] reusable config-root-relative source groups referenced with. |
 | <code><a href="#mise-projen.TaskConfig.property.rustCache">rustCache</a></code> | <code>any</code> | deprecated no-op; |
 | <code><a href="#mise-projen.TaskConfig.property.shell">shell</a></code> | <code>string</code> | default shell to run tasks with in this config scope. |
 
@@ -13346,7 +13372,7 @@ public readonly cache: TaskConfigCache;
 
 - *Type:* <a href="#mise-projen.TaskConfigCache">TaskConfigCache</a>
 
-default experimental local artifact cache configuration for eligible tasks with sources and explicit outputs.
+[experimental] default local artifact cache configuration for eligible tasks with sources and explicit outputs.
 
 ---
 
@@ -13394,7 +13420,7 @@ public readonly globalEnv: string[];
 
 - *Type:* string[]
 
-experimental ambient environment variable names added to every enabled task cache key in this config scope.
+[experimental] ambient environment variable names added to every enabled task cache key in this config scope.
 
 ---
 
@@ -13406,7 +13432,7 @@ public readonly globalInputs: string[];
 
 - *Type:* string[]
 
-experimental config-root-relative source patterns added to every task in this config scope;
+[experimental] config-root-relative source patterns added to every task in this config scope;
 
 entries may reference input groups with
 
@@ -13420,7 +13446,7 @@ public readonly globalPassThroughEnv: string[];
 
 - *Type:* string[]
 
-experimental ambient environment variable names preserved under environment denial without affecting task cache keys.
+[experimental] ambient environment variable names preserved under environment denial without affecting task cache keys.
 
 ---
 
@@ -13446,7 +13472,7 @@ public readonly inputGroups: {[ key: string ]: string[]};
 
 - *Type:* {[ key: string ]: string[]}
 
-experimental reusable config-root-relative source groups referenced with.
+[experimental] reusable config-root-relative source groups referenced with.
 
 ---
 
@@ -13478,7 +13504,7 @@ default shell to run tasks with in this config scope.
 
 ### TaskConfigCache <a name="TaskConfigCache" id="mise-projen.TaskConfigCache"></a>
 
-default experimental local artifact cache configuration for eligible tasks with sources and explicit outputs.
+[experimental] default local artifact cache configuration for eligible tasks with sources and explicit outputs.
 
 #### Initializer <a name="Initializer" id="mise-projen.TaskConfigCache.Initializer"></a>
 

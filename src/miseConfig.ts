@@ -160,7 +160,7 @@ export interface MiseTomlSchema {
   readonly bootstrap?: MiseTomlSchemaBootstrap;
 
   /**
-   * dotfiles history: what is never captured, reload commands, and the setup repository (https://mise.jdx.dev/history.html)
+   * dotfiles history: what is never captured, reload commands, and the setup repository (https://mise.jdx.dev/dotfiles/history.html)
    *
    * @schema MiseTomlSchema#history
    */
@@ -228,28 +228,28 @@ export interface MiseTomlSchema {
   readonly doctor?: Doctor;
 
   /**
-   * Experimental project daemons: custom pitchfork commands or managed presets.
+   * [experimental] Project daemons: custom pitchfork commands or managed presets.
    *
    * @schema MiseTomlSchema#daemons
    */
   readonly daemons?: { [key: string]: any };
 
   /**
-   * Experimental shared servers owned by the user. Only allowed in global configuration.
+   * [experimental] Shared servers owned by the user. Only allowed in global configuration.
    *
    * @schema MiseTomlSchema#daemon_providers
    */
   readonly daemonProviders?: { [key: string]: MiseTomlSchemaDaemonProviders };
 
   /**
-   * Experimental project-wide daemon options.
+   * [experimental] Project-wide daemon options.
    *
    * @schema MiseTomlSchema#daemons_settings
    */
   readonly daemonsSettings?: MiseTomlSchemaDaemonsSettings;
 
   /**
-   * Experimental named groups of project daemons. Members are daemon names or other group names declared in the same project.
+   * [experimental] Named groups of project daemons. Members are daemon names or other group names declared in the same project.
    *
    * @schema MiseTomlSchema#daemon_groups
    */
@@ -2287,14 +2287,14 @@ export interface MiseTomlSchemaBootstrap {
   readonly secrets?: { [key: string]: any };
 
   /**
-   * [experimental] Linux groups that bootstrap creates or removes, keyed by group name
+   * Linux groups that bootstrap creates or removes, keyed by group name
    *
    * @schema MiseTomlSchemaBootstrap#groups
    */
   readonly groups?: { [key: string]: MiseTomlSchemaBootstrapGroups };
 
   /**
-   * [experimental] Linux users that bootstrap creates or removes, keyed by user name
+   * Linux users that bootstrap creates or removes, keyed by user name
    *
    * @schema MiseTomlSchemaBootstrap#users
    */
@@ -2345,7 +2345,7 @@ export function toJson_MiseTomlSchemaBootstrap(obj: MiseTomlSchemaBootstrap | un
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * dotfiles history: what is never captured, reload commands, and the setup repository (https://mise.jdx.dev/history.html)
+ * dotfiles history: what is never captured, reload commands, and the setup repository (https://mise.jdx.dev/dotfiles/history.html)
  *
  * @schema MiseTomlSchemaHistory
  */
@@ -2386,7 +2386,7 @@ export interface MiseTomlSchemaHistory {
   readonly reload?: { [key: string]: string };
 
   /**
-   * the setup repository this machine publishes to and fetches from; machine-local, written by `mise bootstrap dotfiles origin set`
+   * the setup repository this machine publishes to and fetches from; machine-local, written by `mise dot origin set`
    *
    * @schema MiseTomlSchemaHistory#origin
    */
@@ -2441,7 +2441,7 @@ export interface TaskConfig {
   readonly shell?: string;
 
   /**
-   * default experimental local artifact cache configuration for eligible tasks with sources and explicit outputs
+   * [experimental] default local artifact cache configuration for eligible tasks with sources and explicit outputs
    *
    * @schema task_config#cache
    */
@@ -2455,28 +2455,28 @@ export interface TaskConfig {
   readonly rustCache?: any;
 
   /**
-   * experimental ambient environment variable names added to every enabled task cache key in this config scope
+   * [experimental] ambient environment variable names added to every enabled task cache key in this config scope
    *
    * @schema task_config#global_env
    */
   readonly globalEnv?: string[];
 
   /**
-   * experimental ambient environment variable names preserved under environment denial without affecting task cache keys
+   * [experimental] ambient environment variable names preserved under environment denial without affecting task cache keys
    *
    * @schema task_config#global_pass_through_env
    */
   readonly globalPassThroughEnv?: string[];
 
   /**
-   * experimental config-root-relative source patterns added to every task in this config scope; entries may reference input groups with @group:<name>
+   * [experimental] config-root-relative source patterns added to every task in this config scope; entries may reference input groups with @group:<name>
    *
    * @schema task_config#global_inputs
    */
   readonly globalInputs?: string[];
 
   /**
-   * experimental reusable config-root-relative source groups referenced with @group:<name>
+   * [experimental] reusable config-root-relative source groups referenced with @group:<name>
    *
    * @schema task_config#input_groups
    */
@@ -2740,7 +2740,7 @@ export function toJson_MiseTomlSchemaDaemonProviders(obj: MiseTomlSchemaDaemonPr
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * Experimental project-wide daemon options.
+ * [experimental] Project-wide daemon options.
  *
  * @schema MiseTomlSchemaDaemonsSettings
  */
@@ -4278,6 +4278,13 @@ export function toJson_SettingsOtel(obj: SettingsOtel | undefined): Record<strin
  */
 export interface SettingsPackslip {
   /**
+   * Let zsh activation run `compinit -i` to register packslip completions when `compdef` is not defined yet.
+   *
+   * @schema SettingsPackslip#compinit
+   */
+  readonly compinit?: boolean;
+
+  /**
    * Let packslip tools run their own executable at install time to generate resources, such as an agent skill.
    *
    * @schema SettingsPackslip#exec
@@ -4300,6 +4307,7 @@ export interface SettingsPackslip {
 export function toJson_SettingsPackslip(obj: SettingsPackslip | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'compinit': obj.compinit,
     'exec': obj.exec,
     'stampers': obj.stampers?.map(y => y),
   };
@@ -4353,6 +4361,13 @@ export interface SettingsPrune {
    * @schema SettingsPrune#exclude
    */
   readonly exclude?: string[];
+
+  /**
+   * Forget a tracked config or tool stub that no mise command has loaded for this long.
+   *
+   * @schema SettingsPrune#forget_unused_after
+   */
+  readonly forgetUnusedAfter?: string;
 }
 
 /**
@@ -4364,6 +4379,7 @@ export function toJson_SettingsPrune(obj: SettingsPrune | undefined): Record<str
   if (obj === undefined) { return undefined; }
   const result = {
     'exclude': obj.exclude?.map(y => y),
+    'forget_unused_after': obj.forgetUnusedAfter,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -6986,7 +7002,7 @@ export function toJson_MiseTomlSchemaHistoryEncryption(obj: MiseTomlSchemaHistor
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * the setup repository this machine publishes to and fetches from; machine-local, written by `mise bootstrap dotfiles origin set`
+ * the setup repository this machine publishes to and fetches from; machine-local, written by `mise dot origin set`
  *
  * @schema MiseTomlSchemaHistoryOrigin
  */
@@ -7023,7 +7039,7 @@ export function toJson_MiseTomlSchemaHistoryOrigin(obj: MiseTomlSchemaHistoryOri
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * default experimental local artifact cache configuration for eligible tasks with sources and explicit outputs
+ * [experimental] default local artifact cache configuration for eligible tasks with sources and explicit outputs
  *
  * @schema TaskConfigCache
  */
@@ -8742,7 +8758,7 @@ export interface MiseTomlSchemaBootstrapMacosLaunchdAgents {
   readonly hardResourceLimits?: LaunchdResourceLimits;
 
   /**
-   * run `launchctl kickstart -k` after loading the agent
+   * run `launchctl kickstart` after loading the agent
    *
    * @schema MiseTomlSchemaBootstrapMacosLaunchdAgents#kickstart
    */
