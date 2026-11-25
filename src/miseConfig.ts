@@ -7059,6 +7059,13 @@ export interface TaskConfigCache {
   readonly audit?: boolean;
 
   /**
+   * run eligible tasks in a sandbox that allows reading their sources and writing their outputs, and blocks the network and undeclared environment variables (enforced on Linux)
+   *
+   * @schema TaskConfigCache#sandbox
+   */
+  readonly sandbox?: boolean;
+
+  /**
    * ambient environment variable names whose values affect eligible task cache keys
    *
    * @schema TaskConfigCache#env
@@ -7083,6 +7090,7 @@ export function toJson_TaskConfigCache(obj: TaskConfigCache | undefined): Record
   const result = {
     'enabled': obj.enabled,
     'audit': obj.audit,
+    'sandbox': obj.sandbox,
     'env': obj.env?.map(y => y),
     'command_inputs': obj.commandInputs?.map(y => y),
   };
