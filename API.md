@@ -13522,6 +13522,7 @@ const taskConfigCache: TaskConfigCache = { ... }
 | <code><a href="#mise-projen.TaskConfigCache.property.commandInputs">commandInputs</a></code> | <code>string[]</code> | commands whose stdout and stderr affect eligible task cache keys. |
 | <code><a href="#mise-projen.TaskConfigCache.property.enabled">enabled</a></code> | <code>boolean</code> | store and restore eligible task outputs from the local mise cache. |
 | <code><a href="#mise-projen.TaskConfigCache.property.env">env</a></code> | <code>string[]</code> | ambient environment variable names whose values affect eligible task cache keys. |
+| <code><a href="#mise-projen.TaskConfigCache.property.sandbox">sandbox</a></code> | <code>boolean</code> | run eligible tasks in a sandbox that allows reading their sources and writing their outputs, and blocks the network and undeclared environment variables (enforced on Linux). |
 
 ---
 
@@ -13570,6 +13571,18 @@ public readonly env: string[];
 - *Type:* string[]
 
 ambient environment variable names whose values affect eligible task cache keys.
+
+---
+
+##### `sandbox`<sup>Optional</sup> <a name="sandbox" id="mise-projen.TaskConfigCache.property.sandbox"></a>
+
+```typescript
+public readonly sandbox: boolean;
+```
+
+- *Type:* boolean
+
+run eligible tasks in a sandbox that allows reading their sources and writing their outputs, and blocks the network and undeclared environment variables (enforced on Linux).
 
 ---
 
